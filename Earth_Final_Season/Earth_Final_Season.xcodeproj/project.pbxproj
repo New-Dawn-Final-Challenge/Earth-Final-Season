@@ -10,9 +10,22 @@
 		620E4D522C9C468E006850BB /* Earth_Final_Season.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earth_Final_Season.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		620E4DD92C9C7686006850BB /* Exceptions for "Earth_Final_Season" folder in "Earth_Final_Season" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/README.md",
+			);
+			target = 620E4D512C9C468E006850BB /* Earth_Final_Season */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		620E4D542C9C468E006850BB /* Earth_Final_Season */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				620E4DD92C9C7686006850BB /* Exceptions for "Earth_Final_Season" folder in "Earth_Final_Season" target */,
+			);
 			path = Earth_Final_Season;
 			sourceTree = "<group>";
 		};
