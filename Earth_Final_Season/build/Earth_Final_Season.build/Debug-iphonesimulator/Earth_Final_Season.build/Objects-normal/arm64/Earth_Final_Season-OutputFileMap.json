@@ -1,0 +1,88 @@
+{
+  "" : {
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_Season-master.dia",
+    "emit-module-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_Season-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_Season-master-emit-module.dia",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_Season-master.swiftdeps"
+  },
+  "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  },
+  "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/Earth_Final_Season/Components/Models/ComponentModel.swift" : {
+    "const-values" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentModel.swiftconstvalues",
+    "dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentModel.d",
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentModel.dia",
+    "index-unit-output-path" : "/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentModel.o",
+    "llvm-bc" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentModel.bc",
+    "object" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentModel.o",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentModel.swiftdeps",
+    "swiftmodule" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentModel~partial.swiftmodule"
+  },
+  "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/Earth_Final_Season/Components/ViewModels/ComponentViewModel.swift" : {
+    "const-values" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentViewModel.swiftconstvalues",
+    "dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentViewModel.d",
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentViewModel.dia",
+    "index-unit-output-path" : "/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentViewModel.o",
+    "llvm-bc" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentViewModel.bc",
+    "object" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentViewModel.o",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentViewModel.swiftdeps",
+    "swiftmodule" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentViewModel~partial.swiftmodule"
+  },
+  "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/Earth_Final_Season/Components/Views/ComponentView.swift" : {
+    "const-values" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentView.swiftconstvalues",
+    "dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentView.d",
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentView.dia",
+    "index-unit-output-path" : "/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentView.o",
+    "llvm-bc" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentView.bc",
+    "object" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentView.o",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentView.swiftdeps",
+    "swiftmodule" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ComponentView~partial.swiftmodule"
+  },
+  "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/Earth_Final_Season/Earth_Final_SeasonApp.swift" : {
+    "const-values" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_SeasonApp.swiftconstvalues",
+    "dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_SeasonApp.d",
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_SeasonApp.dia",
+    "index-unit-output-path" : "/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_SeasonApp.o",
+    "llvm-bc" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_SeasonApp.bc",
+    "object" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_SeasonApp.o",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_SeasonApp.swiftdeps",
+    "swiftmodule" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/Earth_Final_SeasonApp~partial.swiftmodule"
+  },
+  "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/Earth_Final_Season/Models/ContentModel.swift" : {
+    "const-values" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentModel.swiftconstvalues",
+    "dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentModel.d",
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentModel.dia",
+    "index-unit-output-path" : "/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentModel.o",
+    "llvm-bc" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentModel.bc",
+    "object" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentModel.o",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentModel.swiftdeps",
+    "swiftmodule" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentModel~partial.swiftmodule"
+  },
+  "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/Earth_Final_Season/ViewModels/ContentViewModel.swift" : {
+    "const-values" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentViewModel.swiftconstvalues",
+    "dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentViewModel.d",
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentViewModel.dia",
+    "index-unit-output-path" : "/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentViewModel.o",
+    "llvm-bc" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentViewModel.bc",
+    "object" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentViewModel.o",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentViewModel.swiftdeps",
+    "swiftmodule" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentViewModel~partial.swiftmodule"
+  },
+  "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/Earth_Final_Season/Views/ContentView.swift" : {
+    "const-values" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/larissafazolin/Documents/Apple Developer Academy/Projects/Final Challenge/Earth_Final_Season/build/Earth_Final_Season.build/Debug-iphonesimulator/Earth_Final_Season.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  }
+}
