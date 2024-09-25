@@ -34,6 +34,9 @@
 			exceptions = (
 				620E4DD92C9C7686006850BB /* Exceptions for "Earth_Final_Season" folder in "Earth_Final_Season" target */,
 			);
+			explicitFileTypes = {
+				events.JSON = text.json;
+			};
 			path = Earth_Final_Season;
 			sourceTree = "<group>";
 		};
