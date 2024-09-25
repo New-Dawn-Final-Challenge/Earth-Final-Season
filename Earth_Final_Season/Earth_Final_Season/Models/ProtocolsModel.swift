@@ -8,20 +8,20 @@
 import Foundation
 
 // Event Protocol
-protocol EventProtocol {
+protocol EventService {
     var id: UUID { get }
     var character: String { get }
     var description: String { get }
     var choice1: String { get }
     var choice2: String { get }
-    var consequence1: ConsequenceProtocol { get }
-    var consequence2: ConsequenceProtocol { get }
+    var consequence1: ConsequenceService { get }
+    var consequence2: ConsequenceService { get }
     var difficulty: Difficulty { get }
     var tags: [Tags] { get }
 }
 
 // Consequence Protocol
-protocol ConsequenceProtocol {
+protocol ConsequenceService {
     var socialInstability: Int { get }
     var politicalInstability: Int { get }
     var environmentalDegradation: Int { get }
@@ -29,7 +29,7 @@ protocol ConsequenceProtocol {
 }
 
 // Indicator Protocol
-protocol IndicatorProtocol {
+protocol IndicatorService {
     var audience: Int { get set }
     var socialInstability: Int { get set }
     var politicalInstability: Int { get set }
