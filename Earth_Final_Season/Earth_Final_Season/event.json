@@ -1,156 +1,156 @@
 [
   {
-    "id": 0,
+    "id": UUID,
     "character": "Sensationalist TV Host",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".easy",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .easy,
+    "tag": .enviromental
   },
   {
-    "id": 1,
+    "id": UUID,
     "character": "Indie Physician",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".easy",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .easy,
+    "tag": .enviromental
   },
   {
-    "id": 2,
+    "id": UUID,
     "character": "Chronically online teenager",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".easy",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .easy,
+    "tag": .enviromental
   },
   {
-    "id": 3,
+    "id": UUID,
     "character": "Ultra New Age environmentalist",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".easy",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .easy,
+    "tag": .enviromental
   },
   {
-    "id": 4,
+    "id": UUID,
     "character": "Slow logistics engineer",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".medium",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .medium,
+    "tag": .enviromental
   },
   {
-    "id": 5,
+    "id": UUID,
     "character": "Experimentalist geneticist",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".medium",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .medium,
+    "tag": .enviromental
   },
   {
-    "id": 6,
+    "id": UUID,
     "character": "Questionable religious leader",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".medium",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .medium,
+    "tag": .enviromental
   },
   {
-    "id": 7,
+    "id": UUID,
     "character": "President in denial",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".medium",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .medium,
+    "tag": .enviromental
   },
   {
-    "id": 8,
+    "id": UUID,
     "character": "Fearless economist",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".medium",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .medium,
+    "tag": .enviromental
   },
   {
-    "id": 9,
+    "id": UUID,
     "character": "Evil researcher",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".hard",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .hard,
+    "tag": .enviromental
   },
   {
-    "id": 10,
+    "id": UUID,
     "character": "Chaotic billionaire",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".hard",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .hard,
+    "tag": .enviromental
   },
   {
-    "id": 11,
+    "id": UUID,
     "character": "Convincing conspiracy theorist",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".hard",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .hard,
+    "tag": .enviromental
   },
   {
-    "id": 12,
+    "id": UUID,
     "character": "Apocalyptical cat",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".hard",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .hard,
+    "tag": .enviromental
   },
   {
-    "id": 13,
+    "id": UUID,
     "character": "Robot vacuum cleaner",
     "description": "My new sketch shows people the truth about global warming: a totally lie!",
     "choice1": "Approve program sketch",
     "choice2": "Get off here, idiot!",
-    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
-    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
-    "difficulty": ".hard",
-    "tag": "nil"
+    "consequence1": Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+    "consequence2": Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+    "difficulty": .hard,
+    "tag": .enviromental
   }
 ]
