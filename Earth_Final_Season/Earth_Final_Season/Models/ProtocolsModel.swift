@@ -35,5 +35,5 @@ protocol IndicatorService {
     var politicalInstability: Int { get set }
     var environmentalDegradation: Int { get set }
     var currentYear: Int { get set }
-    func applyConsequence()
+    mutating func applyConsequence(_ consequence: Consequence)
 }
