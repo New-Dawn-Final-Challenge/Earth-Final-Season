@@ -1,0 +1,156 @@
+[
+  {
+    "id": 0,
+    "character": "Sensationalist TV Host",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".easy",
+    "tag": "nil"
+  },
+  {
+    "id": 1,
+    "character": "Indie Physician",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".easy",
+    "tag": "nil"
+  },
+  {
+    "id": 2,
+    "character": "Chronically online teenager",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".easy",
+    "tag": "nil"
+  },
+  {
+    "id": 3,
+    "character": "Ultra New Age environmentalist",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".easy",
+    "tag": "nil"
+  },
+  {
+    "id": 4,
+    "character": "Slow logistics engineer",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".medium",
+    "tag": "nil"
+  },
+  {
+    "id": 5,
+    "character": "Experimentalist geneticist",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".medium",
+    "tag": "nil"
+  },
+  {
+    "id": 6,
+    "character": "Questionable religious leader",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".medium",
+    "tag": "nil"
+  },
+  {
+    "id": 7,
+    "character": "President in denial",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".medium",
+    "tag": "nil"
+  },
+  {
+    "id": 8,
+    "character": "Fearless economist",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".medium",
+    "tag": "nil"
+  },
+  {
+    "id": 9,
+    "character": "Evil researcher",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".hard",
+    "tag": "nil"
+  },
+  {
+    "id": 10,
+    "character": "Chaotic billionaire",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".hard",
+    "tag": "nil"
+  },
+  {
+    "id": 11,
+    "character": "Convincing conspiracy theorist",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".hard",
+    "tag": "nil"
+  },
+  {
+    "id": 12,
+    "character": "Apocalyptical cat",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".hard",
+    "tag": "nil"
+  },
+  {
+    "id": 13,
+    "character": "Robot vacuum cleaner",
+    "description": "My new sketch shows people the truth about global warming: a totally lie!",
+    "choice1": "Approve program sketch",
+    "choice2": "Get off here, idiot!",
+    "consequence1": "Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2)",
+    "consequence2": "Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1)",
+    "difficulty": ".hard",
+    "tag": "nil"
+  }
+]
