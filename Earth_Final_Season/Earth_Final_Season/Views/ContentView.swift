@@ -9,13 +9,30 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack{
+            
+            HStack {
+                AudienceIndicatorView(percentage: 55)
+                    .padding()
+                ChaosIndicatorsView(socialInstability: 0, politicalInstability: 0, environmentalDegradation: 0, Year: "2070")
+                    .padding()
+            }
+            
+            CharacterView(characterImage: "Placeholder", characterName: "Líder conspiracionista")
+                .padding()
+            
+            EventView(eventDescription: "Event")
+                .padding()
+            HStack{
+                ChoicesView(choiceDescription: "Option 1")
+                ChoicesView(choiceDescription: "Option 2")
+            }
+            .padding()
+            
+            SliderView()
+                .padding()
+            Spacer()
         }
-        .padding()
     }
 }
 
