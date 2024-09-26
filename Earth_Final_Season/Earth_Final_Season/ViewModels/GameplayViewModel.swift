@@ -15,20 +15,35 @@ class GameplayViewModel: ObservableObject {
     private var eventsSequence: [UUID]
 
     init(events: [Event]) {
-        self.events = Dictionary(uniqueKeysWithValues: events.map { ($0.id, $0) })
-        self.eventsSequence = events.map { $0.id }
-        currentEvent = events.first
+        let shuffledEvents = events.shuffled()
+        self.events = Dictionary(uniqueKeysWithValues: shuffledEvents.map { ($0.id, $0) })
+        self.eventsSequence = shuffledEvents.map { $0.id }
+        currentEvent = shuffledEvents.first
     }
-    
-    func swipeRight() {
-        if let event = currentEvent {
-            indicators.applyConsequence(event.consequence1)
+
+    private func goToNextEvent() {
+        if !eventsSequence.isEmpty {
+            eventsSequence.removeFirst()
+            
+            if let nextEventID = eventsSequence.first {
+                currentEvent = events[nextEventID]
+            } else {
+                currentEvent = nil
+            }
         }
     }
     
-    func swipeLeft() {
+    func chooseOption1() {
+        if let event = currentEvent {
+            indicators.applyConsequence(event.consequence1)
+            goToNextEvent()
+        }
+    }
+    
+    func chooseOption2() {
         if let event = currentEvent {
             indicators.applyConsequence(event.consequence2)
+            goToNextEvent()
         }
     }
 }
