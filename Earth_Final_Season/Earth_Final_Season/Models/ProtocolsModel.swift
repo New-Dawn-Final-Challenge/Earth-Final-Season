@@ -14,8 +14,8 @@ protocol EventService {
     var description: String { get }
     var choice1: String { get }
     var choice2: String { get }
-    var consequence1: ConsequenceService { get }
-    var consequence2: ConsequenceService { get }
+    var consequence1: Consequence { get }
+    var consequence2: Consequence { get }
     var difficulty: Difficulty { get }
     var tags: [Tags] { get }
 }

@@ -13,8 +13,8 @@ struct Event: EventService {
     let description: String
     let choice1: String
     let choice2: String
-    let consequence1: any ConsequenceService
-    let consequence2: any ConsequenceService
+    let consequence1: Consequence
+    let consequence2: Consequence
     let difficulty: Difficulty
     let tags: [Tags]
 }
@@ -26,7 +26,7 @@ struct Consequence: ConsequenceService {
     var description: String
 }
 
-struct Indicator: IndicatorService {
+struct Indicators: IndicatorService {
     var audience: Int
     var socialInstability: Int
     var politicalInstability: Int

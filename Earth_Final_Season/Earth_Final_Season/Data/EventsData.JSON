@@ -1,0 +1,156 @@
+let mockEvents: [Event] = [
+    Event(
+        id: UUID(),
+        character: "Sensationalist TV Host",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .easy,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Indie Physician",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .easy,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Chronically online teenager",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .easy,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Ultra New Age environmentalist",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .easy,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Slow logistics engineer",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .medium,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Experimentalist geneticist",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .medium,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Questionable religious leader",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .medium,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "President in denial",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .medium,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Fearless economist",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .medium,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Evil researcher",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .hard,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Chaotic billionaire",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .hard,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Convincing conspiracy theorist",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .hard,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Apocalyptical cat",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .hard,
+        tag: .environmental
+    ),
+    Event(
+        id: UUID(),
+        character: "Robot vacuum cleaner",
+        description: "My new sketch shows people the truth about global warming: a totally lie!",
+        choice1: "Approve program sketch",
+        choice2: "Get off here, idiot!",
+        consequence1: Consequence(audience: -5, socialInstability: +10, politicalInstability: +3, environmentalDegradation: -2, currentYear: +2),
+        consequence2: Consequence(audience: +5, socialInstability: -10, politicalInstability: -3, environmentalDegradation: +2, currentYear: +1),
+        difficulty: .hard,
+        tag: .environmental
+    )
+]
