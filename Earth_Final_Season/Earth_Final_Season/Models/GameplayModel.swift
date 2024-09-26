@@ -17,12 +17,10 @@ struct Event: EventService, Codable {
     let socialInstability1: Int
     let politicalInstability1: Int
     let environmentalDegradation1: Int
-    let currentYear1: Int
     let audience2: Int
     let socialInstability2: Int
     let politicalInstability2: Int
     let environmentalDegradation2: Int
-    let currentYear2: Int
     var difficulty: String
     var tag: String
 

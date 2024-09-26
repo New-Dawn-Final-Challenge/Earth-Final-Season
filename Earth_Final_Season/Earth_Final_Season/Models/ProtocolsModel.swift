@@ -18,12 +18,10 @@ protocol EventService {
     var socialInstability1: Int { get }
     var politicalInstability1: Int { get }
     var environmentalDegradation1: Int { get }
-    var currentYear1: Int { get }
     var audience2: Int { get }
     var socialInstability2: Int { get }
     var politicalInstability2: Int { get }
     var environmentalDegradation2: Int { get }
-    var currentYear2: Int { get }
     var difficulty: String { get }
     var tag: String { get }
 }
