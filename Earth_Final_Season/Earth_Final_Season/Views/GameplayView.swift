@@ -1,18 +1,10 @@
-//
-//  ContentView.swift
-//  Earth_Final_Season
-//
-//  Created by Larissa Fazolin on 19/09/24.
-//
-
 import SwiftUI
 
 struct GameplayView: View {
-    @State var viewModel = GameplayViewModel(events: mockEvents)
+    @State var viewModel = GameplayViewModel()
     
     var body: some View {
-        VStack{
-            
+        VStack {
             HStack {
                 AudienceIndicatorView(percentage: viewModel.indicators.audience)
                     .padding()
@@ -53,6 +45,7 @@ struct GameplayView: View {
             
             SliderView()
                 .padding()
+            
             Spacer()
         }
     }

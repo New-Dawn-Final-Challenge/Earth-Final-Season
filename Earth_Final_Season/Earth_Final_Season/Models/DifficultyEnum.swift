@@ -7,6 +7,6 @@
 
 import Foundation
 
-public enum Difficulty {
+public enum Difficulty: Codable {
     case easy, medium, hard
 }

@@ -7,19 +7,37 @@
 
 import Foundation
 
-struct Event: EventService {
-    let id: UUID
+struct Event: EventService, Codable {
     let character: String
-    let description: String
+    let description: String  // Ensure this matches your JSON
     let choice1: String
     let choice2: String
-    let consequence1: Consequence
-    let consequence2: Consequence
-    let difficulty: Difficulty
-    let tags: [Tags]
+    let audience1: Int
+    let socialInstability1: Int
+    let politicalInstability1: Int
+    let environmentalDegradation1: Int
+    let currentYear1: Int
+    let audience2: Int
+    let socialInstability2: Int
+    let politicalInstability2: Int
+    let environmentalDegradation2: Int
+    let currentYear2: Int
+    var difficulty: String
+    var tag: String
+
+    var uuid: UUID {
+        return UUID(uuidString: description) ?? UUID() // Provide a default if parsing fails
+    }
+    var consequence1: Consequence {
+        return Consequence(socialInstability: socialInstability1, politicalInstability: politicalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
+    }
+    var consequence2: Consequence {
+        return Consequence(socialInstability: socialInstability2, politicalInstability: politicalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
+    }
 }
 
-struct Consequence: ConsequenceService {
+
+struct Consequence: ConsequenceService, Codable {
     var socialInstability: Int
     var politicalInstability: Int
     var environmentalDegradation: Int

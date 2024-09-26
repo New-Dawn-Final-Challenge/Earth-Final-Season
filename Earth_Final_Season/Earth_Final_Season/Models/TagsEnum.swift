@@ -7,6 +7,6 @@
 
 import Foundation
 
-public enum Tags {
+public enum Tags: Codable {
     case enviromental
 }
