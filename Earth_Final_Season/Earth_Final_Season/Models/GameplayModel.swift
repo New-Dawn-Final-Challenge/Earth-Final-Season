@@ -50,5 +50,14 @@ struct Indicators: IndicatorService {
         socialInstability += consequence.socialInstability
         politicalInstability += consequence.politicalInstability
         environmentalDegradation += consequence.environmentalDegradation
+        
+        // Update the audience to be the mean of the other indicators multiplied by 100
+        updateAudience()
+    }
+    
+    mutating func updateAudience() {
+        let total = socialInstability + politicalInstability + environmentalDegradation
+        let count = 3  // We are averaging three indicators
+        audience = (total / count) * 10  // Multiply the mean by 100
     }
 }
