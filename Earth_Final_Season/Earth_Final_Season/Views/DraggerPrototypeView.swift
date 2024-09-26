@@ -5,6 +5,7 @@
 //  Created by Luan Fazolin on 24/09/24.
 //
 
+import CoreHaptics
 import SwiftUI
 
 struct DraggerPrototypeView: View {
@@ -13,6 +14,7 @@ struct DraggerPrototypeView: View {
     @State private var optionToChoose = "Choose option A"
     @State private var counter = 0
     @State private var currentOffset: CGFloat = .zero
+    @State private var engine: CHHapticEngine?
     
     @State private var optionBShadowRadius = 0
     @State private var optionAShadowRadius = 0
@@ -84,12 +86,12 @@ struct DraggerPrototypeView: View {
                                 
                                 if state.location.x > screenWidth/2 {
                                     withAnimation {
-                                        optionBShadowRadius = Int(state.location.x)/20
+                                        optionBShadowRadius = Int(state.location.x)/10
                                         optionAShadowRadius = 0
                                     }
                                 } else {
                                     withAnimation {
-                                        optionAShadowRadius = Int(state.location.x)/10
+                                        optionAShadowRadius = Int(screenWidth - state.location.x)/10
                                         optionBShadowRadius = 0
                                     }
                                 }
@@ -102,8 +104,10 @@ struct DraggerPrototypeView: View {
                                 withAnimation {
                                     if location.x == rightLimit {
                                         optionToChoose = "Choose option A"
+                                        complexSuccess()
                                     } else if location.x == leftLimit {
                                         optionToChoose = "Choose option B"
+                                        complexSuccess()
                                     }
                                     location = CGPoint(x: screenWidth/2, y: 162)
                                     optionAShadowRadius = 0
@@ -114,8 +118,43 @@ struct DraggerPrototypeView: View {
                     )
             }
         }
+        .sensoryFeedback(.impact(weight: .medium, intensity: 0.28), trigger: location)
         .offset(y: 100)
+        .onAppear(perform: prepareHaptics)
                     
+    }
+    
+    func prepareHaptics() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        
+        do {
+            engine = try CHHapticEngine()
+            try engine?.start()
+        } catch {
+            print("There was an error creating the engine")
+        }
+    }
+    
+    func complexSuccess() {
+        guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+        
+        var events = [CHHapticEvent]()
+        
+        for i in stride(from: 0, to: 0.5, by: 0.01) {
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i))
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.3)
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: i)
+            events.append(event)
+        }
+
+        
+        do {
+            let pattern = try CHHapticPattern(events: events, parameters: [])
+            let player = try engine?.makePlayer(with: pattern)
+            try player?.start(atTime: 0)
+        } catch {
+            print("Failed to play pattern")
+        }
     }
 }
 
