@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct GameplayView: View {
     var body: some View {
         VStack{
             
