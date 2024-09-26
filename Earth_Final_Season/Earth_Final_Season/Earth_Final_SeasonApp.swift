@@ -11,12 +11,7 @@ import SwiftUI
 struct Earth_Final_SeasonApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                PrototypeSelectionView()
-                    .navigationBarHidden(true)
-                    .navigationBarTitle(Text("Home"))
-                    .edgesIgnoringSafeArea([.top, .bottom])
-            }
+            ContentView()
         }
     }
 }
