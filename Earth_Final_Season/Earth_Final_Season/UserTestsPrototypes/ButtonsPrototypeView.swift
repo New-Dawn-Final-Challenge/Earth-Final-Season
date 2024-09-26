@@ -15,6 +15,7 @@ struct ButtonsPrototypeView: View {
     @State private var optionAShadowRadius = 0
     @State private var optionBShadowRadius = 0
     @State private var engine: CHHapticEngine?
+    @State private var mainScreenShadowRadius = 0
 
 
     var body: some View {
@@ -26,21 +27,14 @@ struct ButtonsPrototypeView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(UIColor.systemGray4))
+                        .shadow(color: Color.blue, radius: CGFloat(mainScreenShadowRadius))
                 )
+                .frame(width: 300)
 
             Spacer()
 
             Button(
                 action: {
-                    withAnimation() {
-                        if counter > 5 {
-                            optionToChoose = "Great! That's enough"
-                        } else {
-                            optionToChoose = "Choose option B"
-                        }
-                        
-                        counter += 1
-                    }
                     withAnimation(.easeInOut(duration: 0.5)) {
                         optionAShadowRadius = 12
                     }
@@ -50,6 +44,19 @@ struct ButtonsPrototypeView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         withAnimation(.easeInOut(duration: 0.5)) {
                             optionAShadowRadius = 0
+                        }
+                    }
+                    
+                    optionToChoose = "Loading next command..."
+                    
+                    withAnimation(.easeInOut(duration: 1).repeatCount(5)) {
+                        mainScreenShadowRadius = 12
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            optionToChoose = "Choose option B"
+                            mainScreenShadowRadius = 0
                         }
                     }
                 },
@@ -70,14 +77,6 @@ struct ButtonsPrototypeView: View {
             Button(
                 action: {
                     withAnimation {
-                        if counter > 5 {
-                            optionToChoose = "Great! That's enough"
-                        } else {
-                            optionToChoose = "Choose option A"
-                        }
-                        
-                        counter += 1
-
                         withAnimation(.easeInOut(duration: 0.5)) {
                             optionBShadowRadius = 12
                         }
@@ -87,6 +86,19 @@ struct ButtonsPrototypeView: View {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             withAnimation(.easeInOut(duration: 0.5)) {
                                 optionBShadowRadius = 0
+                            }
+                        }
+                        
+                        optionToChoose = "Loading next command..."
+                        
+                        withAnimation(.easeInOut(duration: 1).repeatCount(5)) {
+                            mainScreenShadowRadius = 12
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                optionToChoose = "Choose option A"
+                                mainScreenShadowRadius = 0
                             }
                         }
                     }

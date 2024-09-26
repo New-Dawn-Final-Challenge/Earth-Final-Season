@@ -18,8 +18,10 @@ struct DraggerPrototypeView: View {
     
     @State private var optionBShadowRadius = 0
     @State private var optionAShadowRadius = 0
+    @State private var mainScreenShadowRadius = 0
+
     
-    @State var location = CGPoint(x: UIScreen.main.bounds.width/2, y: 162)
+    @State var location = CGPoint(x: UIScreen.main.bounds.width/2, y: 152)
 
     let screenWidth = UIScreen.main.bounds.width
 
@@ -30,7 +32,9 @@ struct DraggerPrototypeView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(Color(UIColor.systemGray4))
+                        .shadow(color: Color.blue, radius: CGFloat(mainScreenShadowRadius))
                 )
+                .frame(width: 300)
                 .offset(y: 50)
                         
             RoundedRectangle(cornerRadius: 16)
@@ -103,13 +107,36 @@ struct DraggerPrototypeView: View {
 
                                 withAnimation {
                                     if location.x == rightLimit {
-                                        optionToChoose = "Choose option A"
+                                        optionToChoose = "Loading next command..."
                                         complexSuccess()
+                                        
+                                        withAnimation(.easeInOut(duration: 1).repeatCount(5)) {
+                                            mainScreenShadowRadius = 12
+                                        }
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                                            withAnimation(.easeInOut(duration: 0.5)) {
+                                                optionToChoose = "Choose option A"
+                                                mainScreenShadowRadius = 0
+                                            }
+                                        }
+                                        
                                     } else if location.x == leftLimit {
-                                        optionToChoose = "Choose option B"
+                                        optionToChoose = "Loading next command..."
                                         complexSuccess()
+
+                                        withAnimation(.easeInOut(duration: 1).repeatCount(5)) {
+                                            mainScreenShadowRadius = 12
+                                        }
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                                            withAnimation(.easeInOut(duration: 0.5)) {
+                                                optionToChoose = "Choose option B"
+                                                mainScreenShadowRadius = 0
+                                            }
+                                        }
                                     }
-                                    location = CGPoint(x: screenWidth/2, y: 162)
+                                    location = CGPoint(x: screenWidth/2, y: 152)
                                     optionAShadowRadius = 0
                                     optionBShadowRadius = 0
                                 }
