@@ -13,7 +13,8 @@ class GameplayViewModel: ObservableObject {
     @Published var indicators = Indicators(audience: 5, socialInstability: 5, politicalInstability: 5, environmentalDegradation: 5, currentYear: 0)  // Initial Indicators
     
     private var eventsSequence: [UUID] = []
-    
+    private var eventsPassedCount = 0 // Counter for events passed
+
     init() {
         // Load events and ensure UUIDs are correctly initialized
         events = loadAndReturnEvents()
@@ -38,8 +39,6 @@ class GameplayViewModel: ObservableObject {
         }
     }
 
-
-
     private func goToNextEvent() {
         if !eventsSequence.isEmpty {
             // Remove the first event in the sequence
@@ -53,6 +52,18 @@ class GameplayViewModel: ObservableObject {
                 if let nextEvent = events.first(where: { $0.id == nextEventID }) {
                     currentEvent = nextEvent
                     print("Next event found: \(nextEvent.description)")
+
+                    // Increment the events passed count
+                    eventsPassedCount += 1
+
+                    // Check if two events have been passed
+                    if eventsPassedCount == 2 {
+                        // Increment the current year
+                        indicators.currentYear += 1
+                        print("Year increased to: \(indicators.currentYear)")
+                        // Reset the events passed count
+                        eventsPassedCount = 0
+                    }
                 } else {
                     print("Next event not found in the events array.")
                     currentEvent = nil
@@ -66,7 +77,6 @@ class GameplayViewModel: ObservableObject {
             currentEvent = nil
         }
     }
-
     
     func chooseOption1() {
         if let event = currentEvent {
