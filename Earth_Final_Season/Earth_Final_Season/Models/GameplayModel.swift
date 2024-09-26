@@ -8,6 +8,7 @@
 import Foundation
 
 struct Event: EventService, Codable {
+    let id: UUID
     let character: String
     let description: String  // Ensure this matches your JSON
     let choice1: String
@@ -25,9 +26,6 @@ struct Event: EventService, Codable {
     var difficulty: String
     var tag: String
 
-    var uuid: UUID {
-        return UUID(uuidString: description) ?? UUID() // Provide a default if parsing fails
-    }
     var consequence1: Consequence {
         return Consequence(socialInstability: socialInstability1, politicalInstability: politicalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
     }
@@ -35,7 +33,6 @@ struct Event: EventService, Codable {
         return Consequence(socialInstability: socialInstability2, politicalInstability: politicalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
     }
 }
-
 
 struct Consequence: ConsequenceService, Codable {
     var socialInstability: Int

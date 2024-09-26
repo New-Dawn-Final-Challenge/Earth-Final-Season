@@ -1,6 +1,7 @@
 {
   "mockEvents": [
     {
+      "id": "a3bb189e-8bf9-4881-99b6-4b1b2e8c24e4",
       "character": "Sensationalist TV Host",
       "description": "My controversial new report denies the existence of climate change!",
       "choice1": "Air the report",
@@ -19,6 +20,7 @@
       "tag": "environmental"
     },
     {
+      "id": "a44d8861-5e6f-4bc1-9b16-2eab1d9b6595",
       "character": "Indie Physician",
       "description": "I’ve found a miracle cure for climate-related health issues!",
       "choice1": "Approve the treatment",
@@ -37,6 +39,7 @@
       "tag": "environmental"
     },
     {
+      "id": "b99b83ec-8f8c-4be1-b831-c793fbe3a3b8",
       "character": "Chronically online teenager",
       "description": "I created a viral meme downplaying global warming.",
       "choice1": "Let the meme spread",
@@ -55,6 +58,7 @@
       "tag": "environmental"
     },
     {
+      "id": "c1189a51-fd0c-4748-85c1-6e5d706fdfe2",
       "character": "Ultra New Age environmentalist",
       "description": "Let’s use crystals and meditation to reverse climate change.",
       "choice1": "Promote the idea",
@@ -73,6 +77,7 @@
       "tag": "environmental"
     },
     {
+      "id": "e3f00e3b-9a81-4a02-b2b8-4e51c812e6cc",
       "character": "Slow logistics engineer",
       "description": "We can reduce carbon emissions, but it will take years to implement.",
       "choice1": "Approve the slow rollout",
@@ -91,6 +96,7 @@
       "tag": "environmental"
     },
     {
+      "id": "f622d5be-b827-44a0-bb4a-0b11e4e6126d",
       "character": "Experimentalist geneticist",
       "description": "I’ve developed a new breed of plants that can absorb CO2 faster.",
       "choice1": "Fund the research",
@@ -109,6 +115,7 @@
       "tag": "environmental"
     },
     {
+      "id": "fa11c5c4-2b8b-4f35-b4e6-f4ab1ffb46ff",
       "character": "Questionable religious leader",
       "description": "The world is heating up because people are straying from the path of faith.",
       "choice1": "Spread the message",
@@ -127,6 +134,7 @@
       "tag": "environmental"
     },
     {
+      "id": "04e3c3e1-2ac4-433b-8b86-3eb0b9c04990",
       "character": "President in denial",
       "description": "Climate change is a hoax! Let’s prioritize economic growth instead.",
       "choice1": "Support the president's stance",
@@ -145,6 +153,7 @@
       "tag": "environmental"
     },
     {
+      "id": "03e8a5f2-18d2-48c7-986c-8d06cd3a2c7d",
       "character": "Fearless economist",
       "description": "If we deregulate, we can achieve both economic growth and environmental recovery!",
       "choice1": "Support the deregulation",
@@ -163,6 +172,7 @@
       "tag": "environmental"
     },
     {
+      "id": "8a30f4e7-cda6-47a5-91b0-f3d75f709db0",
       "character": "Evil researcher",
       "description": "Let’s speed up global warming for a quick profit.",
       "choice1": "Approve the scheme",
@@ -177,24 +187,6 @@
       "politicalInstability2": -5,
       "environmentalDegradation2": 6,
       "currentYear2": 3,
-      "difficulty": "hard",
-      "tag": "environmental"
-    },
-    {
-      "character": "Chaotic billionaire",
-      "description": "Let’s exploit climate change for business opportunities.",
-      "choice1": "Support the initiative",
-      "choice2": "Condemn the strategy",
-      "audience1": -7,
-      "socialInstability1": 13,
-      "politicalInstability1": 4,
-      "environmentalDegradation1": -4,
-      "currentYear1": 2,
-      "audience2": 9,
-      "socialInstability2": -15,
-      "politicalInstability2": -3,
-      "environmentalDegradation2": 5,
-      "currentYear2": 1,
       "difficulty": "hard",
       "tag": "environmental"
     }
