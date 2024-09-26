@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GameplayView: View {
+    // @State var viewModel = GameplayViewModel(events: mockEvents)
+    
     var body: some View {
         VStack{
             
@@ -37,5 +39,5 @@ struct GameplayView: View {
 }
 
 #Preview {
-    ContentView()
+    GameplayView()
 }
