@@ -27,6 +27,7 @@ struct DraggerPrototypeView: View {
 
     var body: some View {
         VStack {
+            // main screen
             Text(optionToChoose)
                 .padding(100)
                 .background(
@@ -36,7 +37,8 @@ struct DraggerPrototypeView: View {
                 )
                 .frame(width: 300)
                 .offset(y: 50)
-                        
+
+            // option A
             RoundedRectangle(cornerRadius: 16)
                 .frame(width: 360, height: 80)
                 .foregroundStyle(Color(UIColor.systemGray2))
@@ -49,6 +51,7 @@ struct DraggerPrototypeView: View {
                 .shadow(color: Color.pink, radius: CGFloat(optionAShadowRadius))
                 .offset(x: -100, y: 120)
 
+            // option B
             RoundedRectangle(cornerRadius: 16)
                 .frame(width: 360, height: 80)
                 .foregroundStyle(Color(UIColor.systemGray2))
@@ -59,13 +62,19 @@ struct DraggerPrototypeView: View {
                 )
                 .shadow(color: Color.pink, radius: CGFloat(optionBShadowRadius))
                 .offset(x: 100, y: 110)
-                            
+            
+            // slider/dragger
             ZStack {
+
+                // set max width for slider
                 let rectangleWidth = screenWidth * 1/2.5
+                
+                // slider
                 RoundedRectangle(cornerRadius: 16)
                     .frame(width: screenWidth * 1/2.5, height: 40)
                     .foregroundStyle(Color(UIColor.purple))
                 
+                // circle that can be dragged across the slider
                 Circle()
                     .frame(width: 50, height: 50)
                     .foregroundStyle(Color(UIColor.systemPink))
@@ -74,26 +83,36 @@ struct DraggerPrototypeView: View {
                     .gesture(
                         DragGesture()
                             .onChanged { state in
-                                var rightLimit = (screenWidth + rectangleWidth) / 2
-                                var leftLimit = (screenWidth - rectangleWidth) / 2
+                                // get the horizontal limits to which the circle can be dragged
+                                let rightLimit = (screenWidth + rectangleWidth) / 2
+                                let leftLimit = (screenWidth - rectangleWidth) / 2
                                 
+                                // set limit for the right side
                                 if state.location.x > rightLimit {
                                     location = CGPoint(x: rightLimit, y: location.y)
 
                                 }
+                                
+                                // set limit for the left side
                                 else if state.location.x < leftLimit {
                                     location = CGPoint(x: leftLimit, y: location.y)
                                 }
+                                
+                                // otherwise: move circle wherever its dragged
                                 else {
                                     location = CGPoint(x: state.location.x, y: location.y)
                                 }
                                 
+                                // if circle is on the second half of the slider, animate option B
                                 if state.location.x > screenWidth/2 {
                                     withAnimation {
                                         optionBShadowRadius = Int(state.location.x)/10
                                         optionAShadowRadius = 0
                                     }
-                                } else {
+                                }
+                                
+                                // if circle is on the first half of the slider, animate option A
+                                else {
                                     withAnimation {
                                         optionAShadowRadius = Int(screenWidth - state.location.x)/10
                                         optionBShadowRadius = 0
@@ -102,18 +121,25 @@ struct DraggerPrototypeView: View {
 
                             }
                             .onEnded { state in
-                                var rightLimit = (screenWidth + rectangleWidth) / 2
-                                var leftLimit = (screenWidth - rectangleWidth) / 2
+                                // get the horizontal limits to which the circle can be dragged
+                                let rightLimit = (screenWidth + rectangleWidth) / 2
+                                let leftLimit = (screenWidth - rectangleWidth) / 2
 
                                 withAnimation {
+                                    // option B was choosen
                                     if location.x == rightLimit {
-                                        optionToChoose = "Loading next command..."
+
+                                        // trigger haptic
                                         complexSuccess()
                                         
+                                        // animate main screen with blue shadow for 5 seconds
+                                        // and show loading text
+                                        optionToChoose = "Loading next command..."
                                         withAnimation(.easeInOut(duration: 1).repeatCount(5)) {
                                             mainScreenShadowRadius = 12
                                         }
                                         
+                                        // after 6 seconds, show command to select other option
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
                                             withAnimation(.easeInOut(duration: 0.5)) {
                                                 optionToChoose = "Choose option A"
@@ -121,14 +147,22 @@ struct DraggerPrototypeView: View {
                                             }
                                         }
                                         
-                                    } else if location.x == leftLimit {
-                                        optionToChoose = "Loading next command..."
+                                    }
+                                    
+                                    // option A was choosen
+                                    else if location.x == leftLimit {
+
+                                        // trigger haptic
                                         complexSuccess()
 
+                                        // animate main screen with blue shadow for 5 seconds
+                                        // and show loading text
+                                        optionToChoose = "Loading next command..."
                                         withAnimation(.easeInOut(duration: 1).repeatCount(5)) {
                                             mainScreenShadowRadius = 12
                                         }
                                         
+                                        // after 6 seconds, show command to select other option
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
                                             withAnimation(.easeInOut(duration: 0.5)) {
                                                 optionToChoose = "Choose option B"
@@ -136,6 +170,9 @@ struct DraggerPrototypeView: View {
                                             }
                                         }
                                     }
+                                    
+                                    // either way, after choice was made, set circle to the
+                                    // center of the slider and turn off shadows
                                     location = CGPoint(x: screenWidth/2, y: 152)
                                     optionAShadowRadius = 0
                                     optionBShadowRadius = 0
@@ -145,12 +182,15 @@ struct DraggerPrototypeView: View {
                     )
             }
         }
+        // enable haptics whenever sliding through the slider
         .sensoryFeedback(.impact(weight: .medium, intensity: 0.28), trigger: location)
         .offset(y: 100)
+        // IMPORTANT: This is needed for the stronger haptics to work
         .onAppear(perform: prepareHaptics)
                     
     }
     
+    // function that starts haptics engine
     func prepareHaptics() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         
@@ -162,6 +202,7 @@ struct DraggerPrototypeView: View {
         }
     }
     
+    // function that triggers strong haptics when a choice is made
     func complexSuccess() {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         
@@ -174,7 +215,6 @@ struct DraggerPrototypeView: View {
             events.append(event)
         }
 
-        
         do {
             let pattern = try CHHapticPattern(events: events, parameters: [])
             let player = try engine?.makePlayer(with: pattern)
