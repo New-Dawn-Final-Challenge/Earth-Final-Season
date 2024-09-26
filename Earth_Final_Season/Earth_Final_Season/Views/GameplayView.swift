@@ -8,28 +8,48 @@
 import SwiftUI
 
 struct GameplayView: View {
-    // @State var viewModel = GameplayViewModel(events: mockEvents)
+    @State var viewModel = GameplayViewModel(events: mockEvents)
     
     var body: some View {
         VStack{
             
             HStack {
-                AudienceIndicatorView(percentage: 55)
+                AudienceIndicatorView(percentage: viewModel.indicators.audience)
                     .padding()
-                ChaosIndicatorsView(socialInstability: 0, politicalInstability: 0, environmentalDegradation: 0, Year: "2070")
-                    .padding()
+                ChaosIndicatorsView(
+                    socialInstability: viewModel.indicators.socialInstability,
+                    politicalInstability: viewModel.indicators.politicalInstability,
+                    environmentalDegradation: viewModel.indicators.environmentalDegradation,
+                    Year: String(viewModel.indicators.currentYear)
+                )
+                .padding()
             }
             
-            CharacterView(characterImage: "Placeholder", characterName: "Líder conspiracionista")
+            if let event = viewModel.currentEvent {
+                CharacterView(characterImage: "Placeholder", characterName: event.character)
+                    .padding()
+                
+                EventView(eventDescription: event.description)
+                    .padding()
+                
+                HStack {
+                    Button(action: {
+                        viewModel.chooseOption1()
+                    }) {
+                        ChoicesView(choiceDescription: event.choice1)
+                    }
+                    Button(action: {
+                        viewModel.chooseOption2()
+                    }) {
+                        ChoicesView(choiceDescription: event.choice2)
+                    }
+                }
                 .padding()
-            
-            EventView(eventDescription: "Event")
-                .padding()
-            HStack{
-                ChoicesView(choiceDescription: "Option 1")
-                ChoicesView(choiceDescription: "Option 2")
+            } else {
+                Text("No more events")
+                    .font(.title)
+                    .padding()
             }
-            .padding()
             
             SliderView()
                 .padding()
