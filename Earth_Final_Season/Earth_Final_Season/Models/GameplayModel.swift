@@ -10,7 +10,7 @@ import Foundation
 struct Event: EventService, Codable {
     let id: UUID
     let character: String
-    let description: String  // Ensure this matches your JSON
+    let description: String
     let choice1: String
     let choice2: String
     let audience1: Int
@@ -51,13 +51,13 @@ struct Indicators: IndicatorService {
         politicalInstability += consequence.politicalInstability
         environmentalDegradation += consequence.environmentalDegradation
         
-        // Update the audience to be the mean of the other indicators multiplied by 100
+        // Update the audience to be the mean of the other indicators multiplied by 10
         updateAudience()
     }
     
     mutating func updateAudience() {
         let total = socialInstability + politicalInstability + environmentalDegradation
-        let count = 3  // We are averaging three indicators
-        audience = (total / count) * 10  // Multiply the mean by 100
+        let count = 3
+        audience = (total / count) * 10
     }
 }

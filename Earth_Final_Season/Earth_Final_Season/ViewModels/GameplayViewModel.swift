@@ -13,25 +13,14 @@ class GameplayViewModel: ObservableObject {
     @Published var indicators = Indicators(audience: 50, socialInstability: 5, politicalInstability: 5, environmentalDegradation: 5, currentYear: 0)  // Initial Indicators
     
     private var eventsSequence: [UUID] = []
-    private var eventsPassedCount = 0 // Counter for events passed
+    private var eventsPassedCount = 0
 
     init() {
-        // Load events and ensure UUIDs are correctly initialized
         events = loadAndReturnEvents()
-        
-        // Print the UUIDs of all the events for debugging
-        for event in events {
-            print("Event ID: \(event.id)")
-        }
 
-        // Ensure the events are shuffled and the sequence is generated from these exact events
         if !events.isEmpty {
             let shuffledEvents = events.shuffled()
-            
-            // The sequence should now refer to the same shuffled events
             self.eventsSequence = shuffledEvents.map { $0.id }
-            
-            // Set the current event to the first event in the shuffled sequence
             currentEvent = shuffledEvents.first
         } else {
             currentEvent = nil
@@ -41,27 +30,15 @@ class GameplayViewModel: ObservableObject {
 
     private func goToNextEvent() {
         if !eventsSequence.isEmpty {
-            // Remove the first event in the sequence
             eventsSequence.removeFirst()
-
-            // Debugging prints to check what's happening
-            print("Remaining event sequence: \(eventsSequence)")
             
-            // Get the next event ID and find the event in the events array
             if let nextEventID = eventsSequence.first {
                 if let nextEvent = events.first(where: { $0.id == nextEventID }) {
                     currentEvent = nextEvent
-                    print("Next event found: \(nextEvent.description)")
-
-                    // Increment the events passed count
                     eventsPassedCount += 1
-
-                    // Check if two events have been passed
+                    
                     if eventsPassedCount == 2 {
-                        // Increment the current year
                         indicators.currentYear += 1
-                        print("Year increased to: \(indicators.currentYear)")
-                        // Reset the events passed count
                         eventsPassedCount = 0
                     }
                 } else {
