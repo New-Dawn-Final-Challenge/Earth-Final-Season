@@ -8,28 +8,38 @@
 import Foundation
 
 class GameplayViewModel: ObservableObject {
+    @Published var events = [Event]()
     @Published var currentEvent: Event?
     @Published var indicators = Indicators(audience: 5, socialInstability: 5, politicalInstability: 5, environmentalDegradation: 5, currentYear: 0)  // Initial Indicators
     
-    private var events: [UUID: Event]
-    private var eventsSequence: [UUID]
-
-    init(events: [Event]) {
-        let shuffledEvents = events.shuffled()
-        self.events = Dictionary(uniqueKeysWithValues: shuffledEvents.map { ($0.id, $0) })
-        self.eventsSequence = shuffledEvents.map { $0.id }
-        currentEvent = shuffledEvents.first
+    private var eventsSequence: [UUID] = []
+    
+    init() {
+        events = loadAndReturnEvents()
+        // Shuffle the events and map their IDs into the sequence
+        if !events.isEmpty {
+           let shuffledEvents = events.shuffled()
+            self.eventsSequence = shuffledEvents.map { $0.uuid }
+           currentEvent = shuffledEvents.first
+        } else {
+           // Handle case when no events are loaded
+           currentEvent = nil
+           print("No events loaded.")
+        }
     }
 
     private func goToNextEvent() {
+        // Remove the first event in the sequence
         if !eventsSequence.isEmpty {
             eventsSequence.removeFirst()
-            
-            if let nextEventID = eventsSequence.first {
-                currentEvent = events[nextEventID]
-            } else {
-                currentEvent = nil
-            }
+        }
+        
+        // Get the next event ID and find the event in the events array
+        if let nextEventID = eventsSequence.first {
+            currentEvent = events.first(where: { $0.uuid == nextEventID })
+        } else {
+            // No more events left
+            currentEvent = nil
         }
     }
     
