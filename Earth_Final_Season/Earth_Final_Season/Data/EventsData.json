@@ -15,7 +15,7 @@
       "politicalInstability2": -4,
       "environmentalDegradation2": 4,
       "difficulty": "easy",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "a44d8861-5e6f-4bc1-9b16-2eab1d9b6595",
@@ -32,7 +32,7 @@
       "politicalInstability2": -1,
       "environmentalDegradation2": -2,
       "difficulty": "easy",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "b99b83ec-8f8c-4be1-b831-c793fbe3a3b8",
@@ -49,7 +49,7 @@
       "politicalInstability2": -3,
       "environmentalDegradation2": 2,
       "difficulty": "easy",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "c1189a51-fd0c-4748-85c1-6e5d706fdfe2",
@@ -66,7 +66,7 @@
       "politicalInstability2": -2,
       "environmentalDegradation2": 4,
       "difficulty": "easy",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "e3f00e3b-9a81-4a02-b2b8-4e51c812e6cc",
@@ -83,7 +83,7 @@
       "politicalInstability2": -2,
       "environmentalDegradation2": 3,
       "difficulty": "medium",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "f622d5be-b827-44a0-bb4a-0b11e4e6126d",
@@ -100,7 +100,7 @@
       "politicalInstability2": -1,
       "environmentalDegradation2": 2,
       "difficulty": "medium",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "fa11c5c4-2b8b-4f35-b4e6-f4ab1ffb46ff",
@@ -117,7 +117,7 @@
       "politicalInstability2": -2,
       "environmentalDegradation2": 3,
       "difficulty": "medium",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "04e3c3e1-2ac4-433b-8b86-3eb0b9c04990",
@@ -134,7 +134,7 @@
       "politicalInstability2": -3,
       "environmentalDegradation2": 2,
       "difficulty": "medium",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "03e8a5f2-18d2-48c7-986c-8d06cd3a2c7d",
@@ -151,7 +151,7 @@
       "politicalInstability2": -4,
       "environmentalDegradation2": 4,
       "difficulty": "medium",
-      "tag": "environmental"
+      "tags": ["environmental"]
     },
     {
       "id": "8a30f4e7-cda6-47a5-91b0-f3d75f709db0",
@@ -168,7 +168,7 @@
       "politicalInstability2": -5,
       "environmentalDegradation2": 6,
       "difficulty": "hard",
-      "tag": "environmental"
+      "tags": ["environmental"]
     }
   ]
 }

@@ -21,8 +21,8 @@ struct Event: EventService, Codable {
     let socialInstability2: Int
     let politicalInstability2: Int
     let environmentalDegradation2: Int
-    var difficulty: String
-    var tag: String
+    let difficulty: Difficulty
+    let tags: [String]
 
     var consequence1: Consequence {
         return Consequence(socialInstability: socialInstability1, politicalInstability: politicalInstability1, environmentalDegradation: environmentalDegradation1, description: description)

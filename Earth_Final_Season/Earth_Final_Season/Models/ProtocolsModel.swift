@@ -22,8 +22,8 @@ protocol EventService {
     var socialInstability2: Int { get }
     var politicalInstability2: Int { get }
     var environmentalDegradation2: Int { get }
-    var difficulty: String { get }
-    var tag: String { get }
+    var difficulty: Difficulty { get }
+    var tags: [String] { get }
 }
 
 // Consequence Protocol
