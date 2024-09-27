@@ -7,43 +7,43 @@
 
 import SwiftUI
 
-
 struct AudienceIndicatorView: View {
-    
-    let percentage: Int;
+    let percentage: Int
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
     
     init(percentage: Int) {
         self.percentage = percentage
     }
     
-    
     var body: some View {
-        VStack{
+        VStack {
             Image(systemName: "hands.and.sparkles.fill")
                 .resizable()
-                .frame(width: 40, height: 40)
-                .foregroundStyle(Color.accentColor)
-            GeometryReader { geometry in
-                ZStack(alignment: .bottom) {
-                    // Background Bar (empty part)
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(width: 40) // Set the width for the bar
-                    
-                    // Filled Bar (based on percentage)
-                    Rectangle()
-                        .fill(Color.accentColor)
-                        .frame(width: 40, height: CGFloat(percentage) / 100 * geometry.size.height)
-                }
-                .cornerRadius(16)
+                .frame(width: screenWidth * 0.08,
+                       height: screenHeight * 0.04)
+                .foregroundStyle(Color(UIColor.systemOrange))
+
+            ZStack(alignment: .bottom) {
+                // Background Bar (empty part)
+                Rectangle()
+                    .fill(Color(UIColor.systemGray5))
+                    .frame(width: screenWidth * 0.1,
+                           height: screenHeight * 0.1)
+
+                // Filled Bar (based on percentage)
+                Rectangle()
+                    .fill(Color(UIColor.systemOrange))
+                    .frame(width: screenWidth * 0.1,
+                           height: CGFloat(percentage) / 100 * screenHeight * 0.1)
             }
-            .frame(width: 40, height: 90) // Set a fixed width for the bar
+            .cornerRadius(16)
         }
     }
 }
 
 struct AudienceIndicatorView_Preview: PreviewProvider {
     static var previews: some View {
-        AudienceIndicatorView(percentage: 90)
+        AudienceIndicatorView(percentage: 50)
     }
 }
