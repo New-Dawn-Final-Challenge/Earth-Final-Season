@@ -43,8 +43,8 @@ struct GameplayView: View {
                     .padding()
             }
             
-            SliderView()
-                .padding()
+//            SliderView()
+//                .padding()
             
             Spacer()
         }
