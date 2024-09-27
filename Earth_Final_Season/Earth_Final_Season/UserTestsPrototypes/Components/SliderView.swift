@@ -12,6 +12,7 @@ struct SliderView: View {
     @Binding var mainScreenShadowRadius: Int
     @Binding var optionAShadowRadius: Int
     @Binding var optionBShadowRadius: Int
+    
     @State private var dragOffset = CGSize.zero
     @State private var finalOffsetX: CGFloat = 0
     @State private var feedbackTrigger: CGPoint = .zero

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct OptionButton: View {
-    var text: String
     @Binding var shadowRadius: Int
+    var text: String
     var action: () -> Void
 
     var body: some View {

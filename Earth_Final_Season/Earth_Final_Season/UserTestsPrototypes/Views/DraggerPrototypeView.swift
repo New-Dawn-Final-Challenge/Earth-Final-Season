@@ -15,15 +15,13 @@ struct DraggerPrototypeView: View {
             MainScreenView(optionToChoose: $viewModel.optionToChoose,
                            mainScreenShadowRadius: $viewModel.mainScreenShadowRadius)
             
-            OptionButton(text: "This is option A",
-                         shadowRadius: $viewModel.optionAShadowRadius,
+            OptionButton(shadowRadius: $viewModel.optionAShadowRadius, text: "This is option A",
                          action: {
                              viewModel.selectOptionA()
                          })
             .padding(.trailing, 100)
             
-            OptionButton(text: "This is option B",
-                         shadowRadius: $viewModel.optionBShadowRadius,
+            OptionButton(shadowRadius: $viewModel.optionBShadowRadius, text: "This is option B",
                          action: {
                              viewModel.selectOptionB()
                          })
