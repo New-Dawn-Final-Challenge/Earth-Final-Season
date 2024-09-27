@@ -11,6 +11,7 @@ import Foundation
 protocol EventService {
     var id: UUID { get }
     var character: String { get }
+    var image: String { get }
     var description: String { get }
     var choice1: String { get }
     var choice2: String { get }

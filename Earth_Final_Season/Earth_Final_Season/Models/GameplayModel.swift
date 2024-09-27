@@ -10,6 +10,7 @@ import Foundation
 struct Event: EventService, Codable {
     let id: UUID
     let character: String
+    let image: String
     let description: String
     let choice1: String
     let choice2: String

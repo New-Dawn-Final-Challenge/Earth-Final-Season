@@ -18,7 +18,7 @@ struct GameplayView: View {
             }
             
             if let event = viewModel.currentEvent {
-                CharacterView(characterImage: "Placeholder", characterName: event.character)
+                CharacterView(characterImage: event.image, characterName: event.character)
                     .padding()
                 
                 EventView(eventDescription: event.description)
