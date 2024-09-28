@@ -10,7 +10,7 @@ import Foundation
 class GameplayViewModel: ObservableObject {
     @Published var events = [Event]()
     @Published var currentEvent: Event?
-    @Published var indicators = Indicators(audience: 50, socialInstability: 5, politicalInstability: 5, environmentalDegradation: 5, currentYear: 0)  // Initial Indicators
+    @Published var indicators = Indicators(audience: 100, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)  // Initial Indicators
     
     private var eventsSequence: [UUID] = []
     private var eventsPassedCount = 0

@@ -48,9 +48,13 @@ struct Indicators: IndicatorService {
     var currentYear: Int
     
     mutating func applyConsequence(_ consequence: Consequence) {
+        // Update indicators with new consequences
         socialInstability += consequence.socialInstability
         politicalInstability += consequence.politicalInstability
         environmentalDegradation += consequence.environmentalDegradation
+        
+        // Print updated values
+        printUpdatedValues()
         
         // Update the audience to be the mean of the other indicators multiplied by 10
         updateAudience()
@@ -60,5 +64,15 @@ struct Indicators: IndicatorService {
         let total = socialInstability + politicalInstability + environmentalDegradation
         let count = 3
         audience = (total / count) * 10
+        
+        // Print updated audience value
+        print("Updated Audience: \(audience)")
+    }
+    
+    // Function to print updated indicator values
+    private func printUpdatedValues() {
+        print("Updated Social Instability: \(socialInstability)")
+        print("Updated Political Instability: \(politicalInstability)")
+        print("Updated Environmental Degradation: \(environmentalDegradation)")
     }
 }

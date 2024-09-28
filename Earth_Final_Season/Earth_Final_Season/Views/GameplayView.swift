@@ -5,16 +5,16 @@ struct GameplayView: View {
     
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .center, spacing: 20) {
                 AudienceIndicatorView(percentage: viewModel.indicators.audience)
-                    .padding()
+                    .padding(.bottom)
+
                 ChaosIndicatorsView(
                     socialInstability: viewModel.indicators.socialInstability,
                     politicalInstability: viewModel.indicators.politicalInstability,
                     environmentalDegradation: viewModel.indicators.environmentalDegradation,
-                    Year: String(viewModel.indicators.currentYear)
+                    year: String(viewModel.indicators.currentYear)
                 )
-                .padding()
             }
             
             if let event = viewModel.currentEvent {
