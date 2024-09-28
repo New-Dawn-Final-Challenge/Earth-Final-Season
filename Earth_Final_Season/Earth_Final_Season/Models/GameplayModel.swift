@@ -63,7 +63,7 @@ struct Indicators: IndicatorService {
     mutating func updateAudience() {
         let total = socialInstability + politicalInstability + environmentalDegradation
         let count = 3
-        audience = (total / count) * 10
+        audience = (total / count)
         
         // Print updated audience value
         print("Updated Audience: \(audience)")

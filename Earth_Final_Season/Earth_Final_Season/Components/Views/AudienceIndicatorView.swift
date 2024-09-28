@@ -35,7 +35,7 @@ struct AudienceIndicatorView: View {
                 Rectangle()
                     .fill(Color(UIColor.systemOrange))
                     .frame(width: screenWidth * 0.1,
-                           height: CGFloat(percentage) / 200 * screenHeight * 0.1)
+                           height: CGFloat(percentage) / 20 * screenHeight * 0.1)
             }
             .cornerRadius(16)
         }
