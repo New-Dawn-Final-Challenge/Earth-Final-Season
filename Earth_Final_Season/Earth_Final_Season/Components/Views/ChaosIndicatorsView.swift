@@ -72,19 +72,11 @@ struct ChaosIndicatorsView: View {
         }
     }
 
-    
     // Indicator view with an added percentage
     private func indicatorView(image: String, percentage: Int) -> some View {
         Image(systemName: image)
             .resizable()
-            .frame(width: screenWidth * 0.1, height: screenHeight * 0.05)
+            .frame(width: screenWidth * 0.08, height: screenHeight * 0.04)
             .foregroundStyle(Color(UIColor.systemGray))
     }
 }
-
-//#Preview {
-//    ChaosIndicatorsView(socialInstability: 0,
-//                        politicalInstability: 0,
-//                        environmentalDegradation: 0,
-//                        year: "2070")
-//}

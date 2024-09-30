@@ -4,7 +4,7 @@ struct GameplayView: View {
     @StateObject var viewModel = GameplayViewModel()
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 6) {
             helperButtonsView
             
             indicatorsView
@@ -25,7 +25,7 @@ struct GameplayView: View {
                                  text: event.choice2)
                     .padding(.leading, 100)
                 }
-                .padding(.top, -10)
+                .padding(.top, -15)
             } else {
                 Text("No more events")
                     .font(.title)
