@@ -56,7 +56,7 @@ struct Indicators: IndicatorService {
         // Print updated values
         printUpdatedValues()
         
-        // Update the audience to be the mean of the other indicators multiplied by 10
+        // Update the audience to be the mean of the other indicators
         updateAudience()
     }
     
