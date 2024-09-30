@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 class GameplayViewModel: ObservableObject {
+    @Published var isGameOver = false
     @Published var currentPosition: CGSize = .zero
     @Published var mainScreenShadowRadius = 0
     @Published var option1ShadowRadius = 0
@@ -32,8 +33,19 @@ class GameplayViewModel: ObservableObject {
             print("No events loaded.")
         }
     }
+    
+    private func checkForGameOver() {
+        if indicators.audience <= 0 || indicators.audience >= 20 ||
+           indicators.socialInstability <= 0 || indicators.socialInstability >= 20 ||
+           indicators.politicalInstability <= 0 || indicators.politicalInstability >= 20 ||
+           indicators.environmentalDegradation <= 0 || indicators.environmentalDegradation >= 20 {
+            isGameOver = true
+        }
+    }
 
     private func goToNextEvent() {
+        checkForGameOver()
+        
         if !eventsSequence.isEmpty {
             eventsSequence.removeFirst()
             
@@ -72,5 +84,15 @@ class GameplayViewModel: ObservableObject {
             indicators.applyConsequence(event.consequence2)
             goToNextEvent()
         }
+    }
+    
+    func resetGame() {
+        indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)
+        isGameOver = false
+        events = loadAndReturnEvents()
+        let shuffledEvents = events.shuffled()
+        self.eventsSequence = shuffledEvents.map { $0.id }
+        currentEvent = shuffledEvents.first
+        eventsPassedCount = 0
     }
 }
