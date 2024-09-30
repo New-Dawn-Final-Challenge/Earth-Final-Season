@@ -4,7 +4,7 @@ struct GameplayView: View {
     @StateObject var viewModel = GameplayViewModel()
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 10) {
             HStack(alignment: .center, spacing: 20) {
                 AudienceIndicatorView(percentage: viewModel.indicators.audience)
                     .padding(.bottom)
@@ -18,21 +18,24 @@ struct GameplayView: View {
             }
             
             if let event = viewModel.currentEvent {
-                CharacterView(characterImage: event.image, characterName: event.character)
                 
-                VStack(spacing: -10) {
+                VStack(spacing: -15) {
+                    CharacterView(characterImage: event.image, characterName: event.character)
+                    
                     EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
                               eventDescription: event.description)
                     
-                    VStack(spacing: -20) {
-                        OptionButton(shadowRadius: $viewModel.optionAShadowRadius,
-                                     text: event.choice1)
-                        .padding(.trailing, 100)
-                        
-                        OptionButton(shadowRadius: $viewModel.optionBShadowRadius,
-                                     text: event.choice2)
-                        .padding(.leading, 100)
-                    }
+                }
+                .padding(.bottom, -15)
+                
+                VStack(spacing: -20) {
+                    OptionButton(shadowRadius: $viewModel.optionAShadowRadius,
+                                 text: event.choice1)
+                    .padding(.trailing, 100)
+                    
+                    OptionButton(shadowRadius: $viewModel.optionBShadowRadius,
+                                 text: event.choice2)
+                    .padding(.leading, 100)
                 }
                 
             } else {

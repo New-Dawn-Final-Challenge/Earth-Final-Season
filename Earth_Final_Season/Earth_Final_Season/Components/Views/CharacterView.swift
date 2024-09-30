@@ -10,6 +10,8 @@ import SwiftUI
 struct CharacterView: View {
     let characterImage: String;
     let characterName: String;
+    let screenWidth: CGFloat = UIScreen.main.bounds.width
+    let screenHeight: CGFloat = UIScreen.main.bounds.height
     
     init(characterImage: String, characterName: String) {
         self.characterImage = characterImage
@@ -21,7 +23,8 @@ struct CharacterView: View {
             // Image rectangle
             Rectangle()
                 .fill(Color.gray.opacity(0.2))
-                .frame(width: 150, height: 150)
+                .frame(width: screenWidth * 0.5,
+                       height: screenHeight * 0.2)
                 .overlay(
                     Image(characterImage)
                         .resizable()
@@ -32,15 +35,16 @@ struct CharacterView: View {
             
             // Name rectangle
             Rectangle()
-                .fill(Color.blue.opacity(0.8))
-                .frame(width: 150, height: 50)
+                .foregroundStyle(Color(UIColor.systemGray4))
+                .frame(width: screenWidth * 0.5,
+                       height: screenHeight * 0.08)
                 .overlay(
                     Text(characterName)
-                        .foregroundColor(.white)
-                        .font(.headline)
+                        .bold()
+                        .multilineTextAlignment(.center)
                 )
         }
-        .cornerRadius(10) // Add rounding to both rectangles
+        .cornerRadius(16) // Add rounding to both rectangles
     }
 }
 
