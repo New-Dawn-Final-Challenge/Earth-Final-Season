@@ -4,7 +4,7 @@ struct GameplayView: View {
     @StateObject var viewModel = GameplayViewModel()
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack(alignment: .center, spacing: 20) {
                 AudienceIndicatorView(percentage: viewModel.indicators.audience)
                     .padding(.bottom)
@@ -19,33 +19,40 @@ struct GameplayView: View {
             
             if let event = viewModel.currentEvent {
                 CharacterView(characterImage: event.image, characterName: event.character)
-                    .padding()
                 
-                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
-                          eventDescription: event.description)
-                    .padding()
-                
-                HStack {
-                    Button(action: {
-                        viewModel.chooseOption1()
-                    }) {
-                        ChoicesView(choiceDescription: event.choice1)
-                    }
-                    Button(action: {
-                        viewModel.chooseOption2()
-                    }) {
-                        ChoicesView(choiceDescription: event.choice2)
+                VStack(spacing: -10) {
+                    EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
+                              eventDescription: event.description)
+                    
+                    VStack(spacing: -20) {
+                        OptionButton(shadowRadius: $viewModel.optionAShadowRadius,
+                                     text: event.choice1)
+                        .padding(.trailing, 100)
+                        
+                        OptionButton(shadowRadius: $viewModel.optionBShadowRadius,
+                                     text: event.choice2)
+                        .padding(.leading, 100)
                     }
                 }
-                .padding()
+                
             } else {
                 Text("No more events")
                     .font(.title)
                     .padding()
             }
             
-//            SliderView()
-//                .padding()
+            SliderView(
+                optionToChoose: $viewModel.optionToChoose,
+                mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
+                optionAShadowRadius: $viewModel.optionAShadowRadius,
+                optionBShadowRadius: $viewModel.optionBShadowRadius,
+                onChooseOptionA: {
+                    viewModel.chooseOption1()
+                },
+                onChooseOptionB: {
+                    viewModel.chooseOption2()
+                }
+            )
             
             Spacer()
         }

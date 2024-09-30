@@ -75,4 +75,12 @@ class GameplayViewModel: ObservableObject {
             goToNextEvent()
         }
     }
+    
+    func selectOptionA() {
+        optionToChoose = "Choose option A"
+    }
+
+    func selectOptionB() {
+        optionToChoose = "Choose option B"
+    }
 }

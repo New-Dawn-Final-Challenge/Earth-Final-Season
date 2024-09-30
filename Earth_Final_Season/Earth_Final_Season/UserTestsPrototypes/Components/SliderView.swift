@@ -13,6 +13,9 @@ struct SliderView: View {
     @Binding var optionAShadowRadius: Int
     @Binding var optionBShadowRadius: Int
     
+    var onChooseOptionA: () -> Void
+    var onChooseOptionB: () -> Void
+    
     @State private var dragOffset = CGSize.zero
     @State private var finalOffsetX: CGFloat = 0
     @State private var feedbackTrigger: CGPoint = .zero
@@ -61,31 +64,34 @@ struct SliderView: View {
                                     // Option A chosen
                                     if finalOffsetX == leftLimit {
                                         complexSuccess()
-                                        optionToChoose = "Loading next command..."
+                                        onChooseOptionA()
+//                                        optionToChoose = "Loading next command..."
                                         mainScreenShadowRadius = 12
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-                                            withAnimation(.easeInOut(duration: 0.5)) {
-                                                optionToChoose = "Choose option B"
-                                                mainScreenShadowRadius = 0
-                                            }
-                                        }
+//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+//                                            withAnimation(.easeInOut(duration: 0.5)) {
+//                                                optionToChoose = "Choose option B"
+//                                                mainScreenShadowRadius = 0
+//                                            }
+//                                        }
                                     }
 
                                     // Option B chosen
                                     else if finalOffsetX == rightLimit {
                                         complexSuccess()
-                                        optionToChoose = "Loading next command..."
+                                        onChooseOptionB()
+//                                        optionToChoose = "Loading next command..."
                                         mainScreenShadowRadius = 12
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-                                            withAnimation(.easeInOut(duration: 0.5)) {
-                                                optionToChoose = "Choose option A"
-                                                mainScreenShadowRadius = 0
-                                            }
-                                        }
+//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+//                                            withAnimation(.easeInOut(duration: 0.5)) {
+//                                                optionToChoose = "Choose option A"
+//                                                mainScreenShadowRadius = 0
+//                                            }
+//                                        }
                                     }
 
                                     // Reset position and shadows
                                     dragOffset = .zero
+                                    mainScreenShadowRadius = 0
                                     optionAShadowRadius = 0
                                     optionBShadowRadius = 0
                                 }

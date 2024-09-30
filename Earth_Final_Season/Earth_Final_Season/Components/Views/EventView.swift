@@ -16,11 +16,14 @@ struct EventView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
             .frame(width: screenWidth * 0.8,
-                   height: screenHeight * 0.2)
+                   height: screenHeight * 0.15)
+            .padding()
             .foregroundStyle(Color(UIColor.systemGray4))
             .shadow(color: Color.blue, radius: CGFloat(mainScreenShadowRadius))
             .overlay(
                 Text(eventDescription)
+                    .multilineTextAlignment(.center)
+                    .padding()
                     .padding()
             )
     }
