@@ -10,6 +10,7 @@ import Foundation
 struct Event: EventService, Codable {
     let id: UUID
     let character: String
+    let image: String
     let description: String
     let choice1: String
     let choice2: String
@@ -47,17 +48,31 @@ struct Indicators: IndicatorService {
     var currentYear: Int
     
     mutating func applyConsequence(_ consequence: Consequence) {
+        // Update indicators with new consequences
         socialInstability += consequence.socialInstability
         politicalInstability += consequence.politicalInstability
         environmentalDegradation += consequence.environmentalDegradation
         
-        // Update the audience to be the mean of the other indicators multiplied by 10
+        // Print updated values
+        printUpdatedValues()
+        
+        // Update the audience to be the mean of the other indicators
         updateAudience()
     }
     
     mutating func updateAudience() {
         let total = socialInstability + politicalInstability + environmentalDegradation
         let count = 3
-        audience = (total / count) * 10
+        audience = (total / count)
+        
+        // Print updated audience value
+        print("Updated Audience: \(audience)")
+    }
+    
+    // Function to print updated indicator values
+    private func printUpdatedValues() {
+        print("Updated Social Instability: \(socialInstability)")
+        print("Updated Political Instability: \(politicalInstability)")
+        print("Updated Environmental Degradation: \(environmentalDegradation)")
     }
 }

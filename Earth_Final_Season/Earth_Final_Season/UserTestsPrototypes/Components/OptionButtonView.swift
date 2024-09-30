@@ -1,15 +1,16 @@
 //
-//  ChoicesView.swift
+//  OptionButtonView.swift
 //  Earth_Final_Season
 //
-//  Created by Larissa Okabayashi on 24/09/24.
+//  Created by Larissa Fazolin on 27/09/24.
 //
 
 import SwiftUI
 
-struct ChoicesView: View {
+struct OptionButton: View {
     @Binding var shadowRadius: Int
     var text: String
+    var action: () -> Void
 
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
@@ -21,5 +22,8 @@ struct ChoicesView: View {
             .overlay(
                 Text(text)
             )
+            .onTapGesture {
+                action()
+            }
     }
 }

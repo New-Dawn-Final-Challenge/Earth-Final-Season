@@ -60,13 +60,13 @@ struct ConfigurationsView: View {
                 Section {
                     VStack(alignment: .leading) {
                         Button {
-                            viewModel.selectedGesture = .HoldDrag
+                            viewModel.selectedGesture = .holdDrag
                         } label: {
                             HStack {
                                 Text("Hold and drag")
                                     Spacer()
                                 Image(systemName: "checkmark")
-                                    .opacity(viewModel.selectedGesture == .HoldDrag ? 1:0)
+                                    .opacity(viewModel.selectedGesture == .holdDrag ? 1:0)
                             }
                             .padding(.horizontal)
                         }
@@ -74,13 +74,13 @@ struct ConfigurationsView: View {
                         Divider()
                         
                         Button {
-                            viewModel.selectedGesture = .Tap
+                            viewModel.selectedGesture = .tap
                         } label: {
                             HStack {
                                 Text("Tap")
                                     Spacer()
                                 Image(systemName: "checkmark")
-                                    .opacity(viewModel.selectedGesture == .Tap ? 1.0:0.0)
+                                    .opacity(viewModel.selectedGesture == .tap ? 1.0:0.0)
                             }
                             .padding(.horizontal)
                         }
@@ -102,5 +102,5 @@ struct ConfigurationsView: View {
 }
 
 enum Gesture {
-    case HoldDrag, Tap
+    case holdDrag, tap
 }

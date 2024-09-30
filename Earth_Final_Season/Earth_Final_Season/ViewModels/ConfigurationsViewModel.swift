@@ -17,7 +17,7 @@ class ConfigurationsViewModel {
     }
         
     var hapticsEnabled = true
-    var selectedGesture: Gesture = .HoldDrag
+    var selectedGesture: Gesture = .holdDrag
     var hapticsIntensity: Float = 1
     
     func playMusic(music name: String) {
