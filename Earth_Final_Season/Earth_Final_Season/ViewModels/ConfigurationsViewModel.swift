@@ -9,9 +9,21 @@ import Foundation
 
 @Observable
 class ConfigurationsViewModel {
-    var soundEffectsIntensity: Double = 63.5
-    var musicIntensity: Double = 33.5
+    var soundEffectsIntensity: Float = 63.5
+    var musicIntensity: Float = 33.5 {
+        didSet {
+            SoundtrackAudioManager.shared.changeVolume(intensity: musicIntensity/100)
+        }
+    }
+        
     var hapticsEnabled = true
     var selectedGesture: Gesture = .HoldDrag
-    var hapticsIntensity: Double = 1
+    var hapticsIntensity: Float = 1
+    
+    func playMusic(music name: String) {
+        SoundtrackAudioManager.shared.playSound(named: name)
+    }
+    func stopMusic() {
+        SoundtrackAudioManager.shared.stopSound()
+    }
 }
