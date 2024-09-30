@@ -2,6 +2,7 @@ import SwiftUI
 
 struct GameplayView: View {
     @StateObject var viewModel = GameplayViewModel()
+    @State private var gameOver = false
     
     var body: some View {
         VStack(spacing: 6) {
@@ -47,6 +48,9 @@ struct GameplayView: View {
             Spacer()
         }
         .onAppear(perform: prepareHaptics)
+        .navigationDestination(isPresented: $viewModel.isGameOver) {
+            GameOverView().environmentObject(viewModel)
+        }
     }
     
     private var helperButtonsView: some View {
