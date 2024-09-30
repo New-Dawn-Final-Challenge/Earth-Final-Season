@@ -9,6 +9,7 @@ import Foundation
 
 // Event Protocol
 protocol EventService {
+    var id: UUID { get }
     var character: String { get }
     var description: String { get }
     var choice1: String { get }
@@ -17,15 +18,12 @@ protocol EventService {
     var socialInstability1: Int { get }
     var politicalInstability1: Int { get }
     var environmentalDegradation1: Int { get }
-    var currentYear1: Int { get }
     var audience2: Int { get }
     var socialInstability2: Int { get }
     var politicalInstability2: Int { get }
     var environmentalDegradation2: Int { get }
-    var currentYear2: Int { get }
-    var difficulty: String { get }
-    var tag: String { get }
-    var uuid: UUID { get }
+    var difficulty: Difficulty { get }
+    var tags: [String] { get }
 }
 
 // Consequence Protocol

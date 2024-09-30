@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GameplayView: View {
-    @State var viewModel = GameplayViewModel()
+    @StateObject var viewModel = GameplayViewModel()
     
     var body: some View {
         VStack {
@@ -54,6 +54,3 @@ struct GameplayView: View {
 #Preview {
     GameplayView()
 }
-
-
-
