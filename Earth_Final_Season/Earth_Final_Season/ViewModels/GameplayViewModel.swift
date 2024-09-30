@@ -10,35 +10,47 @@ import Foundation
 class GameplayViewModel: ObservableObject {
     @Published var events = [Event]()
     @Published var currentEvent: Event?
-    @Published var indicators = Indicators(audience: 5, socialInstability: 5, politicalInstability: 5, environmentalDegradation: 5, currentYear: 0)  // Initial Indicators
+    @Published var indicators = Indicators(audience: 50, socialInstability: 5, politicalInstability: 5, environmentalDegradation: 5, currentYear: 0)  // Initial Indicators
     
     private var eventsSequence: [UUID] = []
-    
+    private var eventsPassedCount = 0
+
     init() {
         events = loadAndReturnEvents()
-        // Shuffle the events and map their IDs into the sequence
+
         if !events.isEmpty {
-           let shuffledEvents = events.shuffled()
-            self.eventsSequence = shuffledEvents.map { $0.uuid }
-           currentEvent = shuffledEvents.first
+            let shuffledEvents = events.shuffled()
+            self.eventsSequence = shuffledEvents.map { $0.id }
+            currentEvent = shuffledEvents.first
         } else {
-           // Handle case when no events are loaded
-           currentEvent = nil
-           print("No events loaded.")
+            currentEvent = nil
+            print("No events loaded.")
         }
     }
 
     private func goToNextEvent() {
-        // Remove the first event in the sequence
         if !eventsSequence.isEmpty {
             eventsSequence.removeFirst()
-        }
-        
-        // Get the next event ID and find the event in the events array
-        if let nextEventID = eventsSequence.first {
-            currentEvent = events.first(where: { $0.uuid == nextEventID })
+            
+            if let nextEventID = eventsSequence.first {
+                if let nextEvent = events.first(where: { $0.id == nextEventID }) {
+                    currentEvent = nextEvent
+                    eventsPassedCount += 1
+                    
+                    if eventsPassedCount == 2 {
+                        indicators.currentYear += 1
+                        eventsPassedCount = 0
+                    }
+                } else {
+                    print("Next event not found in the events array.")
+                    currentEvent = nil
+                }
+            } else {
+                print("No more events in the sequence.")
+                currentEvent = nil
+            }
         } else {
-            // No more events left
+            print("Event sequence is empty.")
             currentEvent = nil
         }
     }
