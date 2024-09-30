@@ -10,7 +10,7 @@ import SwiftUI
 struct OptionButton: View {
     @Binding var shadowRadius: Int
     var text: String
-//    var action: () -> Void
+    var action: () -> Void
 
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
@@ -22,8 +22,8 @@ struct OptionButton: View {
             .overlay(
                 Text(text)
             )
-//            .onTapGesture {
-//                action()
-//            }
+            .onTapGesture {
+                action()
+            }
     }
 }

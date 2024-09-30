@@ -29,11 +29,11 @@ struct GameplayView: View {
                 .padding(.bottom, -15)
                 
                 VStack(spacing: -20) {
-                    OptionButton(shadowRadius: $viewModel.optionAShadowRadius,
+                    ChoicesView(shadowRadius: $viewModel.option1ShadowRadius,
                                  text: event.choice1)
                     .padding(.trailing, 100)
                     
-                    OptionButton(shadowRadius: $viewModel.optionBShadowRadius,
+                    ChoicesView(shadowRadius: $viewModel.option2ShadowRadius,
                                  text: event.choice2)
                     .padding(.leading, 100)
                 }
@@ -45,14 +45,13 @@ struct GameplayView: View {
             }
             
             SliderView(
-                optionToChoose: $viewModel.optionToChoose,
                 mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
-                optionAShadowRadius: $viewModel.optionAShadowRadius,
-                optionBShadowRadius: $viewModel.optionBShadowRadius,
-                onChooseOptionA: {
+                option1ShadowRadius: $viewModel.option1ShadowRadius,
+                option2ShadowRadius: $viewModel.option2ShadowRadius,
+                onChooseOption1: {
                     viewModel.chooseOption1()
                 },
-                onChooseOptionB: {
+                onChooseOption2: {
                     viewModel.chooseOption2()
                 }
             )

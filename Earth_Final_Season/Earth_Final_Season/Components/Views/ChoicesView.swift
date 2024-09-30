@@ -8,25 +8,18 @@
 import SwiftUI
 
 struct ChoicesView: View {
-    let choiceDescription: String
-    
-    var body: some View {
-        VStack {
-            Rectangle()
-                .fill(Color.blue)
-                .frame(width: 150, height: 70)
-                .overlay(
-                    Text("\(choiceDescription)")
-                        .font(.title)
-                        .foregroundColor(.white)
-                )
-                .cornerRadius(10)
-                .shadow(radius: 5)
-        }
-        .padding()
-    }
-}
+    @Binding var shadowRadius: Int
+    var text: String
 
-#Preview {
-    ChoicesView(choiceDescription: "Option 1")
+    var body: some View {
+        RoundedRectangle(cornerRadius: 16)
+            .frame(width: UIScreen.main.bounds.width * 0.8,
+                   height: UIScreen.main.bounds.height * 0.08)
+            .foregroundStyle(Color(UIColor.systemGray4))
+            .padding()
+            .shadow(color: Color.pink, radius: CGFloat(shadowRadius))
+            .overlay(
+                Text(text)
+            )
+    }
 }

@@ -2,19 +2,18 @@
 //  SliderView.swift
 //  Earth_Final_Season
 //
-//  Created by Larissa Fazolin on 27/09/24.
+//  Created by Larissa Fazolin on 30/09/24.
 //
 
 import SwiftUI
 
 struct SliderView: View {
-    @Binding var optionToChoose: String
     @Binding var mainScreenShadowRadius: Int
-    @Binding var optionAShadowRadius: Int
-    @Binding var optionBShadowRadius: Int
+    @Binding var option1ShadowRadius: Int
+    @Binding var option2ShadowRadius: Int
     
-    var onChooseOptionA: () -> Void
-    var onChooseOptionB: () -> Void
+    var onChooseOption1: () -> Void
+    var onChooseOption2: () -> Void
     
     @State private var dragOffset = CGSize.zero
     @State private var finalOffsetX: CGFloat = 0
@@ -50,50 +49,36 @@ struct SliderView: View {
 
                                 // Update shadow radius based on the circle's relative position within the slider
                                 if finalOffsetX < 0 {
-                                    optionAShadowRadius = Int(abs(finalOffsetX) / 10)
-                                    optionBShadowRadius = 0
+                                    option1ShadowRadius = Int(abs(finalOffsetX) / 10)
+                                    option2ShadowRadius = 0
                                     mainScreenShadowRadius = Int(abs(finalOffsetX) / 10)
                                 } else {
-                                    optionBShadowRadius = Int(finalOffsetX / 10)
-                                    optionAShadowRadius = 0
+                                    option2ShadowRadius = Int(finalOffsetX / 10)
+                                    option1ShadowRadius = 0
                                     mainScreenShadowRadius = Int(finalOffsetX / 10)
                                 }
                             }
                             .onEnded { _ in
                                 withAnimation {
-                                    // Option A chosen
+                                    // Option 1 chosen
                                     if finalOffsetX == leftLimit {
                                         complexSuccess()
-                                        onChooseOptionA()
-//                                        optionToChoose = "Loading next command..."
+                                        onChooseOption1()
                                         mainScreenShadowRadius = 12
-//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-//                                            withAnimation(.easeInOut(duration: 0.5)) {
-//                                                optionToChoose = "Choose option B"
-//                                                mainScreenShadowRadius = 0
-//                                            }
-//                                        }
                                     }
 
-                                    // Option B chosen
+                                    // Option 2 chosen
                                     else if finalOffsetX == rightLimit {
                                         complexSuccess()
-                                        onChooseOptionB()
-//                                        optionToChoose = "Loading next command..."
+                                        onChooseOption2()
                                         mainScreenShadowRadius = 12
-//                                        DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
-//                                            withAnimation(.easeInOut(duration: 0.5)) {
-//                                                optionToChoose = "Choose option A"
-//                                                mainScreenShadowRadius = 0
-//                                            }
-//                                        }
                                     }
 
                                     // Reset position and shadows
                                     dragOffset = .zero
                                     mainScreenShadowRadius = 0
-                                    optionAShadowRadius = 0
-                                    optionBShadowRadius = 0
+                                    option1ShadowRadius = 0
+                                    option2ShadowRadius = 0
                                 }
                             }
                     )
