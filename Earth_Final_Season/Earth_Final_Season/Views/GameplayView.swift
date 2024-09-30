@@ -5,6 +5,19 @@ struct GameplayView: View {
     
     var body: some View {
         VStack(spacing: 10) {
+            HStack {
+                Spacer()
+                
+                NavigationLink(destination: ConfigurationsView(viewModel: ConfigurationsViewModel())) {
+                    HelpButtonView()
+                }
+                
+                NavigationLink(destination: ConfigurationsView(viewModel: ConfigurationsViewModel())) {
+                    ConfigurationButtonView()
+                }
+            }
+            .padding(.trailing)
+            
             HStack(alignment: .center, spacing: 20) {
                 AudienceIndicatorView(percentage: viewModel.indicators.audience)
                     .padding(.bottom)
