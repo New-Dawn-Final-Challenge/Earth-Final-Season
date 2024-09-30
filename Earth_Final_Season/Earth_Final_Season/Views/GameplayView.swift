@@ -19,7 +19,7 @@ struct GameplayView: View {
             
             if let event = viewModel.currentEvent {
                 
-                VStack(spacing: -15) {
+                VStack(spacing: -18) {
                     CharacterView(characterImage: event.image, characterName: event.character)
                     
                     EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
@@ -58,6 +58,7 @@ struct GameplayView: View {
             
             Spacer()
         }
+        .onAppear(perform: prepareHaptics)
     }
 }
 
