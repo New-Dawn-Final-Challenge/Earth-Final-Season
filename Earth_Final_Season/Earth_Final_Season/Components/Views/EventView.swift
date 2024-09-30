@@ -7,30 +7,21 @@
 import SwiftUI
 
 struct EventView: View {
+    @Binding var mainScreenShadowRadius: Int
     
     let eventDescription: String
-    
-    init(eventDescription: String) {
-        self.eventDescription = eventDescription
-    }
+    let screenWidth: CGFloat = UIScreen.main.bounds.width
+    let screenHeight: CGFloat = UIScreen.main.bounds.height
     
     var body: some View {
-        VStack(spacing: 0) {
-            // Image rectangle
-            Rectangle()
-                .fill(Color.blue.opacity(0.8))
-                .frame(width: 340, height: 180)
-                .overlay(
-                    Text(eventDescription)
-                        .foregroundColor(.white)
-                        .font(.title)
-                )
-        }
-        .cornerRadius(10) // Add rounding to both rectangles
+        RoundedRectangle(cornerRadius: 16)
+            .frame(width: screenWidth * 0.8,
+                   height: screenHeight * 0.2)
+            .foregroundStyle(Color(UIColor.systemGray4))
+            .shadow(color: Color.blue, radius: CGFloat(mainScreenShadowRadius))
+            .overlay(
+                Text(eventDescription)
+                    .padding()
+            )
     }
 }
-
-#Preview {
-    EventView(eventDescription: "Event")
-}
-

@@ -21,7 +21,8 @@ struct GameplayView: View {
                 CharacterView(characterImage: event.image, characterName: event.character)
                     .padding()
                 
-                EventView(eventDescription: event.description)
+                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
+                          eventDescription: event.description)
                     .padding()
                 
                 HStack {

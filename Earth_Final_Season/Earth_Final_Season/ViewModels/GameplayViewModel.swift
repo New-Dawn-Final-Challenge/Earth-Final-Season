@@ -6,8 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
 
 class GameplayViewModel: ObservableObject {
+    @Published var currentPosition: CGSize = .zero
+    @Published var optionToChoose = "Choose option A"
+    @Published var mainScreenShadowRadius = 0
+    @Published var optionAShadowRadius = 0
+    @Published var optionBShadowRadius = 0
+    @Published var circleLocation: CGPoint = CGPoint(x: UIScreen.main.bounds.width / 2, y: 170)
     @Published var events = [Event]()
     @Published var currentEvent: Event?
     @Published var indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)  // Initial Indicators
