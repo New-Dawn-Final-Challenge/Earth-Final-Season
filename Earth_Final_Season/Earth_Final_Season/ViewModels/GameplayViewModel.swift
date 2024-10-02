@@ -74,6 +74,7 @@ class GameplayViewModel: ObservableObject {
     
     func chooseOption1() {
         if let event = currentEvent {
+//            event.applyConsequence(consequence: event.consequenceDescription1)
             indicators.applyConsequence(event.consequence1)
             goToNextEvent()
         }

@@ -11,17 +11,19 @@ struct Event: EventService, Codable {
     let id: UUID
     let character: String
     let image: String
-    let description: String
+    var description: String
     let choice1: String
     let choice2: String
     let audience1: Int
     let socialInstability1: Int
     let politicalInstability1: Int
     let environmentalDegradation1: Int
+    let consequenceDescription1: String
     let audience2: Int
     let socialInstability2: Int
     let politicalInstability2: Int
     let environmentalDegradation2: Int
+    let consequenceDescription2: String
     let difficulty: Difficulty
     let tags: [String]
 
@@ -30,6 +32,9 @@ struct Event: EventService, Codable {
     }
     var consequence2: Consequence {
         return Consequence(socialInstability: socialInstability2, politicalInstability: politicalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
+    }
+    mutating func applyConsequence(consequence : String) {
+        description = consequence
     }
 }
 

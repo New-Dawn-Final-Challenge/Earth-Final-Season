@@ -1,16 +1,14 @@
 //
-//  OptionButtonView.swift
+//  ConsequencesView.swift
 //  Earth_Final_Season
 //
-//  Created by Larissa Fazolin on 27/09/24.
+//  Created by Larissa Okabayashi on 02/10/24.
 //
 
 import SwiftUI
 
-struct OptionButton: View {
-    @Binding var shadowRadius: Int
+struct ConsequencesView: View {
     var text: String
-    var action: () -> Void
 
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
@@ -18,12 +16,12 @@ struct OptionButton: View {
                    height: getHeight() * 0.08)
             .foregroundStyle(Color(UIColor.systemGray4))
             .padding()
-            .shadow(color: Color.pink, radius: CGFloat(shadowRadius))
             .overlay(
                 Text(text)
             )
-            .onTapGesture {
-                action()
-            }
     }
+}
+
+#Preview {
+    ConsequencesView(text: "")
 }

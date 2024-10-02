@@ -13,9 +13,6 @@ struct ChaosIndicatorsView: View {
     let environmentalDegradation: Int
     let year: String
     
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
-    
     init(socialInstability: Int, politicalInstability: Int, environmentalDegradation: Int, year: String) {
         self.socialInstability = socialInstability
         self.politicalInstability = politicalInstability
@@ -25,9 +22,12 @@ struct ChaosIndicatorsView: View {
     
     var body: some View {
         VStack {
-            Text("Year: \(year)").bold()
+            Text("Year: \(year)")
+                .font(.system(size: 16))
+                .bold()
+                .padding(.bottom, 10)
             
-            HStack(spacing: 30) {
+            HStack(spacing: getWidth() * 0.2) {
                 // Environmental Degradation indicator with overlay
                 indicatorView(image: "leaf.fill", percentage: environmentalDegradation)
                     .overlay(
@@ -76,7 +76,7 @@ struct ChaosIndicatorsView: View {
     private func indicatorView(image: String, percentage: Int) -> some View {
         Image(systemName: image)
             .resizable()
-            .frame(width: screenWidth * 0.08, height: screenHeight * 0.04)
+            .frame(width: getWidth() * 0.08, height: getHeight() * 0.04)
             .foregroundStyle(Color(UIColor.systemGray))
     }
 }

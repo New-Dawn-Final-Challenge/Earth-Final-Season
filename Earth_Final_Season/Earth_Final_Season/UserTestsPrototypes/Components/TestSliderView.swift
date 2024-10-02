@@ -17,12 +17,9 @@ struct TestSliderView: View {
     @State private var finalOffsetX: CGFloat = 0
     @State private var feedbackTrigger: CGPoint = .zero
 
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
-
     var body: some View {
-        let sliderWidth = UIScreen.main.bounds.width * 0.5
-        let sliderHeight = UIScreen.main.bounds.height * 0.05
+        let sliderWidth = getWidth() * 0.5
+        let sliderHeight = getHeight() * 0.05
         
         let rightLimit = (sliderWidth / 2)
         let leftLimit = -(sliderWidth / 2)

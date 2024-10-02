@@ -69,7 +69,7 @@ struct GameplayView: View {
     }
     
     private var indicatorsView: some View {
-        HStack(alignment: .center, spacing: 20) {
+        HStack(alignment: .center, spacing: getWidth() * 0.05) {
             AudienceIndicatorView(percentage: viewModel.indicators.audience)
                 .padding(.bottom)
 

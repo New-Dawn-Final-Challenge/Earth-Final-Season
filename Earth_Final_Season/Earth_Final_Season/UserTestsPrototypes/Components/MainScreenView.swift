@@ -13,8 +13,8 @@ struct MainScreenView: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
-            .frame(width: UIScreen.main.bounds.width * 0.8,
-                   height: UIScreen.main.bounds.height * 0.2)
+            .frame(width: getWidth() * 0.8,
+                   height: getHeight() * 0.2)
             .foregroundStyle(Color(UIColor.systemGray4))
             .padding()
             .shadow(color: Color.blue, radius: CGFloat(mainScreenShadowRadius))
