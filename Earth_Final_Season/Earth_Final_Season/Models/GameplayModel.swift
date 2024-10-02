@@ -8,28 +8,28 @@
 import Foundation
 
 struct Event: EventService, Codable {
-    let id: UUID
+    let id: String
     let character: String
-    let image: String
+//    let image: String
     let description: String
     let choice1: String
     let choice2: String
-    let audience1: Int
-    let socialInstability1: Int
-    let politicalInstability1: Int
+//    let audience1: Int
+    let socioPoliticalInstability1: Int
+    let illBeing1: Int
     let environmentalDegradation1: Int
-    let audience2: Int
-    let socialInstability2: Int
-    let politicalInstability2: Int
+//    let audience2: Int
+    let socioPoliticalInstability2: Int
+    let illBeing2: Int
     let environmentalDegradation2: Int
     let difficulty: Difficulty
     let tags: [String]
 
     var consequence1: Consequence {
-        return Consequence(socialInstability: socialInstability1, politicalInstability: politicalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
+        return Consequence(socialInstability: illBeing1, politicalInstability: socioPoliticalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
     }
     var consequence2: Consequence {
-        return Consequence(socialInstability: socialInstability2, politicalInstability: politicalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
+        return Consequence(socialInstability: illBeing1, politicalInstability: socioPoliticalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
     }
 }
 

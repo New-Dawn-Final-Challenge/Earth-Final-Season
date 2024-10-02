@@ -9,19 +9,19 @@ import Foundation
 
 // Event Protocol
 protocol EventService {
-    var id: UUID { get }
+//    var id: UUID { get }
     var character: String { get }
-    var image: String { get }
+//    var image: String { get }
     var description: String { get }
     var choice1: String { get }
     var choice2: String { get }
-    var audience1: Int { get }
-    var socialInstability1: Int { get }
-    var politicalInstability1: Int { get }
+//    var audience1: Int { get }
+    var socioPoliticalInstability1: Int { get }
+    var illBeing1: Int { get }
     var environmentalDegradation1: Int { get }
-    var audience2: Int { get }
-    var socialInstability2: Int { get }
-    var politicalInstability2: Int { get }
+//    var audience2: Int { get }
+    var socioPoliticalInstability2: Int { get }
+    var illBeing2: Int { get }
     var environmentalDegradation2: Int { get }
     var difficulty: Difficulty { get }
     var tags: [String] { get }

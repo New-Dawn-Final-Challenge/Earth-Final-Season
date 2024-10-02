@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CharacterView: View {
-    let characterImage: String;
-    let characterName: String;
+    let characterImage: String
+    let characterName: String
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     let screenHeight: CGFloat = UIScreen.main.bounds.height
     

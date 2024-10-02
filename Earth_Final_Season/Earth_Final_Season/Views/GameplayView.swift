@@ -12,7 +12,8 @@ struct GameplayView: View {
             
             if let event = viewModel.currentEvent {
 
-                CharacterView(characterImage: event.image, characterName: event.character)
+                // change image to current image
+                CharacterView(characterImage: "image1", characterName: event.character)
                 
                 EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
                           eventDescription: event.description)
