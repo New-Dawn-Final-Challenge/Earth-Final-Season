@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GameplayView: View {
-    @EnvironmentObject var viewModel: GameplayViewModel
+    @State var viewModel: GameplayViewModel
     @State private var gameOver = false
     
     var body: some View {
@@ -15,7 +15,7 @@ struct GameplayView: View {
                 // change image to current image
                 CharacterView(characterImage: "image1", characterName: event.character)
                 
-                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
+                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius, viewModel: $viewModel,
                           eventDescription: event.description,
                           consequence1: event.consequenceDescription1,
                           consequence2: event.consequenceDescription2
@@ -24,7 +24,7 @@ struct GameplayView: View {
                 VStack(spacing: -20) {
                     ChoicesView(shadowRadius: $viewModel.option1ShadowRadius,
                                  text: event.choice1)
-                    .padding(.trailing, 80)
+                    .padding(.trailing, 100)
 
                     ChoicesView(shadowRadius: $viewModel.option2ShadowRadius,
                                  text: event.choice2)
@@ -55,7 +55,7 @@ struct GameplayView: View {
         }
         .onAppear(perform: prepareHaptics)
         .navigationDestination(isPresented: $viewModel.isGameOver) {
-            GameOverView().environmentObject(viewModel)
+            GameOverView(gameplayViewModel: $viewModel)
         }
     }
     
@@ -90,5 +90,5 @@ struct GameplayView: View {
 }
 
 #Preview {
-    GameplayView()
+    GameplayView(viewModel: GameplayViewModel())
 }
