@@ -325,7 +325,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Earth_Final_Season/Preview Content\"";
-				DEVELOPMENT_TEAM = QS932KTLCZ;
+				DEVELOPMENT_TEAM = 73XDZPPBTH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
@@ -360,7 +360,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Earth_Final_Season/Preview Content\"";
-				DEVELOPMENT_TEAM = QS932KTLCZ;
+				DEVELOPMENT_TEAM = 73XDZPPBTH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";

@@ -23,21 +23,22 @@ struct CharacterView: View {
             // Image rectangle
             Rectangle()
                 .fill(Color.gray.opacity(0.2))
-                .frame(width: screenWidth * 0.5,
-                       height: screenHeight * 0.2)
+                .frame(width: getWidth() * 0.41,
+                       height: getHeight() * 0.115)
                 .overlay(
                     Image(characterImage)
                         .resizable()
+                        .frame(width: getWidth() * 0.41,
+                               height: getHeight() * 0.115)
                         .aspectRatio(contentMode: .fill)
-//                        .frame(width: 80, height: 80)
                         .foregroundColor(.accentColor)
                 )
             
             // Name rectangle
             Rectangle()
                 .foregroundStyle(Color(UIColor.systemGray4))
-                .frame(width: screenWidth * 0.5,
-                       height: screenHeight * 0.08)
+                .frame(width: getWidth() * 0.41,
+                       height: getHeight() * 0.063)
                 .overlay(
                     Text(characterName)
                         .bold()

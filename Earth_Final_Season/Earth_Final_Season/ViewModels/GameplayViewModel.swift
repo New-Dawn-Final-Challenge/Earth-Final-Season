@@ -10,6 +10,8 @@ import SwiftUI
 
 class GameplayViewModel: ObservableObject {
     @Published var isGameOver = false
+    @Published var isShowingConsequence = false
+    @Published var lastChosenOption = "choice1"
     @Published var currentPosition: CGSize = .zero
     @Published var mainScreenShadowRadius = 0
     @Published var option1ShadowRadius = 0
@@ -74,15 +76,40 @@ class GameplayViewModel: ObservableObject {
     
     func chooseOption1() {
         if let event = currentEvent {
+//            event.applyConsequence(consequence: event.consequenceDescription1)
             indicators.applyConsequence(event.consequence1)
-            goToNextEvent()
+            lastChosenOption = "choice1"
+            
+            withAnimation {
+                self.isShowingConsequence = true
+            }
+            
+            // show next event after 6 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                withAnimation {
+                    self.isShowingConsequence = false
+                    self.goToNextEvent()
+                }
+            }
         }
     }
     
     func chooseOption2() {
         if let event = currentEvent {
             indicators.applyConsequence(event.consequence2)
-            goToNextEvent()
+            lastChosenOption = "choice2"
+            
+            withAnimation {
+                self.isShowingConsequence = true
+            }
+            
+            // show next event after 6 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                withAnimation {
+                    self.isShowingConsequence = false
+                    self.goToNextEvent()
+                }
+            }
         }
     }
     

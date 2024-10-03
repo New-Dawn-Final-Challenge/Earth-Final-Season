@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GameplayView: View {
-    @StateObject var viewModel = GameplayViewModel()
+    @EnvironmentObject var viewModel: GameplayViewModel
     @State private var gameOver = false
     
     var body: some View {
@@ -16,18 +16,23 @@ struct GameplayView: View {
                 CharacterView(characterImage: "image1", characterName: event.character)
                 
                 EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
-                          eventDescription: event.description)
+                          eventDescription: event.description,
+                          consequence1: event.consequenceDescription1,
+                          consequence2: event.consequenceDescription2
+                )
 
                 VStack(spacing: -20) {
                     ChoicesView(shadowRadius: $viewModel.option1ShadowRadius,
                                  text: event.choice1)
-                    .padding(.trailing, 100)
+                    .padding(.trailing, 80)
 
                     ChoicesView(shadowRadius: $viewModel.option2ShadowRadius,
                                  text: event.choice2)
                     .padding(.leading, 100)
                 }
                 .padding(.top, -15)
+                // hide the choices to focus on the consequence
+                .opacity(viewModel.isShowingConsequence ? 0 : 1)
             } else {
                 Text("No more events")
                     .font(.title)
@@ -70,7 +75,7 @@ struct GameplayView: View {
     }
     
     private var indicatorsView: some View {
-        HStack(alignment: .center, spacing: 20) {
+        HStack(alignment: .center, spacing: getWidth() * 0.05) {
             AudienceIndicatorView(percentage: viewModel.indicators.audience)
                 .padding(.bottom)
 

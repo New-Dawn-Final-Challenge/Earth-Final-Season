@@ -18,10 +18,12 @@ struct Event: EventService, Codable {
     let socioPoliticalInstability1: Int
     let illBeing1: Int
     let environmentalDegradation1: Int
+    let consequenceDescription1: String
 //    let audience2: Int
     let socioPoliticalInstability2: Int
     let illBeing2: Int
     let environmentalDegradation2: Int
+    let consequenceDescription2: String
     let difficulty: Difficulty
     let tags: [String]
 

@@ -23,6 +23,7 @@ protocol EventService {
     var socioPoliticalInstability2: Int { get }
     var illBeing2: Int { get }
     var environmentalDegradation2: Int { get }
+    var consequenceDescription2: String {get}
     var difficulty: Difficulty { get }
     var tags: [String] { get }
 }
