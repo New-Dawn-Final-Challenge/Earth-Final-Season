@@ -8,7 +8,7 @@ import SwiftUI
 
 struct EventView: View {
     @Binding var mainScreenShadowRadius: Int
-    @EnvironmentObject var viewModel: GameplayViewModel
+    @Binding var viewModel: GameplayViewModel
     @State var textToShow: String = ""
     
     let eventDescription: String

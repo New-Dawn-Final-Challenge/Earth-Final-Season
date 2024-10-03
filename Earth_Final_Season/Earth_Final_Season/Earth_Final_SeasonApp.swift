@@ -9,13 +9,12 @@ import SwiftUI
 
 @main
 struct Earth_Final_SeasonApp: App {
-    @StateObject var gameplayViewModel = GameplayViewModel()
+    @State var gameplayViewModel = GameplayViewModel()
     
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                GameplayView()
-                    .environmentObject(gameplayViewModel)
+                GameplayView(viewModel: gameplayViewModel)
             }
         }
     }

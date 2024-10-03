@@ -8,17 +8,18 @@
 import Foundation
 import SwiftUI
 
-class GameplayViewModel: ObservableObject {
-    @Published var isGameOver = false
-    @Published var isShowingConsequence = false
-    @Published var lastChosenOption = "choice1"
-    @Published var currentPosition: CGSize = .zero
-    @Published var mainScreenShadowRadius = 0
-    @Published var option1ShadowRadius = 0
-    @Published var option2ShadowRadius = 0
-    @Published var events = [Event]()
-    @Published var currentEvent: Event?
-    @Published var indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)  // Initial Indicators
+@Observable
+class GameplayViewModel {
+    var isGameOver = false
+    var isShowingConsequence = false
+    var lastChosenOption = "choice1"
+    var currentPosition: CGSize = .zero
+    var mainScreenShadowRadius = 0
+    var option1ShadowRadius = 0
+    var option2ShadowRadius = 0
+    var events = [Event]()
+    var currentEvent: Event?
+    var indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)  // Initial Indicators
     
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
@@ -87,8 +88,8 @@ class GameplayViewModel: ObservableObject {
             // show next event after 6 seconds
             DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
                 withAnimation {
-                    self.isShowingConsequence = false
                     self.goToNextEvent()
+                    self.isShowingConsequence = false
                 }
             }
         }
@@ -98,16 +99,18 @@ class GameplayViewModel: ObservableObject {
         if let event = currentEvent {
             indicators.applyConsequence(event.consequence2)
             lastChosenOption = "choice2"
-            
+        
             withAnimation {
                 self.isShowingConsequence = true
             }
             
+            
+            
             // show next event after 6 seconds
             DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
                 withAnimation {
-                    self.isShowingConsequence = false
                     self.goToNextEvent()
+                    self.isShowingConsequence = false
                 }
             }
         }
