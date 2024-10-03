@@ -10,6 +10,8 @@ import SwiftUI
 
 class GameplayViewModel: ObservableObject {
     @Published var isGameOver = false
+    @Published var isShowingConsequence = false
+    @Published var lastChosenOption = "choice1"
     @Published var currentPosition: CGSize = .zero
     @Published var mainScreenShadowRadius = 0
     @Published var option1ShadowRadius = 0
@@ -18,7 +20,7 @@ class GameplayViewModel: ObservableObject {
     @Published var currentEvent: Event?
     @Published var indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)  // Initial Indicators
     
-    private var eventsSequence: [UUID] = []
+    private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
 
     init() {
@@ -74,15 +76,40 @@ class GameplayViewModel: ObservableObject {
     
     func chooseOption1() {
         if let event = currentEvent {
+//            event.applyConsequence(consequence: event.consequenceDescription1)
             indicators.applyConsequence(event.consequence1)
-            goToNextEvent()
+            lastChosenOption = "choice1"
+            
+            withAnimation {
+                self.isShowingConsequence = true
+            }
+            
+            // show next event after 6 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                withAnimation {
+                    self.isShowingConsequence = false
+                    self.goToNextEvent()
+                }
+            }
         }
     }
     
     func chooseOption2() {
         if let event = currentEvent {
             indicators.applyConsequence(event.consequence2)
-            goToNextEvent()
+            lastChosenOption = "choice2"
+            
+            withAnimation {
+                self.isShowingConsequence = true
+            }
+            
+            // show next event after 6 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                withAnimation {
+                    self.isShowingConsequence = false
+                    self.goToNextEvent()
+                }
+            }
         }
     }
     

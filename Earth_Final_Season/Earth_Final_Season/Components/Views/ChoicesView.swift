@@ -13,13 +13,14 @@ struct ChoicesView: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
-            .frame(width: UIScreen.main.bounds.width * 0.8,
-                   height: UIScreen.main.bounds.height * 0.08)
+            .frame(width: getWidth() * 0.8,
+                   height: getHeight() * 0.08)
             .foregroundStyle(Color(UIColor.systemGray4))
             .padding()
             .shadow(color: Color.pink, radius: CGFloat(shadowRadius))
             .overlay(
                 Text(text)
+                    .padding(.horizontal, 16)
             )
     }
 }
