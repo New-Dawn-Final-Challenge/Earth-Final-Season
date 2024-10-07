@@ -40,7 +40,7 @@ struct Consequence: ConsequenceService, Codable {
 }
 
 struct Indicators: IndicatorService {
-    var audience: Int
+    var audience: Double
     var illBeing: Int
     var socioPoliticalInstability: Int
     var environmentalDegradation: Int
@@ -62,7 +62,7 @@ struct Indicators: IndicatorService {
     mutating func updateAudience() {
         let total = illBeing + socioPoliticalInstability + environmentalDegradation
         let count = 3
-        audience = (total / count)
+        audience = Double((total / count))
         
         // Print updated audience value
         print("Updated Audience: \(audience)")

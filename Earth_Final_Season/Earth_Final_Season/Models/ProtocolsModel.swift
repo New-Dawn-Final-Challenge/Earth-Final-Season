@@ -34,7 +34,7 @@ protocol ConsequenceService {
 
 // Indicator Protocol
 protocol IndicatorService {
-    var audience: Int { get set }
+    var audience: Double { get set }
     var illBeing: Int { get set }
     var socioPoliticalInstability: Int { get set }
     var environmentalDegradation: Int { get set }

@@ -34,14 +34,14 @@ struct ChaosIndicatorsView: View {
                         overlayView(for: environmentalDegradation)
                             .mask(indicatorView(for: environmentalDegradation, image: "leaf.fill"))
                     )
-            
+
                 // Sociopolitical Instability indicator with overlay
                 indicatorView(for: socioPoliticalInstability, image: "person.fill")
                     .overlay(
                         overlayView(for: socioPoliticalInstability)
                             .mask(indicatorView(for: socioPoliticalInstability, image: "person.fill"))
                     )
-            
+
                 // Ill-Being indicator with overlay
                 indicatorView(for: illBeing, image: "building.2.crop.circle.fill")
                     .overlay(
