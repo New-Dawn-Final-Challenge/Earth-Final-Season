@@ -19,7 +19,7 @@ class GameplayViewModel {
     var option2ShadowRadius = 0
     var events = [Event]()
     var currentEvent: Event?
-    var indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)  // Initial Indicators
+    var indicators = Indicators(audience: 6, socialInstability: 6, politicalInstability: 6, environmentalDegradation: 6, currentYear: 0)  // Initial Indicators
     
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
@@ -38,10 +38,10 @@ class GameplayViewModel {
     }
     
     private func checkForGameOver() {
-        if indicators.audience <= 0 || indicators.audience >= 20 ||
-           indicators.socialInstability <= 0 || indicators.socialInstability >= 20 ||
-           indicators.politicalInstability <= 0 || indicators.politicalInstability >= 20 ||
-           indicators.environmentalDegradation <= 0 || indicators.environmentalDegradation >= 20 {
+        if indicators.audience <= 0 || indicators.audience >= 12 ||
+           indicators.socialInstability <= 0 || indicators.socialInstability >= 12 ||
+           indicators.politicalInstability <= 0 || indicators.politicalInstability >= 12 ||
+           indicators.environmentalDegradation <= 0 || indicators.environmentalDegradation >= 12 {
             isGameOver = true
         }
     }

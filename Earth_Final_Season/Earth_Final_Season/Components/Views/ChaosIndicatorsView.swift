@@ -28,26 +28,45 @@ struct ChaosIndicatorsView: View {
                 .padding(.bottom, 10)
             
             HStack(spacing: getWidth() * 0.2) {
-                // Environmental Degradation indicator with overlay
-                indicatorView(image: "leaf.fill", percentage: environmentalDegradation)
-                    .overlay(
-                        overlayView(for: environmentalDegradation)
-                            .mask(indicatorView(image: "leaf.fill", percentage: environmentalDegradation))
-                    )
                 
-                // Political Instability indicator with overlay
-                indicatorView(image: "person.fill", percentage: politicalInstability)
-                    .overlay(
-                        overlayView(for: politicalInstability)
-                            .mask(indicatorView(image: "person.fill", percentage: politicalInstability))
-                    )
+                VStack {
+                    // Environmental Degradation indicator with overlay
+                    indicatorView(for: environmentalDegradation, image: "leaf.fill")
+                        .overlay(
+                            overlayView(for: environmentalDegradation)
+                                .mask(indicatorView(for: environmentalDegradation, image: "leaf.fill"))
+                        )
+                    
+                    Text("\(environmentalDegradation)")
+
+                    Text("\(String(format: "%.0f", (Double(environmentalDegradation) / 12) * 100))%")
+                }
                 
-                // Social Instability indicator with overlay
-                indicatorView(image: "building.2.crop.circle.fill", percentage: socialInstability)
-                    .overlay(
-                        overlayView(for: socialInstability)
-                            .mask(indicatorView(image: "building.2.crop.circle.fill", percentage: socialInstability))
-                    )
+                VStack {
+                    // Political Instability indicator with overlay
+                    indicatorView(for: politicalInstability, image: "person.fill")
+                        .overlay(
+                            overlayView(for: politicalInstability)
+                                .mask(indicatorView(for: politicalInstability, image: "person.fill"))
+                        )
+                    
+                    Text("\(politicalInstability)")
+
+                    Text("\(String(format: "%.0f", (Double(politicalInstability) / 12) * 100))%")
+                }
+                
+                VStack {
+                    // Social Instability indicator with overlay
+                    indicatorView(for: socialInstability, image: "building.2.crop.circle.fill")
+                        .overlay(
+                            overlayView(for: socialInstability)
+                                .mask(indicatorView(for: socialInstability, image: "building.2.crop.circle.fill"))
+                        )
+                    
+                    Text("\(socialInstability)")
+
+                    Text("\(String(format: "%.0f", (Double(socialInstability) / 12) * 100))%")
+                }
             }
         }
         .padding()
@@ -60,23 +79,20 @@ struct ChaosIndicatorsView: View {
     // Overlay view to show the indicator's value
     private func overlayView(for indicator: Int) -> some View {
         GeometryReader { geometry in
-            ZStack(alignment: .bottom) {
-                VStack {
-                    Spacer()
-                    
-                    Rectangle()
-                        .foregroundStyle(Color(UIColor.systemRed))
-                        .frame(height: CGFloat(indicator) / 20 * geometry.size.height)
-                }
-            }
+            Rectangle()
+                .foregroundStyle(Color(UIColor.systemRed))
+                .frame(height: CGFloat(indicator) / 12 * geometry.size.height)
+                .frame(maxHeight: geometry.size.height, alignment: .bottom)
         }
     }
 
     // Indicator view with an added percentage
-    private func indicatorView(image: String, percentage: Int) -> some View {
-        Image(systemName: image)
-            .resizable()
-            .frame(width: getWidth() * 0.08, height: getHeight() * 0.04)
-            .foregroundStyle(Color(UIColor.systemGray))
+    private func indicatorView(for indicator: Int, image: String) -> some View {
+        VStack {
+            Image(systemName: image)
+                .resizable()
+                .frame(width: getWidth() * 0.08, height: getHeight() * 0.04)
+                .foregroundStyle(Color(UIColor.systemGray))
+        }
     }
 }
