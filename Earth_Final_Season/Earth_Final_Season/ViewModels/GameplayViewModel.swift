@@ -117,7 +117,7 @@ class GameplayViewModel {
     }
     
     func resetGame() {
-        indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)
+        indicators = Indicators(audience: 6, socialInstability: 6, politicalInstability: 6, environmentalDegradation: 6, currentYear: 0)
         isGameOver = false
         events = loadAndReturnEvents()
         let shuffledEvents = events.shuffled()
