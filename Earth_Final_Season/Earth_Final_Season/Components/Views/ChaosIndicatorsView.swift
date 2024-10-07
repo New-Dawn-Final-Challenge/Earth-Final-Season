@@ -28,45 +28,26 @@ struct ChaosIndicatorsView: View {
                 .padding(.bottom, 10)
             
             HStack(spacing: getWidth() * 0.2) {
-                
-                VStack {
-                    // Environmental Degradation indicator with overlay
-                    indicatorView(for: environmentalDegradation, image: "leaf.fill")
-                        .overlay(
-                            overlayView(for: environmentalDegradation)
-                                .mask(indicatorView(for: environmentalDegradation, image: "leaf.fill"))
-                        )
-                    
-                    Text("\(environmentalDegradation)")
-
-                    Text("\(String(format: "%.0f", (Double(environmentalDegradation) / 12) * 100))%")
-                }
-                
-                VStack {
-                    // Political Instability indicator with overlay
-                    indicatorView(for: socioPoliticalInstability, image: "person.fill")
-                        .overlay(
-                            overlayView(for: socioPoliticalInstability)
-                                .mask(indicatorView(for: socioPoliticalInstability, image: "person.fill"))
-                        )
-                    
-                    Text("\(socioPoliticalInstability)")
-
-                    Text("\(String(format: "%.0f", (Double(socioPoliticalInstability) / 12) * 100))%")
-                }
-                
-                VStack {
-                    // Social Instability indicator with overlay
-                    indicatorView(for: illBeing, image: "building.2.crop.circle.fill")
-                        .overlay(
-                            overlayView(for: illBeing)
-                                .mask(indicatorView(for: illBeing, image: "building.2.crop.circle.fill"))
-                        )
-                    
-                    Text("\(illBeing)")
-
-                    Text("\(String(format: "%.0f", (Double(illBeing) / 12) * 100))%")
-                }
+                // Environmental Degradation indicator with overlay
+                indicatorView(for: environmentalDegradation, image: "leaf.fill")
+                    .overlay(
+                        overlayView(for: environmentalDegradation)
+                            .mask(indicatorView(for: environmentalDegradation, image: "leaf.fill"))
+                    )
+            
+                // Sociopolitical Instability indicator with overlay
+                indicatorView(for: socioPoliticalInstability, image: "person.fill")
+                    .overlay(
+                        overlayView(for: socioPoliticalInstability)
+                            .mask(indicatorView(for: socioPoliticalInstability, image: "person.fill"))
+                    )
+            
+                // Ill-Being indicator with overlay
+                indicatorView(for: illBeing, image: "building.2.crop.circle.fill")
+                    .overlay(
+                        overlayView(for: illBeing)
+                            .mask(indicatorView(for: illBeing, image: "building.2.crop.circle.fill"))
+                    )
             }
         }
         .padding()
