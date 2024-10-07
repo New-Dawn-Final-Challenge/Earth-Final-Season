@@ -43,6 +43,7 @@ struct GameplayView: View {
                 mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
                 option1ShadowRadius: $viewModel.option1ShadowRadius,
                 option2ShadowRadius: $viewModel.option2ShadowRadius,
+                viewModel: $viewModel,
                 onChooseOption1: {
                     viewModel.chooseOption1()
                 },
@@ -83,7 +84,8 @@ struct GameplayView: View {
                 socialInstability: viewModel.indicators.socialInstability,
                 politicalInstability: viewModel.indicators.politicalInstability,
                 environmentalDegradation: viewModel.indicators.environmentalDegradation,
-                year: String(viewModel.indicators.currentYear)
+                year: String(viewModel.indicators.currentYear),
+                viewModel: $viewModel
             )
         }
     }
