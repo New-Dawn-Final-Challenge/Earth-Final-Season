@@ -80,8 +80,8 @@ struct GameplayView: View {
                 .padding(.bottom)
 
             ChaosIndicatorsView(
-                socialInstability: viewModel.indicators.socialInstability,
-                politicalInstability: viewModel.indicators.politicalInstability,
+                illBeing: viewModel.indicators.illBeing,
+                socioPoliticalInstability: viewModel.indicators.socioPoliticalInstability,
                 environmentalDegradation: viewModel.indicators.environmentalDegradation,
                 year: String(viewModel.indicators.currentYear)
             )

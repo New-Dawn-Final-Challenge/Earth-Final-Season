@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ChaosIndicatorsView: View {
-    let socialInstability: Int
-    let politicalInstability: Int
+    let illBeing: Int
+    let socioPoliticalInstability: Int
     let environmentalDegradation: Int
     let year: String
     
-    init(socialInstability: Int, politicalInstability: Int, environmentalDegradation: Int, year: String) {
-        self.socialInstability = socialInstability
-        self.politicalInstability = politicalInstability
+    init(illBeing: Int, socioPoliticalInstability: Int, environmentalDegradation: Int, year: String) {
+        self.illBeing = illBeing
+        self.socioPoliticalInstability = socioPoliticalInstability
         self.environmentalDegradation = environmentalDegradation
         self.year = year
     }
@@ -44,28 +44,28 @@ struct ChaosIndicatorsView: View {
                 
                 VStack {
                     // Political Instability indicator with overlay
-                    indicatorView(for: politicalInstability, image: "person.fill")
+                    indicatorView(for: socioPoliticalInstability, image: "person.fill")
                         .overlay(
-                            overlayView(for: politicalInstability)
-                                .mask(indicatorView(for: politicalInstability, image: "person.fill"))
+                            overlayView(for: socioPoliticalInstability)
+                                .mask(indicatorView(for: socioPoliticalInstability, image: "person.fill"))
                         )
                     
-                    Text("\(politicalInstability)")
+                    Text("\(socioPoliticalInstability)")
 
-                    Text("\(String(format: "%.0f", (Double(politicalInstability) / 12) * 100))%")
+                    Text("\(String(format: "%.0f", (Double(socioPoliticalInstability) / 12) * 100))%")
                 }
                 
                 VStack {
                     // Social Instability indicator with overlay
-                    indicatorView(for: socialInstability, image: "building.2.crop.circle.fill")
+                    indicatorView(for: illBeing, image: "building.2.crop.circle.fill")
                         .overlay(
-                            overlayView(for: socialInstability)
-                                .mask(indicatorView(for: socialInstability, image: "building.2.crop.circle.fill"))
+                            overlayView(for: illBeing)
+                                .mask(indicatorView(for: illBeing, image: "building.2.crop.circle.fill"))
                         )
                     
-                    Text("\(socialInstability)")
+                    Text("\(illBeing)")
 
-                    Text("\(String(format: "%.0f", (Double(socialInstability) / 12) * 100))%")
+                    Text("\(String(format: "%.0f", (Double(illBeing) / 12) * 100))%")
                 }
             }
         }
