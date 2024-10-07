@@ -25,7 +25,3 @@ struct GameOverView: View {
         .navigationBarBackButtonHidden(true)
     }
 }
-//
-//#Preview {
-//    GameOverView(gameplayViewModel: GameplayViewModel())
-//}

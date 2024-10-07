@@ -9,21 +9,20 @@ import Foundation
 
 struct Event: EventService, Codable {
     let id: String
-    let character: String
-    let description: String
-    let choice1: String
-    let choice2: String
-    let socioPoliticalInstability1: Int
-    let illBeing1: Int
-    let environmentalDegradation1: Int
-    let consequenceDescription1: String
-//    let audience2: Int
-    let socioPoliticalInstability2: Int
-    let illBeing2: Int
-    let environmentalDegradation2: Int
-    let consequenceDescription2: String
-    let difficulty: Difficulty
-    let tags: [String]
+    var character: String
+    var description: String
+    var choice1: String
+    var choice2: String
+    var socioPoliticalInstability1: Int
+    var illBeing1: Int
+    var environmentalDegradation1: Int
+    var consequenceDescription1: String
+    var socioPoliticalInstability2: Int
+    var illBeing2: Int
+    var environmentalDegradation2: Int
+    var consequenceDescription2: String
+    var difficulty: Difficulty
+    var tags: [String]
 
     var consequence1: Consequence {
         return Consequence(socialInstability: illBeing1, politicalInstability: socioPoliticalInstability1, environmentalDegradation: environmentalDegradation1, description: description)

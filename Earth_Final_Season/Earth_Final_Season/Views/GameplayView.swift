@@ -12,7 +12,7 @@ struct GameplayView: View {
             
             if let event = viewModel.currentEvent {
 
-                // change image to current image
+                // Change image to current image
                 CharacterView(characterImage: "image1", characterName: event.character)
                 
                 EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius, viewModel: $viewModel,
@@ -31,7 +31,7 @@ struct GameplayView: View {
                     .padding(.leading, 100)
                 }
                 .padding(.top, -15)
-                // hide the choices to focus on the consequence
+                // Hide the choices to focus on the consequence
                 .opacity(viewModel.isShowingConsequence ? 0 : 1)
             } else {
                 Text("No more events")
