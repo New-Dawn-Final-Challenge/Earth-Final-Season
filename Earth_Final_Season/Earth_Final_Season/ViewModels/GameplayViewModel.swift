@@ -85,8 +85,9 @@ class GameplayViewModel {
                 self.isShowingConsequence = true
             }
             
-            // show next event after 6 seconds
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+            // Show next event after 6 seconds
+            Task {
+                try await Task.sleep(nanoseconds: 6_000_000_000)
                 withAnimation {
                     self.goToNextEvent()
                     self.isShowingConsequence = false
@@ -104,10 +105,9 @@ class GameplayViewModel {
                 self.isShowingConsequence = true
             }
             
-            
-            
-            // show next event after 6 seconds
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+            // Show next event after 6 seconds
+            Task {
+                try await Task.sleep(nanoseconds: 6_000_000_000)
                 withAnimation {
                     self.goToNextEvent()
                     self.isShowingConsequence = false

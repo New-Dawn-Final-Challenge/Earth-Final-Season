@@ -49,11 +49,9 @@ struct SliderView: View {
                                     option1ShadowRadius = Int(abs(finalOffsetX) / 6)
                                     option2ShadowRadius = 0
                                     
-//                                    mainScreenShadowRadius = Int(abs(finalOffsetX) / 6)
                                 } else {
                                     option2ShadowRadius = Int(finalOffsetX / 6)
                                     option1ShadowRadius = 0
-//                                    mainScreenShadowRadius = Int(finalOffsetX / 10)
                                 }
                             }
                             .onEnded { _ in

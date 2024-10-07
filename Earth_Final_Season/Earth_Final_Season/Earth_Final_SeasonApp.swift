@@ -16,6 +16,9 @@ struct Earth_Final_SeasonApp: App {
             NavigationStack {
                 GameplayView(viewModel: gameplayViewModel)
             }
+            .task {
+                SoundtrackAudioManager.shared.playSound(named: "lowtoneST")
+            }
         }
     }
 }
