@@ -24,28 +24,40 @@ struct ChaosIndicatorsView: View {
             
             HStack(spacing: getWidth() * 0.2) {
                 // Environmental Degradation indicator with overlay
-                indicatorView(image: "leaf.fill", percentage: environmentalDegradation)
-                    .overlay(
-                        overlayView(for: environmentalDegradation)
-                            .mask(indicatorView(image: "leaf.fill", percentage: environmentalDegradation))
-                    )
-                    .shadow(color: Color.purple, radius: CGFloat(viewModel.environmentalDegradationShadowRadius))
-                
+                VStack() {
+                    ChaosIndicatorsValueChangeView(viewModel: viewModel, indicator: "environmentalDegradation")
+                        .frame(height: getHeight() * 0.01)
+                    indicatorView(image: "leaf.fill", percentage: environmentalDegradation)
+                        .overlay(
+                            overlayView(for: environmentalDegradation)
+                                .mask(indicatorView(image: "leaf.fill", percentage: environmentalDegradation))
+                        )
+                        .shadow(color: Color.purple, radius: CGFloat(viewModel.environmentalDegradationShadowRadius))
+                }
+
                 // Political Instability indicator with overlay
-                indicatorView(image: "person.fill", percentage: politicalInstability)
-                    .overlay(
-                        overlayView(for: politicalInstability)
-                            .mask(indicatorView(image: "person.fill", percentage: politicalInstability))
-                    )
-                    .shadow(color: Color.purple, radius: CGFloat(viewModel.illBeingShadowRadius))
+                VStack() {
+                    ChaosIndicatorsValueChangeView(viewModel: viewModel, indicator: "illBeing")
+                        .frame(height: getHeight() * 0.01)
+                    indicatorView(image: "person.fill", percentage: politicalInstability)
+                        .overlay(
+                            overlayView(for: politicalInstability)
+                                .mask(indicatorView(image: "person.fill", percentage: politicalInstability))
+                        )
+                        .shadow(color: Color.purple, radius: CGFloat(viewModel.illBeingShadowRadius))
+                }
                 
                 // Social Instability indicator with overlay
-                indicatorView(image: "building.2.crop.circle.fill", percentage: socialInstability)
-                    .overlay(
-                        overlayView(for: socialInstability)
-                            .mask(indicatorView(image: "building.2.crop.circle.fill", percentage: socialInstability))
-                    )
-                    .shadow(color: Color.purple, radius: CGFloat(viewModel.sociopoliticalInstabilityShadowRadius))
+                VStack() {
+                    ChaosIndicatorsValueChangeView(viewModel: viewModel, indicator: "sociopoliticalInstability")
+                        .frame(height: getHeight() * 0.01)
+                    indicatorView(image: "building.2.crop.circle.fill", percentage: socialInstability)
+                        .overlay(
+                            overlayView(for: socialInstability)
+                                .mask(indicatorView(image: "building.2.crop.circle.fill", percentage: socialInstability))
+                        )
+                        .shadow(color: Color.purple, radius: CGFloat(viewModel.sociopoliticalInstabilityShadowRadius))
+                }
             }
         }
         .padding()
