@@ -13,6 +13,7 @@ class ConfigurationsViewModel: ObservableObject {
     @Published var musicIntensity: Float = 33.5 {
         didSet {
             SoundtrackAudioManager.shared.changeVolume(intensity: musicIntensity/100)
+            UserDefaults.standard.set(musicIntensity, forKey: "musicIntensity")
         }
     }
         
@@ -21,8 +22,17 @@ class ConfigurationsViewModel: ObservableObject {
     @Published var hapticsIntensity: Float = 100.0 {
         didSet {
             HapticManager.shared.setIntensity(hapticsIntensity/100)
+            UserDefaults.standard.set(hapticsIntensity, forKey: "hapticsIntensity")
         }
     }
+    init() {
+            // Load values from UserDefaults
+//            self.soundEffectsIntensity = UserDefaults.standard.float(forKey: "soundEffectsIntensity") != 0 ? UserDefaults.standard.float(forKey: "soundEffectsIntensity") : 63.5
+            self.musicIntensity = UserDefaults.standard.float(forKey: "musicIntensity") != 0 ? UserDefaults.standard.float(forKey: "musicIntensity") : 33.5
+            self.hapticsIntensity = UserDefaults.standard.float(forKey: "hapticsIntensity") != 0 ? UserDefaults.standard.float(forKey: "hapticsIntensity") : 100.0
+//            self.hapticsEnabled = UserDefaults.standard.bool(forKey: "hapticsEnabled")
+//            self.selectedGesture = Gesture(rawValue: UserDefaults.standard.integer(forKey: "selectedGesture")) ?? .holdDrag
+        }
     
     func playMusic(music name: String) {
         SoundtrackAudioManager.shared.playSound(named: name)
