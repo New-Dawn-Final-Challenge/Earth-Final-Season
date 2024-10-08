@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ChaosIndicatorsView: View {
-    let socialInstability: Int
-    let politicalInstability: Int
+    let illBeing: Int
+    let socioPoliticalInstability: Int
     let environmentalDegradation: Int
     let year: String
     
-    init(socialInstability: Int, politicalInstability: Int, environmentalDegradation: Int, year: String) {
-        self.socialInstability = socialInstability
-        self.politicalInstability = politicalInstability
+    init(illBeing: Int, socioPoliticalInstability: Int, environmentalDegradation: Int, year: String) {
+        self.illBeing = illBeing
+        self.socioPoliticalInstability = socioPoliticalInstability
         self.environmentalDegradation = environmentalDegradation
         self.year = year
     }
@@ -29,24 +29,24 @@ struct ChaosIndicatorsView: View {
             
             HStack(spacing: getWidth() * 0.2) {
                 // Environmental Degradation indicator with overlay
-                indicatorView(image: "leaf.fill", percentage: environmentalDegradation)
+                indicatorView(for: environmentalDegradation, image: "leaf.fill")
                     .overlay(
                         overlayView(for: environmentalDegradation)
-                            .mask(indicatorView(image: "leaf.fill", percentage: environmentalDegradation))
+                            .mask(indicatorView(for: environmentalDegradation, image: "leaf.fill"))
                     )
-                
-                // Political Instability indicator with overlay
-                indicatorView(image: "person.fill", percentage: politicalInstability)
+
+                // Sociopolitical Instability indicator with overlay
+                indicatorView(for: socioPoliticalInstability, image: "person.fill")
                     .overlay(
-                        overlayView(for: politicalInstability)
-                            .mask(indicatorView(image: "person.fill", percentage: politicalInstability))
+                        overlayView(for: socioPoliticalInstability)
+                            .mask(indicatorView(for: socioPoliticalInstability, image: "person.fill"))
                     )
-                
-                // Social Instability indicator with overlay
-                indicatorView(image: "building.2.crop.circle.fill", percentage: socialInstability)
+
+                // Ill-Being indicator with overlay
+                indicatorView(for: illBeing, image: "building.2.crop.circle.fill")
                     .overlay(
-                        overlayView(for: socialInstability)
-                            .mask(indicatorView(image: "building.2.crop.circle.fill", percentage: socialInstability))
+                        overlayView(for: illBeing)
+                            .mask(indicatorView(for: illBeing, image: "building.2.crop.circle.fill"))
                     )
             }
         }
@@ -60,23 +60,20 @@ struct ChaosIndicatorsView: View {
     // Overlay view to show the indicator's value
     private func overlayView(for indicator: Int) -> some View {
         GeometryReader { geometry in
-            ZStack(alignment: .bottom) {
-                VStack {
-                    Spacer()
-                    
-                    Rectangle()
-                        .foregroundStyle(Color(UIColor.systemRed))
-                        .frame(height: CGFloat(indicator) / 20 * geometry.size.height)
-                }
-            }
+            Rectangle()
+                .foregroundStyle(Color(UIColor.systemRed))
+                .frame(height: CGFloat(indicator) / 12 * geometry.size.height)
+                .frame(maxHeight: geometry.size.height, alignment: .bottom)
         }
     }
 
     // Indicator view with an added percentage
-    private func indicatorView(image: String, percentage: Int) -> some View {
-        Image(systemName: image)
-            .resizable()
-            .frame(width: getWidth() * 0.08, height: getHeight() * 0.04)
-            .foregroundStyle(Color(UIColor.systemGray))
+    private func indicatorView(for indicator: Int, image: String) -> some View {
+        VStack {
+            Image(systemName: image)
+                .resizable()
+                .frame(width: getWidth() * 0.08, height: getHeight() * 0.04)
+                .foregroundStyle(Color(UIColor.systemGray))
+        }
     }
 }

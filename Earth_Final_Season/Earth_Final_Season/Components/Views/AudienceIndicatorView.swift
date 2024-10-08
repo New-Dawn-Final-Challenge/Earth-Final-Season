@@ -32,8 +32,8 @@ struct AudienceIndicatorView: View {
                 // Filled Bar (based on percentage)
                 Rectangle()
                     .fill(Color(UIColor.systemOrange))
-                    .frame(width: getWidth() * 0.1,
-                           height: CGFloat(percentage) / 20 * getHeight() * 0.08)
+                    .frame(width: getWidth() * 0.094,
+                           height: CGFloat(percentage) / 10 * (getHeight() * 0.087))
             }
             .cornerRadius(16)
         }

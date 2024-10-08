@@ -25,31 +25,31 @@ struct Event: EventService, Codable {
     var tags: [String]
 
     var consequence1: Consequence {
-        return Consequence(socialInstability: illBeing1, politicalInstability: socioPoliticalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
+        return Consequence(illBeing: illBeing1, socioPoliticalInstability: socioPoliticalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
     }
     var consequence2: Consequence {
-        return Consequence(socialInstability: illBeing1, politicalInstability: socioPoliticalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
+        return Consequence(illBeing: illBeing1, socioPoliticalInstability: socioPoliticalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
     }
 }
 
 struct Consequence: ConsequenceService, Codable {
-    var socialInstability: Int
-    var politicalInstability: Int
+    var illBeing: Int
+    var socioPoliticalInstability: Int
     var environmentalDegradation: Int
     var description: String
 }
 
 struct Indicators: IndicatorService {
-    var audience: Int
-    var socialInstability: Int
-    var politicalInstability: Int
+    var audience: Double
+    var illBeing: Int
+    var socioPoliticalInstability: Int
     var environmentalDegradation: Int
     var currentYear: Int
     
     mutating func applyConsequence(_ consequence: Consequence) {
         // Update indicators with new consequences
-        socialInstability += consequence.socialInstability
-        politicalInstability += consequence.politicalInstability
+        illBeing += consequence.illBeing
+        socioPoliticalInstability += consequence.socioPoliticalInstability
         environmentalDegradation += consequence.environmentalDegradation
         
         // Print updated values
@@ -60,9 +60,9 @@ struct Indicators: IndicatorService {
     }
     
     mutating func updateAudience() {
-        let total = socialInstability + politicalInstability + environmentalDegradation
+        let total = illBeing + socioPoliticalInstability + environmentalDegradation
         let count = 3
-        audience = (total / count)
+        audience = Double((total / count))
         
         // Print updated audience value
         print("Updated Audience: \(audience)")
@@ -70,8 +70,8 @@ struct Indicators: IndicatorService {
     
     // Function to print updated indicator values
     private func printUpdatedValues() {
-        print("Updated Social Instability: \(socialInstability)")
-        print("Updated Political Instability: \(politicalInstability)")
+        print("Updated Ill-Being: \(illBeing)")
+        print("Updated Sociopolitical Instability: \(socioPoliticalInstability)")
         print("Updated Environmental Degradation: \(environmentalDegradation)")
     }
 }

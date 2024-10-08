@@ -26,17 +26,17 @@ protocol EventService {
 
 // Consequence Protocol
 protocol ConsequenceService {
-    var socialInstability: Int { get set }
-    var politicalInstability: Int { get set }
+    var illBeing: Int { get set }
+    var socioPoliticalInstability: Int { get set }
     var environmentalDegradation: Int { get set }
     var description: String { get set }
 }
 
 // Indicator Protocol
 protocol IndicatorService {
-    var audience: Int { get set }
-    var socialInstability: Int { get set }
-    var politicalInstability: Int { get set }
+    var audience: Double { get set }
+    var illBeing: Int { get set }
+    var socioPoliticalInstability: Int { get set }
     var environmentalDegradation: Int { get set }
     var currentYear: Int { get set }
     mutating func applyConsequence(_ consequence: Consequence)

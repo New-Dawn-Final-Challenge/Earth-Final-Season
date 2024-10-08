@@ -76,12 +76,12 @@ struct GameplayView: View {
     
     private var indicatorsView: some View {
         HStack(alignment: .center, spacing: getWidth() * 0.05) {
-            AudienceIndicatorView(percentage: viewModel.indicators.audience)
+            AudienceIndicatorView(percentage: Int(viewModel.indicators.audience))
                 .padding(.bottom)
 
             ChaosIndicatorsView(
-                socialInstability: viewModel.indicators.socialInstability,
-                politicalInstability: viewModel.indicators.politicalInstability,
+                illBeing: viewModel.indicators.illBeing,
+                socioPoliticalInstability: viewModel.indicators.socioPoliticalInstability,
                 environmentalDegradation: viewModel.indicators.environmentalDegradation,
                 year: String(viewModel.indicators.currentYear)
             )
