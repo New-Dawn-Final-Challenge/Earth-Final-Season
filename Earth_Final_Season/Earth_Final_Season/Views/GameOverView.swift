@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameOverView: View {
-    @Binding var gameplayViewModel: GameplayViewModel
+    @ObservedObject var gameplayViewModel: GameplayViewModel
     
     var body: some View {
         VStack {

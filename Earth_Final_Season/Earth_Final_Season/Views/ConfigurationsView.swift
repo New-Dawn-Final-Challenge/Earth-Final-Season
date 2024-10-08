@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ConfigurationsView: View {
-    @State var viewModel: ConfigurationsViewModel
+    @StateObject var viewModel: ConfigurationsViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -48,7 +48,7 @@ struct ConfigurationsView: View {
                     .font(.title2)
                     .padding(.horizontal)
                 HStack {
-                    Slider(value: $viewModel.hapticsIntensity, in: 0...10)
+                    Slider(value: $viewModel.hapticsIntensity, in: 0...100)
                 }
             }
             .padding()

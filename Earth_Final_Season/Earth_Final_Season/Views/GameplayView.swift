@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct GameplayView: View {
-    @State var viewModel: GameplayViewModel
+    @StateObject var viewModel: GameplayViewModel
     @State private var gameOver = false
     
     var body: some View {
@@ -15,7 +15,7 @@ struct GameplayView: View {
                 // Change image to current image
                 CharacterView(characterImage: "image1", characterName: event.character)
                 
-                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius, viewModel: $viewModel,
+                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius, viewModel: viewModel,
                           eventDescription: event.description,
                           consequence1: event.consequenceDescription1,
                           consequence2: event.consequenceDescription2
@@ -53,9 +53,9 @@ struct GameplayView: View {
             
             Spacer()
         }
-        .onAppear(perform: prepareHaptics)
+        .onAppear(perform: HapticManager.shared.prepareHaptics)
         .navigationDestination(isPresented: $viewModel.isGameOver) {
-            GameOverView(gameplayViewModel: $viewModel)
+            GameOverView(gameplayViewModel: viewModel)
         }
     }
     

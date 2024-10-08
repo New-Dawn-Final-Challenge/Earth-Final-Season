@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreHaptics
 
 struct SliderView: View {
     @Binding var mainScreenShadowRadius: Int
@@ -53,19 +54,20 @@ struct SliderView: View {
                                     option2ShadowRadius = Int(finalOffsetX / 6)
                                     option1ShadowRadius = 0
                                 }
+                                provideHapticFeedback()
                             }
                             .onEnded { _ in
                                 withAnimation {
                                     // Option 1 chosen
                                     if finalOffsetX == leftLimit {
-                                        complexSuccess()
+                                        HapticManager.shared.complexSuccess()
                                         onChooseOption1()
                                         mainScreenShadowRadius = 12
                                     }
 
                                     // Option 2 chosen
                                     else if finalOffsetX == rightLimit {
-                                        complexSuccess()
+                                        HapticManager.shared.complexSuccess()
                                         onChooseOption2()
                                         mainScreenShadowRadius = 12
                                     }
@@ -79,6 +81,39 @@ struct SliderView: View {
                             }
                     )
             )
-            .sensoryFeedback(.impact(weight: .medium, intensity: 0.28), trigger: feedbackTrigger)
+            .onAppear {
+                prepareHaptics()
+            }
+            
     }
+    
+    // Prepare the CoreHaptics engine
+        private func prepareHaptics() {
+            HapticManager.shared.prepareHaptics()
+        }
+
+        // Function to provide haptic feedback
+        private func provideHapticFeedback() {
+            guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
+            let intense = HapticManager.shared.currentIntensity
+            var events = [CHHapticEvent]()
+            
+            // Create a haptic pattern with medium impact
+            
+            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.28 * intense)
+            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
+            events.append(event)
+            
+            do {
+                let pattern = try CHHapticPattern(events: events, parameters: [])
+                let player = try HapticManager.shared.engine?.makePlayer(with: pattern)
+                try player?.start(atTime: 0)
+            } catch {
+                print("Failed to play haptic: \(error.localizedDescription)")
+            }
+        }
+    
 }
+
+

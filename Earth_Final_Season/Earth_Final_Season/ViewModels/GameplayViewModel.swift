@@ -8,18 +8,18 @@
 import Foundation
 import SwiftUI
 
-@Observable
-class GameplayViewModel {
-    var isGameOver = false
-    var isShowingConsequence = false
-    var lastChosenOption = "choice1"
-    var currentPosition: CGSize = .zero
-    var mainScreenShadowRadius = 0
-    var option1ShadowRadius = 0
-    var option2ShadowRadius = 0
-    var events = [Event]()
-    var currentEvent: Event?
-    var indicators = Indicators(audience: 5,
+
+class GameplayViewModel: ObservableObject {
+    @Published var isGameOver = false
+    @Published var isShowingConsequence = false
+    @Published var lastChosenOption = "choice1"
+    @Published var currentPosition: CGSize = .zero
+    @Published var mainScreenShadowRadius = 0
+    @Published var option1ShadowRadius = 0
+    @Published var option2ShadowRadius = 0
+    @Published var events = [Event]()
+    @Published var currentEvent: Event?
+    @Published var indicators = Indicators(audience: 5,
                                 illBeing: 6,
                                 socioPoliticalInstability: 6,
                                 environmentalDegradation: 6,

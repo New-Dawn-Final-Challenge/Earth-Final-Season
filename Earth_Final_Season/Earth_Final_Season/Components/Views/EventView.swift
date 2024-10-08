@@ -8,7 +8,7 @@ import SwiftUI
 
 struct EventView: View {
     @Binding var mainScreenShadowRadius: Int
-    @Binding var viewModel: GameplayViewModel
+    @ObservedObject var viewModel: GameplayViewModel
     @State var textToShow: String = ""
     
     let eventDescription: String
@@ -29,7 +29,10 @@ struct EventView: View {
                     .padding()
             )
             .onAppear(perform: updateText)
-            .onChange(of: viewModel.isShowingConsequence, updateText)
+//            .onChange(of: viewModel.isShowingConsequence, updateText)
+            .onChange(of: viewModel.isShowingConsequence) { _ in
+                updateText()
+            }
     }
 
     func updateText() {
