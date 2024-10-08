@@ -8,17 +8,24 @@
 import Foundation
 import SwiftUI
 
-class GameplayViewModel: ObservableObject {
-    @Published var isGameOver = false
-    @Published var currentPosition: CGSize = .zero
-    @Published var mainScreenShadowRadius = 0
-    @Published var option1ShadowRadius = 0
-    @Published var option2ShadowRadius = 0
-    @Published var events = [Event]()
-    @Published var currentEvent: Event?
-    @Published var indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)  // Initial Indicators
+@Observable
+class GameplayViewModel {
+    var isGameOver = false
+    var isShowingConsequence = false
+    var lastChosenOption = "choice1"
+    var currentPosition: CGSize = .zero
+    var mainScreenShadowRadius = 0
+    var option1ShadowRadius = 0
+    var option2ShadowRadius = 0
+    var events = [Event]()
+    var currentEvent: Event?
+    var indicators = Indicators(audience: 5,
+                                illBeing: 6,
+                                socioPoliticalInstability: 6,
+                                environmentalDegradation: 6,
+                                currentYear: 0)  // Initial Indicators
     
-    private var eventsSequence: [UUID] = []
+    private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
 
     init() {
@@ -35,10 +42,10 @@ class GameplayViewModel: ObservableObject {
     }
     
     private func checkForGameOver() {
-        if indicators.audience <= 0 || indicators.audience >= 20 ||
-           indicators.socialInstability <= 0 || indicators.socialInstability >= 20 ||
-           indicators.politicalInstability <= 0 || indicators.politicalInstability >= 20 ||
-           indicators.environmentalDegradation <= 0 || indicators.environmentalDegradation >= 20 {
+        if indicators.audience <= 3 ||
+           indicators.illBeing <= 0 || indicators.illBeing >= 12 ||
+           indicators.socioPoliticalInstability <= 0 || indicators.socioPoliticalInstability >= 12 ||
+           indicators.environmentalDegradation <= 0 || indicators.environmentalDegradation >= 12 {
             isGameOver = true
         }
     }
@@ -74,20 +81,47 @@ class GameplayViewModel: ObservableObject {
     
     func chooseOption1() {
         if let event = currentEvent {
+//            event.applyConsequence(consequence: event.consequenceDescription1)
             indicators.applyConsequence(event.consequence1)
-            goToNextEvent()
+            lastChosenOption = "choice1"
+            
+            withAnimation {
+                self.isShowingConsequence = true
+            }
+            
+            // Show next event after 6 seconds
+            Task {
+                try await Task.sleep(nanoseconds: 6_000_000_000)
+                withAnimation {
+                    self.goToNextEvent()
+                    self.isShowingConsequence = false
+                }
+            }
         }
     }
     
     func chooseOption2() {
         if let event = currentEvent {
             indicators.applyConsequence(event.consequence2)
-            goToNextEvent()
+            lastChosenOption = "choice2"
+        
+            withAnimation {
+                self.isShowingConsequence = true
+            }
+            
+            // Show next event after 6 seconds
+            Task {
+                try await Task.sleep(nanoseconds: 6_000_000_000)
+                withAnimation {
+                    self.goToNextEvent()
+                    self.isShowingConsequence = false
+                }
+            }
         }
     }
     
     func resetGame() {
-        indicators = Indicators(audience: 10, socialInstability: 10, politicalInstability: 10, environmentalDegradation: 10, currentYear: 0)
+        indicators = Indicators(audience: 5, illBeing: 6, socioPoliticalInstability: 6, environmentalDegradation: 6, currentYear: 0)
         isGameOver = false
         events = loadAndReturnEvents()
         let shuffledEvents = events.shuffled()

@@ -8,49 +8,48 @@
 import Foundation
 
 struct Event: EventService, Codable {
-    let id: UUID
-    let character: String
-    let image: String
-    let description: String
-    let choice1: String
-    let choice2: String
-    let audience1: Int
-    let socialInstability1: Int
-    let politicalInstability1: Int
-    let environmentalDegradation1: Int
-    let audience2: Int
-    let socialInstability2: Int
-    let politicalInstability2: Int
-    let environmentalDegradation2: Int
-    let difficulty: Difficulty
-    let tags: [String]
+    let id: String
+    var character: String
+    var description: String
+    var choice1: String
+    var choice2: String
+    var socioPoliticalInstability1: Int
+    var illBeing1: Int
+    var environmentalDegradation1: Int
+    var consequenceDescription1: String
+    var socioPoliticalInstability2: Int
+    var illBeing2: Int
+    var environmentalDegradation2: Int
+    var consequenceDescription2: String
+    var difficulty: Difficulty
+    var tags: [String]
 
     var consequence1: Consequence {
-        return Consequence(socialInstability: socialInstability1, politicalInstability: politicalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
+        return Consequence(illBeing: illBeing1, socioPoliticalInstability: socioPoliticalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
     }
     var consequence2: Consequence {
-        return Consequence(socialInstability: socialInstability2, politicalInstability: politicalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
+        return Consequence(illBeing: illBeing1, socioPoliticalInstability: socioPoliticalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
     }
 }
 
 struct Consequence: ConsequenceService, Codable {
-    var socialInstability: Int
-    var politicalInstability: Int
+    var illBeing: Int
+    var socioPoliticalInstability: Int
     var environmentalDegradation: Int
     var description: String
 }
 
 struct Indicators: IndicatorService {
-    var audience: Int
-    var socialInstability: Int
-    var politicalInstability: Int
+    var audience: Double
+    var illBeing: Int
+    var socioPoliticalInstability: Int
     var environmentalDegradation: Int
     var currentYear: Int
     
     mutating func applyConsequence(_ consequence: Consequence) {
         // Update indicators with new consequences
-        socialInstability += consequence.socialInstability
-        politicalInstability += consequence.politicalInstability
+        illBeing += consequence.illBeing
+        socioPoliticalInstability += consequence.socioPoliticalInstability
         environmentalDegradation += consequence.environmentalDegradation
         
         // Print updated values
@@ -61,9 +60,9 @@ struct Indicators: IndicatorService {
     }
     
     mutating func updateAudience() {
-        let total = socialInstability + politicalInstability + environmentalDegradation
+        let total = illBeing + socioPoliticalInstability + environmentalDegradation
         let count = 3
-        audience = (total / count)
+        audience = Double((total / count))
         
         // Print updated audience value
         print("Updated Audience: \(audience)")
@@ -71,8 +70,8 @@ struct Indicators: IndicatorService {
     
     // Function to print updated indicator values
     private func printUpdatedValues() {
-        print("Updated Social Instability: \(socialInstability)")
-        print("Updated Political Instability: \(politicalInstability)")
+        print("Updated Ill-Being: \(illBeing)")
+        print("Updated Sociopolitical Instability: \(socioPoliticalInstability)")
         print("Updated Environmental Degradation: \(environmentalDegradation)")
     }
 }

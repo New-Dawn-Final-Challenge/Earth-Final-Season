@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// Essa struct nao conforma a nossa arquitetura, mas é
+// Apenas um protótipo antigo usado para testes. Optamos por deixar assim
 struct DraggerPrototypeView: View {
     @StateObject private var viewModel = DraggerPrototypeViewModel()
 

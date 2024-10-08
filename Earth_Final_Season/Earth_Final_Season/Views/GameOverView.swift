@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GameOverView: View {
-    @EnvironmentObject var gameplayViewModel: GameplayViewModel
+    @Binding var gameplayViewModel: GameplayViewModel
     
     var body: some View {
         VStack {
@@ -24,8 +24,4 @@ struct GameOverView: View {
         .navigationTitle("")
         .navigationBarBackButtonHidden(true)
     }
-}
-
-#Preview {
-    GameOverView()
 }

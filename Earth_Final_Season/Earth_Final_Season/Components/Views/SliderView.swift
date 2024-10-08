@@ -19,12 +19,9 @@ struct SliderView: View {
     @State private var finalOffsetX: CGFloat = 0
     @State private var feedbackTrigger: CGPoint = .zero
 
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
-
     var body: some View {
-        let sliderWidth = UIScreen.main.bounds.width * 0.5
-        let sliderHeight = UIScreen.main.bounds.height * 0.05
+        let sliderWidth = getWidth() * 0.5
+        let sliderHeight = getHeight() * 0.05
         
         let rightLimit = (sliderWidth / 2)
         let leftLimit = -(sliderWidth / 2)
@@ -49,13 +46,12 @@ struct SliderView: View {
 
                                 // Update shadow radius based on the circle's relative position within the slider
                                 if finalOffsetX < 0 {
-                                    option1ShadowRadius = Int(abs(finalOffsetX) / 10)
+                                    option1ShadowRadius = Int(abs(finalOffsetX) / 6)
                                     option2ShadowRadius = 0
-                                    mainScreenShadowRadius = Int(abs(finalOffsetX) / 10)
+                                    
                                 } else {
-                                    option2ShadowRadius = Int(finalOffsetX / 10)
+                                    option2ShadowRadius = Int(finalOffsetX / 6)
                                     option1ShadowRadius = 0
-                                    mainScreenShadowRadius = Int(finalOffsetX / 10)
                                 }
                             }
                             .onEnded { _ in
