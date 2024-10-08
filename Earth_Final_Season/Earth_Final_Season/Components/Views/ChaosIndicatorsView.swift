@@ -13,12 +13,7 @@ struct ChaosIndicatorsView: View {
     let environmentalDegradation: Int
     let year: String
     
-    init(illBeing: Int, socioPoliticalInstability: Int, environmentalDegradation: Int, year: String) {
-        self.illBeing = illBeing
-        self.socioPoliticalInstability = socioPoliticalInstability
-        self.environmentalDegradation = environmentalDegradation
-        self.year = year
-    }
+    @Binding var viewModel: GameplayViewModel
     
     var body: some View {
         VStack {
@@ -34,6 +29,7 @@ struct ChaosIndicatorsView: View {
                         overlayView(for: environmentalDegradation)
                             .mask(indicatorView(for: environmentalDegradation, image: "leaf.fill"))
                     )
+                    .shadow(color: Color.purple, radius: CGFloat(viewModel.environmentalDegradationShadowRadius))
 
                 // Sociopolitical Instability indicator with overlay
                 indicatorView(for: socioPoliticalInstability, image: "person.fill")
@@ -41,6 +37,7 @@ struct ChaosIndicatorsView: View {
                         overlayView(for: socioPoliticalInstability)
                             .mask(indicatorView(for: socioPoliticalInstability, image: "person.fill"))
                     )
+                    .shadow(color: Color.purple, radius: CGFloat(viewModel.illBeingShadowRadius))
 
                 // Ill-Being indicator with overlay
                 indicatorView(for: illBeing, image: "building.2.crop.circle.fill")
@@ -48,6 +45,7 @@ struct ChaosIndicatorsView: View {
                         overlayView(for: illBeing)
                             .mask(indicatorView(for: illBeing, image: "building.2.crop.circle.fill"))
                     )
+                    .shadow(color: Color.purple, radius: CGFloat(viewModel.sociopoliticalInstabilityShadowRadius))
             }
         }
         .padding()

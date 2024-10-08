@@ -10,6 +10,8 @@ import SwiftUI
 
 @Observable
 class GameplayViewModel {
+    var environmentalDegradationShadowRadius = 0
+    var illBeingShadowRadius = 0
     var isGameOver = false
     var isShowingConsequence = false
     var lastChosenOption = "choice1"
@@ -17,6 +19,7 @@ class GameplayViewModel {
     var mainScreenShadowRadius = 0
     var option1ShadowRadius = 0
     var option2ShadowRadius = 0
+    var sociopoliticalInstabilityShadowRadius = 0
     var events = [Event]()
     var currentEvent: Event?
     var indicators = Indicators(audience: 5,

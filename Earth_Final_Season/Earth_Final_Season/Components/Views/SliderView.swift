@@ -11,6 +11,7 @@ struct SliderView: View {
     @Binding var mainScreenShadowRadius: Int
     @Binding var option1ShadowRadius: Int
     @Binding var option2ShadowRadius: Int
+    @Binding var viewModel: GameplayViewModel
     
     var onChooseOption1: () -> Void
     var onChooseOption2: () -> Void
@@ -49,9 +50,17 @@ struct SliderView: View {
                                     option1ShadowRadius = Int(abs(finalOffsetX) / 6)
                                     option2ShadowRadius = 0
                                     
+                                    resetIndicatorsShadows()
+                                               
+                                    checkFirstOptionIndicators()
+                                    
                                 } else {
                                     option2ShadowRadius = Int(finalOffsetX / 6)
                                     option1ShadowRadius = 0
+                                    
+                                    resetIndicatorsShadows()
+
+                                    checkSecondOptionIndicators()
                                 }
                             }
                             .onEnded { _ in
@@ -70,6 +79,8 @@ struct SliderView: View {
                                         mainScreenShadowRadius = 12
                                     }
 
+                                    resetIndicatorsShadows()
+                                    
                                     // Reset position and shadows
                                     dragOffset = .zero
                                     mainScreenShadowRadius = 0
@@ -80,5 +91,39 @@ struct SliderView: View {
                     )
             )
             .sensoryFeedback(.impact(weight: .medium, intensity: 0.28), trigger: feedbackTrigger)
+    }
+    
+    private func checkFirstOptionIndicators() {
+        if viewModel.currentEvent?.environmentalDegradation1 != 0 {
+            viewModel.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+        
+        if viewModel.currentEvent?.illBeing1 != 0 {
+            viewModel.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+        
+        if viewModel.currentEvent?.socioPoliticalInstability1 != 0 {
+            viewModel.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+    }
+    
+    private func checkSecondOptionIndicators() {
+        if viewModel.currentEvent?.environmentalDegradation2 != 0 {
+            viewModel.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+        
+        if viewModel.currentEvent?.illBeing2 != 0 {
+            viewModel.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+        
+        if viewModel.currentEvent?.socioPoliticalInstability2 != 0 {
+            viewModel.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+    }
+    
+    private func resetIndicatorsShadows() {
+        viewModel.environmentalDegradationShadowRadius = 0
+        viewModel.illBeingShadowRadius = 0
+        viewModel.sociopoliticalInstabilityShadowRadius = 0
     }
 }
