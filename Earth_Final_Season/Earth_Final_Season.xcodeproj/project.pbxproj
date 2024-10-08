@@ -12,7 +12,18 @@
 		8B61B08D2CA1B5E500ED8A81 /* .swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8B61B08C2CA1B5E000ED8A81 /* .swiftgen.yml */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		050D9A702CB416AA00750603 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 620E4D4A2C9C468E006850BB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 620E4D512C9C468E006850BB;
+			remoteInfo = Earth_Final_Season;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		050D9A6C2CB416AA00750603 /* Earth_Final_SeasonTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Earth_Final_SeasonTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		620E4D522C9C468E006850BB /* Earth_Final_Season.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earth_Final_Season.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B61B0852CA1AB2F00ED8A81 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		8B61B08C2CA1B5E000ED8A81 /* .swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftgen.yml; sourceTree = "<group>"; };
@@ -29,6 +40,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		050D9A6D2CB416AA00750603 /* Earth_Final_SeasonTest */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Earth_Final_SeasonTest;
+			sourceTree = "<group>";
+		};
 		620E4D542C9C468E006850BB /* Earth_Final_Season */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -40,6 +56,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		050D9A692CB416AA00750603 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		620E4D4F2C9C468E006850BB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -56,6 +79,7 @@
 				8B61B08C2CA1B5E000ED8A81 /* .swiftgen.yml */,
 				8B61B0852CA1AB2F00ED8A81 /* .swiftlint.yml */,
 				620E4D542C9C468E006850BB /* Earth_Final_Season */,
+				050D9A6D2CB416AA00750603 /* Earth_Final_SeasonTest */,
 				620E4D532C9C468E006850BB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				620E4D522C9C468E006850BB /* Earth_Final_Season.app */,
+				050D9A6C2CB416AA00750603 /* Earth_Final_SeasonTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -71,6 +96,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		050D9A6B2CB416AA00750603 /* Earth_Final_SeasonTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 050D9A742CB416AA00750603 /* Build configuration list for PBXNativeTarget "Earth_Final_SeasonTest" */;
+			buildPhases = (
+				050D9A682CB416AA00750603 /* Sources */,
+				050D9A692CB416AA00750603 /* Frameworks */,
+				050D9A6A2CB416AA00750603 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				050D9A712CB416AA00750603 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				050D9A6D2CB416AA00750603 /* Earth_Final_SeasonTest */,
+			);
+			name = Earth_Final_SeasonTest;
+			packageProductDependencies = (
+			);
+			productName = Earth_Final_SeasonTest;
+			productReference = 050D9A6C2CB416AA00750603 /* Earth_Final_SeasonTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		620E4D512C9C468E006850BB /* Earth_Final_Season */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 620E4D602C9C4690006850BB /* Build configuration list for PBXNativeTarget "Earth_Final_Season" */;
@@ -105,6 +153,10 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					050D9A6B2CB416AA00750603 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 620E4D512C9C468E006850BB;
+					};
 					620E4D512C9C468E006850BB = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -129,11 +181,19 @@
 			projectRoot = "";
 			targets = (
 				620E4D512C9C468E006850BB /* Earth_Final_Season */,
+				050D9A6B2CB416AA00750603 /* Earth_Final_SeasonTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		050D9A6A2CB416AA00750603 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		620E4D502C9C468E006850BB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -186,6 +246,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		050D9A682CB416AA00750603 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		620E4D4E2C9C468E006850BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,7 +263,53 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		050D9A712CB416AA00750603 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 620E4D512C9C468E006850BB /* Earth_Final_Season */;
+			targetProxy = 050D9A702CB416AA00750603 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		050D9A722CB416AA00750603 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QS932KTLCZ;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LarissaOkabayashi.Earth-Final-SeasonTest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Earth_Final_Season.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Earth_Final_Season";
+			};
+			name = Debug;
+		};
+		050D9A732CB416AA00750603 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QS932KTLCZ;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LarissaOkabayashi.Earth-Final-SeasonTest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Earth_Final_Season.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Earth_Final_Season";
+			};
+			name = Release;
+		};
 		620E4D5E2C9C4690006850BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -325,7 +438,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Earth_Final_Season/Preview Content\"";
-				DEVELOPMENT_TEAM = 73XDZPPBTH;
+				DEVELOPMENT_TEAM = QS932KTLCZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
@@ -360,7 +473,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Earth_Final_Season/Preview Content\"";
-				DEVELOPMENT_TEAM = 73XDZPPBTH;
+				DEVELOPMENT_TEAM = QS932KTLCZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
@@ -389,6 +502,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		050D9A742CB416AA00750603 /* Build configuration list for PBXNativeTarget "Earth_Final_SeasonTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				050D9A722CB416AA00750603 /* Debug */,
+				050D9A732CB416AA00750603 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		620E4D4D2C9C468E006850BB /* Build configuration list for PBXProject "Earth_Final_Season" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
