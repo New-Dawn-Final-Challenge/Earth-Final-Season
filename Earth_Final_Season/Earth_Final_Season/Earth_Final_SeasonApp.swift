@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct Earth_Final_SeasonApp: App {
     @State var gameplayViewModel = GameplayViewModel()
+    @State var configViewModel = ConfigurationsViewModel()
     
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                MenuView()
+                GameplayView(viewModel: $gameplayViewModel,
+                             configViewModel: $configViewModel)
             }
             .task {
                 SoundtrackAudioManager.shared.playSound(named: "lowtoneST")

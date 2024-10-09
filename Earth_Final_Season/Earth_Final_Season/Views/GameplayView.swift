@@ -58,17 +58,18 @@ struct GameplayView: View {
         .navigationDestination(isPresented: $viewModel.isGameOver) {
             GameOverView(gameplayViewModel: $viewModel)
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     private var helperButtonsView: some View {
         HStack {
             Spacer()
             
-            NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
+            NavigationLink(destination: MenuView()) {
                 HelpButtonView()
             }
             
-            NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
+            NavigationLink(destination: MenuView()) {
                 ConfigurationButtonView()
             }
         }

@@ -43,10 +43,10 @@ class GameplayViewModel {
     }
     
     private func checkForGameOver() {
-        if indicators.audience <= 3 ||
-           indicators.illBeing <= 0 || indicators.illBeing >= 12 ||
-           indicators.socioPoliticalInstability <= 0 || indicators.socioPoliticalInstability >= 12 ||
-           indicators.environmentalDegradation <= 0 || indicators.environmentalDegradation >= 12 {
+        if  indicators.audience <= 3 ||
+            indicators.illBeing >= 12 ||
+            indicators.socioPoliticalInstability >= 12 ||
+            indicators.environmentalDegradation >= 12 {
             isGameOver = true
             checkForGameOverReason()
         }
