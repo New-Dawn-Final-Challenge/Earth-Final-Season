@@ -57,7 +57,7 @@ struct TestSliderView: View {
                                 withAnimation {
                                     // Option A chosen
                                     if finalOffsetX == leftLimit {
-                                        complexSuccess()
+                                        HapticsManager.shared.complexSuccess()
                                         optionToChoose = "Loading next command..."
                                         mainScreenShadowRadius = 12
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
@@ -70,7 +70,7 @@ struct TestSliderView: View {
 
                                     // Option B chosen
                                     else if finalOffsetX == rightLimit {
-                                        complexSuccess()
+                                        HapticsManager.shared.complexSuccess()
                                         optionToChoose = "Loading next command..."
                                         mainScreenShadowRadius = 12
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 6) {

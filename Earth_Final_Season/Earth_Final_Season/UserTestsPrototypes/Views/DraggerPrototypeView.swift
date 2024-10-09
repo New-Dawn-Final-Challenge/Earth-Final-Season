@@ -36,7 +36,7 @@ struct DraggerPrototypeView: View {
                 optionBShadowRadius: $viewModel.optionBShadowRadius
             )
         }
-        .onAppear(perform: prepareHaptics)
+        .onAppear(perform: HapticsManager.shared.prepareHaptics)
     }
 }
 

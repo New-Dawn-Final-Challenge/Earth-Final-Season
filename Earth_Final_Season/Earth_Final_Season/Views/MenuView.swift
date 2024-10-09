@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct MenuView: View {
     @State var gameplayViewModel = GameplayViewModel()
     @State var configViewModel = ConfigurationsViewModel()
@@ -66,4 +64,3 @@ struct MenuView_Previews: PreviewProvider {
         MenuView()
     }
 }
-
