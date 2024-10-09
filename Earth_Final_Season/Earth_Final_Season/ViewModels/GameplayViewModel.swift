@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-@Observable
+@Observable @MainActor
 class GameplayViewModel {
     var environmentalDegradationShadowRadius = 0
     var illBeingShadowRadius = 0
@@ -87,7 +87,6 @@ class GameplayViewModel {
 //            event.applyConsequence(consequence: event.consequenceDescription1)
             indicators.applyConsequence(event.consequence1)
             lastChosenOption = "choice1"
-            
             self.isShowingConsequence = true
             
             // Show next event after 6 seconds
@@ -103,7 +102,6 @@ class GameplayViewModel {
         if let event = currentEvent {
             indicators.applyConsequence(event.consequence2)
             lastChosenOption = "choice2"
-        
             self.isShowingConsequence = true
             
             // Show next event after 6 seconds
