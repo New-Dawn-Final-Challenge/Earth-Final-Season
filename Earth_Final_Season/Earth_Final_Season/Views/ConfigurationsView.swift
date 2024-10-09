@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ConfigurationsView: View {
-    @State var viewModel: ConfigurationsViewModel
+    @Binding var viewModel: ConfigurationsViewModel
+    @State private var sliderOpacity: Double = 0
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -43,16 +44,28 @@ struct ConfigurationsView: View {
             }
             .padding(32)
             
-            VStack(alignment: .leading) {
-                Text("Haptics intensity")
-                    .font(.title2)
-                    .padding(.horizontal)
-                HStack {
-                    Slider(value: $viewModel.hapticsIntensity, in: 0...10)
-                }
-            }
-            .padding()
-            
+            if (viewModel.hapticsEnabled) {
+                            VStack(alignment: .leading) {
+                                Text("Haptics intensity")
+                                    .font(.title2)
+                                    .padding(.horizontal)
+                                    .onAppear {
+                                        withAnimation(.easeInOut(duration: 0.5)) {
+                                            sliderOpacity = 1
+                                        }
+                                    }
+                                    .onDisappear {
+                                        sliderOpacity = 0
+                                        }
+                                HStack {
+                                    Slider(value: $viewModel.hapticsIntensity, in: 0...100)
+                                        .opacity(sliderOpacity)
+                                }
+                            }
+                            .transition(.move(edge: .top))
+                            .padding()
+                        }
+           
             VStack(alignment: .leading) {
                 Text("Gesture")
                     .font(.title2)
@@ -91,16 +104,18 @@ struct ConfigurationsView: View {
                 
             }
             .padding(.horizontal, 16)
-            
+            Spacer()
         }
         .navigationTitle("Settings")
     }
 }
 
-#Preview {
-    ConfigurationsView(viewModel: ConfigurationsViewModel())
-}
-
 enum Gesture {
     case holdDrag, tap
+}
+
+extension AnyTransition {
+    static var verticalSlide: AnyTransition {
+        AnyTransition.move(edge: .top).combined(with: .opacity)
+    }
 }
