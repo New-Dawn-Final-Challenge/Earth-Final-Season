@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ConfigurationsView: View {
-    @Binding var viewModel: ConfigurationsViewModel
+    @State var viewModel: ConfigurationsViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -97,9 +97,9 @@ struct ConfigurationsView: View {
     }
 }
 
-//#Preview {
-//    ConfigurationsView(viewModel: )
-//}
+#Preview {
+    ConfigurationsView(viewModel: ConfigurationsViewModel())
+}
 
 enum Gesture {
     case holdDrag, tap
