@@ -53,7 +53,7 @@ struct GameplayView: View {
             
             Spacer()
         }
-        .onAppear(perform: prepareHaptics)
+        .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .navigationDestination(isPresented: $viewModel.isGameOver) {
             GameOverView(gameplayViewModel: $viewModel)
         }

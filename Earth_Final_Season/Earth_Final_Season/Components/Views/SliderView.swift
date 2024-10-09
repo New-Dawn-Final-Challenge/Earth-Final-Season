@@ -58,14 +58,14 @@ struct SliderView: View {
                                 withAnimation {
                                     // Option 1 chosen
                                     if finalOffsetX == leftLimit {
-                                        complexSuccess()
+                                        HapticsManager.shared.complexSuccess()
                                         onChooseOption1()
                                         mainScreenShadowRadius = 12
                                     }
 
                                     // Option 2 chosen
                                     else if finalOffsetX == rightLimit {
-                                        complexSuccess()
+                                        HapticsManager.shared.complexSuccess()
                                         onChooseOption2()
                                         mainScreenShadowRadius = 12
                                     }
@@ -79,6 +79,7 @@ struct SliderView: View {
                             }
                     )
             )
-            .sensoryFeedback(.impact(weight: .medium, intensity: 0.28), trigger: feedbackTrigger)
+        // swiftlin:disable:next max_length
+            .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity)*0.28), trigger: feedbackTrigger)
     }
 }
