@@ -32,6 +32,8 @@ struct ChaosIndicatorsView: View {
                             overlayView(for: environmentalDegradation)
                                 .mask(indicatorView(for: environmentalDegradation, image: "leaf.fill"))
                         )
+                        .shadow(color: Color.cyan, radius: CGFloat(viewModel.environmentalDegradationDecreaseShadowRadius))
+                        .shadow(color: Color.orange, radius: CGFloat(viewModel.environmentalDegradationIncreaseShadowRadius))
                         .shadow(color: Color.purple, radius: CGFloat(viewModel.environmentalDegradationShadowRadius))
                 }
 
@@ -44,6 +46,8 @@ struct ChaosIndicatorsView: View {
                             overlayView(for: socioPoliticalInstability)
                                 .mask(indicatorView(for: socioPoliticalInstability, image: "person.fill"))
                         )
+                        .shadow(color: Color.cyan, radius: CGFloat(viewModel.illBeingDecreaseShadowRadius))
+                        .shadow(color: Color.orange, radius: CGFloat(viewModel.illBeingIncreaseShadowRadius))
                         .shadow(color: Color.purple, radius: CGFloat(viewModel.illBeingShadowRadius))
                 }
 
@@ -56,6 +60,8 @@ struct ChaosIndicatorsView: View {
                             overlayView(for: illBeing)
                                 .mask(indicatorView(for: illBeing, image: "building.2.crop.circle.fill"))
                         )
+                        .shadow(color: Color.cyan, radius: CGFloat(viewModel.sociopoliticalInstabilityDecreaseShadowRadius))
+                        .shadow(color: Color.orange, radius: CGFloat(viewModel.sociopoliticalInstabilityIncreaseShadowRadius))
                         .shadow(color: Color.purple, radius: CGFloat(viewModel.sociopoliticalInstabilityShadowRadius))
                 }
             }

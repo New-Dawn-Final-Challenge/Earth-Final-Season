@@ -10,7 +10,11 @@ import SwiftUI
 
 @Observable @MainActor
 class GameplayViewModel {
+    var environmentalDegradationDecreaseShadowRadius = 0
+    var environmentalDegradationIncreaseShadowRadius = 0
     var environmentalDegradationShadowRadius = 0
+    var illBeingDecreaseShadowRadius = 0
+    var illBeingIncreaseShadowRadius = 0
     var illBeingShadowRadius = 0
     var isGameOver = false
     var isShowingConsequence = false
@@ -19,6 +23,8 @@ class GameplayViewModel {
     var mainScreenShadowRadius = 0
     var option1ShadowRadius = 0
     var option2ShadowRadius = 0
+    var sociopoliticalInstabilityDecreaseShadowRadius = 0
+    var sociopoliticalInstabilityIncreaseShadowRadius = 0
     var sociopoliticalInstabilityShadowRadius = 0
     var events = [Event]()
     var currentEvent: Event?
@@ -89,11 +95,19 @@ class GameplayViewModel {
             lastChosenOption = "choice1"
             self.isShowingConsequence = true
             
+            animateIndicatorsChange()
             // Show next event after 6 seconds
             Task { @MainActor in
                 try await Task.sleep(nanoseconds: 6_000_000_000)
                 self.goToNextEvent()
                 self.isShowingConsequence = false
+                
+                self.sociopoliticalInstabilityDecreaseShadowRadius = 0
+                self.sociopoliticalInstabilityIncreaseShadowRadius = 0
+                self.illBeingDecreaseShadowRadius = 0
+                self.illBeingIncreaseShadowRadius = 0
+                self.environmentalDegradationDecreaseShadowRadius = 0
+                self.environmentalDegradationIncreaseShadowRadius = 0
             }
         }
     }
@@ -104,11 +118,63 @@ class GameplayViewModel {
             lastChosenOption = "choice2"
             self.isShowingConsequence = true
             
+            animateIndicatorsChange()
             // Show next event after 6 seconds
             Task { @MainActor in
                 try await Task.sleep(nanoseconds: 6_000_000_000)
                 self.goToNextEvent()
                 self.isShowingConsequence = false
+                
+                self.sociopoliticalInstabilityDecreaseShadowRadius = 0
+                self.sociopoliticalInstabilityIncreaseShadowRadius = 0
+                self.illBeingDecreaseShadowRadius = 0
+                self.illBeingIncreaseShadowRadius = 0
+                self.environmentalDegradationDecreaseShadowRadius = 0
+                self.environmentalDegradationIncreaseShadowRadius = 0
+            }
+        }
+    }
+    
+    func animateIndicatorsChange() {
+        if let event = currentEvent {
+            if lastChosenOption == "choice1" {
+                if event.environmentalDegradation1 > 0 {
+                    environmentalDegradationIncreaseShadowRadius = 10
+                } else if event.environmentalDegradation1 < 0 {
+                    environmentalDegradationDecreaseShadowRadius = 10
+                }
+                
+                if event.illBeing1 > 0 {
+                    illBeingIncreaseShadowRadius = 10
+                } else if event.illBeing1 < 0 {
+                    illBeingDecreaseShadowRadius = 10
+                }
+                
+                if event.socioPoliticalInstability1 > 0 {
+                    sociopoliticalInstabilityIncreaseShadowRadius = 10
+                } else if event.socioPoliticalInstability1 < 0 {
+                    sociopoliticalInstabilityDecreaseShadowRadius = 10
+                }
+            }
+            
+            else if lastChosenOption == "choice2" {
+                if event.environmentalDegradation2 > 0 {
+                    environmentalDegradationIncreaseShadowRadius = 10
+                } else if event.environmentalDegradation2 < 0 {
+                    environmentalDegradationDecreaseShadowRadius = 10
+                }
+                
+                if event.illBeing2 > 0 {
+                    illBeingIncreaseShadowRadius = 10
+                } else if event.illBeing2 < 0 {
+                    illBeingDecreaseShadowRadius = 10
+                }
+                
+                if event.socioPoliticalInstability2 > 0 {
+                    sociopoliticalInstabilityIncreaseShadowRadius = 10
+                } else if event.socioPoliticalInstability2 < 0 {
+                    sociopoliticalInstabilityDecreaseShadowRadius = 10
+                }
             }
         }
     }
