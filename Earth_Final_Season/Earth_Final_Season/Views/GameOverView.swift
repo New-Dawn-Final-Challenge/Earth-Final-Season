@@ -15,6 +15,10 @@ struct GameOverView: View {
             Text("Game Over")
                 .font(.largeTitle)
                 .padding()
+            
+            Text("Game over reason was '\(gameplayViewModel.gameOverReason)'.")
+                .font(.title)
+                .padding()
 
             Button("Restart") {
                 gameplayViewModel.resetGame()
