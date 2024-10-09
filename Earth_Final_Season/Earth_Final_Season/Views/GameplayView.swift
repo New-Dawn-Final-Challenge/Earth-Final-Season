@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct GameplayView: View {
-    @State var viewModel: GameplayViewModel
+    @Binding var viewModel: GameplayViewModel
+    @Binding var configViewModel: ConfigurationsViewModel
     @State private var gameOver = false
     
     var body: some View {
@@ -63,11 +64,11 @@ struct GameplayView: View {
         HStack {
             Spacer()
             
-            NavigationLink(destination: ConfigurationsView(viewModel: ConfigurationsViewModel())) {
+            NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
                 HelpButtonView()
             }
             
-            NavigationLink(destination: ConfigurationsView(viewModel: ConfigurationsViewModel())) {
+            NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
                 ConfigurationButtonView()
             }
         }
@@ -87,8 +88,4 @@ struct GameplayView: View {
             )
         }
     }
-}
-
-#Preview {
-    GameplayView(viewModel: GameplayViewModel())
 }

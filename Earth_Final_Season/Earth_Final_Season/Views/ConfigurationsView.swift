@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ConfigurationsView: View {
-    @State var viewModel: ConfigurationsViewModel
+    @Binding var viewModel: ConfigurationsViewModel
     @State private var sliderOpacity: Double = 0
     
     var body: some View {
@@ -108,10 +108,6 @@ struct ConfigurationsView: View {
         }
         .navigationTitle("Settings")
     }
-}
-
-#Preview {
-    ConfigurationsView(viewModel: ConfigurationsViewModel())
 }
 
 enum Gesture {
