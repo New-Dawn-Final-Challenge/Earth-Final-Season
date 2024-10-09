@@ -88,17 +88,13 @@ class GameplayViewModel {
             indicators.applyConsequence(event.consequence1)
             lastChosenOption = "choice1"
             
-            withAnimation {
-                self.isShowingConsequence = true
-            }
+            self.isShowingConsequence = true
             
             // Show next event after 6 seconds
-            Task {
+            Task { @MainActor in
                 try await Task.sleep(nanoseconds: 6_000_000_000)
-                withAnimation {
-                    self.goToNextEvent()
-                    self.isShowingConsequence = false
-                }
+                self.goToNextEvent()
+                self.isShowingConsequence = false
             }
         }
     }
@@ -108,17 +104,13 @@ class GameplayViewModel {
             indicators.applyConsequence(event.consequence2)
             lastChosenOption = "choice2"
         
-            withAnimation {
-                self.isShowingConsequence = true
-            }
+            self.isShowingConsequence = true
             
             // Show next event after 6 seconds
-            Task {
+            Task { @MainActor in
                 try await Task.sleep(nanoseconds: 6_000_000_000)
-                withAnimation {
-                    self.goToNextEvent()
-                    self.isShowingConsequence = false
-                }
+                self.goToNextEvent()
+                self.isShowingConsequence = false
             }
         }
     }
