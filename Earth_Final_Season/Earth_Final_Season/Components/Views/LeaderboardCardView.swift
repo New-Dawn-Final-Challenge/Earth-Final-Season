@@ -40,6 +40,9 @@ struct LeaderboardCardView: View {
                         Circle()
                             .foregroundStyle(Color(UIColor.systemCyan))
                             .frame(width: getWidth() * 0.14)
+                            .overlay(
+                                Text("1st")
+                            )
                         
                         Spacer()
                     }
