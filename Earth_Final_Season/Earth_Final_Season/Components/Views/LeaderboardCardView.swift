@@ -32,6 +32,21 @@ struct LeaderboardCardView: View {
                     Spacer()
                 }
                 .padding()
+                .padding(.leading, 30)
+            )
+            .overlay(
+                HStack {
+                    VStack {
+                        Circle()
+                            .foregroundStyle(Color(UIColor.systemCyan))
+                            .frame(width: getWidth() * 0.14)
+                        
+                        Spacer()
+                    }
+                    .padding(-16)
+                    
+                    Spacer()
+                }
             )
     }
 }
