@@ -9,17 +9,25 @@ import SwiftUI
 
 struct LeaderboardView: View {
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("Your Record")
-                .font(.title2.bold())
-
-            LeaderboardCardView()
-            
-            Text("Leaderboard")
-                .font(.title2.bold())
+        ScrollView {
+            VStack(alignment: .leading, spacing: 30) {
+                Text("Your Record")
+                    .font(.title2.bold())
+                
+                LeaderboardCardView()
+                
+                Text("Global Records")
+                    .font(.title2.bold())
+                
+                ForEach(0..<6, id: \.self) { _ in
+                    LeaderboardCardView()
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .navigationTitle("Leaderboard")
         }
-        .padding()
-        .navigationTitle("Leaderboard")
     }
 }
 
