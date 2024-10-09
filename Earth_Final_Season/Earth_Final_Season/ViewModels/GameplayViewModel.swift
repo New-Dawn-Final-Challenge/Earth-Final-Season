@@ -11,6 +11,7 @@ import SwiftUI
 @Observable
 class GameplayViewModel {
     var isGameOver = false
+    var gameOverReason = ""
     var isShowingConsequence = false
     var lastChosenOption = "choice1"
     var currentPosition: CGSize = .zero
@@ -42,11 +43,39 @@ class GameplayViewModel {
     }
     
     private func checkForGameOver() {
-        if indicators.audience <= 3 ||
-           indicators.illBeing <= 0 || indicators.illBeing >= 12 ||
-           indicators.socioPoliticalInstability <= 0 || indicators.socioPoliticalInstability >= 12 ||
-           indicators.environmentalDegradation <= 0 || indicators.environmentalDegradation >= 12 {
+        if  indicators.audience <= 3 ||
+            indicators.illBeing >= 12 ||
+            indicators.socioPoliticalInstability >= 12 ||
+            indicators.environmentalDegradation >= 12 {
             isGameOver = true
+            checkForGameOverReason()
+        }
+    }
+    
+    private func checkForGameOverReason() {
+        if indicators.audience <= 3 {
+            gameOverReason = "audience"
+            return
+        }
+        
+        checkHighestIndicator()
+    }
+    
+    private func checkHighestIndicator() {
+        var highest = 12
+        
+        for val in [indicators.environmentalDegradation, indicators.illBeing, indicators.socioPoliticalInstability] {
+            if val >= highest {
+                highest = val
+            }
+        }
+        
+        if indicators.environmentalDegradation == highest {
+            gameOverReason = "environmentalDegradation"
+        } else if indicators.illBeing == highest {
+            gameOverReason = "illBeing"
+        } else if indicators.socioPoliticalInstability == highest {
+            gameOverReason = "socioPoliticalInstability"
         }
     }
 
