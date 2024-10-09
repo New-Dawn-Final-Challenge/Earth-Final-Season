@@ -14,7 +14,7 @@ struct Earth_Final_SeasonApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                GameplayView(viewModel: gameplayViewModel)
+                MenuView()
             }
             .task {
                 SoundtrackAudioManager.shared.playSound(named: "lowtoneST")
