@@ -95,19 +95,23 @@ class GameplayViewModel {
             lastChosenOption = "choice1"
             self.isShowingConsequence = true
             
-            animateIndicatorsChange()
+            withAnimation(Animation.linear(duration: 1).repeatCount(3)) {
+                animateIndicatorsChange()
+            }
             // Show next event after 6 seconds
             Task { @MainActor in
                 try await Task.sleep(nanoseconds: 6_000_000_000)
                 self.goToNextEvent()
                 self.isShowingConsequence = false
                 
-                self.sociopoliticalInstabilityDecreaseShadowRadius = 0
-                self.sociopoliticalInstabilityIncreaseShadowRadius = 0
-                self.illBeingDecreaseShadowRadius = 0
-                self.illBeingIncreaseShadowRadius = 0
-                self.environmentalDegradationDecreaseShadowRadius = 0
-                self.environmentalDegradationIncreaseShadowRadius = 0
+                withAnimation {
+                    self.sociopoliticalInstabilityDecreaseShadowRadius = 0
+                    self.sociopoliticalInstabilityIncreaseShadowRadius = 0
+                    self.illBeingDecreaseShadowRadius = 0
+                    self.illBeingIncreaseShadowRadius = 0
+                    self.environmentalDegradationDecreaseShadowRadius = 0
+                    self.environmentalDegradationIncreaseShadowRadius = 0
+                }
             }
         }
     }
@@ -118,19 +122,24 @@ class GameplayViewModel {
             lastChosenOption = "choice2"
             self.isShowingConsequence = true
             
-            animateIndicatorsChange()
+            withAnimation(Animation.linear(duration: 1).repeatCount(3)) {
+                animateIndicatorsChange()
+            }
+
             // Show next event after 6 seconds
             Task { @MainActor in
                 try await Task.sleep(nanoseconds: 6_000_000_000)
                 self.goToNextEvent()
                 self.isShowingConsequence = false
                 
-                self.sociopoliticalInstabilityDecreaseShadowRadius = 0
-                self.sociopoliticalInstabilityIncreaseShadowRadius = 0
-                self.illBeingDecreaseShadowRadius = 0
-                self.illBeingIncreaseShadowRadius = 0
-                self.environmentalDegradationDecreaseShadowRadius = 0
-                self.environmentalDegradationIncreaseShadowRadius = 0
+                withAnimation {
+                    self.sociopoliticalInstabilityDecreaseShadowRadius = 0
+                    self.sociopoliticalInstabilityIncreaseShadowRadius = 0
+                    self.illBeingDecreaseShadowRadius = 0
+                    self.illBeingIncreaseShadowRadius = 0
+                    self.environmentalDegradationDecreaseShadowRadius = 0
+                    self.environmentalDegradationIncreaseShadowRadius = 0
+                }
             }
         }
     }
@@ -139,41 +148,41 @@ class GameplayViewModel {
         if let event = currentEvent {
             if lastChosenOption == "choice1" {
                 if event.environmentalDegradation1 > 0 {
-                    environmentalDegradationIncreaseShadowRadius = 10
+                    environmentalDegradationIncreaseShadowRadius = 7
                 } else if event.environmentalDegradation1 < 0 {
-                    environmentalDegradationDecreaseShadowRadius = 10
+                    environmentalDegradationDecreaseShadowRadius = 7
                 }
                 
                 if event.illBeing1 > 0 {
-                    illBeingIncreaseShadowRadius = 10
+                    illBeingIncreaseShadowRadius = 7
                 } else if event.illBeing1 < 0 {
-                    illBeingDecreaseShadowRadius = 10
+                    illBeingDecreaseShadowRadius = 7
                 }
                 
                 if event.socioPoliticalInstability1 > 0 {
-                    sociopoliticalInstabilityIncreaseShadowRadius = 10
+                    sociopoliticalInstabilityIncreaseShadowRadius = 7
                 } else if event.socioPoliticalInstability1 < 0 {
-                    sociopoliticalInstabilityDecreaseShadowRadius = 10
+                    sociopoliticalInstabilityDecreaseShadowRadius = 7
                 }
             }
             
             else if lastChosenOption == "choice2" {
                 if event.environmentalDegradation2 > 0 {
-                    environmentalDegradationIncreaseShadowRadius = 10
+                    environmentalDegradationIncreaseShadowRadius = 7
                 } else if event.environmentalDegradation2 < 0 {
-                    environmentalDegradationDecreaseShadowRadius = 10
+                    environmentalDegradationDecreaseShadowRadius = 7
                 }
                 
                 if event.illBeing2 > 0 {
-                    illBeingIncreaseShadowRadius = 10
+                    illBeingIncreaseShadowRadius = 7
                 } else if event.illBeing2 < 0 {
-                    illBeingDecreaseShadowRadius = 10
+                    illBeingDecreaseShadowRadius = 7
                 }
                 
                 if event.socioPoliticalInstability2 > 0 {
-                    sociopoliticalInstabilityIncreaseShadowRadius = 10
+                    sociopoliticalInstabilityIncreaseShadowRadius = 7
                 } else if event.socioPoliticalInstability2 < 0 {
-                    sociopoliticalInstabilityDecreaseShadowRadius = 10
+                    sociopoliticalInstabilityDecreaseShadowRadius = 7
                 }
             }
         }
