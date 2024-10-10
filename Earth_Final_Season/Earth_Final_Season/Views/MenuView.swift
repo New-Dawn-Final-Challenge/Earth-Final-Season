@@ -30,8 +30,8 @@ struct MenuView: View {
                         .cornerRadius(10)
                 }
                 
-                NavigationLink(destination: RankingView()) {
-                    Text("Ranking")
+                NavigationLink(destination: LeaderboardView()) {
+                    Text("Leaderboard")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))
                         .foregroundColor(.black)
