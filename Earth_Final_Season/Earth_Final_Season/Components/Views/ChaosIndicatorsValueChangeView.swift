@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChaosIndicatorsValueChangeView: View {
+    @State var scaleChange: CGFloat = 0
     @State var shouldShowIndicator: Bool = false
     @State var valueIsIncreasing: Bool = false
     @State var value: Int = 0
@@ -23,8 +24,11 @@ struct ChaosIndicatorsValueChangeView: View {
         }
         .foregroundStyle(valueIsIncreasing ? .orange : .cyan)
         .opacity(shouldShowIndicator ? 1 : 0)
+        .scaleEffect(scaleChange, anchor: .bottom)
         .onChange(of: viewModel.isShowingConsequence) {
-            getIndicatorValue()
+            withAnimation(Animation.linear(duration: 1)) {
+                getIndicatorValue()
+            }
         }
     }
 
@@ -32,6 +36,7 @@ struct ChaosIndicatorsValueChangeView: View {
         // stopped showing consequence: stop showing indicator and reset value
         if viewModel.isShowingConsequence == false {
             value = 0
+            scaleChange = 0
             shouldShowIndicator = false
             return
         }
@@ -119,6 +124,8 @@ struct ChaosIndicatorsValueChangeView: View {
                 shouldShowIndicator = true
             }
         }
+        
+        scaleChange = 1
     }
 }
 

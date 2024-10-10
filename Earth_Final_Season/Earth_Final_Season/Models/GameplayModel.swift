@@ -28,7 +28,7 @@ struct Event: EventService, Codable {
         return Consequence(illBeing: illBeing1, socioPoliticalInstability: socioPoliticalInstability1, environmentalDegradation: environmentalDegradation1, description: description)
     }
     var consequence2: Consequence {
-        return Consequence(illBeing: illBeing1, socioPoliticalInstability: socioPoliticalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
+        return Consequence(illBeing: illBeing2, socioPoliticalInstability: socioPoliticalInstability2, environmentalDegradation: environmentalDegradation2, description: description)
     }
 }
 

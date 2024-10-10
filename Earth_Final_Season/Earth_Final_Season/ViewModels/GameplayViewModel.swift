@@ -95,7 +95,7 @@ class GameplayViewModel {
             lastChosenOption = "choice1"
             self.isShowingConsequence = true
             
-            withAnimation(Animation.linear(duration: 1).repeatCount(3)) {
+            withAnimation(Animation.linear(duration: 1)) {
                 animateIndicatorsChange()
             }
             // Show next event after 6 seconds
@@ -122,7 +122,7 @@ class GameplayViewModel {
             lastChosenOption = "choice2"
             self.isShowingConsequence = true
             
-            withAnimation(Animation.linear(duration: 1).repeatCount(3)) {
+            withAnimation(Animation.linear(duration: 1)) {
                 animateIndicatorsChange()
             }
 

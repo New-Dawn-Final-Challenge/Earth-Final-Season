@@ -64,29 +64,27 @@ struct SliderView: View {
                                 }
                             }
                             .onEnded { _ in
-                                withAnimation {
-                                    // Option 1 chosen
-                                    if finalOffsetX == leftLimit {
-                                        complexSuccess()
-                                        onChooseOption1()
-                                        mainScreenShadowRadius = 12
-                                    }
-
-                                    // Option 2 chosen
-                                    else if finalOffsetX == rightLimit {
-                                        complexSuccess()
-                                        onChooseOption2()
-                                        mainScreenShadowRadius = 12
-                                    }
-
-                                    resetIndicatorsShadows()
-                                    
-                                    // Reset position and shadows
-                                    dragOffset = .zero
-                                    mainScreenShadowRadius = 0
-                                    option1ShadowRadius = 0
-                                    option2ShadowRadius = 0
+                                // Option 1 chosen
+                                if finalOffsetX == leftLimit {
+                                    complexSuccess()
+                                    onChooseOption1()
+                                    mainScreenShadowRadius = 12
                                 }
+
+                                // Option 2 chosen
+                                else if finalOffsetX == rightLimit {
+                                    complexSuccess()
+                                    onChooseOption2()
+                                    mainScreenShadowRadius = 12
+                                }
+
+                                resetIndicatorsShadows()
+                                
+                                // Reset position and shadows
+                                dragOffset = .zero
+                                mainScreenShadowRadius = 0
+                                option1ShadowRadius = 0
+                                option2ShadowRadius = 0
                             }
                     )
             )
