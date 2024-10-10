@@ -65,11 +65,11 @@ struct GameplayView: View {
         HStack {
             Spacer()
             
-            NavigationLink(destination: MenuView()) {
+            NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
                 HelpButtonView()
             }
             
-            NavigationLink(destination: MenuView()) {
+            NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
                 ConfigurationButtonView()
             }
         }

@@ -64,9 +64,11 @@ class GameplayViewModel {
     private func checkHighestIndicator() {
         var highest = 12
         
-        for val in [indicators.environmentalDegradation, indicators.illBeing, indicators.socioPoliticalInstability] {
-            if val >= highest {
-                highest = val
+        for value in [indicators.environmentalDegradation,
+                      indicators.illBeing,
+                      indicators.socioPoliticalInstability] {
+            if value >= highest {
+                highest = value
             }
         }
         
