@@ -64,31 +64,32 @@ struct SliderView: View {
                                 }
                             }
                             .onEnded { _ in
-                                // Option 1 chosen
-                                if finalOffsetX == leftLimit {
-                                    complexSuccess()
-                                    onChooseOption1()
-                                    mainScreenShadowRadius = 12
-                                }
+                                withAnimation {
+                                    // Option 1 chosen
+                                    if finalOffsetX == leftLimit {
+                                        HapticsManager.shared.complexSuccess()
+                                        onChooseOption1()
+                                        mainScreenShadowRadius = 12
+                                    }
 
-                                // Option 2 chosen
-                                else if finalOffsetX == rightLimit {
-                                    complexSuccess()
-                                    onChooseOption2()
-                                    mainScreenShadowRadius = 12
-                                }
+                                    // Option 2 chosen
+                                    else if finalOffsetX == rightLimit {
+                                        HapticsManager.shared.complexSuccess()
+                                        onChooseOption2()
+                                        mainScreenShadowRadius = 12
+                                    }
 
-                                resetIndicatorsShadows()
-                                
-                                // Reset position and shadows
-                                dragOffset = .zero
-                                mainScreenShadowRadius = 0
-                                option1ShadowRadius = 0
-                                option2ShadowRadius = 0
+                                    // Reset position and shadows
+                                    resetIndicatorsShadows()
+                                    dragOffset = .zero
+                                    mainScreenShadowRadius = 0
+                                    option1ShadowRadius = 0
+                                    option2ShadowRadius = 0
+                                }
                             }
                     )
             )
-            .sensoryFeedback(.impact(weight: .medium, intensity: 0.28), trigger: feedbackTrigger)
+            .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity)*0.28), trigger: feedbackTrigger)
     }
     
     private func checkFirstOptionIndicators() {

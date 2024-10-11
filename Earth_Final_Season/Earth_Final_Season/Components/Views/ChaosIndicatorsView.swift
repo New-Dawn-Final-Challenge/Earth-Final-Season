@@ -37,28 +37,28 @@ struct ChaosIndicatorsView: View {
                         .shadow(color: Color.purple, radius: CGFloat(viewModel.environmentalDegradationShadowRadius))
                 }
 
-                // Sociopolitical Instability indicator with overlay
+                // Ill-being indicator with overlay
                 VStack {
                     ChaosIndicatorsValueChangeView(viewModel: $viewModel, indicator: "illBeing")
                         .frame(height: getHeight() * 0.01)
-                    indicatorView(for: socioPoliticalInstability, image: "person.fill")
+                    indicatorView(for: illBeing, image: "person.fill")
                         .overlay(
-                            overlayView(for: socioPoliticalInstability)
-                                .mask(indicatorView(for: socioPoliticalInstability, image: "person.fill"))
+                            overlayView(for: illBeing)
+                                .mask(indicatorView(for: illBeing, image: "person.fill"))
                         )
                         .shadow(color: Color.cyan, radius: CGFloat(viewModel.illBeingDecreaseShadowRadius))
                         .shadow(color: Color.orange, radius: CGFloat(viewModel.illBeingIncreaseShadowRadius))
                         .shadow(color: Color.purple, radius: CGFloat(viewModel.illBeingShadowRadius))
                 }
 
-                // Ill-Being indicator with overlay
+                // Sociopolitical Instability with overlay
                 VStack {
                     ChaosIndicatorsValueChangeView(viewModel: $viewModel, indicator: "sociopoliticalInstability")
                         .frame(height: getHeight() * 0.01)
-                    indicatorView(for: illBeing, image: "building.2.crop.circle.fill")
+                    indicatorView(for: socioPoliticalInstability, image: "building.2.crop.circle.fill")
                         .overlay(
-                            overlayView(for: illBeing)
-                                .mask(indicatorView(for: illBeing, image: "building.2.crop.circle.fill"))
+                            overlayView(for: socioPoliticalInstability)
+                                .mask(indicatorView(for: socioPoliticalInstability, image: "building.2.crop.circle.fill"))
                         )
                         .shadow(color: Color.cyan, radius: CGFloat(viewModel.sociopoliticalInstabilityDecreaseShadowRadius))
                         .shadow(color: Color.orange, radius: CGFloat(viewModel.sociopoliticalInstabilityIncreaseShadowRadius))
