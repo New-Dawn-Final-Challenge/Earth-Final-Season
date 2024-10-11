@@ -8,8 +8,10 @@
 import Foundation
 import SwiftUI
 
-@Observable @MainActor
+@Observable
 class GameplayViewModel {
+    var countdown = 6
+    var timer: Timer?
     var environmentalDegradationDecreaseShadowRadius = 0
     var environmentalDegradationIncreaseShadowRadius = 0
     var environmentalDegradationShadowRadius = 0
@@ -90,7 +92,6 @@ class GameplayViewModel {
     
     func chooseOption1() {
         if let event = currentEvent {
-//            event.applyConsequence(consequence: event.consequenceDescription1)
             indicators.applyConsequence(event.consequence1)
             lastChosenOption = "choice1"
             self.isShowingConsequence = true
@@ -98,24 +99,31 @@ class GameplayViewModel {
             withAnimation(Animation.linear(duration: 1)) {
                 animateIndicatorsChange()
             }
-            // Show next event after 6 seconds
-            Task { @MainActor in
-                try await Task.sleep(nanoseconds: 6_000_000_000)
-                self.goToNextEvent()
-                self.isShowingConsequence = false
-                
-                withAnimation {
-                    self.sociopoliticalInstabilityDecreaseShadowRadius = 0
-                    self.sociopoliticalInstabilityIncreaseShadowRadius = 0
-                    self.illBeingDecreaseShadowRadius = 0
-                    self.illBeingIncreaseShadowRadius = 0
-                    self.environmentalDegradationDecreaseShadowRadius = 0
-                    self.environmentalDegradationIncreaseShadowRadius = 0
+
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if self.countdown > 0 {
+                    self.countdown -= 1
+                } else {
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    self.countdown = 6
+
+                    self.goToNextEvent()
+                    self.isShowingConsequence = false
+
+                    withAnimation {
+                        self.sociopoliticalInstabilityDecreaseShadowRadius = 0
+                        self.sociopoliticalInstabilityIncreaseShadowRadius = 0
+                        self.illBeingDecreaseShadowRadius = 0
+                        self.illBeingIncreaseShadowRadius = 0
+                        self.environmentalDegradationDecreaseShadowRadius = 0
+                        self.environmentalDegradationIncreaseShadowRadius = 0
+                    }
                 }
             }
         }
     }
-    
+
     func chooseOption2() {
         if let event = currentEvent {
             indicators.applyConsequence(event.consequence2)
@@ -126,19 +134,25 @@ class GameplayViewModel {
                 animateIndicatorsChange()
             }
 
-            // Show next event after 6 seconds
-            Task { @MainActor in
-                try await Task.sleep(nanoseconds: 6_000_000_000)
-                self.goToNextEvent()
-                self.isShowingConsequence = false
-                
-                withAnimation {
-                    self.sociopoliticalInstabilityDecreaseShadowRadius = 0
-                    self.sociopoliticalInstabilityIncreaseShadowRadius = 0
-                    self.illBeingDecreaseShadowRadius = 0
-                    self.illBeingIncreaseShadowRadius = 0
-                    self.environmentalDegradationDecreaseShadowRadius = 0
-                    self.environmentalDegradationIncreaseShadowRadius = 0
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if self.countdown > 0 {
+                    self.countdown -= 1
+                } else {
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    self.countdown = 6
+
+                    self.goToNextEvent()
+                    self.isShowingConsequence = false
+
+                    withAnimation {
+                        self.sociopoliticalInstabilityDecreaseShadowRadius = 0
+                        self.sociopoliticalInstabilityIncreaseShadowRadius = 0
+                        self.illBeingDecreaseShadowRadius = 0
+                        self.illBeingIncreaseShadowRadius = 0
+                        self.environmentalDegradationDecreaseShadowRadius = 0
+                        self.environmentalDegradationIncreaseShadowRadius = 0
+                    }
                 }
             }
         }
@@ -187,7 +201,7 @@ class GameplayViewModel {
             }
         }
     }
-    
+
     func resetGame() {
         indicators = Indicators(audience: 5, illBeing: 6, socioPoliticalInstability: 6, environmentalDegradation: 6, currentYear: 0)
         isGameOver = false
