@@ -23,15 +23,15 @@ struct MenuView: View {
                 
                 // Navigation buttons
                 NavigationLink(destination: GameplayView(viewModel: $gameplayViewModel, configViewModel: $configViewModel)) {
-                    Text("Jogar")
+                    Text("Play")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))
                         .foregroundColor(.black)
                         .cornerRadius(10)
                 }
                 
-                NavigationLink(destination: RankingView()) {
-                    Text("Ranking")
+                NavigationLink(destination: LeaderboardView()) {
+                    Text("Leaderboard")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))
                         .foregroundColor(.black)
@@ -39,7 +39,7 @@ struct MenuView: View {
                 }
                 
                 NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
-                    Text("Configurações")
+                    Text("Settings")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))
                         .foregroundColor(.black)
@@ -47,7 +47,7 @@ struct MenuView: View {
                 }
                 
                 NavigationLink(destination: AboutUsView()) {
-                    Text("Sobre nós")
+                    Text("About Us")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))
                         .foregroundColor(.black)

@@ -11,7 +11,7 @@ struct GameOverView: View {
     @Binding var gameplayViewModel: GameplayViewModel
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             Text("Game Over")
                 .font(.largeTitle)
                 .padding()
@@ -19,6 +19,7 @@ struct GameOverView: View {
             Text("Game over reason was '\(gameplayViewModel.gameOverReason)'.")
                 .font(.title)
                 .padding()
+                .multilineTextAlignment(.center)
 
             Button("Restart") {
                 gameplayViewModel.resetGame()
