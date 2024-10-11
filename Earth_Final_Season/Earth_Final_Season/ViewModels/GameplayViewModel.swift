@@ -162,50 +162,6 @@ class GameplayViewModel {
             }
         }
     }
-    
-    func animateIndicatorsChange() {
-        if let event = currentEvent {
-            if lastChosenOption == "choice1" {
-                if event.environmentalDegradation1 > 0 {
-                    environmentalDegradationIncreaseShadowRadius = 7
-                } else if event.environmentalDegradation1 < 0 {
-                    environmentalDegradationDecreaseShadowRadius = 7
-                }
-                
-                if event.illBeing1 > 0 {
-                    illBeingIncreaseShadowRadius = 7
-                } else if event.illBeing1 < 0 {
-                    illBeingDecreaseShadowRadius = 7
-                }
-                
-                if event.socioPoliticalInstability1 > 0 {
-                    sociopoliticalInstabilityIncreaseShadowRadius = 7
-                } else if event.socioPoliticalInstability1 < 0 {
-                    sociopoliticalInstabilityDecreaseShadowRadius = 7
-                }
-            }
-            
-            else if lastChosenOption == "choice2" {
-                if event.environmentalDegradation2 > 0 {
-                    environmentalDegradationIncreaseShadowRadius = 7
-                } else if event.environmentalDegradation2 < 0 {
-                    environmentalDegradationDecreaseShadowRadius = 7
-                }
-                
-                if event.illBeing2 > 0 {
-                    illBeingIncreaseShadowRadius = 7
-                } else if event.illBeing2 < 0 {
-                    illBeingDecreaseShadowRadius = 7
-                }
-                
-                if event.socioPoliticalInstability2 > 0 {
-                    sociopoliticalInstabilityIncreaseShadowRadius = 7
-                } else if event.socioPoliticalInstability2 < 0 {
-                    sociopoliticalInstabilityDecreaseShadowRadius = 7
-                }
-            }
-        }
-    }
 
     func resetGame() {
         indicators = Indicators(audience: 5, illBeing: 6, socioPoliticalInstability: 6, environmentalDegradation: 6, currentYear: 0)
