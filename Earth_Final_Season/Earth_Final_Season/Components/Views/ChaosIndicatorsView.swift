@@ -71,6 +71,66 @@ struct ChaosIndicatorsView: View {
             RoundedRectangle(cornerRadius: 16)
                 .foregroundStyle(Color(UIColor.systemGray4))
         )
+        .onChange(of: viewModel.isShowingConsequence) {
+            withAnimation(Animation.linear(duration: 1)) {
+                animateIndicatorsChange()
+            }
+        }
+    }
+    
+    func animateIndicatorsChange() {
+        // stopped showing consequence: stop showing indicator and reset value
+        if viewModel.isShowingConsequence == false {
+            viewModel.sociopoliticalInstabilityDecreaseShadowRadius = 0
+            viewModel.sociopoliticalInstabilityIncreaseShadowRadius = 0
+            viewModel.illBeingDecreaseShadowRadius = 0
+            viewModel.illBeingIncreaseShadowRadius = 0
+            viewModel.environmentalDegradationDecreaseShadowRadius = 0
+            viewModel.environmentalDegradationIncreaseShadowRadius = 0
+            return
+        }
+        
+        if let event = viewModel.currentEvent {
+            if viewModel.lastChosenOption == "choice1" {
+                if event.environmentalDegradation1 > 0 {
+                    viewModel.environmentalDegradationIncreaseShadowRadius = 7
+                } else if event.environmentalDegradation1 < 0 {
+                    viewModel.environmentalDegradationDecreaseShadowRadius = 7
+                }
+                
+                if event.illBeing1 > 0 {
+                    viewModel.illBeingIncreaseShadowRadius = 7
+                } else if event.illBeing1 < 0 {
+                    viewModel.illBeingDecreaseShadowRadius = 7
+                }
+                
+                if event.socioPoliticalInstability1 > 0 {
+                    viewModel.sociopoliticalInstabilityIncreaseShadowRadius = 7
+                } else if event.socioPoliticalInstability1 < 0 {
+                    viewModel.sociopoliticalInstabilityDecreaseShadowRadius = 7
+                }
+            }
+            
+            else if viewModel.lastChosenOption == "choice2" {
+                if event.environmentalDegradation2 > 0 {
+                    viewModel.environmentalDegradationIncreaseShadowRadius = 7
+                } else if event.environmentalDegradation2 < 0 {
+                    viewModel.environmentalDegradationDecreaseShadowRadius = 7
+                }
+                
+                if event.illBeing2 > 0 {
+                    viewModel.illBeingIncreaseShadowRadius = 7
+                } else if event.illBeing2 < 0 {
+                    viewModel.illBeingDecreaseShadowRadius = 7
+                }
+                
+                if event.socioPoliticalInstability2 > 0 {
+                    viewModel.sociopoliticalInstabilityIncreaseShadowRadius = 7
+                } else if event.socioPoliticalInstability2 < 0 {
+                    viewModel.sociopoliticalInstabilityDecreaseShadowRadius = 7
+                }
+            }
+        }
     }
     
     // Overlay view to show the indicator's value

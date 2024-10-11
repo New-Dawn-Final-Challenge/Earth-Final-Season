@@ -95,10 +95,6 @@ class GameplayViewModel {
             indicators.applyConsequence(event.consequence1)
             lastChosenOption = "choice1"
             self.isShowingConsequence = true
-            
-            withAnimation(Animation.linear(duration: 1)) {
-                animateIndicatorsChange()
-            }
 
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if self.countdown > 0 {
@@ -110,15 +106,6 @@ class GameplayViewModel {
 
                     self.goToNextEvent()
                     self.isShowingConsequence = false
-
-                    withAnimation {
-                        self.sociopoliticalInstabilityDecreaseShadowRadius = 0
-                        self.sociopoliticalInstabilityIncreaseShadowRadius = 0
-                        self.illBeingDecreaseShadowRadius = 0
-                        self.illBeingIncreaseShadowRadius = 0
-                        self.environmentalDegradationDecreaseShadowRadius = 0
-                        self.environmentalDegradationIncreaseShadowRadius = 0
-                    }
                 }
             }
         }
@@ -129,10 +116,6 @@ class GameplayViewModel {
             indicators.applyConsequence(event.consequence2)
             lastChosenOption = "choice2"
             self.isShowingConsequence = true
-            
-            withAnimation(Animation.linear(duration: 1)) {
-                animateIndicatorsChange()
-            }
 
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if self.countdown > 0 {
@@ -144,15 +127,6 @@ class GameplayViewModel {
 
                     self.goToNextEvent()
                     self.isShowingConsequence = false
-
-                    withAnimation {
-                        self.sociopoliticalInstabilityDecreaseShadowRadius = 0
-                        self.sociopoliticalInstabilityIncreaseShadowRadius = 0
-                        self.illBeingDecreaseShadowRadius = 0
-                        self.illBeingIncreaseShadowRadius = 0
-                        self.environmentalDegradationDecreaseShadowRadius = 0
-                        self.environmentalDegradationIncreaseShadowRadius = 0
-                    }
                 }
             }
         }
