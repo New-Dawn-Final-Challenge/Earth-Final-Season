@@ -9,6 +9,7 @@ import SwiftUI
 struct EventView: View {
     @Binding var mainScreenShadowRadius: Int
     @Binding var viewModel: GameplayViewModel
+    @Binding var engine: GameEngine
     @State var textToShow: String = ""
     
     let eventDescription: String
@@ -29,12 +30,12 @@ struct EventView: View {
                     .padding()
             )
             .onAppear(perform: updateText)
-            .onChange(of: viewModel.isShowingConsequence, updateText)
+            .onChange(of: engine.state, updateText)
     }
 
     func updateText() {
-        if viewModel.isShowingConsequence {
-            if viewModel.lastChosenOption == "choice1" {
+        if engine.state == .consequence {
+            if engine.lastChosenOption == "choice1" {
                 withAnimation {
                     textToShow = consequence1
                 }

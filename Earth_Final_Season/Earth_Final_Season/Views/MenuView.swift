@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MenuView: View {
     @State var gameplayViewModel = GameplayViewModel()
+    @State var engine = GameEngine()
     @State var configViewModel = ConfigurationsViewModel()
     
     var body: some View {
@@ -22,7 +23,7 @@ struct MenuView: View {
                     .cornerRadius(10)
                 
                 // Navigation buttons
-                NavigationLink(destination: GameplayView(viewModel: $gameplayViewModel, configViewModel: $configViewModel)) {
+                NavigationLink(destination: GameplayView(engine: $engine ,viewModel: $gameplayViewModel, configViewModel: $configViewModel)) {
                     Text("Play")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))

@@ -11,6 +11,7 @@ struct SliderView: View {
     @Binding var mainScreenShadowRadius: Int
     @Binding var option1ShadowRadius: Int
     @Binding var option2ShadowRadius: Int
+    @Binding var engine: GameEngine
     @Binding var viewModel: GameplayViewModel
     
     var onChooseOption1: () -> Void
@@ -39,7 +40,7 @@ struct SliderView: View {
                         DragGesture()
                             .onChanged { gesture in
                                 
-                                if !viewModel.isShowingConsequence {
+                                if !(engine.state == .consequence) {
                                     // Calculate the new drag offset within the limits
                                     finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
                                     dragOffset = CGSize(width: finalOffsetX, height: 0)
@@ -67,7 +68,7 @@ struct SliderView: View {
                                 }
                             }
                             .onEnded { _ in
-                                if !viewModel.isShowingConsequence {
+                                if !(engine.state == .consequence) {
                                     withAnimation {
                                         // Option 1 chosen
                                         if finalOffsetX == leftLimit {
@@ -98,29 +99,29 @@ struct SliderView: View {
     }
     
     private func checkFirstOptionIndicators() {
-        if viewModel.currentEvent?.environmentalDegradation1 != 0 {
+        if engine.currentEvent?.environmentalDegradation1 != 0 {
             viewModel.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if viewModel.currentEvent?.illBeing1 != 0 {
+        if engine.currentEvent?.illBeing1 != 0 {
             viewModel.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if viewModel.currentEvent?.socioPoliticalInstability1 != 0 {
+        if engine.currentEvent?.socioPoliticalInstability1 != 0 {
             viewModel.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
         }
     }
     
     private func checkSecondOptionIndicators() {
-        if viewModel.currentEvent?.environmentalDegradation2 != 0 {
+        if engine.currentEvent?.environmentalDegradation2 != 0 {
             viewModel.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if viewModel.currentEvent?.illBeing2 != 0 {
+        if engine.currentEvent?.illBeing2 != 0 {
             viewModel.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if viewModel.currentEvent?.socioPoliticalInstability2 != 0 {
+        if engine.currentEvent?.socioPoliticalInstability2 != 0 {
             viewModel.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
         }
     }

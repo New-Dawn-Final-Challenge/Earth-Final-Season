@@ -13,6 +13,7 @@ struct ChaosIndicatorsView: View {
     let environmentalDegradation: Int
     let year: String
     
+    @Binding var engine: GameEngine
     @Binding var viewModel: GameplayViewModel
     
     var body: some View {
@@ -25,7 +26,7 @@ struct ChaosIndicatorsView: View {
             HStack(spacing: getWidth() * 0.1) {
                 // Environmental Degradation indicator with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(viewModel: $viewModel, indicator: "environmentalDegradation")
+                    ChaosIndicatorsValueChangeView(engine: $engine, viewModel: $viewModel, indicator: "environmentalDegradation")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     indicatorView(for: environmentalDegradation, image: "leaf.fill")
                         .overlay(
@@ -39,7 +40,7 @@ struct ChaosIndicatorsView: View {
 
                 // Ill-being indicator with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(viewModel: $viewModel, indicator: "illBeing")
+                    ChaosIndicatorsValueChangeView(engine: $engine, viewModel: $viewModel, indicator: "illBeing")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     indicatorView(for: illBeing, image: "person.fill")
                         .overlay(
@@ -53,7 +54,7 @@ struct ChaosIndicatorsView: View {
 
                 // Sociopolitical Instability with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(viewModel: $viewModel, indicator: "sociopoliticalInstability")
+                    ChaosIndicatorsValueChangeView(engine: $engine, viewModel: $viewModel, indicator: "sociopoliticalInstability")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     indicatorView(for: socioPoliticalInstability, image: "building.2.crop.circle.fill")
                         .overlay(
@@ -71,8 +72,8 @@ struct ChaosIndicatorsView: View {
             RoundedRectangle(cornerRadius: 16)
                 .foregroundStyle(Color(UIColor.systemGray4))
         )
-        .onChange(of: viewModel.isShowingConsequence) {
-            if viewModel.isShowingConsequence {
+        .onChange(of: engine.state) {
+            if engine.state == .consequence {
                 withAnimation(Animation.linear(duration: 1).repeatCount(3, autoreverses: true)) {
                     animateIndicatorsChange()
                 }
@@ -86,7 +87,7 @@ struct ChaosIndicatorsView: View {
     
     func animateIndicatorsChange() {
         // stopped showing consequence: stop showing indicator and reset value
-        if viewModel.isShowingConsequence == false {
+        if !(engine.state == .consequence){
             viewModel.sociopoliticalInstabilityDecreaseShadowRadius = 0
             viewModel.sociopoliticalInstabilityIncreaseShadowRadius = 0
             viewModel.illBeingDecreaseShadowRadius = 0
@@ -96,8 +97,8 @@ struct ChaosIndicatorsView: View {
             return
         }
         
-        if let event = viewModel.currentEvent {
-            if viewModel.lastChosenOption == "choice1" {
+        if let event = engine.currentEvent {
+            if engine.lastChosenOption == "choice1" {
                 if event.environmentalDegradation1 > 0 {
                     viewModel.environmentalDegradationIncreaseShadowRadius = 7
                 } else if event.environmentalDegradation1 < 0 {
@@ -117,7 +118,7 @@ struct ChaosIndicatorsView: View {
                 }
             }
             
-            else if viewModel.lastChosenOption == "choice2" {
+            else if engine.lastChosenOption == "choice2" {
                 if event.environmentalDegradation2 > 0 {
                     viewModel.environmentalDegradationIncreaseShadowRadius = 7
                 } else if event.environmentalDegradation2 < 0 {

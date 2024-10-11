@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct GameplayView: View {
+    @Binding var engine: GameEngine
     @Binding var viewModel: GameplayViewModel
     @Binding var configViewModel: ConfigurationsViewModel
     @State private var gameOver = false
@@ -11,15 +12,12 @@ struct GameplayView: View {
             
             indicatorsView
             
-            if let event = viewModel.currentEvent {
+            if let event = engine.currentEvent {
 
                 // Change image to current image
                 CharacterView(characterImage: "image1", characterName: event.character)
                 
-                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius, viewModel: $viewModel,
-                          eventDescription: event.description,
-                          consequence1: event.consequenceDescription1,
-                          consequence2: event.consequenceDescription2
+                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius, viewModel: $viewModel, engine: $engine, eventDescription: event.description, consequence1: event.consequenceDescription1, consequence2: event.consequenceDescription2
                 )
 
                 VStack(spacing: -20) {
@@ -33,7 +31,7 @@ struct GameplayView: View {
                 }
                 .padding(.top, -15)
                 // Hide the choices to focus on the consequence
-                .opacity(viewModel.isShowingConsequence ? 0 : 1)
+                .opacity(engine.state == .consequence ? 0 : 1)
             } else {
                 Text("No more events")
                     .font(.title)
@@ -43,21 +41,21 @@ struct GameplayView: View {
             SliderView(
                 mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
                 option1ShadowRadius: $viewModel.option1ShadowRadius,
-                option2ShadowRadius: $viewModel.option2ShadowRadius,
+                option2ShadowRadius: $viewModel.option2ShadowRadius, engine: $engine,
                 viewModel: $viewModel,
                 onChooseOption1: {
-                    viewModel.chooseOption1()
+                    engine.chooseOption1()
                 },
                 onChooseOption2: {
-                    viewModel.chooseOption2()
+                    engine.chooseOption2()
                 }
             )
             
             Spacer()
         }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
-        .navigationDestination(isPresented: $viewModel.isGameOver) {
-            GameOverView(gameplayViewModel: $viewModel)
+        .navigationDestination(isPresented: $gameOver) {
+            GameOverView(engine: $engine)
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -79,14 +77,14 @@ struct GameplayView: View {
     
     private var indicatorsView: some View {
         HStack(alignment: .center, spacing: getWidth() * 0.05) {
-            AudienceIndicatorView(percentage: Int(viewModel.indicators.audience))
+            AudienceIndicatorView(percentage: Int(engine.indicators.audience))
                 .padding(.bottom)
 
             ChaosIndicatorsView(
-                illBeing: viewModel.indicators.illBeing,
-                socioPoliticalInstability: viewModel.indicators.socioPoliticalInstability,
-                environmentalDegradation: viewModel.indicators.environmentalDegradation,
-                year: String(viewModel.indicators.currentYear),
+                illBeing: engine.indicators.illBeing,
+                socioPoliticalInstability: engine.indicators.socioPoliticalInstability,
+                environmentalDegradation: engine.indicators.environmentalDegradation,
+                year: String(engine.indicators.currentYear), engine: $engine,
                 viewModel: $viewModel
             )
         }

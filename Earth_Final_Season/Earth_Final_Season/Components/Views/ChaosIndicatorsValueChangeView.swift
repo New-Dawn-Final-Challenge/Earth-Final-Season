@@ -13,6 +13,7 @@ struct ChaosIndicatorsValueChangeView: View {
     @State var valueIsIncreasing: Bool = false
     @State var value: Int = 0
     
+    @Binding var engine: GameEngine
     @Binding var viewModel: GameplayViewModel
     let indicator: String
     
@@ -25,7 +26,7 @@ struct ChaosIndicatorsValueChangeView: View {
         .foregroundStyle(valueIsIncreasing ? .orange : .cyan)
         .opacity(shouldShowIndicator ? 1 : 0)
         .scaleEffect(scaleChange, anchor: .bottom)
-        .onChange(of: viewModel.isShowingConsequence) {
+        .onChange(of: engine.state == .consequence) {
             withAnimation(Animation.linear(duration: 1)) {
                 getIndicatorValue()
             }
@@ -34,7 +35,7 @@ struct ChaosIndicatorsValueChangeView: View {
 
     private func getIndicatorValue() {
         // stopped showing consequence: stop showing indicator and reset value
-        if viewModel.isShowingConsequence == false {
+        if !(engine.state == .consequence) {
             value = 0
             scaleChange = 0
             shouldShowIndicator = false
@@ -42,85 +43,85 @@ struct ChaosIndicatorsValueChangeView: View {
         }
 
         if indicator == "illBeing" {
-            if viewModel.lastChosenOption == "choice1" &&
-               viewModel.currentEvent?.illBeing1 ?? 0 > 0 {
+            if engine.lastChosenOption == "choice1" &&
+                engine.currentEvent?.illBeing1 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = viewModel.currentEvent?.illBeing1 ?? 0
+                value = engine.currentEvent?.illBeing1 ?? 0
                 shouldShowIndicator = true
             }
-            else if viewModel.lastChosenOption == "choice1" &&
-               viewModel.currentEvent?.illBeing1 ?? 0 < 0 {
+            else if engine.lastChosenOption == "choice1" &&
+                        engine.currentEvent?.illBeing1 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = viewModel.currentEvent?.illBeing1 ?? 0
+                value = engine.currentEvent?.illBeing1 ?? 0
                 shouldShowIndicator = true
             }
             
-            if viewModel.lastChosenOption == "choice2" &&
-               viewModel.currentEvent?.illBeing2 ?? 0 > 0 {
+            if engine.lastChosenOption == "choice2" &&
+                engine.currentEvent?.illBeing2 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = viewModel.currentEvent?.illBeing2 ?? 0
+                value = engine.currentEvent?.illBeing2 ?? 0
                 shouldShowIndicator = true
             }
-            else if viewModel.lastChosenOption == "choice2" &&
-               viewModel.currentEvent?.illBeing2 ?? 0 < 0 {
+            else if engine.lastChosenOption == "choice2" &&
+                        engine.currentEvent?.illBeing2 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = viewModel.currentEvent?.illBeing2 ?? 0
+                value = engine.currentEvent?.illBeing2 ?? 0
                 shouldShowIndicator = true
             }
         }
         
         else if indicator == "environmentalDegradation" {
-            if viewModel.lastChosenOption == "choice1" &&
-               viewModel.currentEvent?.environmentalDegradation1 ?? 0 > 0 {
+            if engine.lastChosenOption == "choice1" &&
+                engine.currentEvent?.environmentalDegradation1 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = viewModel.currentEvent?.environmentalDegradation1 ?? 0
+                value = engine.currentEvent?.environmentalDegradation1 ?? 0
                 shouldShowIndicator = true
             }
-            else if viewModel.lastChosenOption == "choice1" &&
-                viewModel.currentEvent?.environmentalDegradation1 ?? 0 < 0 {
+            else if engine.lastChosenOption == "choice1" &&
+                        engine.currentEvent?.environmentalDegradation1 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = viewModel.currentEvent?.environmentalDegradation1 ?? 0
+                value = engine.currentEvent?.environmentalDegradation1 ?? 0
                 shouldShowIndicator = true
             }
 
-            if viewModel.lastChosenOption == "choice2" &&
-               viewModel.currentEvent?.environmentalDegradation2 ?? 0 > 0 {
+            if engine.lastChosenOption == "choice2" &&
+                engine.currentEvent?.environmentalDegradation2 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = viewModel.currentEvent?.environmentalDegradation2 ?? 0
+                value = engine.currentEvent?.environmentalDegradation2 ?? 0
                 shouldShowIndicator = true
             }
-            else if viewModel.lastChosenOption == "choice2" &&
-                viewModel.currentEvent?.environmentalDegradation2 ?? 0 < 0 {
+            else if engine.lastChosenOption == "choice2" &&
+                        engine.currentEvent?.environmentalDegradation2 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = viewModel.currentEvent?.environmentalDegradation2 ?? 0
+                value = engine.currentEvent?.environmentalDegradation2 ?? 0
                 shouldShowIndicator = true
             }
         }
         
         else if indicator == "sociopoliticalInstability" {
-            if viewModel.lastChosenOption == "choice1" &&
-               viewModel.currentEvent?.socioPoliticalInstability1 ?? 0 > 0 {
+            if engine.lastChosenOption == "choice1" &&
+                engine.currentEvent?.socioPoliticalInstability1 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = viewModel.currentEvent?.socioPoliticalInstability1 ?? 0
+                value = engine.currentEvent?.socioPoliticalInstability1 ?? 0
                 shouldShowIndicator = true
             }
-            else if viewModel.lastChosenOption == "choice1" &&
-                viewModel.currentEvent?.socioPoliticalInstability1 ?? 0 < 0 {
+            else if engine.lastChosenOption == "choice1" &&
+                        engine.currentEvent?.socioPoliticalInstability1 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = viewModel.currentEvent?.socioPoliticalInstability1 ?? 0
+                value = engine.currentEvent?.socioPoliticalInstability1 ?? 0
                 shouldShowIndicator = true
             }
             
-            if viewModel.lastChosenOption == "choice2" &&
-               viewModel.currentEvent?.socioPoliticalInstability2 ?? 0 > 0 {
+            if engine.lastChosenOption == "choice2" &&
+                engine.currentEvent?.socioPoliticalInstability2 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = viewModel.currentEvent?.socioPoliticalInstability2 ?? 0
+                value = engine.currentEvent?.socioPoliticalInstability2 ?? 0
                 shouldShowIndicator = true
             }
-            else if viewModel.lastChosenOption == "choice2" &&
-                viewModel.currentEvent?.socioPoliticalInstability2 ?? 0 < 0 {
+            else if engine.lastChosenOption == "choice2" &&
+                        engine.currentEvent?.socioPoliticalInstability2 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = viewModel.currentEvent?.socioPoliticalInstability2 ?? 0
+                value = engine.currentEvent?.socioPoliticalInstability2 ?? 0
                 shouldShowIndicator = true
             }
         }
