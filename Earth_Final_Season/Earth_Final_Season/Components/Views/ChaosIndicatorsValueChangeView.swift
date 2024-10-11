@@ -12,10 +12,9 @@ struct ChaosIndicatorsValueChangeView: View {
     @State var shouldShowIndicator: Bool = false
     @State var valueIsIncreasing: Bool = false
     @State var value: Int = 0
-    
+
     @Binding var viewModel: GameplayViewModel
     let indicator: String
-    
 
     var body: some View {
         HStack() {
@@ -128,4 +127,3 @@ struct ChaosIndicatorsValueChangeView: View {
         scaleChange = 1
     }
 }
-
