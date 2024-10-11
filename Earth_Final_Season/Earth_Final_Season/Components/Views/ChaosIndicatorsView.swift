@@ -72,8 +72,14 @@ struct ChaosIndicatorsView: View {
                 .foregroundStyle(Color(UIColor.systemGray4))
         )
         .onChange(of: viewModel.isShowingConsequence) {
-            withAnimation(Animation.linear(duration: 1)) {
-                animateIndicatorsChange()
+            if viewModel.isShowingConsequence {
+                withAnimation(Animation.linear(duration: 1).repeatCount(3, autoreverses: true)) {
+                    animateIndicatorsChange()
+                }
+            } else {
+                withAnimation(Animation.linear(duration: 1)) {
+                    animateIndicatorsChange()
+                }
             }
         }
     }
