@@ -25,7 +25,7 @@ struct ChaosIndicatorsView: View {
             HStack(spacing: getWidth() * 0.1) {
                 // Environmental Degradation indicator with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(indicator: "environmentalDegradation")
+                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, indicator: "environmentalDegradation")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     indicatorView(for: environmentalDegradation, image: "leaf.fill")
                         .overlay(
@@ -39,7 +39,7 @@ struct ChaosIndicatorsView: View {
 
                 // Ill-being indicator with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(indicator: "illBeing")
+                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, indicator: "illBeing")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     indicatorView(for: illBeing, image: "person.fill")
                         .overlay(
@@ -53,7 +53,7 @@ struct ChaosIndicatorsView: View {
 
                 // Sociopolitical Instability with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(indicator: "sociopoliticalInstability")
+                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, indicator: "sociopoliticalInstability")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     indicatorView(for: socioPoliticalInstability, image: "building.2.crop.circle.fill")
                         .overlay(
