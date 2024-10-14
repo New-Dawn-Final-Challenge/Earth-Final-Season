@@ -11,6 +11,7 @@ struct SliderView: View {
     @Binding var mainScreenShadowRadius: Int
     @Binding var option1ShadowRadius: Int
     @Binding var option2ShadowRadius: Int
+    @Binding var viewModel: GameplayViewModel
     
     var onChooseOption1: () -> Void
     var onChooseOption2: () -> Void
@@ -37,49 +38,96 @@ struct SliderView: View {
                     .gesture(
                         DragGesture()
                             .onChanged { gesture in
-                                // Calculate the new drag offset within the limits
-                                finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
-                                dragOffset = CGSize(width: finalOffsetX, height: 0)
+                                
+                                if !viewModel.isShowingConsequence {
+                                    // Calculate the new drag offset within the limits
+                                    finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
+                                    dragOffset = CGSize(width: finalOffsetX, height: 0)
 
-                                // Update the feedback trigger to the current drag location
-                                feedbackTrigger = CGPoint(x: dragOffset.width, y: 0)
+                                    // Update the feedback trigger to the current drag location
+                                    feedbackTrigger = CGPoint(x: dragOffset.width, y: 0)
 
-                                // Update shadow radius based on the circle's relative position within the slider
-                                if finalOffsetX < 0 {
-                                    option1ShadowRadius = Int(abs(finalOffsetX) / 6)
-                                    option2ShadowRadius = 0
-                                    
-                                } else {
-                                    option2ShadowRadius = Int(finalOffsetX / 6)
-                                    option1ShadowRadius = 0
+                                    // Update shadow radius based on the circle's relative position within the slider
+                                    if finalOffsetX < 0 {
+                                        option1ShadowRadius = Int(abs(finalOffsetX) / 6)
+                                        option2ShadowRadius = 0
+                                        
+                                        resetIndicatorsShadows()
+                                                   
+                                        checkFirstOptionIndicators()
+                                        
+                                    } else {
+                                        option2ShadowRadius = Int(finalOffsetX / 6)
+                                        option1ShadowRadius = 0
+                                        
+                                        resetIndicatorsShadows()
+
+                                        checkSecondOptionIndicators()
+                                    }
                                 }
                             }
                             .onEnded { _ in
-                                withAnimation {
-                                    // Option 1 chosen
-                                    if finalOffsetX == leftLimit {
-                                        HapticsManager.shared.complexSuccess()
-                                        onChooseOption1()
-                                        mainScreenShadowRadius = 12
-                                    }
+                                if !viewModel.isShowingConsequence {
+                                    withAnimation {
+                                        // Option 1 chosen
+                                        if finalOffsetX == leftLimit {
+                                            HapticsManager.shared.complexSuccess()
+                                            onChooseOption1()
+                                            mainScreenShadowRadius = 12
+                                        }
 
-                                    // Option 2 chosen
-                                    else if finalOffsetX == rightLimit {
-                                        HapticsManager.shared.complexSuccess()
-                                        onChooseOption2()
-                                        mainScreenShadowRadius = 12
-                                    }
+                                        // Option 2 chosen
+                                        else if finalOffsetX == rightLimit {
+                                            HapticsManager.shared.complexSuccess()
+                                            onChooseOption2()
+                                            mainScreenShadowRadius = 12
+                                        }
 
-                                    // Reset position and shadows
-                                    dragOffset = .zero
-                                    mainScreenShadowRadius = 0
-                                    option1ShadowRadius = 0
-                                    option2ShadowRadius = 0
+                                        // Reset position and shadows
+                                        resetIndicatorsShadows()
+                                        dragOffset = .zero
+                                        mainScreenShadowRadius = 0
+                                        option1ShadowRadius = 0
+                                        option2ShadowRadius = 0
+                                    }
                                 }
                             }
                     )
             )
-        // swiftlin:disable:next max_length
             .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity)*0.28), trigger: feedbackTrigger)
+    }
+    
+    private func checkFirstOptionIndicators() {
+        if viewModel.currentEvent?.environmentalDegradation1 != 0 {
+            viewModel.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+        
+        if viewModel.currentEvent?.illBeing1 != 0 {
+            viewModel.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+        
+        if viewModel.currentEvent?.socioPoliticalInstability1 != 0 {
+            viewModel.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+    }
+    
+    private func checkSecondOptionIndicators() {
+        if viewModel.currentEvent?.environmentalDegradation2 != 0 {
+            viewModel.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+        
+        if viewModel.currentEvent?.illBeing2 != 0 {
+            viewModel.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+        
+        if viewModel.currentEvent?.socioPoliticalInstability2 != 0 {
+            viewModel.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
+        }
+    }
+    
+    private func resetIndicatorsShadows() {
+        viewModel.environmentalDegradationShadowRadius = 0
+        viewModel.illBeingShadowRadius = 0
+        viewModel.sociopoliticalInstabilityShadowRadius = 0
     }
 }

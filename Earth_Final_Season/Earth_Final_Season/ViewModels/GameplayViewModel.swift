@@ -10,6 +10,14 @@ import SwiftUI
 
 @Observable
 class GameplayViewModel {
+    var countdown = 6
+    var timer: Timer?
+    var environmentalDegradationDecreaseShadowRadius = 0
+    var environmentalDegradationIncreaseShadowRadius = 0
+    var environmentalDegradationShadowRadius = 0
+    var illBeingDecreaseShadowRadius = 0
+    var illBeingIncreaseShadowRadius = 0
+    var illBeingShadowRadius = 0
     var isGameOver = false
     var gameOverReason = ""
     var isShowingConsequence = false
@@ -18,6 +26,9 @@ class GameplayViewModel {
     var mainScreenShadowRadius = 0
     var option1ShadowRadius = 0
     var option2ShadowRadius = 0
+    var sociopoliticalInstabilityDecreaseShadowRadius = 0
+    var sociopoliticalInstabilityIncreaseShadowRadius = 0
+    var sociopoliticalInstabilityShadowRadius = 0
     var events = [Event]()
     var currentEvent: Event?
     var indicators = Indicators(audience: 5,
@@ -112,45 +123,46 @@ class GameplayViewModel {
     
     func chooseOption1() {
         if let event = currentEvent {
-//            event.applyConsequence(consequence: event.consequenceDescription1)
             indicators.applyConsequence(event.consequence1)
             lastChosenOption = "choice1"
-            
-            withAnimation {
-                self.isShowingConsequence = true
-            }
-            
-            // Show next event after 6 seconds
-            Task {
-                try await Task.sleep(nanoseconds: 6_000_000_000)
-                withAnimation {
+            self.isShowingConsequence = true
+
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if self.countdown > 0 {
+                    self.countdown -= 1
+                } else {
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    self.countdown = 6
+
                     self.goToNextEvent()
                     self.isShowingConsequence = false
                 }
             }
         }
     }
-    
+
     func chooseOption2() {
         if let event = currentEvent {
             indicators.applyConsequence(event.consequence2)
             lastChosenOption = "choice2"
-        
-            withAnimation {
-                self.isShowingConsequence = true
-            }
-            
-            // Show next event after 6 seconds
-            Task {
-                try await Task.sleep(nanoseconds: 6_000_000_000)
-                withAnimation {
+            self.isShowingConsequence = true
+
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if self.countdown > 0 {
+                    self.countdown -= 1
+                } else {
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    self.countdown = 6
+
                     self.goToNextEvent()
                     self.isShowingConsequence = false
                 }
             }
         }
     }
-    
+
     func resetGame() {
         indicators = Indicators(audience: 5, illBeing: 6, socioPoliticalInstability: 6, environmentalDegradation: 6, currentYear: 0)
         isGameOver = false
