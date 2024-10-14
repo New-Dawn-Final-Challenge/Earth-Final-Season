@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct Earth_Final_SeasonApp: App {
     @State private var gameplayVM = GameplayViewModel()
-    @State var configViewModel = ConfigurationsViewModel()
+    @State var configViewModel = SettingsViewModel()
     
     var body: some Scene {
         WindowGroup {

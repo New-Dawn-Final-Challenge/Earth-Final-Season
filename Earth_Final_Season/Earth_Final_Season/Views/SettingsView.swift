@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ConfigurationsView: View {
-    @Binding var viewModel: ConfigurationsViewModel
+struct SettingsView: View {
+    @Binding var viewModel: SettingsViewModel
     @State private var sliderOpacity: Double = 0
     
     var body: some View {

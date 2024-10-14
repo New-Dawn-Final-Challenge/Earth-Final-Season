@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MenuView: View {
-    @State var configViewModel = ConfigurationsViewModel()
+    @State var configViewModel = SettingsViewModel()
     
     var body: some View {
         NavigationStack {
@@ -37,7 +37,7 @@ struct MenuView: View {
                         .cornerRadius(10)
                 }
                 
-                NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
+                NavigationLink(destination: SettingsView(viewModel: $configViewModel)) {
                     Text("Settings")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))
