@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChoicesView: View {
-    @Binding var shadowRadius: Int
+    var shadowRadius: Int
     var text: String
 
     var body: some View {

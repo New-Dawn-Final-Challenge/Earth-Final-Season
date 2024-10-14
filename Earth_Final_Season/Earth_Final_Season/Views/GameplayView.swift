@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct GameplayView: View {
-    @Binding var viewModel: GameplayViewModel
-    @Binding var configViewModel: ConfigurationsViewModel
-    @State private var gameOver = false
+    @Environment(GameplayViewModel.self) private var gameplayVM
+    @Environment(ChaosIndicatorsViewModel.self) private var chaosIndicatorsVM
+    @Binding var settingsVM: SettingsViewModel
+    
+    @State private var showGameOver = false
     
     var body: some View {
         VStack(spacing: 6) {
@@ -11,29 +13,28 @@ struct GameplayView: View {
             
             indicatorsView
             
-            if let event = viewModel.currentEvent {
+            if let event = gameplayVM.currentEvent {
 
                 // Change image to current image
                 CharacterView(characterImage: "image1", characterName: event.character)
                 
-                EventView(mainScreenShadowRadius: $viewModel.mainScreenShadowRadius, viewModel: $viewModel,
-                          eventDescription: event.description,
+                EventView(eventDescription: event.description,
                           consequence1: event.consequenceDescription1,
                           consequence2: event.consequenceDescription2
                 )
 
                 VStack(spacing: -20) {
-                    ChoicesView(shadowRadius: $viewModel.option1ShadowRadius,
+                    ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
                                  text: event.choice1)
                     .padding(.trailing, 100)
 
-                    ChoicesView(shadowRadius: $viewModel.option2ShadowRadius,
+                    ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
                                  text: event.choice2)
                     .padding(.leading, 100)
                 }
                 .padding(.top, -15)
                 // Hide the choices to focus on the consequence
-                .opacity(viewModel.isShowingConsequence ? 0 : 1)
+                .opacity(gameplayVM.isShowingConsequence ? 0 : 1)
             } else {
                 Text("No more events")
                     .font(.title)
@@ -41,23 +42,22 @@ struct GameplayView: View {
             }
             
             SliderView(
-                mainScreenShadowRadius: $viewModel.mainScreenShadowRadius,
-                option1ShadowRadius: $viewModel.option1ShadowRadius,
-                option2ShadowRadius: $viewModel.option2ShadowRadius,
-                viewModel: $viewModel,
                 onChooseOption1: {
-                    viewModel.chooseOption1()
+                    gameplayVM.chooseOption1()
                 },
                 onChooseOption2: {
-                    viewModel.chooseOption2()
+                    gameplayVM.chooseOption2()
                 }
             )
             
             Spacer()
         }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
-        .navigationDestination(isPresented: $viewModel.isGameOver) {
-            GameOverView(gameplayViewModel: $viewModel)
+        .onChange(of: gameplayVM.isGameOver) {
+            showGameOver = gameplayVM.isGameOver
+        }
+        .navigationDestination(isPresented: $showGameOver) {
+            GameOverView(isPresented: $showGameOver)
         }
         .navigationBarBackButtonHidden(true)
     }
@@ -66,12 +66,12 @@ struct GameplayView: View {
         HStack {
             Spacer()
             
-            NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
+            NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
                 HelpButtonView()
             }
             
-            NavigationLink(destination: ConfigurationsView(viewModel: $configViewModel)) {
-                ConfigurationButtonView()
+            NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
+                SettingsButtonView()
             }
         }
         .padding(.trailing)
@@ -79,15 +79,14 @@ struct GameplayView: View {
     
     private var indicatorsView: some View {
         HStack(alignment: .center, spacing: getWidth() * 0.05) {
-            AudienceIndicatorView(percentage: Int(viewModel.indicators.audience))
+            AudienceIndicatorView(percentage: Int(gameplayVM.indicators.audience))
                 .padding(.bottom)
 
             ChaosIndicatorsView(
-                illBeing: viewModel.indicators.illBeing,
-                socioPoliticalInstability: viewModel.indicators.socioPoliticalInstability,
-                environmentalDegradation: viewModel.indicators.environmentalDegradation,
-                year: String(viewModel.indicators.currentYear),
-                viewModel: $viewModel
+                illBeing: gameplayVM.indicators.illBeing,
+                socioPoliticalInstability: gameplayVM.indicators.socioPoliticalInstability,
+                environmentalDegradation: gameplayVM.indicators.environmentalDegradation,
+                year: String(gameplayVM.indicators.currentYear)
             )
         }
     }

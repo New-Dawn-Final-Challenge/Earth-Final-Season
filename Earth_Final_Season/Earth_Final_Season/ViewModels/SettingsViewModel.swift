@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class ConfigurationsViewModel {
+class SettingsViewModel {
     var soundEffectsIntensity: Float = 63.5
     var musicIntensity: Float = 33.5 {
         didSet {

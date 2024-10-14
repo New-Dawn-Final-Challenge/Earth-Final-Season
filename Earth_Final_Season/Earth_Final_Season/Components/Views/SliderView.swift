@@ -8,17 +8,14 @@
 import SwiftUI
 
 struct SliderView: View {
-    @Binding var mainScreenShadowRadius: Int
-    @Binding var option1ShadowRadius: Int
-    @Binding var option2ShadowRadius: Int
-    @Binding var viewModel: GameplayViewModel
-    
-    var onChooseOption1: () -> Void
-    var onChooseOption2: () -> Void
+    @Environment(GameplayViewModel.self) private var gameplayVM
     
     @State private var dragOffset = CGSize.zero
     @State private var finalOffsetX: CGFloat = 0
     @State private var feedbackTrigger: CGPoint = .zero
+    
+    var onChooseOption1: () -> Void
+    var onChooseOption2: () -> Void
 
     var body: some View {
         let sliderWidth = getWidth() * 0.5
@@ -39,7 +36,7 @@ struct SliderView: View {
                         DragGesture()
                             .onChanged { gesture in
                                 
-                                if !viewModel.isShowingConsequence {
+                                if !gameplayVM.isShowingConsequence {
                                     // Calculate the new drag offset within the limits
                                     finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
                                     dragOffset = CGSize(width: finalOffsetX, height: 0)
@@ -49,16 +46,16 @@ struct SliderView: View {
 
                                     // Update shadow radius based on the circle's relative position within the slider
                                     if finalOffsetX < 0 {
-                                        option1ShadowRadius = Int(abs(finalOffsetX) / 6)
-                                        option2ShadowRadius = 0
+                                        gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
+                                        gameplayVM.option2ShadowRadius = 0
                                         
                                         resetIndicatorsShadows()
                                                    
                                         checkFirstOptionIndicators()
                                         
                                     } else {
-                                        option2ShadowRadius = Int(finalOffsetX / 6)
-                                        option1ShadowRadius = 0
+                                        gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
+                                        gameplayVM.option1ShadowRadius = 0
                                         
                                         resetIndicatorsShadows()
 
@@ -67,28 +64,28 @@ struct SliderView: View {
                                 }
                             }
                             .onEnded { _ in
-                                if !viewModel.isShowingConsequence {
+                                if !gameplayVM.isShowingConsequence {
                                     withAnimation {
                                         // Option 1 chosen
                                         if finalOffsetX == leftLimit {
                                             HapticsManager.shared.complexSuccess()
                                             onChooseOption1()
-                                            mainScreenShadowRadius = 12
+                                            gameplayVM.mainScreenShadowRadius = 12
                                         }
 
                                         // Option 2 chosen
                                         else if finalOffsetX == rightLimit {
                                             HapticsManager.shared.complexSuccess()
                                             onChooseOption2()
-                                            mainScreenShadowRadius = 12
+                                            gameplayVM.mainScreenShadowRadius = 12
                                         }
 
                                         // Reset position and shadows
                                         resetIndicatorsShadows()
                                         dragOffset = .zero
-                                        mainScreenShadowRadius = 0
-                                        option1ShadowRadius = 0
-                                        option2ShadowRadius = 0
+                                        gameplayVM.mainScreenShadowRadius = 0
+                                        gameplayVM.option1ShadowRadius = 0
+                                        gameplayVM.option2ShadowRadius = 0
                                     }
                                 }
                             }
@@ -98,36 +95,36 @@ struct SliderView: View {
     }
     
     private func checkFirstOptionIndicators() {
-        if viewModel.currentEvent?.environmentalDegradation1 != 0 {
-            viewModel.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
+        if gameplayVM.currentEvent?.environmentalDegradation1 != 0 {
+            gameplayVM.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if viewModel.currentEvent?.illBeing1 != 0 {
-            viewModel.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
+        if gameplayVM.currentEvent?.illBeing1 != 0 {
+            gameplayVM.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if viewModel.currentEvent?.socioPoliticalInstability1 != 0 {
-            viewModel.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
+        if gameplayVM.currentEvent?.socioPoliticalInstability1 != 0 {
+            gameplayVM.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
         }
     }
     
     private func checkSecondOptionIndicators() {
-        if viewModel.currentEvent?.environmentalDegradation2 != 0 {
-            viewModel.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
+        if gameplayVM.currentEvent?.environmentalDegradation2 != 0 {
+            gameplayVM.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if viewModel.currentEvent?.illBeing2 != 0 {
-            viewModel.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
+        if gameplayVM.currentEvent?.illBeing2 != 0 {
+            gameplayVM.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if viewModel.currentEvent?.socioPoliticalInstability2 != 0 {
-            viewModel.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
+        if gameplayVM.currentEvent?.socioPoliticalInstability2 != 0 {
+            gameplayVM.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
         }
     }
     
     private func resetIndicatorsShadows() {
-        viewModel.environmentalDegradationShadowRadius = 0
-        viewModel.illBeingShadowRadius = 0
-        viewModel.sociopoliticalInstabilityShadowRadius = 0
+        gameplayVM.environmentalDegradationShadowRadius = 0
+        gameplayVM.illBeingShadowRadius = 0
+        gameplayVM.sociopoliticalInstabilityShadowRadius = 0
     }
 }

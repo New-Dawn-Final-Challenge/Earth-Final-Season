@@ -7,8 +7,8 @@
 import SwiftUI
 
 struct EventView: View {
-    @Binding var mainScreenShadowRadius: Int
-    @Binding var viewModel: GameplayViewModel
+    @Environment(GameplayViewModel.self) private var gameplayVM
+
     @State var textToShow: String = ""
     
     let eventDescription: String
@@ -21,7 +21,7 @@ struct EventView: View {
                    height: getHeight() * 0.12)
             .padding()
             .foregroundStyle(Color(UIColor.systemGray4))
-            .shadow(color: Color.blue, radius: CGFloat(mainScreenShadowRadius))
+            .shadow(color: Color.blue, radius: CGFloat(gameplayVM.mainScreenShadowRadius))
             .overlay(
                 Text(textToShow)
                     .multilineTextAlignment(.center)
@@ -29,12 +29,12 @@ struct EventView: View {
                     .padding()
             )
             .onAppear(perform: updateText)
-            .onChange(of: viewModel.isShowingConsequence, updateText)
+            .onChange(of: gameplayVM.isShowingConsequence, updateText)
     }
 
     func updateText() {
-        if viewModel.isShowingConsequence {
-            if viewModel.lastChosenOption == "choice1" {
+        if gameplayVM.isShowingConsequence {
+            if gameplayVM.lastChosenOption == "choice1" {
                 withAnimation {
                     textToShow = consequence1
                 }
