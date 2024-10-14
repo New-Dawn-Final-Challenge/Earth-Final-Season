@@ -87,13 +87,13 @@ struct SettingsView: View {
                         Divider()
                         
                         Button {
-                            settingsVM.selectedGesture = .tap
+                            settingsVM.selectedGesture = .justTap
                         } label: {
                             HStack {
                                 Text("Tap")
                                     Spacer()
                                 Image(systemName: "checkmark")
-                                    .opacity(settingsVM.selectedGesture == .tap ? 1.0:0.0)
+                                    .opacity(settingsVM.selectedGesture == .justTap ? 1.0:0.0)
                             }
                             .padding(.horizontal)
                         }
@@ -111,7 +111,7 @@ struct SettingsView: View {
 }
 
 enum Gesture {
-    case holdDrag, tap
+    case holdDrag, justTap
 }
 
 extension AnyTransition {
