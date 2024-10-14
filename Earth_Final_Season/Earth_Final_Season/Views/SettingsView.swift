@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Binding var viewModel: SettingsViewModel
+    @Binding var settingsVM: SettingsViewModel
     @State private var sliderOpacity: Double = 0
     
     var body: some View {
@@ -19,7 +19,7 @@ struct SettingsView: View {
                     .padding(.horizontal)
                 HStack {
                     Image(systemName: "speaker.wave.1")
-                    Slider(value: $viewModel.musicIntensity, in: 0...100)
+                    Slider(value: $settingsVM.musicIntensity, in: 0...100)
                     Image(systemName: "speaker.wave.3.fill")
                 }
             }
@@ -30,21 +30,21 @@ struct SettingsView: View {
                     .padding(.horizontal)
                 HStack {
                     Image(systemName: "speaker.wave.1")
-                    Slider(value: $viewModel.soundEffectsIntensity, in: 0...100)
+                    Slider(value: $settingsVM.soundEffectsIntensity, in: 0...100)
                     Image(systemName: "speaker.wave.3.fill")
                 }
                 .padding()
             }
             
             HStack {
-                Toggle("Haptics enabled", isOn: $viewModel.hapticsEnabled)
+                Toggle("Haptics enabled", isOn: $settingsVM.hapticsEnabled)
                     .font(.title2)
                     .toggleStyle(SwitchToggleStyle(tint: .indigo))
                 Spacer()
             }
             .padding(32)
             
-            if (viewModel.hapticsEnabled) {
+            if (settingsVM.hapticsEnabled) {
                             VStack(alignment: .leading) {
                                 Text("Haptics intensity")
                                     .font(.title2)
@@ -58,7 +58,7 @@ struct SettingsView: View {
                                         sliderOpacity = 0
                                         }
                                 HStack {
-                                    Slider(value: $viewModel.hapticsIntensity, in: 0...100)
+                                    Slider(value: $settingsVM.hapticsIntensity, in: 0...100)
                                         .opacity(sliderOpacity)
                                 }
                             }
@@ -73,13 +73,13 @@ struct SettingsView: View {
                 Section {
                     VStack(alignment: .leading) {
                         Button {
-                            viewModel.selectedGesture = .holdDrag
+                            settingsVM.selectedGesture = .holdDrag
                         } label: {
                             HStack {
                                 Text("Hold and drag")
                                     Spacer()
                                 Image(systemName: "checkmark")
-                                    .opacity(viewModel.selectedGesture == .holdDrag ? 1:0)
+                                    .opacity(settingsVM.selectedGesture == .holdDrag ? 1:0)
                             }
                             .padding(.horizontal)
                         }
@@ -87,13 +87,13 @@ struct SettingsView: View {
                         Divider()
                         
                         Button {
-                            viewModel.selectedGesture = .tap
+                            settingsVM.selectedGesture = .tap
                         } label: {
                             HStack {
                                 Text("Tap")
                                     Spacer()
                                 Image(systemName: "checkmark")
-                                    .opacity(viewModel.selectedGesture == .tap ? 1.0:0.0)
+                                    .opacity(settingsVM.selectedGesture == .tap ? 1.0:0.0)
                             }
                             .padding(.horizontal)
                         }

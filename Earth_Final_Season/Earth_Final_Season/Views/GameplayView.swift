@@ -2,7 +2,7 @@ import SwiftUI
 
 struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
-    @Binding var configViewModel: SettingsViewModel
+    @Binding var settingsVM: SettingsViewModel
     
     @State private var showGameOver = false
     
@@ -65,11 +65,11 @@ struct GameplayView: View {
         HStack {
             Spacer()
             
-            NavigationLink(destination: SettingsView(viewModel: $configViewModel)) {
+            NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
                 HelpButtonView()
             }
             
-            NavigationLink(destination: SettingsView(viewModel: $configViewModel)) {
+            NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
                 SettingsButtonView()
             }
         }
