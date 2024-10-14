@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MenuView: View {
+    @Environment(ChaosIndicatorsViewModel.self) private var chaosIndicatorsVM
+    
     @State var settingsVM = SettingsViewModel()
     
     var body: some View {
@@ -54,11 +56,5 @@ struct MenuView: View {
                 }
             }
         }
-    }
-}
-
-struct MenuView_Previews: PreviewProvider {
-    static var previews: some View {
-        MenuView()
     }
 }

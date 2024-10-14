@@ -2,6 +2,7 @@ import SwiftUI
 
 struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
+    @Environment(ChaosIndicatorsViewModel.self) private var chaosIndicatorsVM
     @Binding var settingsVM: SettingsViewModel
     
     @State private var showGameOver = false
