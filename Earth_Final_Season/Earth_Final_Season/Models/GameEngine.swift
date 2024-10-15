@@ -28,19 +28,20 @@ class GameEngine {
     var state: states = .initializing
 
     init() {
-        if state == .initializing {
-            events = loadAndReturnEvents()
-
-            if !events.isEmpty {
-                let shuffledEvents = events.shuffled()
-                self.eventsSequence = shuffledEvents.map { $0.id }
-                currentEvent = shuffledEvents.first
-            } else {
-                currentEvent = nil
-                print("No events loaded.")
-            }
-            state = .choosing
-        }
+//        if state == .initializing {
+        events = loadAndReturnEvents()
+        resetGame()
+//
+//            if !events.isEmpty {
+//                let shuffledEvents = events.shuffled()
+//                self.eventsSequence = shuffledEvents.map { $0.id }
+//                currentEvent = shuffledEvents.first
+//            } else {
+//                currentEvent = nil
+//                print("No events loaded.")
+//            }
+//            state = .choosing
+//        }
     }
     
     private func checkForGameOver() {
@@ -135,7 +136,6 @@ class GameEngine {
                         self.countdown = 6
                         
                         self.goToNextEvent()
-//                        self.isShowingConsequence = false
                     }
                 }
             }
@@ -143,9 +143,9 @@ class GameEngine {
     }
 
     func resetGame() {
-        if state == .gameOver{
+        if state == .gameOver || state == .initializing{
             indicators = Indicators(audience: 5, illBeing: 6, socioPoliticalInstability: 6, environmentalDegradation: 6, currentYear: 0)
-            state = .initializing
+            state = .choosing
             let shuffledEvents = events.shuffled()
             self.eventsSequence = shuffledEvents.map { $0.id }
             currentEvent = shuffledEvents.first
