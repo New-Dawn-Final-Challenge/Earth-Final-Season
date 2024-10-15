@@ -5,6 +5,7 @@ struct GameplayView: View {
     @Environment(ChaosIndicatorsViewModel.self) private var chaosIndicatorsVM
     @Binding var settingsVM: SettingsViewModel
     
+    @State private var leaderboardVM = LeaderboardViewModel()
     @State private var showGameOver = false
     
     var body: some View {
@@ -54,7 +55,10 @@ struct GameplayView: View {
         }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.isGameOver) {
-            showGameOver = gameplayVM.isGameOver
+            Task {
+                showGameOver = gameplayVM.isGameOver
+                await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.indicators.currentYear)
+            }
         }
         .navigationDestination(isPresented: $showGameOver) {
             GameOverView(isPresented: $showGameOver)
@@ -68,6 +72,10 @@ struct GameplayView: View {
             
             NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
                 HelpButtonView()
+            }
+            
+            NavigationLink(destination: MenuView()) {
+                MenuButtonView()
             }
             
             NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {

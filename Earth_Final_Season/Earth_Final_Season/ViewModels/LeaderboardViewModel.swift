@@ -12,7 +12,6 @@ import GameKit
 class LeaderboardViewModel: ObservableObject {
     let leaderboardIdentifier = "com.EarthFinalSeason.Leaderboard"
     var isGameCenterPresented = false
-    var scoreToSubmit: Int = 2
     var playersList: [Player] = []
     
     // Game Center Authentication
@@ -47,10 +46,10 @@ class LeaderboardViewModel: ObservableObject {
     }
     
     // Submit Score to Game Center
-    func submitScore() async {
+    func submitScore(scoreToSubmit: Int) async {
         do {
             try await GKLeaderboard.submitScore(scoreToSubmit, context: 0, player: GKLocalPlayer.local, leaderboardIDs: [leaderboardIdentifier])
-            print("Score submitted successfully!")
+            print("Score of \(scoreToSubmit) years submitted successfully!")
         } catch {
             print("Error submitting score: \(error.localizedDescription)")
         }

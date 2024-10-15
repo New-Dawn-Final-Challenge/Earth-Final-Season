@@ -95,29 +95,31 @@ class GameplayViewModel {
     private func goToNextEvent() {
         checkForGameOver()
         
-        if !eventsSequence.isEmpty {
-            eventsSequence.removeFirst()
-            
-            if let nextEventID = eventsSequence.first {
-                if let nextEvent = events.first(where: { $0.id == nextEventID }) {
-                    currentEvent = nextEvent
-                    eventsPassedCount += 1
-                    
-                    if eventsPassedCount == 2 {
-                        indicators.currentYear += 1
-                        eventsPassedCount = 0
+        if !isGameOver {
+            if !eventsSequence.isEmpty {
+                eventsSequence.removeFirst()
+
+                if let nextEventID = eventsSequence.first {
+                    if let nextEvent = events.first(where: { $0.id == nextEventID }) {
+                        currentEvent = nextEvent
+                        eventsPassedCount += 1
+
+                        if eventsPassedCount == 2 {
+                            indicators.currentYear += 1
+                            eventsPassedCount = 0
+                        }
+                    } else {
+                        print("Next event not found in the events array.")
+                        currentEvent = nil
                     }
                 } else {
-                    print("Next event not found in the events array.")
+                    print("No more events in the sequence.")
                     currentEvent = nil
                 }
             } else {
-                print("No more events in the sequence.")
+                print("Event sequence is empty.")
                 currentEvent = nil
             }
-        } else {
-            print("Event sequence is empty.")
-            currentEvent = nil
         }
     }
     
