@@ -8,42 +8,51 @@
 import SwiftUI
 import GameKit
 
-//class LeaderboardViewModel: NSObject, ObservableObject {
-//    @Published var isAuthenticated = false
-//    
-//    override init() {
-//        super.init()
-//        authenticateUser()
-//    }
-//    
-//    func authenticateUser() {
-//        GKLocalPlayer.local.authenticateHandler = { vc, error in
-//            guard error == nil else {
-//                print(error?.localizedDescription ?? "")
-//                return
-//            }
-//        }
-//    }
-//    
-//    func loadLeaderboard() async {
-//        playersList.removeAll()
-//        Task{
-//            var playersListTemp : [Player] = []
-//            let leaderboards = try await GKLeaderboard.loadLeaderboards(IDs: [leaderboardIdentifier])
-//            if let leaderboard = leaderboards.filter ({ $0.baseLeaderboardID == self.leaderboardIdentifier }).first {
-//                let allPlayers = try await leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...5))
-//                if allPlayers.1.count > 0 {
-//                    try await allPlayers.1.asyncForEach { leaderboardEntry in
-//                        var image = try await leaderboardEntry.player.loadPhoto(for: .small)
-//                        playersListTemp.append(Player(name: leaderboardEntry.player.displayName, score:leaderboardEntry.formattedScore, image: image))
-//                                    print(playersListTemp)
-//                        playersListTemp.sort{
-//                            $0.score < $1.score
-//                        }
-//                    }
-//                }
-//            }
-//            playersList = playersListTemp
-//        }
-//    }
-//}
+@Observable
+class LeaderboardViewModel: ObservableObject {
+    let leaderboardIdentifier = "com.EarthFinalSeason.Leaderboard"
+    var isGameCenterPresented = false
+    var scoreToSubmit: Int = 2
+    var playersList: [Player] = []
+    
+    // Game Center Authentication
+    func authenticateUser() {
+        GKLocalPlayer.local.authenticateHandler = { viewController, error in
+            guard error == nil else {
+                print(error?.localizedDescription ?? "Failed to authenticate")
+                return
+            }
+        }
+    }
+    
+    // Load Leaderboard Entries
+    func loadLeaderboard() async {
+        playersList.removeAll()
+        do {
+            let leaderboards = try await GKLeaderboard.loadLeaderboards(IDs: [leaderboardIdentifier])
+            if let leaderboard = leaderboards.first(where: { $0.baseLeaderboardID == leaderboardIdentifier }) {
+                let entries = try await leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...5))
+                if !entries.1.isEmpty {
+                    for leaderboardEntry in entries.1 {
+                        let image = try await leaderboardEntry.player.loadPhoto(for: .small)
+                        let player = Player(name: leaderboardEntry.player.displayName, score: leaderboardEntry.formattedScore, image: image)
+                        playersList.append(player)
+                    }
+                    playersList.sort { $0.score < $1.score }
+                }
+            }
+        } catch {
+            print("Error loading leaderboard: \(error.localizedDescription)")
+        }
+    }
+    
+    // Submit Score to Game Center
+    func submitScore() async {
+        do {
+            try await GKLeaderboard.submitScore(scoreToSubmit, context: 0, player: GKLocalPlayer.local, leaderboardIDs: [leaderboardIdentifier])
+            print("Score submitted successfully!")
+        } catch {
+            print("Error submitting score: \(error.localizedDescription)")
+        }
+    }
+}
