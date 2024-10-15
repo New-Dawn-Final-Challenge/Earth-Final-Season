@@ -10,6 +10,7 @@ import SwiftUI
 struct ChaosIndicatorsView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
     @Environment(ChaosIndicatorsViewModel.self) private var chaosIndicatorsVM
+    @Environment(GameEngine.self) private var gameEngine
     
     let illBeing: Int
     let socioPoliticalInstability: Int
@@ -26,7 +27,7 @@ struct ChaosIndicatorsView: View {
             HStack(spacing: getWidth() * 0.1) {
                 // Environmental Degradation indicator with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, indicator: "environmentalDegradation")
+                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, gameEngine: gameEngine, indicator: "environmentalDegradation")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     chaosIndicatorsVM.indicatorView(for: environmentalDegradation, image: "leaf.fill")
                         .overlay(
@@ -40,7 +41,7 @@ struct ChaosIndicatorsView: View {
 
                 // Ill-being indicator with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, indicator: "illBeing")
+                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, gameEngine: gameEngine, indicator: "illBeing")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     chaosIndicatorsVM.indicatorView(for: illBeing, image: "person.fill")
                         .overlay(
@@ -54,7 +55,7 @@ struct ChaosIndicatorsView: View {
 
                 // Sociopolitical Instability with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, indicator: "sociopoliticalInstability")
+                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, gameEngine: gameEngine, indicator: "sociopoliticalInstability")
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
                     chaosIndicatorsVM.indicatorView(for: socioPoliticalInstability, image: "building.2.crop.circle.fill")
                         .overlay(
@@ -72,8 +73,8 @@ struct ChaosIndicatorsView: View {
             RoundedRectangle(cornerRadius: 16)
                 .foregroundStyle(Color(UIColor.systemGray4))
         )
-        .onChange(of: gameplayVM.isShowingConsequence) {
-            if gameplayVM.isShowingConsequence {
+        .onChange(of: gameEngine.state == .consequence) {
+            if gameEngine.state == .consequence {
                 withAnimation(Animation.linear(duration: 1).repeatCount(3, autoreverses: true)) {
                     chaosIndicatorsVM.animateIndicatorsChange()
                 }

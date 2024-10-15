@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ChaosIndicatorsValueChangeView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
+    @Environment(GameEngine.self) private var gameEngine
     @State private var chaosIndicatorsValueChangeVM: ChaosIndicatorsValueChangeViewModel
     
     let indicator: String
 
-    init(gameplayVM: GameplayViewModel, indicator: String) {
-        _chaosIndicatorsValueChangeVM = State(initialValue: ChaosIndicatorsValueChangeViewModel(gameplayVM: gameplayVM, indicator: indicator))
+    init(gameplayVM: GameplayViewModel, gameEngine: GameEngine, indicator: String) {
+        _chaosIndicatorsValueChangeVM = State(initialValue: ChaosIndicatorsValueChangeViewModel(gameplayVM: gameplayVM, gameEngine: gameEngine, indicator: indicator))
         self.indicator = indicator
     }
 
@@ -26,7 +27,7 @@ struct ChaosIndicatorsValueChangeView: View {
         .foregroundStyle(chaosIndicatorsValueChangeVM.valueIsIncreasing ? .orange : .cyan)
         .opacity(chaosIndicatorsValueChangeVM.shouldShowIndicator ? 1 : 0)
         .scaleEffect(chaosIndicatorsValueChangeVM.scaleChange, anchor: .bottom)
-        .onChange(of: gameplayVM.isShowingConsequence) {
+        .onChange(of: gameEngine.state == .consequence) {
             withAnimation(Animation.linear(duration: 1)) {
                 chaosIndicatorsValueChangeVM.getIndicatorValue()
             }

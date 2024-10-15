@@ -11,14 +11,16 @@ import SwiftUI
 @Observable
 class ChaosIndicatorsViewModel {
     var gameplayVM: GameplayViewModel
+    var gameEngine: GameEngine
     
-    init(gameplayVM: GameplayViewModel) {
+    init(gameplayVM: GameplayViewModel, gameEngine: GameEngine) {
         self.gameplayVM = gameplayVM
+        self.gameEngine = gameEngine
     }
     
     func animateIndicatorsChange() {
         // stopped showing consequence: stop showing indicator and reset value
-        if gameplayVM.isShowingConsequence == false {
+        if gameEngine.state != .consequence {
             gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius = 0
             gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius = 0
             gameplayVM.illBeingDecreaseShadowRadius = 0
@@ -28,8 +30,8 @@ class ChaosIndicatorsViewModel {
             return
         }
         
-        if let event = gameplayVM.currentEvent {
-            if gameplayVM.lastChosenOption == "choice1" {
+        if let event = gameEngine.currentEvent {
+            if gameEngine.lastChosenOption == "choice1" {
                 if event.environmentalDegradation1 > 0 {
                     gameplayVM.environmentalDegradationIncreaseShadowRadius = 7
                 } else if event.environmentalDegradation1 < 0 {
@@ -49,7 +51,7 @@ class ChaosIndicatorsViewModel {
                 }
             }
             
-            else if gameplayVM.lastChosenOption == "choice2" {
+            else if gameEngine.lastChosenOption == "choice2" {
                 if event.environmentalDegradation2 > 0 {
                     gameplayVM.environmentalDegradationIncreaseShadowRadius = 7
                 } else if event.environmentalDegradation2 < 0 {

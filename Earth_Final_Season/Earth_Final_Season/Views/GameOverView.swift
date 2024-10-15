@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameOverView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
+    @Environment(GameEngine.self) private var gameEngine
     @Binding var isPresented: Bool
     
     var body: some View {
@@ -17,13 +18,13 @@ struct GameOverView: View {
                 .font(.largeTitle)
                 .padding()
             
-            Text("Game over reason was '\(gameplayVM.gameOverReason)'.")
+            Text("Game over reason was '\(gameEngine.gameOverReason)'.")
                 .font(.title)
                 .padding()
                 .multilineTextAlignment(.center)
 
             Button("Restart") {
-                gameplayVM.resetGame()
+                gameEngine.resetGame()
                 isPresented = false
             }
             .padding()

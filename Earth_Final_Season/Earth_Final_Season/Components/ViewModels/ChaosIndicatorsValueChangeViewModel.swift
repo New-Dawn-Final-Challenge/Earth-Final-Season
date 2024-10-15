@@ -11,10 +11,12 @@ import SwiftUI
 @Observable
 class ChaosIndicatorsValueChangeViewModel {
     var gameplayVM: GameplayViewModel
+    var gameEngine: GameEngine
     let indicator: String
     
-    init(gameplayVM: GameplayViewModel, indicator: String) {
+    init(gameplayVM: GameplayViewModel, gameEngine: GameEngine, indicator: String) {
         self.gameplayVM = gameplayVM
+        self.gameEngine = gameEngine
         self.indicator = indicator
     }
     
@@ -25,7 +27,7 @@ class ChaosIndicatorsValueChangeViewModel {
     
     func getIndicatorValue() {
         // stopped showing consequence: stop showing indicator and reset value
-        if gameplayVM.isShowingConsequence == false {
+        if gameEngine.state != .consequence {
             value = 0
             scaleChange = 0
             shouldShowIndicator = false
@@ -33,85 +35,85 @@ class ChaosIndicatorsValueChangeViewModel {
         }
 
         if indicator == "illBeing" {
-            if gameplayVM.lastChosenOption == "choice1" &&
-                gameplayVM.currentEvent?.illBeing1 ?? 0 > 0 {
+            if gameEngine.lastChosenOption == "choice1" &&
+                gameEngine.currentEvent?.illBeing1 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = gameplayVM.currentEvent?.illBeing1 ?? 0
+                value = gameEngine.currentEvent?.illBeing1 ?? 0
                 shouldShowIndicator = true
             }
-            else if gameplayVM.lastChosenOption == "choice1" &&
-                    gameplayVM.currentEvent?.illBeing1 ?? 0 < 0 {
+            else if gameEngine.lastChosenOption == "choice1" &&
+                        gameEngine.currentEvent?.illBeing1 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = gameplayVM.currentEvent?.illBeing1 ?? 0
+                value = gameEngine.currentEvent?.illBeing1 ?? 0
                 shouldShowIndicator = true
             }
             
-            if gameplayVM.lastChosenOption == "choice2" &&
-                gameplayVM.currentEvent?.illBeing2 ?? 0 > 0 {
+            if gameEngine.lastChosenOption == "choice2" &&
+                gameEngine.currentEvent?.illBeing2 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = gameplayVM.currentEvent?.illBeing2 ?? 0
+                value = gameEngine.currentEvent?.illBeing2 ?? 0
                 shouldShowIndicator = true
             }
-            else if gameplayVM.lastChosenOption == "choice2" &&
-                    gameplayVM.currentEvent?.illBeing2 ?? 0 < 0 {
+            else if gameEngine.lastChosenOption == "choice2" &&
+                        gameEngine.currentEvent?.illBeing2 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = gameplayVM.currentEvent?.illBeing2 ?? 0
+                value = gameEngine.currentEvent?.illBeing2 ?? 0
                 shouldShowIndicator = true
             }
         }
         
         else if indicator == "environmentalDegradation" {
-            if gameplayVM.lastChosenOption == "choice1" &&
-                gameplayVM.currentEvent?.environmentalDegradation1 ?? 0 > 0 {
+            if gameEngine.lastChosenOption == "choice1" &&
+                gameEngine.currentEvent?.environmentalDegradation1 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = gameplayVM.currentEvent?.environmentalDegradation1 ?? 0
+                value = gameEngine.currentEvent?.environmentalDegradation1 ?? 0
                 shouldShowIndicator = true
             }
-            else if gameplayVM.lastChosenOption == "choice1" &&
-                    gameplayVM.currentEvent?.environmentalDegradation1 ?? 0 < 0 {
+            else if gameEngine.lastChosenOption == "choice1" &&
+                        gameEngine.currentEvent?.environmentalDegradation1 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = gameplayVM.currentEvent?.environmentalDegradation1 ?? 0
+                value = gameEngine.currentEvent?.environmentalDegradation1 ?? 0
                 shouldShowIndicator = true
             }
 
-            if gameplayVM.lastChosenOption == "choice2" &&
-                gameplayVM.currentEvent?.environmentalDegradation2 ?? 0 > 0 {
+            if gameEngine.lastChosenOption == "choice2" &&
+                gameEngine.currentEvent?.environmentalDegradation2 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = gameplayVM.currentEvent?.environmentalDegradation2 ?? 0
+                value = gameEngine.currentEvent?.environmentalDegradation2 ?? 0
                 shouldShowIndicator = true
             }
-            else if gameplayVM.lastChosenOption == "choice2" &&
-                    gameplayVM.currentEvent?.environmentalDegradation2 ?? 0 < 0 {
+            else if gameEngine.lastChosenOption == "choice2" &&
+                        gameEngine.currentEvent?.environmentalDegradation2 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = gameplayVM.currentEvent?.environmentalDegradation2 ?? 0
+                value = gameEngine.currentEvent?.environmentalDegradation2 ?? 0
                 shouldShowIndicator = true
             }
         }
         
         else if indicator == "sociopoliticalInstability" {
-            if gameplayVM.lastChosenOption == "choice1" &&
-                gameplayVM.currentEvent?.socioPoliticalInstability1 ?? 0 > 0 {
+            if gameEngine.lastChosenOption == "choice1" &&
+                gameEngine.currentEvent?.socioPoliticalInstability1 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = gameplayVM.currentEvent?.socioPoliticalInstability1 ?? 0
+                value = gameEngine.currentEvent?.socioPoliticalInstability1 ?? 0
                 shouldShowIndicator = true
             }
-            else if gameplayVM.lastChosenOption == "choice1" &&
-                    gameplayVM.currentEvent?.socioPoliticalInstability1 ?? 0 < 0 {
+            else if gameEngine.lastChosenOption == "choice1" &&
+                        gameEngine.currentEvent?.socioPoliticalInstability1 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = gameplayVM.currentEvent?.socioPoliticalInstability1 ?? 0
+                value = gameEngine.currentEvent?.socioPoliticalInstability1 ?? 0
                 shouldShowIndicator = true
             }
             
-            if gameplayVM.lastChosenOption == "choice2" &&
-                gameplayVM.currentEvent?.socioPoliticalInstability2 ?? 0 > 0 {
+            if gameEngine.lastChosenOption == "choice2" &&
+                gameEngine.currentEvent?.socioPoliticalInstability2 ?? 0 > 0 {
                 valueIsIncreasing = true
-                value = gameplayVM.currentEvent?.socioPoliticalInstability2 ?? 0
+                value = gameEngine.currentEvent?.socioPoliticalInstability2 ?? 0
                 shouldShowIndicator = true
             }
-            else if gameplayVM.lastChosenOption == "choice2" &&
-                    gameplayVM.currentEvent?.socioPoliticalInstability2 ?? 0 < 0 {
+            else if gameEngine.lastChosenOption == "choice2" &&
+                        gameEngine.currentEvent?.socioPoliticalInstability2 ?? 0 < 0 {
                 valueIsIncreasing = false
-                value = gameplayVM.currentEvent?.socioPoliticalInstability2 ?? 0
+                value = gameEngine.currentEvent?.socioPoliticalInstability2 ?? 0
                 shouldShowIndicator = true
             }
         }
