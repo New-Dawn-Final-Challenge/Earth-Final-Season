@@ -28,20 +28,8 @@ class GameEngine {
     var state: states = .initializing
 
     init() {
-//        if state == .initializing {
         events = loadAndReturnEvents()
         resetGame()
-//
-//            if !events.isEmpty {
-//                let shuffledEvents = events.shuffled()
-//                self.eventsSequence = shuffledEvents.map { $0.id }
-//                currentEvent = shuffledEvents.first
-//            } else {
-//                currentEvent = nil
-//                print("No events loaded.")
-//            }
-//            state = .choosing
-//        }
     }
     
     private func checkForGameOver() {
@@ -113,7 +101,6 @@ class GameEngine {
                         self.countdown = 6
                         
                         self.goToNextEvent()
-//                        self.isShowingConsequence = false
                     }
                 }
             }
