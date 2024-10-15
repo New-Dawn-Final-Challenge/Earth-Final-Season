@@ -65,8 +65,8 @@ class GameEngine {
     }
 
     private func goToNextEvent() {
+        checkForGameOver()
         if state == .consequence {
-            checkForGameOver()
             state = .choosing
             
             if !eventsSequence.isEmpty {
