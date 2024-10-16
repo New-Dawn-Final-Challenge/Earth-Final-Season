@@ -8,8 +8,22 @@
 import Foundation
 import SwiftUI
 
+//enum GamePlayViewModelState {
+//    case start
+//    case choosing
+//    case displayStatus
+//    case gameOver
+//}
+
+protocol GameEngineDelegate: AnyObject {
+    func gameStateChanged(to state: States)
+}
+
 @Observable
-class GameplayViewModel {
+class GameplayViewModel: GameEngineDelegate {
+    
+    weak var engine: GameEngine?
+    
     var environmentalDegradationDecreaseShadowRadius = 0
     var environmentalDegradationIncreaseShadowRadius = 0
     var environmentalDegradationShadowRadius = 0
@@ -23,4 +37,72 @@ class GameplayViewModel {
     var sociopoliticalInstabilityDecreaseShadowRadius = 0
     var sociopoliticalInstabilityIncreaseShadowRadius = 0
     var sociopoliticalInstabilityShadowRadius = 0
+    var currentState: States = .initializing
+    var currentEvent: Event?
+    
+    var timer: Timer?
+    var countdown = 6
+    
+    func gameStateChanged(to state: States) {
+        if state == .choosing {
+            currentEvent = getEvent()
+            currentState = .choosing
+            //View state
+        }
+        if state == .consequence {
+            currentState = .consequence
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if self.countdown > 0 {
+                    self.countdown -= 1
+                } else {
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    self.countdown = 6
+                    
+                    self.engine?.goToNextEvent()
+                    if !(self.engine?.gameEnded() ?? true) {
+                        self.currentState = .choosing
+                    }
+                }
+            }
+        }
+        if state == .gameOver {
+            currentState = .gameOver
+        }
+    }
+    
+    func getEvent() -> Event? {
+        currentEvent = engine?.currentEvent
+        return currentEvent
+    }
+    
+    func getIndicators() -> Indicators? {
+        return engine?.indicators
+    }
+    
+    func chooseOption1() {
+        //User feedback
+        engine?.chooseOption1()
+    }
+    
+    
+    func chooseOption2() {
+        //User feedback
+        engine?.chooseOption2()
+    }
+    
+//    func advanceGameState() {
+//        switch currentState {
+//        case .choosing:
+//            currentState = .consequence
+//        case .consequence:
+//            //check game over
+//            if engine?.checkForGameOver() {
+//                //game over
+//            }
+//            //senao volta pro choosing
+//        default:
+//            break
+//        }
+//    }
 }

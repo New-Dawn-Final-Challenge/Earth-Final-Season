@@ -3,7 +3,7 @@ import SwiftUI
 struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
     @Environment(ChaosIndicatorsViewModel.self) private var chaosIndicatorsVM
-    @Environment(GameEngine.self) private var gameEngine
+    //@Environment(GameEngine.self) private var gameEngine
     @Binding var settingsVM: SettingsViewModel
     
     @State private var showGameOver = false
@@ -14,7 +14,7 @@ struct GameplayView: View {
             
             indicatorsView
             
-            if let event = gameEngine.currentEvent {
+            if let event = gameplayVM.getEvent() {
 
                 // Change image to current image
                 CharacterView(characterImage: "image1", characterName: event.character)
@@ -35,7 +35,7 @@ struct GameplayView: View {
                 }
                 .padding(.top, -15)
                 // Hide the choices to focus on the consequence
-                .opacity(gameEngine.state == .consequence ? 0 : 1)
+                .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
             } else {
                 Text("No more events")
                     .font(.title)
@@ -44,18 +44,23 @@ struct GameplayView: View {
             
             SliderView(
                 onChooseOption1: {
-                    gameEngine.chooseOption1()
+                    gameplayVM.chooseOption1()
                 },
                 onChooseOption2: {
-                    gameEngine.chooseOption2()
+                    gameplayVM.chooseOption2()
                 }
             )
             
             Spacer()
         }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
-        .onChange(of: gameEngine.state == .gameOver) {
-            showGameOver = gameEngine.state == .gameOver
+        .onChange(of: gameplayVM.currentState == .gameOver) {
+            showGameOver = gameplayVM.currentState == .gameOver
+        }
+        .onChange(of: gameplayVM.currentState) {
+            //muda e proca o timer
+            
+            
         }
         .navigationDestination(isPresented: $showGameOver) {
             GameOverView(isPresented: $showGameOver)
@@ -80,14 +85,14 @@ struct GameplayView: View {
     
     private var indicatorsView: some View {
         HStack(alignment: .center, spacing: getWidth() * 0.05) {
-            AudienceIndicatorView(percentage: Int(gameEngine.indicators.audience))
+            AudienceIndicatorView(percentage: Int(gameplayVM.getIndicators()?.audience ?? 0))
                 .padding(.bottom)
 
             ChaosIndicatorsView(
-                illBeing: gameEngine.indicators.illBeing,
-                socioPoliticalInstability: gameEngine.indicators.socioPoliticalInstability,
-                environmentalDegradation: gameEngine.indicators.environmentalDegradation,
-                year: String(gameEngine.indicators.currentYear)
+                illBeing: gameplayVM.getIndicators()?.illBeing ?? 0,
+                socioPoliticalInstability: gameplayVM.getIndicators()?.socioPoliticalInstability ?? 0,
+                environmentalDegradation: gameplayVM.getIndicators()?.environmentalDegradation ?? 0,
+                year: String(gameplayVM.getIndicators()?.currentYear ?? 0)
             )
         }
     }

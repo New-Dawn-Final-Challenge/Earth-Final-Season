@@ -10,6 +10,9 @@ import SwiftUI
 
 @Observable
 class GameEngine {
+    
+    weak var delegate: GameEngineDelegate?
+    
     var countdown = 6
     var timer: Timer?
     var gameOverReason = ""
@@ -25,35 +28,86 @@ class GameEngine {
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
     
-    var state: states = .initializing
+    var state: States = .initializing
 
-    init() {
+    init(delegate: GameplayViewModel) {
         events = loadAndReturnEvents()
         resetGame()
+        self.delegate = delegate
     }
     
-    private func checkForGameOver() {
+    func gameEnded() -> Bool {
+        if indicators.audience <= 3 {
+            return true
+        }
+        if indicators.environmentalDegradation >= 12 {
+            return true
+        }
+        if indicators.illBeing >= 12 {
+            return true
+        }
+        if indicators.socioPoliticalInstability >= 12 {
+            return true
+        }
+        return false
+    }
+    
+    func checkForGameOver() {
         if state == .consequence {
             if indicators.audience <= 3 {
                 gameOverReason = "audience"
                 state = .gameOver
+                delegate?.gameStateChanged(to: .gameOver)
+                SoundtrackAudioManager.shared.stopSoundtrack()
+                SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
             }
             if indicators.environmentalDegradation >= 12 {
-                gameOverReason = "environmentalDegradation"
+                gameOverReason += "environmentalDegradation "
                 state = .gameOver
+                delegate?.gameStateChanged(to: .gameOver)
+                SoundtrackAudioManager.shared.stopSoundtrack()
+                SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
             }
             if indicators.illBeing >= 12 {
-                gameOverReason = "illBeing"
+                gameOverReason += "illBeing "
                 state = .gameOver
+                delegate?.gameStateChanged(to: .gameOver)
+                SoundtrackAudioManager.shared.stopSoundtrack()
+                SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
             }
             if indicators.socioPoliticalInstability >= 12 {
-                gameOverReason = "socioPoliticalInstability"
+                gameOverReason += "socioPoliticalInstability "
                 state = .gameOver
+                delegate?.gameStateChanged(to: .gameOver)
+                SoundtrackAudioManager.shared.stopSoundtrack()
+                SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
             }
         }
     }
+    
+//    private func checkForGameOver() -> bool {
+//        if state == .consequence {
+//            if indicators.audience <= 3 {
+//                gameOverReason = "audience"
+//                state = .gameOver
+//                delegate?.gameStateChanged(to: .gameOver)
+//            }
+//            if indicators.environmentalDegradation >= 12 {
+//                gameOverReason = "environmentalDegradation"
+//                state = .gameOver
+//            }
+//            if indicators.illBeing >= 12 {
+//                gameOverReason = "illBeing"
+//                state = .gameOver
+//            }
+//            if indicators.socioPoliticalInstability >= 12 {
+//                gameOverReason = "socioPoliticalInstability"
+//                state = .gameOver
+//            }
+//        }
+//    }
 
-    private func goToNextEvent() {
+    func goToNextEvent() {
         checkForGameOver()
         if state == .consequence {
             state = .choosing
@@ -91,18 +145,8 @@ class GameEngine {
                 indicators.applyConsequence(event.consequence1)
                 lastChosenOption = "choice1"
                 state = .consequence
+                delegate?.gameStateChanged(to: .consequence)
 
-                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                    if self.countdown > 0 {
-                        self.countdown -= 1
-                    } else {
-                        self.timer?.invalidate()
-                        self.timer = nil
-                        self.countdown = 6
-                        
-                        self.goToNextEvent()
-                    }
-                }
             }
         }
     }
@@ -113,18 +157,19 @@ class GameEngine {
                 indicators.applyConsequence(event.consequence2)
                 lastChosenOption = "choice2"
                 state = .consequence
+                delegate?.gameStateChanged(to: .consequence)
                 
-                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                    if self.countdown > 0 {
-                        self.countdown -= 1
-                    } else {
-                        self.timer?.invalidate()
-                        self.timer = nil
-                        self.countdown = 6
-                        
-                        self.goToNextEvent()
-                    }
-                }
+//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+//                    if self.countdown > 0 {
+//                        self.countdown -= 1
+//                    } else {
+//                        self.timer?.invalidate()
+//                        self.timer = nil
+//                        self.countdown = 6
+//                        
+//                        self.goToNextEvent()
+//                    }
+//                }
             }
         }
     }
@@ -137,6 +182,9 @@ class GameEngine {
             self.eventsSequence = shuffledEvents.map { $0.id }
             currentEvent = shuffledEvents.first
             eventsPassedCount = 0
+            gameOverReason = ""
+            SoundtrackAudioManager.shared.stopAllSoundEffects()
+            SoundtrackAudioManager.shared.playSoundtrack(named: "lowtoneST")
         }
     }
 }

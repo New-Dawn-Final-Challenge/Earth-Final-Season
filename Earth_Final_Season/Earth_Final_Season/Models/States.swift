@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum states{
+enum States{
     case initializing, choosing, consequence, gameOver
 }
