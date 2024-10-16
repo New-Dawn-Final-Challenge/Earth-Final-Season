@@ -47,7 +47,6 @@ class GameplayViewModel: GameEngineDelegate {
         if state == .choosing {
             currentEvent = getEvent()
             currentState = .choosing
-            //View state
         }
         if state == .consequence {
             currentState = .consequence
@@ -80,29 +79,7 @@ class GameplayViewModel: GameEngineDelegate {
         return engine?.indicators
     }
     
-    func chooseOption1() {
-        //User feedback
-        engine?.chooseOption1()
+    func chooseOption(option: Int) {
+        engine?.chooseOption(option: option)
     }
-    
-    
-    func chooseOption2() {
-        //User feedback
-        engine?.chooseOption2()
-    }
-    
-//    func advanceGameState() {
-//        switch currentState {
-//        case .choosing:
-//            currentState = .consequence
-//        case .consequence:
-//            //check game over
-//            if engine?.checkForGameOver() {
-//                //game over
-//            }
-//            //senao volta pro choosing
-//        default:
-//            break
-//        }
-//    }
 }

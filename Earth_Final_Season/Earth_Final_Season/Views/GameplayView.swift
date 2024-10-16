@@ -44,10 +44,10 @@ struct GameplayView: View {
             
             SliderView(
                 onChooseOption1: {
-                    gameplayVM.chooseOption1()
+                    gameplayVM.chooseOption(option: 1)
                 },
                 onChooseOption2: {
-                    gameplayVM.chooseOption2()
+                    gameplayVM.chooseOption(option: 2)
                 }
             )
             
@@ -56,11 +56,6 @@ struct GameplayView: View {
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.currentState == .gameOver) {
             showGameOver = gameplayVM.currentState == .gameOver
-        }
-        .onChange(of: gameplayVM.currentState) {
-            //muda e proca o timer
-            
-            
         }
         .navigationDestination(isPresented: $showGameOver) {
             GameOverView(isPresented: $showGameOver)
