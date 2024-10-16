@@ -3,7 +3,6 @@ import SwiftUI
 struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
     @Environment(ChaosIndicatorsViewModel.self) private var chaosIndicatorsVM
-    //@Environment(GameEngine.self) private var gameEngine
     @Binding var settingsVM: SettingsViewModel
     
     @State private var showGameOver = false
@@ -56,11 +55,6 @@ struct GameplayView: View {
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.currentState == .gameOver) {
             showGameOver = gameplayVM.currentState == .gameOver
-        }
-        .onChange(of: gameplayVM.currentState) {
-            //muda e proca o timer
-            
-            
         }
         .navigationDestination(isPresented: $showGameOver) {
             GameOverView(isPresented: $showGameOver)

@@ -30,47 +30,85 @@ class ChaosIndicatorsViewModel {
             return
         }
         
-        if let event = gameEngine.currentEvent {
-            if gameEngine.lastChosenOption == "choice1" {
-                if event.environmentalDegradation1 > 0 {
-                    gameplayVM.environmentalDegradationIncreaseShadowRadius = 7
-                } else if event.environmentalDegradation1 < 0 {
-                    gameplayVM.environmentalDegradationDecreaseShadowRadius = 7
-                }
-                
-                if event.illBeing1 > 0 {
-                    gameplayVM.illBeingIncreaseShadowRadius = 7
-                } else if event.illBeing1 < 0 {
-                    gameplayVM.illBeingDecreaseShadowRadius = 7
-                }
-                
-                if event.socioPoliticalInstability1 > 0 {
-                    gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius = 7
-                } else if event.socioPoliticalInstability1 < 0 {
-                    gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius = 7
-                }
-            }
-            
-            else if gameEngine.lastChosenOption == "choice2" {
-                if event.environmentalDegradation2 > 0 {
-                    gameplayVM.environmentalDegradationIncreaseShadowRadius = 7
-                } else if event.environmentalDegradation2 < 0 {
-                    gameplayVM.environmentalDegradationDecreaseShadowRadius = 7
-                }
-                
-                if event.illBeing2 > 0 {
-                    gameplayVM.illBeingIncreaseShadowRadius = 7
-                } else if event.illBeing2 < 0 {
-                    gameplayVM.illBeingDecreaseShadowRadius = 7
-                }
-                
-                if event.socioPoliticalInstability2 > 0 {
-                    gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius = 7
-                } else if event.socioPoliticalInstability2 < 0 {
-                    gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius = 7
-                }
-            }
+        let illBeing = [gameEngine.currentEvent?.illBeing1, gameEngine.currentEvent?.illBeing2]
+        let environmentalDegradation = [gameEngine.currentEvent?.environmentalDegradation1,
+                                        gameEngine.currentEvent?.environmentalDegradation2]
+        let socioPoliticalInstability = [gameEngine.currentEvent?.socioPoliticalInstability1,
+                                          gameEngine.currentEvent?.socioPoliticalInstability2]
+        
+        var optionToget = 0
+        switch gameEngine.lastChosenOption {
+            case "choice1":
+            optionToget = 0
+            case "choice2":
+            optionToget = 1
+            default :    break
         }
+        let value1 = illBeing[optionToget] ?? 0
+        let value2 = environmentalDegradation[optionToget] ?? 0
+        let value3 = socioPoliticalInstability[optionToget] ?? 0
+        
+        
+        if value1 < 0 {
+            gameplayVM.illBeingDecreaseShadowRadius = 7
+        } else if value1 > 0 {
+            gameplayVM.illBeingIncreaseShadowRadius = 7
+        }
+        
+        if value2 < 0 {
+            gameplayVM.environmentalDegradationDecreaseShadowRadius = 7
+        } else if value2 > 0 {
+            gameplayVM.environmentalDegradationIncreaseShadowRadius = 7
+        }
+        
+        if value3 < 0 {
+            gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius = 7
+        } else if value3 > 0 {
+            gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius = 7
+        }
+        
+        
+//        if let event = gameEngine.currentEvent {
+//            if gameEngine.lastChosenOption == "choice1" {
+//                if event.environmentalDegradation1 > 0 {
+//                    gameplayVM.environmentalDegradationIncreaseShadowRadius = 7
+//                } else if event.environmentalDegradation1 < 0 {
+//                    gameplayVM.environmentalDegradationDecreaseShadowRadius = 7
+//                }
+//                
+//                if event.illBeing1 > 0 {
+//                    gameplayVM.illBeingIncreaseShadowRadius = 7
+//                } else if event.illBeing1 < 0 {
+//                    gameplayVM.illBeingDecreaseShadowRadius = 7
+//                }
+//                
+//                if event.socioPoliticalInstability1 > 0 {
+//                    gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius = 7
+//                } else if event.socioPoliticalInstability1 < 0 {
+//                    gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius = 7
+//                }
+//            }
+//            
+//            else if gameEngine.lastChosenOption == "choice2" {
+//                if event.environmentalDegradation2 > 0 {
+//                    gameplayVM.environmentalDegradationIncreaseShadowRadius = 7
+//                } else if event.environmentalDegradation2 < 0 {
+//                    gameplayVM.environmentalDegradationDecreaseShadowRadius = 7
+//                }
+//                
+//                if event.illBeing2 > 0 {
+//                    gameplayVM.illBeingIncreaseShadowRadius = 7
+//                } else if event.illBeing2 < 0 {
+//                    gameplayVM.illBeingDecreaseShadowRadius = 7
+//                }
+//                
+//                if event.socioPoliticalInstability2 > 0 {
+//                    gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius = 7
+//                } else if event.socioPoliticalInstability2 < 0 {
+//                    gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius = 7
+//                }
+//            }
+//        }
     }
     
     // Overlay view to show the indicator's value

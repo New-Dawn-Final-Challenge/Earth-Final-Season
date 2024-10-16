@@ -84,28 +84,6 @@ class GameEngine {
             }
         }
     }
-    
-//    private func checkForGameOver() -> bool {
-//        if state == .consequence {
-//            if indicators.audience <= 3 {
-//                gameOverReason = "audience"
-//                state = .gameOver
-//                delegate?.gameStateChanged(to: .gameOver)
-//            }
-//            if indicators.environmentalDegradation >= 12 {
-//                gameOverReason = "environmentalDegradation"
-//                state = .gameOver
-//            }
-//            if indicators.illBeing >= 12 {
-//                gameOverReason = "illBeing"
-//                state = .gameOver
-//            }
-//            if indicators.socioPoliticalInstability >= 12 {
-//                gameOverReason = "socioPoliticalInstability"
-//                state = .gameOver
-//            }
-//        }
-//    }
 
     func goToNextEvent() {
         checkForGameOver()
@@ -158,18 +136,6 @@ class GameEngine {
                 lastChosenOption = "choice2"
                 state = .consequence
                 delegate?.gameStateChanged(to: .consequence)
-                
-//                timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-//                    if self.countdown > 0 {
-//                        self.countdown -= 1
-//                    } else {
-//                        self.timer?.invalidate()
-//                        self.timer = nil
-//                        self.countdown = 6
-//                        
-//                        self.goToNextEvent()
-//                    }
-//                }
             }
         }
     }
