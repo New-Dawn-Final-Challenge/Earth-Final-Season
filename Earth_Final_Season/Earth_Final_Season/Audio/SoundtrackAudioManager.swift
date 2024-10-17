@@ -1,53 +1,78 @@
-//
-//  AudioManager.swift
-//  Earth_Final_Season
-//
-//  Created by Breno Harris on 30/09/24.
-//
-
 import Foundation
 import AVFoundation
-
-//esse manager é um singleton apenas para a trilha sonora
-//para efeitos sonoros, vamos precisar de outro manager
-//talvez seja interessante mudar depois para um MediaPlayerFramework pois
-//mudar o som com AVFoundation se refere apenas ao som relativo ao sistema
 class SoundtrackAudioManager {
-    static let shared = SoundtrackAudioManager()
-    var audioPlayer: AVAudioPlayer?
-    var isPlaying: Bool {
-        return audioPlayer?.isPlaying ?? false
+  static let shared = SoundtrackAudioManager()
+  private var soundtrackPlayer: AVAudioPlayer?
+  private var soundEffectPlayers: [AVAudioPlayer] = []
+  var isSoundtrackPlaying: Bool {
+    return soundtrackPlayer?.isPlaying ?? false
+  }
+  var soundtrackPlaybackPosition: TimeInterval = 0
+  // MARK: - Soundtrack Methods
+  func playSoundtrack(named name: String) {
+    guard let musicUrl = Bundle.main.url(forResource: name, withExtension: "mp3") else {
+      print("Soundtrack file not found")
+      return
     }
-    var playbackPosition: TimeInterval = 0
-    
-    func playSound(named name: String) {
-        guard let musicUrl = Bundle.main.url(forResource: name, withExtension: "mp3") else {
-                    print("Sound file not found")
-                    return
-        }
-        do {
-            if audioPlayer == nil || !isPlaying {
-                audioPlayer = try AVAudioPlayer(contentsOf: musicUrl)
-                audioPlayer?.currentTime = playbackPosition
-                audioPlayer?.prepareToPlay()
-                audioPlayer?.play()
-            } else {
-                print("Sound is already playing")
-            }
-        } catch {
-            print("Error playing sound: \(error.localizedDescription)")
-        }
-        
+    do {
+      if soundtrackPlayer == nil || !isSoundtrackPlaying {
+        soundtrackPlayer = try AVAudioPlayer(contentsOf: musicUrl)
+        soundtrackPlayer?.currentTime = soundtrackPlaybackPosition
+        soundtrackPlayer?.numberOfLoops = -1 // Loop the soundtrack
+        soundtrackPlayer?.prepareToPlay()
+        soundtrackPlayer?.play()
+      } else {
+        print("Soundtrack is already playing")
+      }
+    } catch {
+      print("Error playing soundtrack: \(error.localizedDescription)")
     }
-    func stopSound() {
-        if let player = audioPlayer {
-            playbackPosition = player.currentTime
-            player.stop()
-        }
+  }
+  func stopSoundtrack() {
+    if let player = soundtrackPlayer {
+      soundtrackPlaybackPosition = player.currentTime
+      player.stop()
     }
-    func changeVolume(intensity: Float) {
-        if let player = audioPlayer {
-            player.volume = intensity
-        }
+  }
+  func changeVolume(intensity: Float) {
+    soundtrackPlayer?.volume = intensity
+  }
+  // MARK: - Sound Effects Methods
+  func playSoundEffect(named name: String) {
+    guard let effectUrl = Bundle.main.url(forResource: name, withExtension: "mp3") else {
+      print("Sound effect file not found")
+      return
     }
+    do {
+      let soundEffectPlayer = try AVAudioPlayer(contentsOf: effectUrl)
+      soundEffectPlayer.prepareToPlay()
+      soundEffectPlayer.play()
+      soundEffectPlayers.append(soundEffectPlayer)
+    } catch {
+      print("Error playing sound effect: \(error.localizedDescription)")
+    }
+  }
+  func stopAllSoundEffects() {
+    for player in soundEffectPlayers {
+      player.stop()
+    }
+    soundEffectPlayers.removeAll()
+  }
+  func changeSoundEffectVolume(intensity: Float) {
+    for player in soundEffectPlayers {
+      player.volume = intensity
+    }
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+

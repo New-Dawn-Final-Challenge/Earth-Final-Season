@@ -8,7 +8,7 @@ import SwiftUI
 
 struct EventView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
-
+    @Environment(GameEngine.self) private var gameEngine
     @State var textToShow: String = ""
     
     let eventDescription: String
@@ -29,12 +29,12 @@ struct EventView: View {
                     .padding()
             )
             .onAppear(perform: updateText)
-            .onChange(of: gameplayVM.isShowingConsequence, updateText)
+            .onChange(of: gameEngine.state == .consequence, updateText)
     }
 
     func updateText() {
-        if gameplayVM.isShowingConsequence {
-            if gameplayVM.lastChosenOption == "choice1" {
+        if gameEngine.state == .consequence {
+            if gameEngine.lastChosenOption == "choice1" {
                 withAnimation {
                     textToShow = consequence1
                 }

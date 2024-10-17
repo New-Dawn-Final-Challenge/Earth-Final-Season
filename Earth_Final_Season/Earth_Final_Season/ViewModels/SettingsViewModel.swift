@@ -36,9 +36,9 @@ class SettingsViewModel {
             self.hapticsEnabled = UserDefaults.standard.bool(forKey: "hapticsEnabled")
         }
     func playMusic(music name: String) {
-        SoundtrackAudioManager.shared.playSound(named: name)
+        SoundtrackAudioManager.shared.playSoundtrack(named: name)
     }
     func stopMusic() {
-        SoundtrackAudioManager.shared.stopSound()
+        SoundtrackAudioManager.shared.stopSoundtrack()
     }
 }

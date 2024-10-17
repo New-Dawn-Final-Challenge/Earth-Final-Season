@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SliderView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
+    @Environment(GameEngine.self) private var gameEngine
     
     @State private var dragOffset = CGSize.zero
     @State private var finalOffsetX: CGFloat = 0
@@ -36,7 +37,7 @@ struct SliderView: View {
                         DragGesture()
                             .onChanged { gesture in
                                 
-                                if !gameplayVM.isShowingConsequence {
+                                if gameEngine.state != .consequence {
                                     // Calculate the new drag offset within the limits
                                     finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
                                     dragOffset = CGSize(width: finalOffsetX, height: 0)
@@ -64,7 +65,7 @@ struct SliderView: View {
                                 }
                             }
                             .onEnded { _ in
-                                if !gameplayVM.isShowingConsequence {
+                                if gameEngine.state != .consequence {
                                     withAnimation {
                                         // Option 1 chosen
                                         if finalOffsetX == leftLimit {
@@ -95,29 +96,29 @@ struct SliderView: View {
     }
     
     private func checkFirstOptionIndicators() {
-        if gameplayVM.currentEvent?.environmentalDegradation1 != 0 {
+        if gameEngine.currentEvent?.environmentalDegradation1 != 0 {
             gameplayVM.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if gameplayVM.currentEvent?.illBeing1 != 0 {
+        if gameEngine.currentEvent?.illBeing1 != 0 {
             gameplayVM.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if gameplayVM.currentEvent?.socioPoliticalInstability1 != 0 {
+        if gameEngine.currentEvent?.socioPoliticalInstability1 != 0 {
             gameplayVM.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
         }
     }
     
     private func checkSecondOptionIndicators() {
-        if gameplayVM.currentEvent?.environmentalDegradation2 != 0 {
+        if gameEngine.currentEvent?.environmentalDegradation2 != 0 {
             gameplayVM.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if gameplayVM.currentEvent?.illBeing2 != 0 {
+        if gameEngine.currentEvent?.illBeing2 != 0 {
             gameplayVM.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if gameplayVM.currentEvent?.socioPoliticalInstability2 != 0 {
+        if gameEngine.currentEvent?.socioPoliticalInstability2 != 0 {
             gameplayVM.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
         }
     }
