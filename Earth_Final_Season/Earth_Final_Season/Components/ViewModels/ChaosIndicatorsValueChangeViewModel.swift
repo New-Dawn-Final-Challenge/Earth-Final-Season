@@ -44,7 +44,7 @@ class ChaosIndicatorsValueChangeViewModel {
                 value = gameplayVM.currentEvent?.illBeing1 ?? 0
                 shouldShowIndicator = true
             }
-            
+
             if gameplayVM.lastChosenOption == "choice2" &&
                 gameplayVM.currentEvent?.illBeing2 ?? 0 > 0 {
                 valueIsIncreasing = true

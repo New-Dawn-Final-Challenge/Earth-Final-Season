@@ -11,7 +11,7 @@ import SwiftUI
 @Observable
 class ChaosIndicatorsViewModel {
     var gameplayVM: GameplayViewModel
-    
+
     init(gameplayVM: GameplayViewModel) {
         self.gameplayVM = gameplayVM
     }
