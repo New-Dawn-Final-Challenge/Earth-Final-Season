@@ -9,8 +9,6 @@ import SwiftUI
 
 struct ChaosIndicatorsView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
-    @Environment(ChaosIndicatorsViewModel.self) private var chaosIndicatorsVM
-    @Environment(GameEngine.self) private var gameEngine
     
     let illBeing: Int
     let socioPoliticalInstability: Int
@@ -27,44 +25,80 @@ struct ChaosIndicatorsView: View {
             HStack(spacing: getWidth() * 0.1) {
                 // Environmental Degradation indicator with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, gameEngine: gameEngine, indicator: "environmentalDegradation")
+                    ChaosIndicatorsValueChangeView(indicator: "environmentalDegradation", n_indicator: 0)
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
-                    chaosIndicatorsVM.indicatorView(for: environmentalDegradation, image: "leaf.fill")
-                        .overlay(
-                            chaosIndicatorsVM.overlayView(for: environmentalDegradation)
-                                .mask(chaosIndicatorsVM.indicatorView(for: environmentalDegradation, image: "leaf.fill"))
-                        )
-                        .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.environmentalDegradationDecreaseShadowRadius))
-                        .shadow(color: Color.orange, radius: CGFloat(gameplayVM.environmentalDegradationIncreaseShadowRadius))
-                        .shadow(color: Color.purple, radius: CGFloat(gameplayVM.environmentalDegradationShadowRadius))
+                    Image(systemName: "leaf.fill")
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width * 0.08,
+                           height: UIScreen.main.bounds.height * 0.04)
+                    .foregroundStyle(Color(UIColor.systemGray))
+                    .overlay(
+                        GeometryReader { geometry in
+                            Rectangle()
+                                .foregroundStyle(Color(UIColor.systemRed))
+                                .frame(height: CGFloat(environmentalDegradation) / 12 * geometry.size.height)
+                                .frame(maxHeight: geometry.size.height, alignment: .bottom)
+                        }
+                    )
+                    .mask(
+                        Image(systemName: "leaf.fill")
+                            .resizable()
+                    )
+                    .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.environmentalDegradationDecreaseShadowRadius))
+                    .shadow(color: Color.orange, radius: CGFloat(gameplayVM.environmentalDegradationIncreaseShadowRadius))
+                    .shadow(color: Color.purple, radius: CGFloat(gameplayVM.environmentalDegradationShadowRadius))
                 }
 
                 // Ill-being indicator with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, gameEngine: gameEngine, indicator: "illBeing")
+                    ChaosIndicatorsValueChangeView(indicator: "illBeing", n_indicator: 1)
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
-                    chaosIndicatorsVM.indicatorView(for: illBeing, image: "person.fill")
-                        .overlay(
-                            chaosIndicatorsVM.overlayView(for: illBeing)
-                                .mask(chaosIndicatorsVM.indicatorView(for: illBeing, image: "person.fill"))
-                        )
-                        .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.illBeingDecreaseShadowRadius))
-                        .shadow(color: Color.orange, radius: CGFloat(gameplayVM.illBeingIncreaseShadowRadius))
-                        .shadow(color: Color.purple, radius: CGFloat(gameplayVM.illBeingShadowRadius))
+                    Image(systemName: "person.fill")
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width * 0.08,
+                           height: UIScreen.main.bounds.height * 0.04)
+                    .foregroundStyle(Color(UIColor.systemGray))
+                    .overlay(
+                        GeometryReader { geometry in
+                            Rectangle()
+                            .foregroundStyle(Color(UIColor.systemRed))
+                            .frame(height: CGFloat(illBeing) / 12 * geometry.size.height)
+                            .frame(maxHeight: geometry.size.height, alignment: .bottom)
+                        }
+                    )
+                    .mask(
+                        Image(systemName: "person.fill")
+                            .resizable()
+                    )
+                    .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.illBeingDecreaseShadowRadius))
+                    .shadow(color: Color.orange, radius: CGFloat(gameplayVM.illBeingIncreaseShadowRadius))
+                    .shadow(color: Color.purple, radius: CGFloat(gameplayVM.illBeingShadowRadius))
                 }
 
                 // Sociopolitical Instability with overlay
                 VStack {
-                    ChaosIndicatorsValueChangeView(gameplayVM: gameplayVM, gameEngine: gameEngine, indicator: "sociopoliticalInstability")
+                    ChaosIndicatorsValueChangeView(indicator: "socioPoliticalInstability", n_indicator: 2)
                         .frame(width: getWidth() * 0.15, height: getHeight() * 0.01)
-                    chaosIndicatorsVM.indicatorView(for: socioPoliticalInstability, image: "building.2.crop.circle.fill")
-                        .overlay(
-                            chaosIndicatorsVM.overlayView(for: socioPoliticalInstability)
-                                .mask(chaosIndicatorsVM.indicatorView(for: socioPoliticalInstability, image: "building.2.crop.circle.fill"))
-                        )
-                        .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius))
-                        .shadow(color: Color.orange, radius: CGFloat(gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius))
-                        .shadow(color: Color.purple, radius: CGFloat(gameplayVM.sociopoliticalInstabilityShadowRadius))
+                    Image(systemName: "building.2.crop.circle.fill")
+                    .resizable()
+                    .frame(width: UIScreen.main.bounds.width * 0.08,
+                           height: UIScreen.main.bounds.height * 0.04)
+                    .foregroundStyle(Color(UIColor.systemGray))
+                    .overlay(
+                        GeometryReader { geometry in
+                            Rectangle()
+                            .foregroundStyle(Color(UIColor.systemRed))
+                            .frame(height: CGFloat(socioPoliticalInstability) / 12 * geometry.size.height)
+                            .frame(maxHeight: geometry.size.height, alignment: .bottom)
+                        }
+                    )
+                    .mask(
+                        Image(systemName: "building.2.crop.circle.fill")
+                            .resizable()
+                    )
+                    .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius))
+                    .shadow(color: Color.orange, radius: CGFloat(gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius))
+                    .shadow(color: Color.purple, radius: CGFloat(gameplayVM.sociopoliticalInstabilityShadowRadius))
                 }
             }
         }
@@ -73,14 +107,14 @@ struct ChaosIndicatorsView: View {
             RoundedRectangle(cornerRadius: 16)
                 .foregroundStyle(Color(UIColor.systemGray4))
         )
-        .onChange(of: gameEngine.state == .consequence) {
-            if gameEngine.state == .consequence {
+        .onChange(of: gameplayVM.currentState) {
+            if gameplayVM.currentState == .consequence {
                 withAnimation(Animation.linear(duration: 1).repeatCount(3, autoreverses: true)) {
-                    chaosIndicatorsVM.animateIndicatorsChange()
+                    gameplayVM.animateIndicatorsChange()
                 }
             } else {
                 withAnimation(Animation.linear(duration: 1)) {
-                    chaosIndicatorsVM.animateIndicatorsChange()
+                    gameplayVM.animateIndicatorsChange()
                 }
             }
         }
