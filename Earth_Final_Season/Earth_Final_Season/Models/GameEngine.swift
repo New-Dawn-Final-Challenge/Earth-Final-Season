@@ -56,33 +56,28 @@ class GameEngine {
         if state == .consequence {
             if indicators.audience <= 3 {
                 gameOverReason = "audience"
-                state = .gameOver
-                delegate?.gameStateChanged(to: .gameOver)
-                SoundtrackAudioManager.shared.stopSoundtrack()
-                SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
+                applyGameOver()
             }
             if indicators.environmentalDegradation >= 12 {
                 gameOverReason += "environmentalDegradation "
-                state = .gameOver
-                delegate?.gameStateChanged(to: .gameOver)
-                SoundtrackAudioManager.shared.stopSoundtrack()
-                SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
+                applyGameOver()
             }
             if indicators.illBeing >= 12 {
                 gameOverReason += "illBeing "
-                state = .gameOver
-                delegate?.gameStateChanged(to: .gameOver)
-                SoundtrackAudioManager.shared.stopSoundtrack()
-                SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
+                applyGameOver()
             }
             if indicators.socioPoliticalInstability >= 12 {
                 gameOverReason += "socioPoliticalInstability "
-                state = .gameOver
-                delegate?.gameStateChanged(to: .gameOver)
-                SoundtrackAudioManager.shared.stopSoundtrack()
-                SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
+                applyGameOver()
             }
         }
+    }
+    
+    func applyGameOver() {
+        self.state = .gameOver
+        self.delegate?.gameStateChanged(to: .gameOver)
+        SoundtrackAudioManager.shared.stopSoundtrack()
+        SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
     }
 
     func goToNextEvent() {
@@ -117,25 +112,15 @@ class GameEngine {
         }
     }
     
-    func chooseOption1() {
+    func chooseOption(option: Int) {
         if state == .choosing {
             if let event = currentEvent {
-                indicators.applyConsequence(event.consequence1)
-                lastChosenOption = "choice1"
+                let consequences = [event.consequence1, event.consequence2]
+                indicators.applyConsequence(consequences[option-1])
+                lastChosenOption = "choice\(option)"
                 state = .consequence
                 delegate?.gameStateChanged(to: .consequence)
 
-            }
-        }
-    }
-
-    func chooseOption2() {
-        if state == .choosing {
-            if let event = currentEvent {
-                indicators.applyConsequence(event.consequence2)
-                lastChosenOption = "choice2"
-                state = .consequence
-                delegate?.gameStateChanged(to: .consequence)
             }
         }
     }

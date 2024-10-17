@@ -77,14 +77,7 @@ class GameplayViewModel: GameEngineDelegate {
         return engine?.indicators
     }
     
-    func chooseOption1() {
-        //User feedback
-        engine?.chooseOption1()
-    }
-    
-    
-    func chooseOption2() {
-        //User feedback
-        engine?.chooseOption2()
+    func chooseOption(option: Int) {
+        engine?.chooseOption(option: option)
     }
 }

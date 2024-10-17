@@ -43,10 +43,10 @@ struct GameplayView: View {
             
             SliderView(
                 onChooseOption1: {
-                    gameplayVM.chooseOption1()
+                    gameplayVM.chooseOption(option: 1)
                 },
                 onChooseOption2: {
-                    gameplayVM.chooseOption2()
+                    gameplayVM.chooseOption(option: 2)
                 }
             )
             
