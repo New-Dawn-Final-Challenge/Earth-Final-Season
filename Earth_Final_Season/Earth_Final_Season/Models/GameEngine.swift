@@ -54,19 +54,19 @@ class GameEngine {
     func checkForGameOver() {
         if state == .consequence {
             if indicators.audience <= 3 {
-                gameOverReason = "The reality has reached zero audience. Game Over"
+                gameOverReason = "The reality has reached zero audience."
                 applyGameOver()
             }
             if indicators.environmentalDegradation >= 12 {
-                gameOverReason += "The earth is barren, and nature has collapsed. The damage is irreversible. Game Over"
+                gameOverReason += "The earth is barren, and nature has collapsed. The damage is irreversible."
                 applyGameOver()
             }
             if indicators.illBeing >= 12 {
-                gameOverReason += "The people are overwhelmed by suffering and despair. Society can no longer endure. Game Over"
+                gameOverReason += "The people are overwhelmed by suffering and despair. Society can no longer endure."
                 applyGameOver()
             }
             if indicators.socioPoliticalInstability >= 12 {
-                gameOverReason += "Chaos and conflict have torn society apart. Order is lost, and survival is impossible. Game Over"
+                gameOverReason += "Chaos and conflict have torn society apart. Order is lost, and survival is impossible."
                 applyGameOver()
             }
         }
