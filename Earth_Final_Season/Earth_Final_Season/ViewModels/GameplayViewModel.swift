@@ -77,11 +77,11 @@ class GameplayViewModel: GameEngineDelegate {
         return engine?.indicators
     }
     
-    func getGameOverReason() -> String?{
+    func getGameOverReason() -> String? {
         return engine?.gameOverReason
     }
     
-    func getLastChosenOption() -> String?{
+    func getLastChosenOption() -> String? {
         return engine?.lastChosenOption
     }
     
@@ -89,11 +89,11 @@ class GameplayViewModel: GameEngineDelegate {
         engine?.chooseOption(option: option)
     }
     
-    func resetGame(){
+    func resetGame() {
         engine?.resetGame()
     }
     
-    func getIndicatorValue(indicator: String, n_indicator: Int) {
+    func getIndicatorValue(indicator: String, nIndicator: Int) {
         
         // Stop showing indicator and reset values if not in consequence state
         guard currentState == .consequence else {
