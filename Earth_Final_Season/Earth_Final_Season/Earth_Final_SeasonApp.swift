@@ -9,22 +9,24 @@ import SwiftUI
 
 @main
 struct Earth_Final_SeasonApp: App {
-    @State private var gameplayVM = GameplayViewModel()
-    @State private var chaosIndicatorsVM: ChaosIndicatorsViewModel
+    @State private var gameplayVM: GameplayViewModel
+    @State private var gameEngine:GameEngine
 
     init() {
         let gameplayViewModel = GameplayViewModel()
-        _chaosIndicatorsVM = State(wrappedValue: ChaosIndicatorsViewModel(gameplayVM: gameplayViewModel))
+        let engine = GameEngine(delegate: gameplayViewModel)
+        _gameEngine = State(wrappedValue: engine)
         _gameplayVM = State(wrappedValue: gameplayViewModel)
+        gameplayVM.engine = engine
     }
     
     var body: some Scene {
         WindowGroup {
             MenuView()
+                .environment(gameEngine)
                 .environment(gameplayVM)
-                .environment(chaosIndicatorsVM)
             .task {
-                SoundtrackAudioManager.shared.playSound(named: "lowtoneST")
+                SoundtrackAudioManager.shared.playSoundtrack(named: "lowtoneST")
             }
         }
     }

@@ -8,20 +8,21 @@
 import Foundation
 import SwiftUI
 
+protocol GameEngineDelegate: AnyObject {
+    func gameStateChanged(to state: States)
+}
+
 @Observable
-class GameplayViewModel {
-    var countdown = 6
-    var timer: Timer?
+class GameplayViewModel: GameEngineDelegate {
+    
+    weak var engine: GameEngine?
+    
     var environmentalDegradationDecreaseShadowRadius = 0
     var environmentalDegradationIncreaseShadowRadius = 0
     var environmentalDegradationShadowRadius = 0
     var illBeingDecreaseShadowRadius = 0
     var illBeingIncreaseShadowRadius = 0
     var illBeingShadowRadius = 0
-    var isGameOver = false
-    var gameOverReason = ""
-    var isShowingConsequence = false
-    var lastChosenOption = "choice1"
     var currentPosition: CGSize = .zero
     var mainScreenShadowRadius = 0
     var option1ShadowRadius = 0
@@ -29,147 +30,132 @@ class GameplayViewModel {
     var sociopoliticalInstabilityDecreaseShadowRadius = 0
     var sociopoliticalInstabilityIncreaseShadowRadius = 0
     var sociopoliticalInstabilityShadowRadius = 0
-    var events = [Event]()
+    var currentState: States = .initializing
     var currentEvent: Event?
-    var indicators = Indicators(audience: 5,
-                                illBeing: 6,
-                                socioPoliticalInstability: 6,
-                                environmentalDegradation: 6,
-                                currentYear: 0)  // Initial Indicators
     
-    private var eventsSequence: [String] = []
-    private var eventsPassedCount = 0
-
-    init() {
-        events = loadAndReturnEvents()
-
-        if !events.isEmpty {
-            let shuffledEvents = events.shuffled()
-            self.eventsSequence = shuffledEvents.map { $0.id }
-            currentEvent = shuffledEvents.first
-        } else {
-            currentEvent = nil
-            print("No events loaded.")
+    var timer: Timer?
+    var countdown = 6
+    
+    var scaleChange: [CGFloat] = [0,0,0]
+    var shouldShowIndicator: [Bool] = [false,false,false]
+    var valueIsIncreasing: [Bool] = [false,false,false]
+    var value: [Int] = [0,0,0]
+    
+    func gameStateChanged(to state: States) {
+        if state == .choosing {
+            currentEvent = getEvent()
+            currentState = .choosing
+        }
+        if state == .consequence {
+            currentState = .consequence
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if self.countdown > 0 {
+                    self.countdown -= 1
+                } else {
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    self.countdown = 6
+                    
+                    self.engine?.goToNextEvent()
+                    if !(self.engine?.gameEnded() ?? true) {
+                        self.currentState = .choosing
+                    }
+                }
+            }
+        }
+        if state == .gameOver {
+            currentState = .gameOver
         }
     }
     
-    private func checkForGameOver() {
-        if  indicators.audience <= 3 ||
-            indicators.illBeing >= 12 ||
-            indicators.socioPoliticalInstability >= 12 ||
-            indicators.environmentalDegradation >= 12 {
-            isGameOver = true
-            checkForGameOverReason()
-        }
+    func getEvent() -> Event? {
+        currentEvent = engine?.currentEvent
+        return currentEvent
     }
     
-    private func checkForGameOverReason() {
-        if indicators.audience <= 3 {
-            gameOverReason = "audience"
+    func getIndicators() -> Indicators? {
+        return engine?.indicators
+    }
+    
+    func chooseOption(option: Int) {
+        engine?.chooseOption(option: option)
+    }
+    
+    func getIndicatorValue(indicator: String, n_indicator: Int) {
+        
+        // Stop showing indicator and reset values if not in consequence state
+        guard currentState == .consequence else {
+            scaleChange = [0,0,0]
+            shouldShowIndicator = [false, false, false]
+            valueIsIncreasing = [false, false, false]
+            value = [0,0,0]
             return
         }
         
-        checkHighestIndicator()
+        let event = engine?.currentEvent
+        let indicatorValues: [String: [Int?]] = [
+            "environmentalDegradation": [event?.environmentalDegradation1, event?.environmentalDegradation2],
+            "illBeing": [event?.illBeing1, event?.illBeing2],
+            "socioPoliticalInstability": [event?.socioPoliticalInstability1, event?.socioPoliticalInstability2]
+        ]
+        
+        let optionIndex = engine?.lastChosenOption == "choice2" ? 1 : 0
+        let chosenValue = indicatorValues[indicator]?[optionIndex] ?? 0
+        
+        value[n_indicator] = chosenValue
+        valueIsIncreasing[n_indicator] = value[n_indicator] > 0
+        shouldShowIndicator[n_indicator] = value[n_indicator] != 0
+        scaleChange[n_indicator] = 1
     }
     
-    private func checkHighestIndicator() {
-        var highest = 12
+    func animateIndicatorsChange() {
+        // stopped showing consequence: stop showing indicator and reset value
+        if engine?.state != .consequence {
+            sociopoliticalInstabilityDecreaseShadowRadius = 0
+            sociopoliticalInstabilityIncreaseShadowRadius = 0
+            illBeingDecreaseShadowRadius = 0
+            illBeingIncreaseShadowRadius = 0
+            environmentalDegradationDecreaseShadowRadius = 0
+            environmentalDegradationIncreaseShadowRadius = 0
+            return
+        }
+        let environmentalDegradation = [engine?.currentEvent?.environmentalDegradation1,
+                                        engine?.currentEvent?.environmentalDegradation2]
         
-        for value in [indicators.environmentalDegradation,
-                      indicators.illBeing,
-                      indicators.socioPoliticalInstability] {
-            if value >= highest {
-                highest = value
-            }
+        let illBeing = [engine?.currentEvent?.illBeing1, engine?.currentEvent?.illBeing2]
+        
+        let socioPoliticalInstability = [engine?.currentEvent?.socioPoliticalInstability1,
+                                         engine?.currentEvent?.socioPoliticalInstability2]
+        
+        var optionToget = 0
+        switch engine?.lastChosenOption {
+        case "choice1":
+            optionToget = 0
+        case "choice2":
+            optionToget = 1
+        default :    break
+        }
+        let value1 = illBeing[optionToget] ?? 0
+        let value2 = environmentalDegradation[optionToget] ?? 0
+        let value3 = socioPoliticalInstability[optionToget] ?? 0
+        
+        
+        if value1 < 0 {
+            illBeingDecreaseShadowRadius = 7
+        } else if value1 > 0 {
+            illBeingIncreaseShadowRadius = 7
         }
         
-        if indicators.environmentalDegradation == highest {
-            gameOverReason = "environmentalDegradation"
-        } else if indicators.illBeing == highest {
-            gameOverReason = "illBeing"
-        } else if indicators.socioPoliticalInstability == highest {
-            gameOverReason = "socioPoliticalInstability"
+        if value2 < 0 {
+            environmentalDegradationDecreaseShadowRadius = 7
+        } else if value2 > 0 {
+            environmentalDegradationIncreaseShadowRadius = 7
         }
-    }
-
-    private func goToNextEvent() {
-        checkForGameOver()
         
-        if !eventsSequence.isEmpty {
-            eventsSequence.removeFirst()
-            
-            if let nextEventID = eventsSequence.first {
-                if let nextEvent = events.first(where: { $0.id == nextEventID }) {
-                    currentEvent = nextEvent
-                    eventsPassedCount += 1
-                    
-                    if eventsPassedCount == 2 {
-                        indicators.currentYear += 1
-                        eventsPassedCount = 0
-                    }
-                } else {
-                    print("Next event not found in the events array.")
-                    currentEvent = nil
-                }
-            } else {
-                print("No more events in the sequence.")
-                currentEvent = nil
-            }
-        } else {
-            print("Event sequence is empty.")
-            currentEvent = nil
+        if value3 < 0 {
+            sociopoliticalInstabilityDecreaseShadowRadius = 7
+        } else if value3 > 0 {
+            sociopoliticalInstabilityIncreaseShadowRadius = 7
         }
-    }
-    
-    func chooseOption1() {
-        if let event = currentEvent {
-            indicators.applyConsequence(event.consequence1)
-            lastChosenOption = "choice1"
-            self.isShowingConsequence = true
-
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                if self.countdown > 0 {
-                    self.countdown -= 1
-                } else {
-                    self.timer?.invalidate()
-                    self.timer = nil
-                    self.countdown = 6
-
-                    self.goToNextEvent()
-                    self.isShowingConsequence = false
-                }
-            }
-        }
-    }
-
-    func chooseOption2() {
-        if let event = currentEvent {
-            indicators.applyConsequence(event.consequence2)
-            lastChosenOption = "choice2"
-            self.isShowingConsequence = true
-
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                if self.countdown > 0 {
-                    self.countdown -= 1
-                } else {
-                    self.timer?.invalidate()
-                    self.timer = nil
-                    self.countdown = 6
-
-                    self.goToNextEvent()
-                    self.isShowingConsequence = false
-                }
-            }
-        }
-    }
-
-    func resetGame() {
-        indicators = Indicators(audience: 5, illBeing: 6, socioPoliticalInstability: 6, environmentalDegradation: 6, currentYear: 0)
-        isGameOver = false
-        events = loadAndReturnEvents()
-        let shuffledEvents = events.shuffled()
-        self.eventsSequence = shuffledEvents.map { $0.id }
-        currentEvent = shuffledEvents.first
-        eventsPassedCount = 0
     }
 }
