@@ -77,8 +77,20 @@ class GameplayViewModel: GameEngineDelegate {
         return engine?.indicators
     }
     
+    func getGameOverReason() -> String?{
+        return engine?.gameOverReason
+    }
+    
+    func getLastChosenOption() -> String?{
+        return engine?.lastChosenOption
+    }
+    
     func chooseOption(option: Int) {
         engine?.chooseOption(option: option)
+    }
+    
+    func resetGame(){
+        engine?.resetGame()
     }
     
     func getIndicatorValue(indicator: String, n_indicator: Int) {
@@ -127,34 +139,36 @@ class GameplayViewModel: GameEngineDelegate {
         let socioPoliticalInstability = [engine?.currentEvent?.socioPoliticalInstability1,
                                          engine?.currentEvent?.socioPoliticalInstability2]
         
-        var optionToget = 0
+        var n_choice = 0
+        
         switch engine?.lastChosenOption {
-        case "choice1":
-            optionToget = 0
-        case "choice2":
-            optionToget = 1
-        default :    break
+            case "choice1":
+                n_choice = 0
+            case "choice2":
+                n_choice = 1
+            default :    break
         }
-        let value1 = illBeing[optionToget] ?? 0
-        let value2 = environmentalDegradation[optionToget] ?? 0
-        let value3 = socioPoliticalInstability[optionToget] ?? 0
+        
+        let illBeingValue = illBeing[n_choice] ?? 0
+        let envDegradationValue = environmentalDegradation[n_choice] ?? 0
+        let socioPoliticalValue = socioPoliticalInstability[n_choice] ?? 0
         
         
-        if value1 < 0 {
+        if illBeingValue < 0 {
             illBeingDecreaseShadowRadius = 7
-        } else if value1 > 0 {
+        } else if illBeingValue > 0 {
             illBeingIncreaseShadowRadius = 7
         }
         
-        if value2 < 0 {
+        if envDegradationValue < 0 {
             environmentalDegradationDecreaseShadowRadius = 7
-        } else if value2 > 0 {
+        } else if envDegradationValue > 0 {
             environmentalDegradationIncreaseShadowRadius = 7
         }
         
-        if value3 < 0 {
+        if socioPoliticalValue < 0 {
             sociopoliticalInstabilityDecreaseShadowRadius = 7
-        } else if value3 > 0 {
+        } else if socioPoliticalValue > 0 {
             sociopoliticalInstabilityIncreaseShadowRadius = 7
         }
     }
