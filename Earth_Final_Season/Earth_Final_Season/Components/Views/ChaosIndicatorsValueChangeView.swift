@@ -12,24 +12,25 @@ struct ChaosIndicatorsValueChangeView: View {
     
     let indicator: String
     
-    let n_indicator: Int
+    let nIndicator: Int
     
-    init(indicator: String, n_indicator: Int) {
+    init(indicator: String, nIndicator: Int) {
         self.indicator = indicator
-        self.n_indicator = n_indicator
+        self.nIndicator = nIndicator
     }
 
     var body: some View {
         HStack() {
-            Image(systemName: gameplayVM.valueIsIncreasing[n_indicator] ? "arrowshape.up.fill" : "arrowshape.down.fill")
-            Text(String(gameplayVM.value[n_indicator]))
+            Image(systemName: gameplayVM.valueIsIncreasing[nIndicator] ?
+                  "arrowshape.up.fill" : "arrowshape.down.fill")
+            Text(String(gameplayVM.value[nIndicator]))
         }
-        .foregroundStyle(gameplayVM.valueIsIncreasing[n_indicator] ? .orange : .cyan)
-        .opacity(gameplayVM.shouldShowIndicator[n_indicator] ? 1 : 0)
-        .scaleEffect(gameplayVM.scaleChange[n_indicator], anchor: .bottom)
+        .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ? .orange : .cyan)
+        .opacity(gameplayVM.shouldShowIndicator[nIndicator] ? 1 : 0)
+        .scaleEffect(gameplayVM.scaleChange[nIndicator], anchor: .bottom)
         .onChange(of: gameplayVM.currentState) {
             withAnimation(Animation.linear(duration: 1)) {
-                gameplayVM.getIndicatorValue(indicator: indicator, n_indicator: n_indicator)
+                gameplayVM.getIndicatorValue(indicator: indicator, nIndicator: nIndicator)
             }
         }
     }

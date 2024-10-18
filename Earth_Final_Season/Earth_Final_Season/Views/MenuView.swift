@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
+    @State private var isGameCenterPresented = false
     
     var body: some View {
         NavigationStack {
@@ -29,12 +30,17 @@ struct MenuView: View {
                         .cornerRadius(10)
                 }
                 
-                NavigationLink(destination: LeaderboardView()) {
+                Button(action: {
+                    isGameCenterPresented.toggle()
+                }) {
                     Text("Leaderboard")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))
                         .foregroundColor(.black)
                         .cornerRadius(10)
+                }
+                .sheet(isPresented: $isGameCenterPresented) {
+                    LeaderboardView()
                 }
                 
                 NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {

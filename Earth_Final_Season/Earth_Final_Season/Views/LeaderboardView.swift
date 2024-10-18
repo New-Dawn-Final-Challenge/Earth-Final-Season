@@ -6,10 +6,22 @@
 //
 
 import SwiftUI
+import GameKit
 
 struct LeaderboardView: View {
+    @State private var leaderboardVM = LeaderboardViewModel()
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GameCenterView(viewController: GKGameCenterViewController(state: .leaderboards))
+            .onAppear {
+                if !GKLocalPlayer.local.isAuthenticated {
+                    leaderboardVM.authenticateUser()
+                } else if leaderboardVM.playersList.isEmpty {
+                    Task {
+                        await leaderboardVM.loadLeaderboard()
+                    }
+                }
+            }
     }
 }
 
