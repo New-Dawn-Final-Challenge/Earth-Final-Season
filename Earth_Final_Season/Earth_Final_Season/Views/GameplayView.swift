@@ -3,6 +3,7 @@ import SwiftUI
 struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
     @Binding var settingsVM: SettingsViewModel
+    @Binding var leaderboardVM: LeaderboardViewModel
     
     @State private var showGameOver = false
     
@@ -53,7 +54,10 @@ struct GameplayView: View {
         }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.currentState == .gameOver) {
-            showGameOver = gameplayVM.currentState == .gameOver
+            Task {
+                showGameOver = gameplayVM.currentState == .gameOver
+                await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
+            }
         }
         .navigationDestination(isPresented: $showGameOver) {
             GameOverView(isPresented: $showGameOver)
