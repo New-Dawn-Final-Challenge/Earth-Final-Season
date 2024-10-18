@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
+    @State var leaderboardVM = LeaderboardViewModel()
     @State private var isGameCenterPresented = false
     
     var body: some View {
@@ -22,7 +23,8 @@ struct MenuView: View {
                     .cornerRadius(10)
                 
                 // Navigation buttons
-                NavigationLink(destination: GameplayView(settingsVM: $settingsVM)) {
+                NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
+                                                         leaderboardVM: $leaderboardVM)) {
                     Text("Play")
                         .frame(width: 200, height: 50)
                         .background(Color.pink.opacity(0.5))
