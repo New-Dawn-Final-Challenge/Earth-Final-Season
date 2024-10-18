@@ -73,6 +73,10 @@ struct GameplayView: View {
                 HelpButtonView()
             }
             
+            NavigationLink(destination: MenuView()) {
+                MenuButtonView()
+            }
+            
             NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
                 SettingsButtonView()
             }
