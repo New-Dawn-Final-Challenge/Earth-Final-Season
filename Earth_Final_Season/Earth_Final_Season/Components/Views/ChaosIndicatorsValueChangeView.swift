@@ -9,11 +9,11 @@ import SwiftUI
 
 struct ChaosIndicatorsValueChangeView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
-    
+
     let indicator: String
     
     let nIndicator: Int
-    
+
     init(indicator: String, nIndicator: Int) {
         self.indicator = indicator
         self.nIndicator = nIndicator
