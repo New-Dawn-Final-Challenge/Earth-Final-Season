@@ -21,6 +21,7 @@ struct PrototypeSelectionView: View {
                         .padding()
                         .overlay(
                             Text("Dragger Prototype")
+                                .font(.bodyFont)
                                 .foregroundStyle(Color.white)
                         )
                 }
@@ -37,6 +38,7 @@ struct PrototypeSelectionView: View {
                         .padding()
                         .overlay(
                             Text("Buttons Prototype")
+                                .font(.bodyFont)
                                 .foregroundStyle(Color.white)
                         )
                 }

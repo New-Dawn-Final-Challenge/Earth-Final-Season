@@ -23,9 +23,9 @@ struct EventView: View {
             .shadow(color: Color.blue, radius: CGFloat(gameplayVM.mainScreenShadowRadius))
             .overlay(
                 Text(textToShow)
+                    .font(.bodyFont)
                     .multilineTextAlignment(.center)
-                    .padding()
-                    .padding()
+                    .padding(.horizontal, 30)
             )
             .onAppear(perform: updateText)
             .onChange(of: gameplayVM.currentState == .consequence, updateText)

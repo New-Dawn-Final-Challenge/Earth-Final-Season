@@ -20,6 +20,7 @@ struct ChoicesView: View {
             .shadow(color: Color.pink, radius: CGFloat(shadowRadius))
             .overlay(
                 Text(text)
+                    .font(.bodyFont)
                     .padding(.horizontal, 30)
             )
     }

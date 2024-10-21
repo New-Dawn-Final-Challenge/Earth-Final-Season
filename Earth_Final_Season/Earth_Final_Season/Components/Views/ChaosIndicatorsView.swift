@@ -18,7 +18,7 @@ struct ChaosIndicatorsView: View {
     var body: some View {
         VStack {
             Text("Year: \(year)")
-                .font(.system(size: 16))
+                .font(.bodyFont)
                 .bold()
                 .padding(.bottom, 10)
             

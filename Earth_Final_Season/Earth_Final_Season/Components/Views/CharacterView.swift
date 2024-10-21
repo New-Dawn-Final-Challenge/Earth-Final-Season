@@ -41,6 +41,7 @@ struct CharacterView: View {
                        height: getHeight() * 0.063)
                 .overlay(
                     Text(characterName)
+                        .font(.bodyFont)
                         .bold()
                         .multilineTextAlignment(.center)
                 )
