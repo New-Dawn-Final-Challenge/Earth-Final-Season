@@ -1,5 +1,5 @@
 {
-  "originHash" : "4ebbb37380053751e3eb1eb367d51b421014a9f8dd014da57dd599b5bb076e5d",
+  "originHash" : "6190752ebfb2598f98a1814cf287afbd6268d6a39298fc202ee3ec6caeb14fe6",
   "pins" : [
     {
       "identity" : "collectionconcurrencykit",
@@ -25,7 +25,7 @@
       "location" : "https://github.com/New-Dawn-Final-Challenge/Design-System.git",
       "state" : {
         "branch" : "main",
-        "revision" : "283cb3be1e332b45ffdb384bff171603172c8900"
+        "revision" : "431ec2ab29b4e449331ef2d1e2a1ee44b1a862a8"
       }
     },
     {
