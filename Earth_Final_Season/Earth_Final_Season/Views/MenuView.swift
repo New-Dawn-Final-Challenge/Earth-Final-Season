@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+// font
+// ShareTechMono-Regular
+
 struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
@@ -61,6 +64,7 @@ struct MenuView: View {
                         .cornerRadius(10)
                 }
             }
+            .font(.bodyFont)
         }
     }
 }

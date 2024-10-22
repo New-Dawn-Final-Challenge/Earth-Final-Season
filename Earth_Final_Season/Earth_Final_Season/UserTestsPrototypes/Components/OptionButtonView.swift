@@ -21,6 +21,7 @@ struct OptionButton: View {
             .shadow(color: Color.pink, radius: CGFloat(shadowRadius))
             .overlay(
                 Text(text)
+                    .font(.bodyFont)
             )
             .onTapGesture {
                 action()

@@ -15,11 +15,11 @@ struct GameOverView: View {
     var body: some View {
         VStack(alignment: .center) {
             Text("Game Over")
-                .font(.largeTitle)
+                .font(.largeTitleFont)
                 .padding()
             
             Text(gameplayVM.getGameOverReason() ?? "")
-                .font(.caption)
+                .font(.bodyFont)
                 .padding()
                 .multilineTextAlignment(.center)
 

@@ -26,6 +26,7 @@ struct CriandoComponente: View {
             
         } label: {
             Text(tituloBotao).bold()
+                .font(.bodyFont)
                 .frame(width: 80, height: 80, alignment: .center)
                 .foregroundColor(corTitulo)
                 .background(corBotao)
