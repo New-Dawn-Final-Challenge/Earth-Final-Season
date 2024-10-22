@@ -1,4 +1,5 @@
 import SwiftUI
+import Design_System
 
 struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
@@ -67,6 +68,9 @@ struct GameplayView: View {
             }
             
         }
+        .background(
+            Assets.Colors.bgFillPrimary.swiftUIColor
+        )
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.currentState == .gameOver) {
             Task {

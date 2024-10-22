@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct ChaosIndicatorsView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
@@ -20,7 +21,6 @@ struct ChaosIndicatorsView: View {
             Text("Year: \(year)")
                 .font(.bodyFont)
                 .bold()
-                .padding(.bottom, 10)
             
             HStack(spacing: getWidth() * 0.1) {
                 // Environmental Degradation indicator with overlay
@@ -104,8 +104,9 @@ struct ChaosIndicatorsView: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .foregroundStyle(Color(UIColor.systemGray4))
+            Assets.Images.indicatorsScreen.swiftUIImage
+                .resizable()
+                .scaledToFit()
         )
         .onChange(of: gameplayVM.currentState) {
             if gameplayVM.currentState == .consequence {
