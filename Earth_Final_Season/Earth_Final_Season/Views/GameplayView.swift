@@ -22,35 +22,50 @@ struct GameplayView: View {
                           consequence1: event.consequenceDescription1,
                           consequence2: event.consequenceDescription2
                 )
+                switch (settingsVM.selectedGesture) {
+                case .holdDrag:
+                    VStack(spacing: -20) {
+                        ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
+                                     text: event.choice1)
+                        .padding(.trailing, 100)
 
-                VStack(spacing: -20) {
-                    ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
-                                 text: event.choice1)
-                    .padding(.trailing, 100)
-
-                    ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
-                                 text: event.choice2)
-                    .padding(.leading, 100)
+                        ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
+                                     text: event.choice2)
+                        .padding(.leading, 100)
+                    }
+                    .padding(.top, -15)
+                    // Hide the choices to focus on the consequence
+                    .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                case .tap:
+                    TapView(onChooseOption1:  {
+                        gameplayVM.chooseOption(option: 1)
+                    },
+                            onChooseOption2: {
+                        gameplayVM.chooseOption(option: 2)
+                    },
+                            text1: event.choice1,
+                            text2: event.choice2
+                    )
+                    .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
                 }
-                .padding(.top, -15)
-                // Hide the choices to focus on the consequence
-                .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
             } else {
                 Text("No more events")
                     .font(.title)
                     .padding()
             }
             
-            SliderView(
-                onChooseOption1: {
-                    gameplayVM.chooseOption(option: 1)
-                },
-                onChooseOption2: {
-                    gameplayVM.chooseOption(option: 2)
-                }
-            )
+            if (settingsVM.selectedGesture == .holdDrag) {
+                SliderView(
+                    onChooseOption1: {
+                        gameplayVM.chooseOption(option: 1)
+                    },
+                    onChooseOption2: {
+                        gameplayVM.chooseOption(option: 2)
+                    }
+                )
+                Spacer()
+            }
             
-            Spacer()
         }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.currentState == .gameOver) {

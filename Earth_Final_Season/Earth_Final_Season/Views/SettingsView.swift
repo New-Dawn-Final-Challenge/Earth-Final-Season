@@ -110,8 +110,10 @@ struct SettingsView: View {
     }
 }
 
-enum Gesture {
-    case holdDrag, tap
+// swiftlint:disable min_length
+enum Gesture: Int {
+    case holdDrag
+    case tap
 }
 
 extension AnyTransition {

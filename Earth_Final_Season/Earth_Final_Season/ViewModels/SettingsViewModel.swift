@@ -22,7 +22,12 @@ class SettingsViewModel {
             UserDefaults.standard.set(hapticsEnabled, forKey: "hapticsEnabled")
         }
     }
-    var selectedGesture: Gesture = .holdDrag
+    var selectedGesture: Gesture = .holdDrag {
+        didSet {
+            UserDefaults.standard.set(selectedGesture.rawValue, forKey: "selectedGesture")
+            print("saved \(selectedGesture.rawValue)")
+        }
+    }
     var hapticsIntensity: Float = 1 {
         didSet {
             HapticsManager.shared.setIntensity(hapticsIntensity/100)
@@ -34,6 +39,9 @@ class SettingsViewModel {
             self.musicIntensity = UserDefaults.standard.float(forKey: "musicIntensity") != 0 ? UserDefaults.standard.float(forKey: "musicIntensity") : 33.5
             self.hapticsIntensity = UserDefaults.standard.float(forKey: "hapticsIntensity") != 0 ? UserDefaults.standard.float(forKey: "hapticsIntensity") : 100.0
             self.hapticsEnabled = UserDefaults.standard.bool(forKey: "hapticsEnabled")
+            let rawValue = UserDefaults.standard.integer(forKey: "selectedGesture")
+        print("raw value: \(rawValue)")
+        self.selectedGesture = Gesture(rawValue: rawValue) ?? .holdDrag
         }
     func playMusic(music name: String) {
         SoundtrackAudioManager.shared.playSoundtrack(named: name)
