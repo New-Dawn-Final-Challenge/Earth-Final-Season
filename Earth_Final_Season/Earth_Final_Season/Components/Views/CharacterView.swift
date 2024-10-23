@@ -24,16 +24,17 @@ struct CharacterView: View {
             // Image rectangle
             Assets.Images.characterScreen.swiftUIImage
                 .resizable()
-                .scaledToFit()
+                .frame(width: getWidth() * 0.5,
+                       height: getHeight() * 0.18)
                 .overlay(
-                    VStack(spacing: 12) {
+                    VStack() {
                         Image(characterImage)
                             .resizable()
-                            .frame(width: getWidth() * 0.4,
-                                   height: getHeight() * 0.115)
-                            .aspectRatio(contentMode: .fill)
-                            .foregroundColor(.accentColor)
+                            .frame(width: getWidth() * 0.32,
+                                   height: getHeight() * 0.08)
                             .cornerRadius(16)
+                        
+                        Spacer()
                         
                         Text(characterName)
                             .font(.bodyFont)
@@ -43,8 +44,8 @@ struct CharacterView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity)
                     }
-                    .padding(.vertical, 35)
-                    .padding(.horizontal, 20)
+                    .padding(.vertical, 30)
+                    .padding(.horizontal)
                 )
         }
     }

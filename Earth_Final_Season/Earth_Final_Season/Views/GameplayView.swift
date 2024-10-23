@@ -9,7 +9,7 @@ struct GameplayView: View {
     @State private var showGameOver = false
     
     var body: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: -10) {
             helperButtonsView
             
             indicatorsView
@@ -25,18 +25,21 @@ struct GameplayView: View {
                 )
                 switch (settingsVM.selectedGesture) {
                 case .holdDrag:
-                    VStack(spacing: -20) {
+                    VStack(spacing: -30) {
                         ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
-                                     text: event.choice1)
-                        .padding(.trailing, 100)
+                                    text: event.choice1,
+                                    image: Assets.Images.optionScreen2.swiftUIImage)
+                        .padding(.trailing, 130)
 
                         ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
-                                     text: event.choice2)
-                        .padding(.leading, 100)
+                                    text: event.choice2,
+                                    image: Assets.Images.optionScreen1.swiftUIImage)
+                        .padding(.leading, 130)
                     }
                     .padding(.top, -15)
                     // Hide the choices to focus on the consequence
                     .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                    
                 case .tap:
                     TapView(onChooseOption1:  {
                         gameplayVM.chooseOption(option: 1)
@@ -64,6 +67,7 @@ struct GameplayView: View {
                         gameplayVM.chooseOption(option: 2)
                     }
                 )
+                .padding(.top, 40)
                 Spacer()
             }
             

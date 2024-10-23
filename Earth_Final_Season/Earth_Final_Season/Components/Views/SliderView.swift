@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct SliderView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
@@ -18,78 +19,83 @@ struct SliderView: View {
     var onChooseOption2: () -> Void
 
     var body: some View {
-        let sliderWidth = getWidth() * 0.5
-        let sliderHeight = getHeight() * 0.05
+        let sliderWidth = getWidth() * 0.4
+        let sliderHeight = getHeight() * 0.03
         
-        let rightLimit = (sliderWidth / 2)
-        let leftLimit = -(sliderWidth / 2)
+        let rightLimit = (sliderWidth / 2.5)
+        let leftLimit = -(sliderWidth / 2.5)
 
-        RoundedRectangle(cornerRadius: 16)
+        Assets.Images.sliderBar.swiftUIImage
+            .resizable()
             .frame(width: sliderWidth, height: sliderHeight)
-            .foregroundStyle(Color(UIColor.purple))
             .overlay(
-                Circle()
-                    .foregroundStyle(Color(UIColor.systemPink))
-                    .padding(-6) // Set circle size
-                    .offset(dragOffset)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { gesture in
-                                
-                                if gameplayVM.currentState != .consequence {
-                                    // Calculate the new drag offset within the limits
-                                    finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
-                                    dragOffset = CGSize(width: finalOffsetX, height: 0)
+                VStack {
+                    Assets.Images.sliderDragger.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .padding(-30) // Set dragger size
+                        .offset(dragOffset)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { gesture in
+                                    
+                                    if gameplayVM.currentState != .consequence {
+                                        // Calculate the new drag offset within the limits
+                                        finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
+                                        dragOffset = CGSize(width: finalOffsetX, height: 0)
 
-                                    // Update the feedback trigger to the current drag location
-                                    feedbackTrigger = CGPoint(x: dragOffset.width, y: 0)
+                                        // Update the feedback trigger to the current drag location
+                                        feedbackTrigger = CGPoint(x: dragOffset.width, y: 0)
 
-                                    // Update shadow radius based on the circle's relative position within the slider
-                                    if finalOffsetX < 0 {
-                                        gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
-                                        gameplayVM.option2ShadowRadius = 0
-                                        
-                                        resetIndicatorsShadows()
-                                                   
-                                        checkFirstOptionIndicators()
-                                        
-                                    } else {
-                                        gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
-                                        gameplayVM.option1ShadowRadius = 0
-                                        
-                                        resetIndicatorsShadows()
+                                        // Update shadow radius based on the circle's relative position within the slider
+                                        if finalOffsetX < 0 {
+                                            gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
+                                            gameplayVM.option2ShadowRadius = 0
+                                            
+                                            resetIndicatorsShadows()
+                                                       
+                                            checkFirstOptionIndicators()
+                                            
+                                        } else {
+                                            gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
+                                            gameplayVM.option1ShadowRadius = 0
+                                            
+                                            resetIndicatorsShadows()
 
-                                        checkSecondOptionIndicators()
+                                            checkSecondOptionIndicators()
+                                        }
                                     }
                                 }
-                            }
-                            .onEnded { _ in
-                                if gameplayVM.currentState != .consequence {
-                                    withAnimation {
-                                        // Option 1 chosen
-                                        if finalOffsetX == leftLimit {
-                                            HapticsManager.shared.complexSuccess()
-                                            onChooseOption1()
-                                            gameplayVM.mainScreenShadowRadius = 12
-                                        }
+                                .onEnded { _ in
+                                    if gameplayVM.currentState != .consequence {
+                                        withAnimation {
+                                            // Option 1 chosen
+                                            if finalOffsetX == leftLimit {
+                                                HapticsManager.shared.complexSuccess()
+                                                onChooseOption1()
+                                                gameplayVM.mainScreenShadowRadius = 12
+                                            }
 
-                                        // Option 2 chosen
-                                        else if finalOffsetX == rightLimit {
-                                            HapticsManager.shared.complexSuccess()
-                                            onChooseOption2()
-                                            gameplayVM.mainScreenShadowRadius = 12
-                                        }
+                                            // Option 2 chosen
+                                            else if finalOffsetX == rightLimit {
+                                                HapticsManager.shared.complexSuccess()
+                                                onChooseOption2()
+                                                gameplayVM.mainScreenShadowRadius = 12
+                                            }
 
-                                        // Reset position and shadows
-                                        resetIndicatorsShadows()
-                                        dragOffset = .zero
-                                        gameplayVM.mainScreenShadowRadius = 0
-                                        gameplayVM.option1ShadowRadius = 0
-                                        gameplayVM.option2ShadowRadius = 0
+                                            // Reset position and shadows
+                                            resetIndicatorsShadows()
+                                            dragOffset = .zero
+                                            gameplayVM.mainScreenShadowRadius = 0
+                                            gameplayVM.option1ShadowRadius = 0
+                                            gameplayVM.option2ShadowRadius = 0
+                                        }
                                     }
                                 }
-                            }
-                    )
+                        )
+                        .padding(.bottom, 30)
+                    Spacer()
+                }
             )
             .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity)*0.28), trigger: feedbackTrigger)
     }
