@@ -18,6 +18,7 @@ struct ConsequencesView: View {
             .padding()
             .overlay(
                 Text(text)
+                    .font(.bodyFont)
             )
     }
 }
