@@ -8,6 +8,10 @@
 import SwiftUI
 
 extension Font {
+    static var hugeTitleFont: Font {
+        return .custom("ShareTechMono-Regular", size: 70)
+    }
+    
     static var largeTitleFont: Font {
         return .custom("ShareTechMono-Regular", size: UIFont.preferredFont(forTextStyle: .largeTitle).pointSize)
     }

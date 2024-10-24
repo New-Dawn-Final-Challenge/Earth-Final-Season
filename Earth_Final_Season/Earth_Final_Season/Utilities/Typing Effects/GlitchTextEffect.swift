@@ -17,7 +17,8 @@ struct GlitchTextEffect: View {
         VStack {
             ZStack {
                 glitchTextView(text ?? "", trigger: trigger, intensity: intensity)
-                    .font(.system(size: 70, weight: .semibold))
+                    .font(.hugeTitleFont)
+                    .bold()
             }
         }
         .onAppear {

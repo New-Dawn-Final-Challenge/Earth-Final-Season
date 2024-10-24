@@ -117,7 +117,7 @@ private struct Exampleview: View {
                                )
             }
             .lineLimit(3)
-            .font(.largeTitle)
+            .font(.bodyFont)
             .padding()
             Spacer()
             
@@ -125,7 +125,7 @@ private struct Exampleview: View {
                     
             }
             .opacity(opacity)
-            .font(.title)
+            .font(.title1Font)
             .buttonStyle(.bordered)
             .tint(.pink)
             
