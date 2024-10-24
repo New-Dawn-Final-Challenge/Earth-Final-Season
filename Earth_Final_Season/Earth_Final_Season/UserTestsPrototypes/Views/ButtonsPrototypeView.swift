@@ -23,6 +23,7 @@ struct ButtonsPrototypeView: View {
             Spacer()
 
             Text(optionToChoose)
+                .font(.bodyFont)
                 .padding(100)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
@@ -67,6 +68,7 @@ struct ButtonsPrototypeView: View {
                         .padding()
                         .overlay(
                             Text("This is option A")
+                                .font(.bodyFont)
                                 .foregroundStyle(Color.white)
                         )
                         .shadow(color: Color.pink, radius: CGFloat(optionAShadowRadius))
@@ -110,6 +112,7 @@ struct ButtonsPrototypeView: View {
                         .padding()
                         .overlay(
                             Text("This is option B")
+                                .font(.bodyFont)
                                 .foregroundStyle(Color.white)
                         )
                         .shadow(color: Color.pink, radius: CGFloat(optionBShadowRadius))

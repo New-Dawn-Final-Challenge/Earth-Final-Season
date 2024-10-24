@@ -61,6 +61,7 @@ struct MenuView: View {
                         .cornerRadius(10)
                 }
             }
+            .font(.bodyFont)
         }
     }
 }

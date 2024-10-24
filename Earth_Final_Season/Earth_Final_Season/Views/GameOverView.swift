@@ -19,7 +19,7 @@ struct GameOverView: View {
             VStack(alignment: .center) {
                 Spacer()
                 GlitchTextEffect(text: "Game Over", intensity: 2)
-                    .font(.largeTitle)
+                    .font(.largeTitleFont)
                     .padding()
                 HackerTextView(text: gameplayVM.getGameOverReason() ?? "Crossed the road without looking at both sides",
                                trigger: trigger,
@@ -27,7 +27,8 @@ struct GameOverView: View {
                                speed: 0.001
                 )
                 .lineLimit(4)
-                .font(.title3)
+                .multilineTextAlignment(.center)
+                .font(.bodyFont)
                 .padding()
                 Spacer()
             }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct CharacterView: View {
     let characterImage: String
@@ -21,31 +22,32 @@ struct CharacterView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Image rectangle
-            Rectangle()
-                .fill(Color.gray.opacity(0.2))
-                .frame(width: getWidth() * 0.41,
-                       height: getHeight() * 0.115)
+            Assets.Images.characterScreen.swiftUIImage
+                .resizable()
+                .frame(width: getWidth() * 0.5,
+                       height: getHeight() * 0.18)
                 .overlay(
-                    Image(characterImage)
-                        .resizable()
-                        .frame(width: getWidth() * 0.41,
-                               height: getHeight() * 0.115)
-                        .aspectRatio(contentMode: .fill)
-                        .foregroundColor(.accentColor)
-                )
-            
-            // Name rectangle
-            Rectangle()
-                .foregroundStyle(Color(UIColor.systemGray4))
-                .frame(width: getWidth() * 0.41,
-                       height: getHeight() * 0.063)
-                .overlay(
-                    Text(characterName)
-                        .bold()
-                        .multilineTextAlignment(.center)
+                    VStack() {
+                        Image(characterImage)
+                            .resizable()
+                            .frame(width: getWidth() * 0.32,
+                                   height: getHeight() * 0.08)
+                            .cornerRadius(16)
+                        
+                        Spacer()
+                        
+                        Text(characterName)
+                            .font(.bodyFont)
+                            .bold()
+                            .multilineTextAlignment(.center)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding(.vertical, 30)
+                    .padding(.horizontal)
                 )
         }
-        .cornerRadius(16) // Add rounding to both rectangles
     }
 }
 
