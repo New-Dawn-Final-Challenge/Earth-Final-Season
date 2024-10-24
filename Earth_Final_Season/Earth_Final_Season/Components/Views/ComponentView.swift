@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct CriandoComponente: View {
     
@@ -27,6 +28,7 @@ struct CriandoComponente: View {
         } label: {
             Text(tituloBotao).bold()
                 .font(.bodyFont)
+                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                 .frame(width: 80, height: 80, alignment: .center)
                 .foregroundColor(corTitulo)
                 .background(corBotao)

@@ -20,6 +20,7 @@ struct ChaosIndicatorsView: View {
         VStack {
             Text("Year: \(year)")
                 .font(.bodyFont)
+                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                 .bold()
             
             HStack(spacing: getWidth() * 0.1) {

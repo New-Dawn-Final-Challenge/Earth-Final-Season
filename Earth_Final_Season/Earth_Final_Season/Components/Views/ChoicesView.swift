@@ -23,6 +23,7 @@ struct ChoicesView: View {
             .overlay(
                 Text(text)
                     .font(.bodyFont)
+                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                     .padding(.horizontal, 50)
             )
     }
