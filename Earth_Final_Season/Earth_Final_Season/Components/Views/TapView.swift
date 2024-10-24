@@ -35,6 +35,7 @@ struct TapView: View {
                     .overlay(
                         Text(text1)
                             .font(.bodyFont)
+                            .foregroundStyle(.black)
                             .padding(.horizontal, 50)
                     )
                     .shadow(color: Color.orange, radius: CGFloat(shadowRadius1))
@@ -66,6 +67,7 @@ struct TapView: View {
                     .overlay(
                         Text(text2)
                             .font(.bodyFont)
+                            .foregroundStyle(.black)
                             .padding(.horizontal, 50)
                     )
                     .shadow(color: Color.pink, radius: CGFloat(shadowRadius2))

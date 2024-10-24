@@ -53,7 +53,7 @@ struct GameplayView: View {
                         .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
                         
                     case .tap:
-                        VStack(spacing: -30) {
+                        VStack {
                             TapView(onChooseOption1:  {
                                 gameplayVM.chooseOption(option: 1)
                             },
@@ -65,6 +65,7 @@ struct GameplayView: View {
                             )
                             .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
                         }
+                        .padding(.top, -15)
                     }
                 } else {
                     Text("No more events")
@@ -92,8 +93,23 @@ struct GameplayView: View {
                             .scaleEffect(0.8)
                     }
                     .padding(.top, 40)
+                } else {
+                    HStack {
+                        Assets.Images.panelAccessoryA.swiftUIImage
+                            .resizable()
+                            .frame(width: getWidth() * 0.3,
+                                   height: getHeight() * 0.08)
+                        
+                        Spacer()
+                        
+                        Assets.Images.panelAccessoryB.swiftUIImage
+                            .resizable()
+                            .frame(width: getWidth() * 0.3,
+                                   height: getHeight() * 0.08)
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.top, 40)
                 }
-                
             }
         }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
