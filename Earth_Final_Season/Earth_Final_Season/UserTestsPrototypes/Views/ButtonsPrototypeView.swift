@@ -7,6 +7,7 @@
 
 import CoreHaptics
 import SwiftUI
+import Design_System
 
 struct ButtonsPrototypeView: View {
     
@@ -24,6 +25,7 @@ struct ButtonsPrototypeView: View {
 
             Text(optionToChoose)
                 .font(.bodyFont)
+                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                 .padding(100)
                 .background(
                     RoundedRectangle(cornerRadius: 16)

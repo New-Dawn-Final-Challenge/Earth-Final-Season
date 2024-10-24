@@ -27,6 +27,7 @@ struct EventView: View {
             .overlay(
                 Text(textToShow)
                     .font(.bodyFont)
+                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 40)
             )

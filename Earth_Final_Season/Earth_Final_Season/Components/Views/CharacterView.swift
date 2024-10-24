@@ -38,6 +38,7 @@ struct CharacterView: View {
                         
                         Text(characterName)
                             .font(.bodyFont)
+                            .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                             .bold()
                             .multilineTextAlignment(.center)
                             .lineLimit(nil)
