@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct TapView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
@@ -18,7 +19,7 @@ struct TapView: View {
     var desiredOffset: Float = 28.0
     
     var body: some View {
-        VStack(alignment: .center, spacing: -10) {
+        VStack(alignment: .center, spacing: -30) {
             Button {
                 onChooseOption1()
                 resetIndicatorsShadows()
@@ -26,18 +27,18 @@ struct TapView: View {
                 shadowRadius1 = 0
                 shadowRadius2 = 0
             } label: {
-                RoundedRectangle(cornerRadius: 16)
-                    .frame(width: getWidth() * 0.9,
-                           height: getHeight() * 0.10)
-                    .foregroundStyle(Color(UIColor.systemGray4))
+                Assets.Images.optionScreen2.swiftUIImage
+                    .resizable()
+                    .frame(width: getWidth() * 0.8,
+                           height: getHeight() * 0.12)
                     .padding()
                     .overlay(
                         Text(text1)
-                            .foregroundStyle(Color.orange.gradient)
-                            .padding(.horizontal, 30)
+                            .font(.bodyFont)
+                            .padding(.horizontal, 50)
                     )
                     .shadow(color: Color.orange, radius: CGFloat(shadowRadius1))
-                    .offset(x: -CGFloat(desiredOffset))
+                    .padding(.trailing, 130)
             }
             .simultaneousGesture(
                 LongPressGesture(minimumDuration: 0.1).onEnded {_ in
@@ -57,18 +58,18 @@ struct TapView: View {
                 shadowRadius1 = 0
                 shadowRadius2 = 0
             } label: {
-                RoundedRectangle(cornerRadius: 16)
-                    .frame(width: getWidth() * 0.9,
-                           height: getHeight() * 0.10)
-                    .foregroundStyle(Color(UIColor.systemGray4))
+                Assets.Images.optionScreen1.swiftUIImage
+                    .resizable()
+                    .frame(width: getWidth() * 0.8,
+                           height: getHeight() * 0.12)
                     .padding()
                     .overlay(
                         Text(text2)
-                            .foregroundStyle(Color.pink.gradient)
-                            .padding(.horizontal, 30)
+                            .font(.bodyFont)
+                            .padding(.horizontal, 50)
                     )
-                    .offset(x: CGFloat(desiredOffset))
                     .shadow(color: Color.pink, radius: CGFloat(shadowRadius2))
+                    .padding(.leading, 130)
             }
             .simultaneousGesture(
                 LongPressGesture(minimumDuration: 0.1).onEnded {_ in

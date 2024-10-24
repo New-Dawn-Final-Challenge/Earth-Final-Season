@@ -9,79 +9,7 @@ struct GameplayView: View {
     @State private var showGameOver = false
     
     var body: some View {
-        VStack(spacing: -10) {
-            helperButtonsView
-            
-            indicatorsView
-            
-            if let event = gameplayVM.getEvent() {
-
-                // Change image to current image
-                CharacterView(characterImage: "image1", characterName: event.character)
-                
-                EventView(eventDescription: event.description,
-                          consequence1: event.consequenceDescription1,
-                          consequence2: event.consequenceDescription2
-                )
-                switch (settingsVM.selectedGesture) {
-                case .holdDrag:
-                    VStack(spacing: -30) {
-                        ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
-                                    text: event.choice1,
-                                    image: Assets.Images.optionScreen2.swiftUIImage)
-                        .padding(.trailing, 130)
-
-                        ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
-                                    text: event.choice2,
-                                    image: Assets.Images.optionScreen1.swiftUIImage)
-                        .padding(.leading, 130)
-                    }
-                    .padding(.top, -15)
-                    // Hide the choices to focus on the consequence
-                    .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
-                    
-                case .tap:
-                    TapView(onChooseOption1:  {
-                        gameplayVM.chooseOption(option: 1)
-                    },
-                            onChooseOption2: {
-                        gameplayVM.chooseOption(option: 2)
-                    },
-                            text1: event.choice1,
-                            text2: event.choice2
-                    )
-                    .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
-                }
-            } else {
-                Text("No more events")
-                    .font(.title)
-                    .padding()
-            }
-            
-            if (settingsVM.selectedGesture == .holdDrag) {
-                HStack {
-                    Assets.Images.panelAccessoryA.swiftUIImage
-                        .resizable()
-                        .scaleEffect(0.8)
-                    
-                    SliderView(
-                        onChooseOption1: {
-                            gameplayVM.chooseOption(option: 1)
-                        },
-                        onChooseOption2: {
-                            gameplayVM.chooseOption(option: 2)
-                        }
-                    )
-                    
-                    Assets.Images.panelAccessoryB.swiftUIImage
-                        .resizable()
-                        .scaleEffect(0.8)
-                }
-                .padding(.top, 40)
-            }
-            
-        }
-        .background(
+        ZStack {
             ZStack {
                 Assets.Colors.bgFillPrimary.swiftUIColor
                 Assets.Images.skyAndStars.swiftUIImage
@@ -92,7 +20,82 @@ struct GameplayView: View {
                     .scaledToFit()
             }
             .ignoresSafeArea()
-        )
+            
+            VStack(spacing: -10) {
+                helperButtonsView
+                
+                indicatorsView
+                
+                if let event = gameplayVM.getEvent() {
+
+                    // Change image to current image
+                    CharacterView(characterImage: "image1", characterName: event.character)
+                    
+                    EventView(eventDescription: event.description,
+                              consequence1: event.consequenceDescription1,
+                              consequence2: event.consequenceDescription2
+                    )
+                    switch (settingsVM.selectedGesture) {
+                    case .holdDrag:
+                        VStack(spacing: -30) {
+                            ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
+                                        text: event.choice1,
+                                        image: Assets.Images.optionScreen2.swiftUIImage)
+                            .padding(.trailing, 130)
+
+                            ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
+                                        text: event.choice2,
+                                        image: Assets.Images.optionScreen1.swiftUIImage)
+                            .padding(.leading, 130)
+                        }
+                        .padding(.top, -15)
+                        // Hide the choices to focus on the consequence
+                        .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                        
+                    case .tap:
+                        VStack(spacing: -30) {
+                            TapView(onChooseOption1:  {
+                                gameplayVM.chooseOption(option: 1)
+                            },
+                                    onChooseOption2: {
+                                gameplayVM.chooseOption(option: 2)
+                            },
+                                    text1: event.choice1,
+                                    text2: event.choice2
+                            )
+                            .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                        }
+                    }
+                } else {
+                    Text("No more events")
+                        .font(.title)
+                        .padding()
+                }
+                
+                if (settingsVM.selectedGesture == .holdDrag) {
+                    HStack {
+                        Assets.Images.panelAccessoryA.swiftUIImage
+                            .resizable()
+                            .scaleEffect(0.8)
+                        
+                        SliderView(
+                            onChooseOption1: {
+                                gameplayVM.chooseOption(option: 1)
+                            },
+                            onChooseOption2: {
+                                gameplayVM.chooseOption(option: 2)
+                            }
+                        )
+                        
+                        Assets.Images.panelAccessoryB.swiftUIImage
+                            .resizable()
+                            .scaleEffect(0.8)
+                    }
+                    .padding(.top, 40)
+                }
+                
+            }
+        }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.currentState == .gameOver) {
             Task {
@@ -122,7 +125,7 @@ struct GameplayView: View {
                 SettingsButtonView()
             }
         }
-        .padding(.trailing)
+        .padding(.trailing, 50)
     }
     
     private var indicatorsView: some View {
