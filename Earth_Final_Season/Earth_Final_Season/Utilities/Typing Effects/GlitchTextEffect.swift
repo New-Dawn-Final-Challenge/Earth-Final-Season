@@ -9,13 +9,14 @@ import SwiftUI
 
 struct GlitchTextEffect: View {
     var text: String?
+    var intensity: CGFloat = 1.0
     @State private var trigger = false
     @State var timer: Timer?
     @State var duration: Float = 3
     var body: some View {
         VStack {
             ZStack {
-                glitchTextView(text ?? "", trigger: trigger)
+                glitchTextView(text ?? "", trigger: trigger, intensity: intensity)
                     .font(.system(size: 70, weight: .semibold))
             }
         }
@@ -24,23 +25,23 @@ struct GlitchTextEffect: View {
         }
     }
     @ViewBuilder
-    func glitchTextView(_ text: String, trigger: Bool) -> some View {
+    func glitchTextView(_ text: String, trigger: Bool, intensity: CGFloat) -> some View {
         ZStack {
             GlitchView(text: text, trigger: trigger, radius: 1, frames: {
                 LinearKeyframe(
-                    GlitchFrame(top: -5, center: 0, bottom: 0, shadowOpacity: 0.2),
+                    GlitchFrame(top: -5, center: 0, bottom: 0, shadowOpacity: 0.2 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: -5, center: -5, bottom: -5, shadowOpacity: 0.6),
+                    GlitchFrame(top: -5, center: -5, bottom: -5, shadowOpacity: 0.6 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: -5, center: -5, bottom: 5, shadowOpacity: 0.8),
+                    GlitchFrame(top: -5, center: -5, bottom: 5, shadowOpacity: 0.8 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: 5, center: 5, bottom: 5, shadowOpacity: 0.4),
+                    GlitchFrame(top: 5, center: 5, bottom: 5, shadowOpacity: 0.4 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: 5, center: 0, bottom: 5, shadowOpacity: 0.1),
+                    GlitchFrame(top: 5, center: 0, bottom: 5, shadowOpacity: 0.1 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
                     GlitchFrame(),
@@ -49,19 +50,19 @@ struct GlitchTextEffect: View {
             
             GlitchView(text: text, trigger: trigger, shadow: .green, radius: 1, frames: {
                 LinearKeyframe(
-                    GlitchFrame(top: 0, center: 5, bottom: 0, shadowOpacity: 0.2),
+                    GlitchFrame(top: 0, center: 5, bottom: 0, shadowOpacity: 0.2 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: 5, center: 5, bottom: 5, shadowOpacity: 0.3),
+                    GlitchFrame(top: 5, center: 5, bottom: 5, shadowOpacity: 0.3 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: 5, center: 5, bottom: -5, shadowOpacity: 0.7),
+                    GlitchFrame(top: 5, center: 5, bottom: -5, shadowOpacity: 0.7 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: 0, center: 5, bottom: -5, shadowOpacity: 0.5),
+                    GlitchFrame(top: 0, center: 5, bottom: -5, shadowOpacity: 0.5 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: 0, center: -5, bottom: 0, shadowOpacity: 0.15),
+                    GlitchFrame(top: 0, center: -5, bottom: 0, shadowOpacity: 0.15 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
                     GlitchFrame(),
@@ -70,13 +71,13 @@ struct GlitchTextEffect: View {
             
             GlitchView(text: text, trigger: trigger, shadow: .yellow, radius: 1, frames: {
                 LinearKeyframe(
-                    GlitchFrame(top: 5, center: 5, bottom: 5, shadowOpacity: 0.15),
+                    GlitchFrame(top: 5, center: 5, bottom: 5, shadowOpacity: 0.15 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: -5, center: -5, bottom: -5, shadowOpacity: 0.4),
+                    GlitchFrame(top: -5, center: -5, bottom: -5, shadowOpacity: 0.4 * intensity),
                     duration: 0.1)
                 LinearKeyframe(
-                    GlitchFrame(top: 0, center: 5, bottom: -2, shadowOpacity: 0.75),
+                    GlitchFrame(top: 0, center: 5, bottom: -2, shadowOpacity: 0.75 * intensity),
                     duration: 0.1)
                 
                 LinearKeyframe(

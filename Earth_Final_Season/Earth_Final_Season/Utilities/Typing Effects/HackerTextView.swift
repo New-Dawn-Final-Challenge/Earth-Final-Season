@@ -104,7 +104,7 @@ private struct Exampleview: View {
     var body: some View {
         VStack(alignment: .center) {
             Spacer()
-            GlitchTextEffect(text: "Game Over")
+            GlitchTextEffect(text: "Game Over", intensity: 2)
                 .font(.largeTitle)
                 .padding()
             
