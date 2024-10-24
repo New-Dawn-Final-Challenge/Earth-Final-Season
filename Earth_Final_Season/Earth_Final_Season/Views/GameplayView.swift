@@ -59,21 +59,39 @@ struct GameplayView: View {
             }
             
             if (settingsVM.selectedGesture == .holdDrag) {
-                SliderView(
-                    onChooseOption1: {
-                        gameplayVM.chooseOption(option: 1)
-                    },
-                    onChooseOption2: {
-                        gameplayVM.chooseOption(option: 2)
-                    }
-                )
+                HStack {
+                    Assets.Images.panelAccessoryA.swiftUIImage
+                        .resizable()
+                        .scaleEffect(0.8)
+                    
+                    SliderView(
+                        onChooseOption1: {
+                            gameplayVM.chooseOption(option: 1)
+                        },
+                        onChooseOption2: {
+                            gameplayVM.chooseOption(option: 2)
+                        }
+                    )
+                    
+                    Assets.Images.panelAccessoryB.swiftUIImage
+                        .resizable()
+                        .scaleEffect(0.8)
+                }
                 .padding(.top, 40)
-                Spacer()
             }
             
         }
         .background(
-            Assets.Colors.bgFillPrimary.swiftUIColor
+            ZStack {
+                Assets.Colors.bgFillPrimary.swiftUIColor
+                Assets.Images.skyAndStars.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                Assets.Images.spaceShip.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+            }
+            .ignoresSafeArea()
         )
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.currentState == .gameOver) {
