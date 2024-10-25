@@ -31,4 +31,8 @@ extension Font {
     static var headlineFont: Font {
         return .custom("ShareTechMono-Regular", size: UIFont.preferredFont(forTextStyle: .headline).pointSize)
     }
+    
+    static var footnoteFont: Font {
+        return .custom("ShareTechMono-Regular", size: UIFont.preferredFont(forTextStyle: .footnote).pointSize)
+    }
 }

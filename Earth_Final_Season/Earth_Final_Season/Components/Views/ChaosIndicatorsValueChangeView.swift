@@ -21,12 +21,16 @@ struct ChaosIndicatorsValueChangeView: View {
     }
 
     var body: some View {
-        HStack() {
+        HStack(alignment: .center, spacing: 4) {
             Image(systemName: gameplayVM.valueIsIncreasing[nIndicator] ?
                   "arrowshape.up.fill" : "arrowshape.down.fill")
+                .resizable()
+                .frame(width: getWidth() * 0.03,
+                       height: getHeight() * 0.015)
             Text(String(gameplayVM.value[nIndicator]))
-                .font(.bodyFont)
+                .font(.footnoteFont)
                 .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                .multilineTextAlignment(.center)
         }
         .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ? .orange : .cyan)
         .opacity(gameplayVM.shouldShowIndicator[nIndicator] ? 1 : 0)
