@@ -19,7 +19,8 @@ struct ChoicesView: View {
             .frame(width: getWidth() * 0.8,
                    height: getHeight() * 0.12)
             .padding()
-            .shadow(color: Color.pink, radius: CGFloat(shadowRadius))
+            .shadow(color: Assets.Colors.secondaryGreen.swiftUIColor,
+                    radius: CGFloat(shadowRadius))
             .overlay(
                 Text(text)
                     .font(.bodyFont)

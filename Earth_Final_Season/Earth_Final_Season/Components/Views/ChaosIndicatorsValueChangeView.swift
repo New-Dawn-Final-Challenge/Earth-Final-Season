@@ -32,7 +32,9 @@ struct ChaosIndicatorsValueChangeView: View {
                 .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                 .multilineTextAlignment(.center)
         }
-        .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ? .orange : .cyan)
+        .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ?
+                         Assets.Colors.secondaryPurple.swiftUIColor :
+                         Assets.Colors.secondaryBlue.swiftUIColor)
         .opacity(gameplayVM.shouldShowIndicator[nIndicator] ? 1 : 0)
         .scaleEffect(gameplayVM.scaleChange[nIndicator], anchor: .bottom)
         .onChange(of: gameplayVM.currentState) {

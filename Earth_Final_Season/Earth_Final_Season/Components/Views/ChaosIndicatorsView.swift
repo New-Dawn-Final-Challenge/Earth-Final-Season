@@ -51,9 +51,12 @@ struct ChaosIndicatorsView: View {
                                 Assets.Images.environmentalDegradationSimple.swiftUIImage
                                     .resizable()
                             )
-                            .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.environmentalDegradationDecreaseShadowRadius))
-                            .shadow(color: Color.orange, radius: CGFloat(gameplayVM.environmentalDegradationIncreaseShadowRadius))
-                            .shadow(color: Color.purple, radius: CGFloat(gameplayVM.environmentalDegradationShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryBlue.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.environmentalDegradationDecreaseShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryPurpleVariation.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.environmentalDegradationIncreaseShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryGreen.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.environmentalDegradationShadowRadius))
                     }
 
                     // Ill-being indicator with overlay
@@ -77,9 +80,12 @@ struct ChaosIndicatorsView: View {
                                 Assets.Images.illbeingSimple.swiftUIImage
                                     .resizable()
                             )
-                            .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.illBeingDecreaseShadowRadius))
-                            .shadow(color: Color.orange, radius: CGFloat(gameplayVM.illBeingIncreaseShadowRadius))
-                            .shadow(color: Color.purple, radius: CGFloat(gameplayVM.illBeingShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryBlue.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.illBeingDecreaseShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryPurpleVariation.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.illBeingIncreaseShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryGreen.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.illBeingShadowRadius))
                     }
 
                     // Sociopolitical Instability with overlay
@@ -103,9 +109,12 @@ struct ChaosIndicatorsView: View {
                                 Assets.Images.sociopoliticalInstabilitySimple.swiftUIImage
                                     .resizable()
                             )
-                            .shadow(color: Color.cyan, radius: CGFloat(gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius))
-                            .shadow(color: Color.orange, radius: CGFloat(gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius))
-                            .shadow(color: Color.purple, radius: CGFloat(gameplayVM.sociopoliticalInstabilityShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryBlue.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.sociopoliticalInstabilityDecreaseShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryPurpleVariation.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.sociopoliticalInstabilityIncreaseShadowRadius))
+                            .shadow(color: Assets.Colors.secondaryGreen.swiftUIColor,
+                                    radius: CGFloat(gameplayVM.sociopoliticalInstabilityShadowRadius))
                     }
                 }
             }
