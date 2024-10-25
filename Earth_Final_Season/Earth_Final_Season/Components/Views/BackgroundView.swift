@@ -24,6 +24,24 @@ struct BackgroundView: View {
             Color(red: 0.208, green: 0.212, blue: 0.216)
                 .edgesIgnoringSafeArea(.all)
             
+            TimelineView(.animation) { context in
+                Assets.Images.sparkles.swiftUIImage
+                .resizable()
+                .scaledToFit()
+                .frame(width: getWidth(), height: getHeight())
+                .opacity(0.7)
+                .visualEffect { content, proxy in
+                    content
+                    .distortionEffect(ShaderLibrary.complexWave(
+                        .float(startDate.timeIntervalSinceNow),
+                        .float2(proxy.size),
+                        .float(0.5),
+                        .float(1),
+                        .float(10)
+                    ), maxSampleOffset: .zero)
+                }
+            }
+            
             GeometryReader { geo in
                 VStack(spacing: 100) {
                     Assets.Images.nebula.swiftUIImage
@@ -69,23 +87,10 @@ struct BackgroundView: View {
                     .cornerRadius(12)
             }
             
-            TimelineView(.animation) { context in
-                Assets.Images.spaceShip.swiftUIImage
-                .resizable()
-                .scaledToFit()
-                .frame(width: getWidth(), height: getHeight())
-                .edgesIgnoringSafeArea(.all)
-                .visualEffect { content, proxy in
-                    content
-                    .distortionEffect(ShaderLibrary.complexWave(
-                        .float(startDate.timeIntervalSinceNow),
-                        .float2(proxy.size),
-                        .float(0.5),
-                        .float(1),
-                        .float(10)
-                    ), maxSampleOffset: .zero)
-                }
-            }
+            Assets.Images.spaceShip.swiftUIImage
+            .resizable()
+            .scaledToFit()
+            .frame(width: getWidth(), height: getHeight())
         }
     }
 }
