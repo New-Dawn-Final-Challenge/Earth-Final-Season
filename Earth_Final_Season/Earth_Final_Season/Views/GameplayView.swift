@@ -89,7 +89,7 @@ struct GameplayView: View {
                             .frame(width: getWidth() * 0.3,
                                    height: getHeight() * 0.08)
                     }
-                    .padding(.top, 40)
+                    .padding(.top, 30)
                 } else {
                     HStack {
                         Assets.Images.panelAccessoryA.swiftUIImage
@@ -105,8 +105,9 @@ struct GameplayView: View {
                                    height: getHeight() * 0.08)
                     }
                     .padding(.horizontal, 30)
-                    .padding(.top, 40)
+                    .padding(.top, 30)
                 }
+                Spacer()
             }
         }
         .navigationBarBackButtonHidden()
