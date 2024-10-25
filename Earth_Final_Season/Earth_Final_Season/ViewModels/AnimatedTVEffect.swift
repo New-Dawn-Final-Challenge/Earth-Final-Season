@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TestingEffect: View {
+struct AnimatedTVEffect: View {
     @State private var elapsed: CGFloat = 0.0
     @State private var showEffect: Bool = false
     private let effectDuration: CGFloat = 1.0
@@ -50,5 +50,5 @@ struct TestingEffect: View {
 }
 
 #Preview {
-    TestingEffect()
+    AnimatedTVEffect()
 }

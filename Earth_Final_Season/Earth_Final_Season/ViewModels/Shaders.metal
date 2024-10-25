@@ -44,7 +44,7 @@ vertex VertexOut vertexShader(uint vertexID [[vertex_id]]) {
 
 fragment float4 fragmentShader(VertexOut in [[stage_in]], constant float &time [[buffer(0)]]) {
     float noise = random(in.uv + time * float2(0.1, 0.1));
-    noise *= 0.8;
+    noise *= 0.5;
     float alpha = 0.3;
     return float4(noise, noise, noise, alpha * noise);
 }

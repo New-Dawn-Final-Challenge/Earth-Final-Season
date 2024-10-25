@@ -34,8 +34,8 @@ struct GlitchImageView: View {
         }
         .onAppear {
             withAnimation(Animation.linear(duration: 0.1).repeatForever(autoreverses: true)) {
-                glitchOffset = CGFloat.random(in: -20...20) // Variação no deslocamento da imagem
-                glitchIntensity = CGFloat.random(in: -2...2) // Variação na intensidade do glitch
+                glitchOffset = CGFloat.random(in: -20...20)
+                glitchIntensity = CGFloat.random(in: -2...2) 
             }
         }
     }
