@@ -69,5 +69,6 @@ struct MenuView: View {
             }
             .font(.bodyFont)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
