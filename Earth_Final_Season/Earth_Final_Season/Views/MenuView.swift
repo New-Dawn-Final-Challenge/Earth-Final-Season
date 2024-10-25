@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
@@ -16,19 +17,21 @@ struct MenuView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 // Title of the game
-                Text("Earth Final Season")
-                    .padding()
-                    .frame(width: 200, height: 50)
-                    .background(Color.gray.opacity(0.5))
+                Text("Earth: Final Season")
+                    .frame(width: getWidth() * 0.5,
+                           height: getHeight() * 0.06)
+                    .background(Assets.Colors.textSecondary.swiftUIColor)
+                    .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
                     .cornerRadius(10)
                 
                 // Navigation buttons
                 NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
                                                          leaderboardVM: $leaderboardVM)) {
                     Text("Play")
-                        .frame(width: 200, height: 50)
-                        .background(Color.pink.opacity(0.5))
-                        .foregroundColor(.black)
+                        .frame(width: getWidth() * 0.5,
+                               height: getHeight() * 0.06)
+                        .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
+                        .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
                         .cornerRadius(10)
                 }
                 
@@ -36,9 +39,10 @@ struct MenuView: View {
                     isGameCenterPresented.toggle()
                 }) {
                     Text("Leaderboard")
-                        .frame(width: 200, height: 50)
-                        .background(Color.pink.opacity(0.5))
-                        .foregroundColor(.black)
+                        .frame(width: getWidth() * 0.5,
+                               height: getHeight() * 0.06)
+                        .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
+                        .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
                         .cornerRadius(10)
                 }
                 .sheet(isPresented: $isGameCenterPresented) {
@@ -47,17 +51,19 @@ struct MenuView: View {
                 
                 NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
                     Text("Settings")
-                        .frame(width: 200, height: 50)
-                        .background(Color.pink.opacity(0.5))
-                        .foregroundColor(.black)
+                        .frame(width: getWidth() * 0.5,
+                               height: getHeight() * 0.06)
+                        .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
+                        .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
                         .cornerRadius(10)
                 }
                 
                 NavigationLink(destination: AboutUsView()) {
                     Text("About Us")
-                        .frame(width: 200, height: 50)
-                        .background(Color.pink.opacity(0.5))
-                        .foregroundColor(.black)
+                        .frame(width: getWidth() * 0.5,
+                               height: getHeight() * 0.06)
+                        .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
+                        .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
                         .cornerRadius(10)
                 }
             }
