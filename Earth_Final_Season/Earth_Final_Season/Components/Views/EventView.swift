@@ -23,7 +23,6 @@ struct EventView: View {
                    height: getHeight() * 0.15)
             .padding()
             .foregroundStyle(Color(UIColor.systemGray4))
-            .shadow(color: Color.blue, radius: CGFloat(gameplayVM.mainScreenShadowRadius))
             .overlay(
                 Text(textToShow)
                     .font(.bodyFont)
