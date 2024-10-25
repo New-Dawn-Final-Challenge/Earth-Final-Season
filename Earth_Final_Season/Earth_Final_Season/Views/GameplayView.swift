@@ -12,16 +12,8 @@ struct GameplayView: View {
         ZStack {
             
             ZStack {
-//                Assets.Colors.bgFillPrimary.swiftUIColor
-//                Assets.Images.skyAndStars.swiftUIImage
-//                    .resizable()
-//                    .scaledToFit()
-//                Assets.Images.spaceShip.swiftUIImage
-//                    .resizable()
-//                    .scaledToFit()
                 BackgroundView()
             }
-            .ignoresSafeArea()
             
             VStack(spacing: -10) {
                 helperButtonsView
@@ -29,7 +21,7 @@ struct GameplayView: View {
                 indicatorsView
                 
                 if let event = gameplayVM.getEvent() {
-
+                    
                     // Change image to current image
                     CharacterView(characterImage: "image1", characterName: event.character)
                     
@@ -44,7 +36,7 @@ struct GameplayView: View {
                                         text: event.choice1,
                                         image: Assets.Images.optionScreen2.swiftUIImage)
                             .padding(.trailing, 130)
-
+                            
                             ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
                                         text: event.choice2,
                                         image: Assets.Images.optionScreen1.swiftUIImage)
@@ -55,23 +47,21 @@ struct GameplayView: View {
                         .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
                         
                     case .tap:
-                        VStack {
-                            TapView(onChooseOption1:  {
-                                gameplayVM.chooseOption(option: 1)
-                            },
-                                    onChooseOption2: {
-                                gameplayVM.chooseOption(option: 2)
-                            },
-                                    text1: event.choice1,
-                                    text2: event.choice2
-                            )
-                            .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
-                        }
-                        .padding(.top, -15)
-                    }
-                    .padding(.top, -15)
-                    // Hide the choices to focus on the consequence
-                    .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                       VStack {
+                           TapView(onChooseOption1:  {
+                               gameplayVM.chooseOption(option: 1)
+                           },
+                                   onChooseOption2: {
+                               gameplayVM.chooseOption(option: 2)
+                           },
+                                   text1: event.choice1,
+                                   text2: event.choice2
+                           )
+                           .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                       }
+                       .padding(.top, -15)
+                   }
+                    
                 } else {
                     Text("No more events")
                         .font(.title)
@@ -117,6 +107,7 @@ struct GameplayView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden()
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.currentState == .gameOver) {
             Task {
@@ -140,19 +131,20 @@ struct GameplayView: View {
             NavigationLink(destination: MenuView()) {
                 MenuButtonView()
             }
-
+            
             NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
                 SettingsButtonView()
             }
         }
         .padding(.trailing, 50)
+        .padding(.top, 32)
     }
     
     private var indicatorsView: some View {
         HStack(alignment: .center, spacing: getWidth() * 0.05) {
             AudienceIndicatorView(percentage: Int(gameplayVM.getIndicators()?.audience ?? 0))
                 .padding(.bottom)
-
+            
             ChaosIndicatorsView(
                 illBeing: gameplayVM.getIndicators()?.illBeing ?? 0,
                 socioPoliticalInstability: gameplayVM.getIndicators()?.socioPoliticalInstability ?? 0,

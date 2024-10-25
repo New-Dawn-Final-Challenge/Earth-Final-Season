@@ -18,7 +18,7 @@ struct Emitters {
             .scale(0.01)
             .scaleRange(0.004)
             .scaleSpeed(0.005)
-            .alphaSpeed(0.05)
+            .alphaSpeed(0.01) // Velocity of the Emitters
             .velocity(100)
             .emissionRange(-.pi)
     }
