@@ -9,6 +9,7 @@ import SwiftUI
 import MetalKit
 import EffectsLibrary
 import UIKit
+import Design_System
 
 struct BackgroundView: View {
     let startDate = Date()
@@ -19,14 +20,14 @@ struct BackgroundView: View {
         
         ZStack() {
             
-            let config: EmitterConfig = EmitterConfig(emitter: Emitters.starField, size: CGSize(width: 1, height: 1), shape: .rectangle, position: CGPoint(x: getWidth() / 2, y: getHeight() / 2), name: "Star Field", background: "structure")
+            let config: EmitterConfig = EmitterConfig(emitter: Emitters.starField, size: CGSize(width: 1, height: 1), shape: .rectangle, position: CGPoint(x: getWidth() / 2, y: getHeight() / 2), name: "Star Field", background: Assets.Images.spaceShip.name)
             
             Color(red: 0.208, green: 0.212, blue: 0.216)
                 .edgesIgnoringSafeArea(.all)
             
             GeometryReader { geo in
                 VStack(spacing: 100) {
-                    Image("nuvem1")
+                    Image(Assets.Images.nebula.name)
                         .resizable()
                         .scaledToFit()
                         .frame(width: getWidth(), height: getHeight())

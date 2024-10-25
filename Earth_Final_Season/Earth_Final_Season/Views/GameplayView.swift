@@ -10,14 +10,16 @@ struct GameplayView: View {
     
     var body: some View {
         ZStack {
+            
             ZStack {
-                Assets.Colors.bgFillPrimary.swiftUIColor
-                Assets.Images.skyAndStars.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                Assets.Images.spaceShip.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
+//                Assets.Colors.bgFillPrimary.swiftUIColor
+//                Assets.Images.skyAndStars.swiftUIImage
+//                    .resizable()
+//                    .scaledToFit()
+//                Assets.Images.spaceShip.swiftUIImage
+//                    .resizable()
+//                    .scaledToFit()
+                BackgroundView()
             }
             .ignoresSafeArea()
             
