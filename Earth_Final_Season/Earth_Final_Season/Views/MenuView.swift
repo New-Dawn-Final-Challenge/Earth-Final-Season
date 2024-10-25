@@ -66,6 +66,7 @@ struct MenuView: View {
                     }
                 }
             }
+            .font(.bodyFont)
         }
     }
 }

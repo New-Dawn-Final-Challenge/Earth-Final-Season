@@ -4,7 +4,9 @@
 //
 //  Created by Larissa Okabayashi on 24/09/24.
 //
+
 import SwiftUI
+import Design_System
 
 struct EventView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
@@ -15,17 +17,19 @@ struct EventView: View {
     let consequence2: String
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 16)
+        Assets.Images.eventsScreen.swiftUIImage
+            .resizable()
             .frame(width: getWidth() * 0.8,
-                   height: getHeight() * 0.12)
+                   height: getHeight() * 0.15)
             .padding()
             .foregroundStyle(Color(UIColor.systemGray4))
             .shadow(color: Color.blue, radius: CGFloat(gameplayVM.mainScreenShadowRadius))
             .overlay(
                 Text(textToShow)
+                    .font(.bodyFont)
+                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                     .multilineTextAlignment(.center)
-                    .padding()
-                    .padding()
+                    .padding(.horizontal, 40)
             )
             .onAppear(perform: updateText)
             .onChange(of: gameplayVM.currentState == .consequence, updateText)

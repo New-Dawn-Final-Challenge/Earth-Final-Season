@@ -1,4 +1,5 @@
 import SwiftUI
+import Design_System
 
 struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
@@ -8,17 +9,25 @@ struct GameplayView: View {
     @State private var showGameOver = false
     
     var body: some View {
-        ZStack{
+        ZStack {
+            ZStack {
+                Assets.Colors.bgFillPrimary.swiftUIColor
+                Assets.Images.skyAndStars.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                Assets.Images.spaceShip.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+            }
+            .ignoresSafeArea()
             
-            BackgroundView()
-            
-            VStack(spacing: 6) {
+            VStack(spacing: -10) {
                 helperButtonsView
                 
                 indicatorsView
                 
                 if let event = gameplayVM.getEvent() {
-                    
+
                     // Change image to current image
                     CharacterView(characterImage: "image1", characterName: event.character)
                     
@@ -26,15 +35,37 @@ struct GameplayView: View {
                               consequence1: event.consequenceDescription1,
                               consequence2: event.consequenceDescription2
                     )
-                    
-                    VStack(spacing: -20) {
-                        ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
-                                    text: event.choice1)
-                        .padding(.trailing, 100)
+                    switch (settingsVM.selectedGesture) {
+                    case .holdDrag:
+                        VStack(spacing: -30) {
+                            ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
+                                        text: event.choice1,
+                                        image: Assets.Images.optionScreen2.swiftUIImage)
+                            .padding(.trailing, 130)
+
+                            ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
+                                        text: event.choice2,
+                                        image: Assets.Images.optionScreen1.swiftUIImage)
+                            .padding(.leading, 130)
+                        }
+                        .padding(.top, -15)
+                        // Hide the choices to focus on the consequence
+                        .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
                         
-                        ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
-                                    text: event.choice2)
-                        .padding(.leading, 100)
+                    case .tap:
+                        VStack {
+                            TapView(onChooseOption1:  {
+                                gameplayVM.chooseOption(option: 1)
+                            },
+                                    onChooseOption2: {
+                                gameplayVM.chooseOption(option: 2)
+                            },
+                                    text1: event.choice1,
+                                    text2: event.choice2
+                            )
+                            .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                        }
+                        .padding(.top, -15)
                     }
                     .padding(.top, -15)
                     // Hide the choices to focus on the consequence
@@ -45,28 +76,54 @@ struct GameplayView: View {
                         .padding()
                 }
                 
-                SliderView(
-                    onChooseOption1: {
-                        gameplayVM.chooseOption(option: 1)
-                    },
-                    onChooseOption2: {
-                        gameplayVM.chooseOption(option: 2)
+                if (settingsVM.selectedGesture == .holdDrag) {
+                    HStack {
+                        Assets.Images.panelAccessoryA.swiftUIImage
+                            .resizable()
+                            .scaleEffect(0.8)
+                        
+                        SliderView(
+                            onChooseOption1: {
+                                gameplayVM.chooseOption(option: 1)
+                            },
+                            onChooseOption2: {
+                                gameplayVM.chooseOption(option: 2)
+                            }
+                        )
+                        
+                        Assets.Images.panelAccessoryB.swiftUIImage
+                            .resizable()
+                            .scaleEffect(0.8)
                     }
-                )
-                
-                Spacer()
-            }
-            .onAppear(perform: HapticsManager.shared.prepareHaptics)
-            .onChange(of: gameplayVM.currentState == .gameOver) {
-                Task {
-                    showGameOver = gameplayVM.currentState == .gameOver
-                    await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
+                    .padding(.top, 40)
+                } else {
+                    HStack {
+                        Assets.Images.panelAccessoryA.swiftUIImage
+                            .resizable()
+                            .frame(width: getWidth() * 0.3,
+                                   height: getHeight() * 0.08)
+                        
+                        Spacer()
+                        
+                        Assets.Images.panelAccessoryB.swiftUIImage
+                            .resizable()
+                            .frame(width: getWidth() * 0.3,
+                                   height: getHeight() * 0.08)
+                    }
+                    .padding(.horizontal, 30)
+                    .padding(.top, 40)
                 }
             }
-            .navigationDestination(isPresented: $showGameOver) {
-                GameOverView(isPresented: $showGameOver)
+        }
+        .onAppear(perform: HapticsManager.shared.prepareHaptics)
+        .onChange(of: gameplayVM.currentState == .gameOver) {
+            Task {
+                showGameOver = gameplayVM.currentState == .gameOver
+                await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
             }
-            .navigationBarBackButtonHidden(true)
+        }
+        .navigationDestination(isPresented: $showGameOver) {
+            GameOverView(isPresented: $showGameOver)
         }
     }
     
@@ -86,8 +143,7 @@ struct GameplayView: View {
                 SettingsButtonView()
             }
         }
-        .padding(.trailing, 32)
-        .padding(.top, 32)
+        .padding(.trailing, 50)
     }
     
     private var indicatorsView: some View {

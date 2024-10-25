@@ -25,7 +25,7 @@ struct AudienceIndicatorView: View {
             ZStack(alignment: .bottom) {
                 // Background Bar (empty part)
                 Rectangle()
-                    .fill(Color(UIColor.systemGray5))
+                    .fill(Color(UIColor.systemGray))
                     .frame(width: getWidth() * 0.094,
                            height: getHeight() * 0.087)
 

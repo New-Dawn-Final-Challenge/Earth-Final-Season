@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct ConsequencesView: View {
     var text: String
@@ -18,6 +19,8 @@ struct ConsequencesView: View {
             .padding()
             .overlay(
                 Text(text)
+                    .font(.bodyFont)
+                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
             )
     }
 }
