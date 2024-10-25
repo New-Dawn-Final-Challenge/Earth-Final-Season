@@ -38,11 +38,11 @@ struct ChaosIndicatorsView: View {
                             .resizable()
                             .frame(width: getWidth() * 0.14,
                                    height: getHeight() * 0.05)
-                            .foregroundStyle(Color(UIColor.systemGray))
+                            .colorInvert().colorMultiply(Assets.Colors.bgFillPrimary.swiftUIColor)
                             .overlay(
                                 GeometryReader { geometry in
                                     Rectangle()
-                                        .foregroundStyle(Color(UIColor.systemRed))
+                                        .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
                                         .frame(height: CGFloat(environmentalDegradation) / 12 * geometry.size.height)
                                         .frame(maxHeight: geometry.size.height, alignment: .bottom)
                                 }
@@ -64,11 +64,11 @@ struct ChaosIndicatorsView: View {
                             .resizable()
                             .frame(width: getWidth() * 0.14,
                                    height: getHeight() * 0.05)
-                            .foregroundStyle(Color(UIColor.systemGray))
+                            .colorInvert().colorMultiply(Assets.Colors.bgFillPrimary.swiftUIColor)
                             .overlay(
                                 GeometryReader { geometry in
                                     Rectangle()
-                                    .foregroundStyle(Color(UIColor.systemRed))
+                                    .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
                                     .frame(height: CGFloat(illBeing) / 12 * geometry.size.height)
                                     .frame(maxHeight: geometry.size.height, alignment: .bottom)
                                 }
@@ -90,11 +90,11 @@ struct ChaosIndicatorsView: View {
                             .resizable()
                             .frame(width: getWidth() * 0.14,
                                    height: getHeight() * 0.05)
-                            .foregroundStyle(Color(UIColor.systemGray))
+                            .colorInvert().colorMultiply(Assets.Colors.bgFillPrimary.swiftUIColor)
                             .overlay(
                                 GeometryReader { geometry in
                                     Rectangle()
-                                    .foregroundStyle(Color(UIColor.systemRed))
+                                    .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
                                     .frame(height: CGFloat(socioPoliticalInstability) / 12 * geometry.size.height)
                                     .frame(maxHeight: geometry.size.height, alignment: .bottom)
                                 }
