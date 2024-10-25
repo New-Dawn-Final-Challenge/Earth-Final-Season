@@ -8,61 +8,66 @@ struct GameplayView: View {
     @State private var showGameOver = false
     
     var body: some View {
-        VStack(spacing: 6) {
-            helperButtonsView
+        ZStack{
             
-            indicatorsView
+            BackgroundView()
             
-            if let event = gameplayVM.getEvent() {
-
-                // Change image to current image
-                CharacterView(characterImage: "image1", characterName: event.character)
+            VStack(spacing: 6) {
+                helperButtonsView
                 
-                EventView(eventDescription: event.description,
-                          consequence1: event.consequenceDescription1,
-                          consequence2: event.consequenceDescription2
+                indicatorsView
+                
+                if let event = gameplayVM.getEvent() {
+                    
+                    // Change image to current image
+                    CharacterView(characterImage: "image1", characterName: event.character)
+                    
+                    EventView(eventDescription: event.description,
+                              consequence1: event.consequenceDescription1,
+                              consequence2: event.consequenceDescription2
+                    )
+                    
+                    VStack(spacing: -20) {
+                        ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
+                                    text: event.choice1)
+                        .padding(.trailing, 100)
+                        
+                        ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
+                                    text: event.choice2)
+                        .padding(.leading, 100)
+                    }
+                    .padding(.top, -15)
+                    // Hide the choices to focus on the consequence
+                    .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                } else {
+                    Text("No more events")
+                        .font(.title)
+                        .padding()
+                }
+                
+                SliderView(
+                    onChooseOption1: {
+                        gameplayVM.chooseOption(option: 1)
+                    },
+                    onChooseOption2: {
+                        gameplayVM.chooseOption(option: 2)
+                    }
                 )
-
-                VStack(spacing: -20) {
-                    ChoicesView(shadowRadius: gameplayVM.option1ShadowRadius,
-                                 text: event.choice1)
-                    .padding(.trailing, 100)
-
-                    ChoicesView(shadowRadius: gameplayVM.option2ShadowRadius,
-                                 text: event.choice2)
-                    .padding(.leading, 100)
-                }
-                .padding(.top, -15)
-                // Hide the choices to focus on the consequence
-                .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
-            } else {
-                Text("No more events")
-                    .font(.title)
-                    .padding()
+                
+                Spacer()
             }
-            
-            SliderView(
-                onChooseOption1: {
-                    gameplayVM.chooseOption(option: 1)
-                },
-                onChooseOption2: {
-                    gameplayVM.chooseOption(option: 2)
+            .onAppear(perform: HapticsManager.shared.prepareHaptics)
+            .onChange(of: gameplayVM.currentState == .gameOver) {
+                Task {
+                    showGameOver = gameplayVM.currentState == .gameOver
+                    await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
                 }
-            )
-            
-            Spacer()
-        }
-        .onAppear(perform: HapticsManager.shared.prepareHaptics)
-        .onChange(of: gameplayVM.currentState == .gameOver) {
-            Task {
-                showGameOver = gameplayVM.currentState == .gameOver
-                await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
             }
+            .navigationDestination(isPresented: $showGameOver) {
+                GameOverView(isPresented: $showGameOver)
+            }
+            .navigationBarBackButtonHidden(true)
         }
-        .navigationDestination(isPresented: $showGameOver) {
-            GameOverView(isPresented: $showGameOver)
-        }
-        .navigationBarBackButtonHidden(true)
     }
     
     private var helperButtonsView: some View {
@@ -81,7 +86,8 @@ struct GameplayView: View {
                 SettingsButtonView()
             }
         }
-        .padding(.trailing)
+        .padding(.trailing, 32)
+        .padding(.top, 32)
     }
     
     private var indicatorsView: some View {
