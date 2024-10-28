@@ -69,10 +69,11 @@ struct GameplayView: View {
                 }
                 
                 if (settingsVM.selectedGesture == .holdDrag) {
-                    HStack {
+                    HStack() {
                         Assets.Images.panelAccessoryA.swiftUIImage
                             .resizable()
-                            .scaleEffect(0.8)
+                            .frame(width: getWidth() * 0.3,
+                                   height: getHeight() * 0.08)
                         
                         SliderView(
                             onChooseOption1: {
@@ -85,9 +86,10 @@ struct GameplayView: View {
                         
                         Assets.Images.panelAccessoryB.swiftUIImage
                             .resizable()
-                            .scaleEffect(0.8)
+                            .frame(width: getWidth() * 0.3,
+                                   height: getHeight() * 0.08)
                     }
-                    .padding(.top, 40)
+                    .padding(.top, 30)
                 } else {
                     HStack {
                         Assets.Images.panelAccessoryA.swiftUIImage
@@ -103,8 +105,9 @@ struct GameplayView: View {
                                    height: getHeight() * 0.08)
                     }
                     .padding(.horizontal, 30)
-                    .padding(.top, 40)
+                    .padding(.top, 30)
                 }
+                Spacer()
             }
         }
         .navigationBarBackButtonHidden()

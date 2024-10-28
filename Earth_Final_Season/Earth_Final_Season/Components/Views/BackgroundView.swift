@@ -42,7 +42,7 @@ struct BackgroundView: View {
                 }
             }
             
-            GeometryReader { geo in
+            GeometryReader { geometry in
                 VStack(spacing: 100) {
                     Assets.Images.nebula.swiftUIImage
                         .resizable()

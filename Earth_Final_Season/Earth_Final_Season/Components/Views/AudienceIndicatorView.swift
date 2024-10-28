@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct AudienceIndicatorView: View {
     let percentage: Int
@@ -20,20 +21,20 @@ struct AudienceIndicatorView: View {
                 .resizable()
                 .frame(width: getWidth() * 0.084,
                        height: getHeight() * 0.042)
-                .foregroundStyle(Color(UIColor.systemOrange))
+                .foregroundStyle(Assets.Colors.secondaryGreenVariation.swiftUIColor)
 
             ZStack(alignment: .bottom) {
                 // Background Bar (empty part)
                 Rectangle()
-                    .fill(Color(UIColor.systemGray))
+                    .fill(Assets.Colors.accentPrimary.swiftUIColor)
                     .frame(width: getWidth() * 0.094,
                            height: getHeight() * 0.087)
 
-                // Filled Bar (based on percentage)
+                // Filled Bar (based on percentage, scaled so 3 is 0% and 11 is 100%)
                 Rectangle()
-                    .fill(Color(UIColor.systemOrange))
+                    .fill(Assets.Colors.secondaryGreen.swiftUIColor)
                     .frame(width: getWidth() * 0.094,
-                           height: CGFloat(percentage) / 10 * (getHeight() * 0.087))
+                           height: max(0, CGFloat(percentage - 3) / 8 * (getHeight() * 0.087)))
             }
             .cornerRadius(16)
         }
