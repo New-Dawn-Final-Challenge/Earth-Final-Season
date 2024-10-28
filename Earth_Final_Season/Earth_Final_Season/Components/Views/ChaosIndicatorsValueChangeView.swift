@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct ChaosIndicatorsValueChangeView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
@@ -24,6 +25,8 @@ struct ChaosIndicatorsValueChangeView: View {
             Image(systemName: gameplayVM.valueIsIncreasing[nIndicator] ?
                   "arrowshape.up.fill" : "arrowshape.down.fill")
             Text(String(gameplayVM.value[nIndicator]))
+                .font(.bodyFont)
+                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
         }
         .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ? .orange : .cyan)
         .opacity(gameplayVM.shouldShowIndicator[nIndicator] ? 1 : 0)

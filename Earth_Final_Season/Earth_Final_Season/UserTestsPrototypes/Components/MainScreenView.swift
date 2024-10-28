@@ -20,6 +20,7 @@ struct MainScreenView: View {
             .shadow(color: Color.blue, radius: CGFloat(mainScreenShadowRadius))
             .overlay(
                 Text(optionToChoose)
+                    .font(.bodyFont)
             )
     }
 }

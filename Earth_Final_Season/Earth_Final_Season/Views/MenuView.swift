@@ -14,53 +14,59 @@ struct MenuView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(spacing: 20) {
-                // Title of the game
-                Text("Earth Final Season")
-                    .padding()
-                    .frame(width: 200, height: 50)
-                    .background(Color.gray.opacity(0.5))
-                    .cornerRadius(10)
+            ZStack{
+    
+                BackgroundView()
                 
-                // Navigation buttons
-                NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
-                                                         leaderboardVM: $leaderboardVM)) {
-                    Text("Play")
+                VStack(spacing: 20) {
+                    // Title of the game
+                    Text("Earth Final Season")
+                        .padding()
                         .frame(width: 200, height: 50)
-                        .background(Color.pink.opacity(0.5))
-                        .foregroundColor(.black)
+                        .background(Color.gray)
                         .cornerRadius(10)
-                }
-                
-                Button(action: {
-                    isGameCenterPresented.toggle()
-                }) {
-                    Text("Leaderboard")
-                        .frame(width: 200, height: 50)
-                        .background(Color.pink.opacity(0.5))
-                        .foregroundColor(.black)
-                        .cornerRadius(10)
-                }
-                .sheet(isPresented: $isGameCenterPresented) {
-                    LeaderboardView()
-                }
-                
-                NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
-                    Text("Settings")
-                        .frame(width: 200, height: 50)
-                        .background(Color.pink.opacity(0.5))
-                        .foregroundColor(.black)
-                        .cornerRadius(10)
-                }
-                
-                NavigationLink(destination: AboutUsView()) {
-                    Text("About Us")
-                        .frame(width: 200, height: 50)
-                        .background(Color.pink.opacity(0.5))
-                        .foregroundColor(.black)
-                        .cornerRadius(10)
+                    
+                    // Navigation buttons
+                    NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
+                                                             leaderboardVM: $leaderboardVM)) {
+                        Text("Play")
+                            .frame(width: 200, height: 50)
+                            .background(Color.pink)
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                    }
+                    
+                    Button(action: {
+                        isGameCenterPresented.toggle()
+                    }) {
+                        Text("Leaderboard")
+                            .frame(width: 200, height: 50)
+                            .background(Color.pink)
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                    }
+                    .sheet(isPresented: $isGameCenterPresented) {
+                        LeaderboardView()
+                    }
+                    
+                    NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
+                        Text("Settings")
+                            .frame(width: 200, height: 50)
+                            .background(Color.pink)
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                    }
+                    
+                    NavigationLink(destination: AboutUsView()) {
+                        Text("About Us")
+                            .frame(width: 200, height: 50)
+                            .background(Color.pink)
+                            .foregroundColor(.black)
+                            .cornerRadius(10)
+                    }
                 }
             }
-        }
+            .font(.bodyFont)
+        }.navigationBarBackButtonHidden()
     }
 }
