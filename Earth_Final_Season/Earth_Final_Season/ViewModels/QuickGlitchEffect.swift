@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GlitchFrame: Animatable {
+struct GlitchFrameImage: Animatable {
     var animatableData: AnimatablePair<CGFloat, AnimatablePair<CGFloat, AnimatablePair<CGFloat, CGFloat >>> {
         get {
             return .init(top, .init(center, .init(bottom, shadowOpacity)))
@@ -30,20 +30,20 @@ struct GlitchFrame: Animatable {
 
 // Result Builder
 @resultBuilder
-struct GlitchFrameBuilder {
-    static func buildBlock(_ components: LinearKeyframe<GlitchFrame>...) -> [LinearKeyframe<GlitchFrame>] {
+struct GlitchFrameImageBuilder {
+    static func buildBlock(_ components: LinearKeyframe<GlitchFrameImage>...) -> [LinearKeyframe<GlitchFrameImage>] {
         return components
     }
 }
 
 struct QuickGlitchEffect: View {
-    var image: UIImage
+    var image: Image
     var trigger: Bool
     var shadow: Color
     var radius: CGFloat
-    var frames: [LinearKeyframe<GlitchFrame>]
+    var frames: [LinearKeyframe<GlitchFrameImage>]
     
-    init(image: UIImage, trigger: Bool, shadow: Color = .red, radius: CGFloat = 1, @GlitchFrameBuilder frames: @escaping  () -> [LinearKeyframe<GlitchFrame>]) {
+    init(image: Image, trigger: Bool, shadow: Color = .red, radius: CGFloat = 1, @GlitchFrameImageBuilder frames: @escaping  () -> [LinearKeyframe<GlitchFrameImage>]) {
         self.image = image
         self.trigger = trigger
         self.shadow = shadow
@@ -53,7 +53,7 @@ struct QuickGlitchEffect: View {
     
     // Configuration
     var body: some View {
-        KeyframeAnimator(initialValue: GlitchFrame(), trigger: trigger) { value in
+        KeyframeAnimator(initialValue: GlitchFrameImage(), trigger: trigger) { value in
             ZStack {
                 ImageView(.top, offset: value.top, opacity: value.shadowOpacity)
                 ImageView(.center, offset: value.center, opacity: value.shadowOpacity)
@@ -70,9 +70,9 @@ struct QuickGlitchEffect: View {
     // Image View
     @ViewBuilder
     func ImageView(_ alignment: Alignment, offset: CGFloat, opacity: CGFloat) -> some View {
-        Image(uiImage: image)
+        image
             .resizable()
-            .scaledToFit()
+            .scaledToFill()
             .mask {
                 if alignment == .top {
                     Rectangle()

@@ -1,5 +1,5 @@
 {
-  "originHash" : "3e04bef9c96a5dc6e8179d84913d23ec1d4091f805f6c3f950ebceedc2752976",
+  "originHash" : "4ebbb37380053751e3eb1eb367d51b421014a9f8dd014da57dd599b5bb076e5d",
   "pins" : [
     {
       "identity" : "collectionconcurrencykit",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "678d442c6f7828def400a70ae15968aef67ef52d",
         "version" : "1.8.3"
+      }
+    },
+    {
+      "identity" : "design-system",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/New-Dawn-Final-Challenge/Design-System.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e585681f8c839e968ad34c173c8b24e7ab207368"
       }
     },
     {
