@@ -10,7 +10,7 @@ import SwiftUI
 struct GlitchContentView: View {
     @State private var trigger: Bool = false
     @State private var glitchTimer: Timer? = nil
-    private let glitchInterval: TimeInterval = 5.0 
+    private let glitchInterval: TimeInterval = 3.0 
     
     var body: some View {
         VStack {

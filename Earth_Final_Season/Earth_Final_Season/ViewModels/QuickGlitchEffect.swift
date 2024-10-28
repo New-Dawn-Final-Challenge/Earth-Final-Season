@@ -75,6 +75,7 @@ struct QuickGlitchEffect: View {
             .scaledToFit()
             .mask {
                 if alignment == .top {
+                    Rectangle()
                     ExtendedSpacer()
                     ExtendedSpacer()
                     
