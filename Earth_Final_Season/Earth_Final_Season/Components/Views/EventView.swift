@@ -28,7 +28,8 @@ struct EventView: View {
                     if textToShow == eventDescription {
                         Text(textToShow)
                     } else {
-                        TypeOnEffect(content: $textToShow, delay: 4)
+//                        TypeOnEffect(content: $textToShow, delay: 4)
+                        HackerTextView(text: textToShow, speed: 0.05)
                     }
                 }
                 .font(.bodyFont)

@@ -9,16 +9,16 @@ import SwiftUI
 
 struct HackerTextView: View {
     var text: String
-    var trigger: Bool
+    var trigger: Bool?
     var transition: ContentTransition = .interpolate
     var duration: CGFloat = 1
     var speed: CGFloat = 0.1
     @State private var animatedText = ""
-    @State private var randomCharacters: [Character] = {
+    var randomCharacters: [Character] = {
         let string = "abcdefghijklnmopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()/?[]{};:=+-"
         return Array(string)
     }()
-    @State private var animationID: String = UUID().uuidString
+    @State var animationID: String = UUID().uuidString
     var body: some View {
         Text(animatedText)
             .fontDesign(.monospaced)
@@ -28,6 +28,9 @@ struct HackerTextView: View {
             .onAppear {
                 guard animatedText.isEmpty else { return }
                 setRandomCharacters()
+                if trigger == nil {
+                    animateText()
+                }
             }
             .customOnChange(value: trigger) { newValue in
                 animateText()
@@ -48,17 +51,16 @@ struct HackerTextView: View {
             let timer = Timer.scheduledTimer(withTimeInterval: speed, repeats: true) { timer in
                 if currentID != animationID {
                     timer.invalidate()
-                } else {
-                    timerDuration += speed
-                    if timerDuration >= delay {
-                        if text.indices.contains(index) {
-                            let actualCharacter = text[index]
-                            replaceCharacter(at: index, character: actualCharacter)
-                        }
-                    } else {
-                        guard let randomCharacter = randomCharacters.randomElement() else { return }
-                        replaceCharacter(at: index, character: randomCharacter)
+                }
+                timerDuration += speed
+                if timerDuration >= delay {
+                    if text.indices.contains(index) {
+                        let actualCharacter = text[index]
+                        replaceCharacter(at: index, character: actualCharacter)
                     }
+                } else {
+                    guard let randomCharacter = randomCharacters.randomElement() else { return }
+                    replaceCharacter(at: index, character: randomCharacter)
                 }
             }
             timer.fire()
@@ -77,7 +79,7 @@ struct HackerTextView: View {
         guard animatedText.indices.contains(index) else { return }
         let indexCharacter = String(animatedText[index])
         
-        if indexCharacter.trimmingCharacters(in: .whitespacesAndNewlines) != "" {
+        if !indexCharacter.isEmpty {
             animatedText.replaceSubrange(index...index, with: String(character))
         }
     }
