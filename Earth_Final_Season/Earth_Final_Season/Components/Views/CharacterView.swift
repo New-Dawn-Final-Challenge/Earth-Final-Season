@@ -22,18 +22,16 @@ struct CharacterView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Image rectangle
-            Assets.Images.characterScreen.swiftUIImage
+             Assets.Images.characterScreen.swiftUIImage
                 .resizable()
                 .frame(width: getWidth() * 0.5,
                        height: getHeight() * 0.18)
                 .overlay(
                     VStack() {
-                        Image(characterImage)
-                            .resizable()
-                            .frame(width: getWidth() * 0.32,
-                                   height: getHeight() * 0.08)
+                        GlitchContentView()
+                            .frame(width: getWidth() * 0.28,
+                                   height: getHeight() * 0.10)
                             .cornerRadius(16)
-                        
                         Spacer()
                         
                         Text(characterName)
@@ -43,7 +41,7 @@ struct CharacterView: View {
                             .multilineTextAlignment(.center)
                             .lineLimit(nil)
                             .fixedSize(horizontal: false, vertical: true)
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity, minHeight: 20)
                     }
                     .padding(.vertical, 30)
                     .padding(.horizontal)
