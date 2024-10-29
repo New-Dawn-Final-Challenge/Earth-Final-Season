@@ -12,7 +12,7 @@ class SettingsViewModel {
     var soundEffectsIntensity: Float = 63.5
     var musicIntensity: Float = 33.5 {
         didSet {
-            SoundtrackAudioManager.shared.changeVolume(intensity: musicIntensity/100)
+            SoundtrackAudioManager.shared.changeVolume(intensity: musicIntensity / 100)
             UserDefaults.standard.set(musicIntensity, forKey: "musicIntensity")
         }
     }
@@ -30,7 +30,7 @@ class SettingsViewModel {
     }
     var hapticsIntensity: Float = 1 {
         didSet {
-            HapticsManager.shared.setIntensity(hapticsIntensity/100)
+            HapticsManager.shared.setIntensity(hapticsIntensity / 100)
             UserDefaults.standard.set(hapticsIntensity, forKey: "hapticsIntensity")
         }
     }
