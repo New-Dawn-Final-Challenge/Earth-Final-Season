@@ -21,7 +21,7 @@ struct HackerTextView: View {
     @State var animationID: String = UUID().uuidString
     var body: some View {
         Text(animatedText)
-            .fontDesign(.monospaced)
+//            .fontDesign(.monospaced)
             .truncationMode(.tail)
             .contentTransition(transition)
             .animation(.easeInOut(duration: 0.1), value: animatedText)

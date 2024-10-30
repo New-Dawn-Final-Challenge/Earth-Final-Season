@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct GlitchContentView: View {
-    @State var trigger: Bool = false
+    @Binding var trigger: Bool
     @State private var glitchTimer: Timer? = nil
     let uiImage = Image("image1")
     private let glitchInterval: TimeInterval = 3.0
@@ -67,6 +67,6 @@ struct GlitchContentView: View {
     }
 }
 
-#Preview {
-    GlitchContentView()
-}
+//#Preview {
+//    GlitchContentView()
+//}
