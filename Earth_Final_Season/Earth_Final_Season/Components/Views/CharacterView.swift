@@ -13,6 +13,7 @@ struct CharacterView: View {
     let characterName: String
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     let screenHeight: CGFloat = UIScreen.main.bounds.height
+    @State private var triggerChangeChannel: Bool = false
     
     init(characterImage: String, characterName: String) {
         self.characterImage = characterImage
@@ -28,7 +29,7 @@ struct CharacterView: View {
                        height: getHeight() * 0.18)
                 .overlay(
                     VStack() {
-                        GlitchContentView()
+                        GlitchContentView(trigger: $triggerChangeChannel)
                             .frame(width: getWidth() * 0.28,
                                    height: getHeight() * 0.10)
                             .cornerRadius(16)
@@ -43,6 +44,9 @@ struct CharacterView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity, minHeight: 20)
                     }
+                        .onChange(of: characterName) {
+                            triggerChangeChannel.toggle()
+                        }
                     .padding(.vertical, 30)
                     .padding(.horizontal)
                 )

@@ -22,6 +22,7 @@ struct GlitchFrameImage: Animatable {
     }
     
     // X-Offset's
+    // swiftlint:disable:next minlength
     var top: CGFloat = 0
     var center: CGFloat = 0
     var bottom: CGFloat = 0

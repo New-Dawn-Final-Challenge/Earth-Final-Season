@@ -24,11 +24,18 @@ struct EventView: View {
             .padding()
             .foregroundStyle(Color(UIColor.systemGray4))
             .overlay(
-                Text(textToShow)
-                    .font(.bodyFont)
-                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 40)
+                Group {
+                    if textToShow == eventDescription {
+                        Text(textToShow)
+                    } else {
+//                        TypeOnEffect(content: $textToShow, delay: 4)
+                        HackerTextView(text: textToShow, speed: 0.05)
+                    }
+                }
+                .font(.bodyFont)
+                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
             )
             .onAppear(perform: updateText)
             .onChange(of: gameplayVM.currentState == .consequence, updateText)
