@@ -23,6 +23,7 @@
 		620E4DD92C9C7686006850BB /* Exceptions for "Earth_Final_Season" folder in "Earth_Final_Season" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"Earth-Final-Season-Info.plist",
 				"Preview Content/README.md",
 			);
 			target = 620E4D512C9C468E006850BB /* Earth_Final_Season */;
@@ -333,6 +334,7 @@
 				DEVELOPMENT_TEAM = MR249PWTJZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Earth-Final-Season-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -370,6 +372,7 @@
 				DEVELOPMENT_TEAM = MR249PWTJZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Earth-Final-Season-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.card-games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
