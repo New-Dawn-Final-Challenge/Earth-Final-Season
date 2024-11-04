@@ -23,7 +23,6 @@
 		620E4DD92C9C7686006850BB /* Exceptions for "Earth_Final_Season" folder in "Earth_Final_Season" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Earth-Final-Season-Info.plist",
 				"Preview Content/README.md",
 			);
 			target = 620E4D512C9C468E006850BB /* Earth_Final_Season */;
@@ -124,8 +123,6 @@
 			mainGroup = 620E4D492C9C468E006850BB;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				8B61B0882CA1B2D300ED8A81 /* XCRemoteSwiftPackageReference "SwiftLint" */,
-				8B61B08A2CA1B4FF00ED8A81 /* XCRemoteSwiftPackageReference "SwiftGenPlugin" */,
 				BD46C3302CCFB43B00441790 /* XCRemoteSwiftPackageReference "Design-System" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -421,22 +418,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8B61B0882CA1B2D300ED8A81 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.57.0;
-			};
-		};
-		8B61B08A2CA1B4FF00ED8A81 /* XCRemoteSwiftPackageReference "SwiftGenPlugin" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftGen/SwiftGenPlugin";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.6.2;
-			};
-		};
 		BD46C3302CCFB43B00441790 /* XCRemoteSwiftPackageReference "Design-System" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/New-Dawn-Final-Challenge/Design-System.git";
