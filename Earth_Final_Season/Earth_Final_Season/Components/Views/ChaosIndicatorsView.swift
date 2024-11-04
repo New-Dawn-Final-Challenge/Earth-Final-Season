@@ -20,8 +20,8 @@ struct ChaosIndicatorsView: View {
         ZStack {
             Assets.Images.indicatorsScreen.swiftUIImage
                 .resizable()
-                .frame(width: getWidth() * 0.6,
-                       height: getHeight() * 0.145)
+                .frame(width: getWidth() * ChaosIndicatorsConstants.indicatorFrameWidthMultiplier,
+                       height: getHeight() * ChaosIndicatorsConstants.indicatorFrameHeightMultiplier)
             
             VStack {
                 Text("Year: \(year)")
@@ -29,21 +29,21 @@ struct ChaosIndicatorsView: View {
                     .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                     .bold()
                 
-                HStack(spacing: 12) {
+                HStack(spacing: ChaosIndicatorsConstants.hStackSpacing) {
                     // Environmental Degradation indicator with overlay
                     VStack {
                         ChaosIndicatorsValueChangeView(indicator: "environmentalDegradation", nIndicator: 0)
-                            .frame(width: getWidth() * 0.1, height: getHeight() * 0.01)
+                            .frame(width: getWidth() * ChaosIndicatorsConstants.changeViewWidthMultiplier, height: getHeight() * ChaosIndicatorsConstants.changeViewHeightMultiplier)
                         Assets.Images.environmentalDegradationSimple.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * 0.14,
-                                   height: getHeight() * 0.05)
+                            .frame(width: getWidth() * ChaosIndicatorsConstants.frameWidthMultiplier,
+                                   height: getHeight() * ChaosIndicatorsConstants.frameHeightMultiplier)
                             .colorInvert().colorMultiply(Assets.Colors.bgFillPrimary.swiftUIColor)
                             .overlay(
                                 GeometryReader { geometry in
                                     Rectangle()
                                         .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
-                                        .frame(height: CGFloat(environmentalDegradation) / 12 * geometry.size.height)
+                                        .frame(height: CGFloat(environmentalDegradation) / ChaosIndicatorsConstants.hStackSpacing * geometry.size.height)
                                         .frame(maxHeight: geometry.size.height, alignment: .bottom)
                                 }
                             )
@@ -62,17 +62,17 @@ struct ChaosIndicatorsView: View {
                     // Ill-being indicator with overlay
                     VStack {
                         ChaosIndicatorsValueChangeView(indicator: "illBeing", nIndicator: 1)
-                            .frame(width: getWidth() * 0.1, height: getHeight() * 0.01)
+                            .frame(width: getWidth() * ChaosIndicatorsConstants.changeViewWidthMultiplier, height: getHeight() * ChaosIndicatorsConstants.changeViewHeightMultiplier)
                         Assets.Images.illbeingSimple.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * 0.14,
-                                   height: getHeight() * 0.05)
+                            .frame(width: getWidth() * ChaosIndicatorsConstants.frameWidthMultiplier,
+                                   height: getHeight() * ChaosIndicatorsConstants.frameHeightMultiplier)
                             .colorInvert().colorMultiply(Assets.Colors.bgFillPrimary.swiftUIColor)
                             .overlay(
                                 GeometryReader { geometry in
                                     Rectangle()
                                     .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
-                                    .frame(height: CGFloat(illBeing) / 12 * geometry.size.height)
+                                    .frame(height: CGFloat(illBeing) / ChaosIndicatorsConstants.hStackSpacing * geometry.size.height)
                                     .frame(maxHeight: geometry.size.height, alignment: .bottom)
                                 }
                             )
@@ -91,17 +91,17 @@ struct ChaosIndicatorsView: View {
                     // Sociopolitical Instability with overlay
                     VStack {
                         ChaosIndicatorsValueChangeView(indicator: "socioPoliticalInstability", nIndicator: 2)
-                            .frame(width: getWidth() * 0.1, height: getHeight() * 0.01)
+                            .frame(width: getWidth() * ChaosIndicatorsConstants.changeViewWidthMultiplier, height: getHeight() * ChaosIndicatorsConstants.changeViewHeightMultiplier)
                         Assets.Images.sociopoliticalInstabilitySimple.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * 0.14,
-                                   height: getHeight() * 0.05)
+                            .frame(width: getWidth() * ChaosIndicatorsConstants.frameWidthMultiplier,
+                                   height: getHeight() * ChaosIndicatorsConstants.frameHeightMultiplier)
                             .colorInvert().colorMultiply(Assets.Colors.bgFillPrimary.swiftUIColor)
                             .overlay(
                                 GeometryReader { geometry in
                                     Rectangle()
                                     .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
-                                    .frame(height: CGFloat(socioPoliticalInstability) / 12 * geometry.size.height)
+                                    .frame(height: CGFloat(socioPoliticalInstability) / ChaosIndicatorsConstants.hStackSpacing * geometry.size.height)
                                     .frame(maxHeight: geometry.size.height, alignment: .bottom)
                                 }
                             )
@@ -122,11 +122,11 @@ struct ChaosIndicatorsView: View {
         .padding()
         .onChange(of: gameplayVM.currentState) {
             if gameplayVM.currentState == .consequence {
-                withAnimation(Animation.linear(duration: 1).repeatCount(3, autoreverses: true)) {
+                withAnimation(Animation.linear(duration: ChaosIndicatorsConstants.animationDuration).repeatCount(ChaosIndicatorsConstants.animationRepeatCount, autoreverses: true)) {
                     gameplayVM.animateIndicatorsChange()
                 }
             } else {
-                withAnimation(Animation.linear(duration: 1)) {
+                withAnimation(Animation.linear(duration: ChaosIndicatorsConstants.animationDuration)) {
                     gameplayVM.animateIndicatorsChange()
                 }
             }

@@ -1,10 +1,3 @@
-//
-//  ConsequencesView.swift
-//  Earth_Final_Season
-//
-//  Created by Larissa Okabayashi on 02/10/24.
-//
-
 import SwiftUI
 import Design_System
 
@@ -12,9 +5,9 @@ struct ConsequencesView: View {
     var text: String
 
     var body: some View {
-        RoundedRectangle(cornerRadius: 16)
-            .frame(width: getWidth() * 0.8,
-                   height: getHeight() * 0.08)
+        RoundedRectangle(cornerRadius: GlobalConstants.cornerRadius)
+            .frame(width: getWidth() * ConsequencesViewConstants.frameWidthMultiplier,
+                   height: getHeight() * ConsequencesViewConstants.frameHeightMultiplier)
             .foregroundStyle(Color(UIColor.systemGray4))
             .padding()
             .overlay(
@@ -28,3 +21,4 @@ struct ConsequencesView: View {
 #Preview {
     ConsequencesView(text: "")
 }
+

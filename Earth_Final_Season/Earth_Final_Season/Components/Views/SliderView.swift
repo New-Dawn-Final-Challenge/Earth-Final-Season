@@ -4,7 +4,6 @@
 //
 //  Created by Larissa Fazolin on 30/09/24.
 //
-
 import SwiftUI
 import Design_System
 
@@ -19,11 +18,11 @@ struct SliderView: View {
     var onChooseOption2: () -> Void
 
     var body: some View {
-        let sliderWidth = getWidth() * 0.4
-        let sliderHeight = getHeight() * 0.03
+        let sliderWidth = getWidth() * SliderViewConstants.widthMultiplier
+        let sliderHeight = getHeight() * SliderViewConstants.heightMultiplier
         
-        let rightLimit = (sliderWidth / 2.5)
-        let leftLimit = -(sliderWidth / 2.5)
+        let rightLimit = (sliderWidth / SliderViewConstants.sliderLimitFactor)
+        let leftLimit = -(sliderWidth / SliderViewConstants.sliderLimitFactor)
 
         Assets.Images.sliderBar.swiftUIImage
             .resizable()
@@ -33,12 +32,11 @@ struct SliderView: View {
                     Assets.Images.sliderDragger.swiftUIImage
                         .resizable()
                         .scaledToFit()
-                        .padding(-30) // Set dragger size
+                        .padding(SliderViewConstants.draggerPadding) // Set dragger size
                         .offset(dragOffset)
                         .gesture(
                             DragGesture()
                                 .onChanged { gesture in
-                                    
                                     if gameplayVM.currentState != .consequence {
                                         // Calculate the new drag offset within the limits
                                         finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
@@ -51,17 +49,12 @@ struct SliderView: View {
                                         if finalOffsetX < 0 {
                                             gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
                                             gameplayVM.option2ShadowRadius = 0
-                                            
                                             resetIndicatorsShadows()
-                                                       
                                             checkFirstOptionIndicators()
-                                            
                                         } else {
                                             gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
                                             gameplayVM.option1ShadowRadius = 0
-                                            
                                             resetIndicatorsShadows()
-
                                             checkSecondOptionIndicators()
                                         }
                                     }
@@ -97,7 +90,7 @@ struct SliderView: View {
                     Spacer()
                 }
             )
-            .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity)*0.28), trigger: feedbackTrigger)
+            .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity) * SliderViewConstants.hapticFeedback), trigger: feedbackTrigger)
     }
     
     private func checkFirstOptionIndicators() {

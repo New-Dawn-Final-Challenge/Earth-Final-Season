@@ -145,7 +145,7 @@ struct GameplayView: View {
     
     private var indicatorsView: some View {
         HStack(alignment: .center, spacing: getWidth() * 0.05) {
-            AudienceIndicatorView(percentage: Int(gameplayVM.getIndicators()?.audience ?? 0))
+            AudienceIndicatorView(percentage: CGFloat(Int(gameplayVM.getIndicators()?.audience ?? 0)))
                 .padding(.bottom)
             
             ChaosIndicatorsView(

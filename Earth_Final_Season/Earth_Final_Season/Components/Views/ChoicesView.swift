@@ -16,8 +16,8 @@ struct ChoicesView: View {
     var body: some View {
         image
             .resizable()
-            .frame(width: getWidth() * 0.8,
-                   height: getHeight() * 0.12)
+            .frame(width: getWidth() * ChoicesViewConstants.imageFrameWidthMultiplier,
+                   height: getHeight() * ChoicesViewConstants.imageFrameHeightMultiplier)
             .padding()
             .shadow(color: shadowRadius == 0 ?
                     Color.clear : Assets.Colors.secondaryGreen.swiftUIColor,
@@ -26,7 +26,7 @@ struct ChoicesView: View {
                 Text(text)
                     .font(.bodyFont)
                     .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                    .padding(.horizontal, 50)
+                    .padding(.horizontal, ChoicesViewConstants.horizontalPadding)
             )
     }
 }

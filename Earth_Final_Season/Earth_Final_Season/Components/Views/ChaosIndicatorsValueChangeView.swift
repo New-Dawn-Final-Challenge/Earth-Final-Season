@@ -12,7 +12,6 @@ struct ChaosIndicatorsValueChangeView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
 
     let indicator: String
-    
     let nIndicator: Int
 
     init(indicator: String, nIndicator: Int) {
@@ -21,26 +20,24 @@ struct ChaosIndicatorsValueChangeView: View {
     }
 
     var body: some View {
-        HStack(alignment: .center, spacing: 4) {
-            Image(systemName: gameplayVM.valueIsIncreasing[nIndicator] ?
-                  "arrowshape.up.fill" : "arrowshape.down.fill")
+        HStack(alignment: .center, spacing: ChaosIndicatorsValueChangeConstants.hStackSpacing) {
+            Image(systemName: gameplayVM.valueIsIncreasing[nIndicator] ? "arrowshape.up.fill" : "arrowshape.down.fill")
                 .resizable()
-                .frame(width: getWidth() * 0.03,
-                       height: getHeight() * 0.015)
+                .frame(width: getWidth() * ChaosIndicatorsValueChangeConstants.arrowWidthMultiplier,
+                       height: getHeight() * ChaosIndicatorsValueChangeConstants.arrowHeightMultiplier)
             Text(String(gameplayVM.value[nIndicator]))
                 .font(.footnoteFont)
                 .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                 .multilineTextAlignment(.center)
         }
-        .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ?
-                         Assets.Colors.secondaryPurple.swiftUIColor :
-                         Assets.Colors.secondaryBlue.swiftUIColor)
+        .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ? Assets.Colors.secondaryPurple.swiftUIColor : Assets.Colors.secondaryBlue.swiftUIColor)
         .opacity(gameplayVM.shouldShowIndicator[nIndicator] ? 1 : 0)
         .scaleEffect(gameplayVM.scaleChange[nIndicator], anchor: .bottom)
         .onChange(of: gameplayVM.currentState) {
-            withAnimation(Animation.linear(duration: 1)) {
+            withAnimation(Animation.linear(duration: ChaosIndicatorsValueChangeConstants.animationDuration)) {
                 gameplayVM.getIndicatorValue(indicator: indicator, nIndicator: nIndicator)
             }
         }
     }
 }
+
