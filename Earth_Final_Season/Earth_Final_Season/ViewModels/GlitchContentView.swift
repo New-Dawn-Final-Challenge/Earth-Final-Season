@@ -66,7 +66,3 @@ struct GlitchContentView: View {
             trigger.toggle()
     }
 }
-
-//#Preview {
-//    GlitchContentView()
-//}

@@ -91,11 +91,3 @@ struct GlitchView: View {
             .offset(x: offset)
     }
 }
-
-
-
-
-//
-//#Preview {
-//    GlitchView()
-//}

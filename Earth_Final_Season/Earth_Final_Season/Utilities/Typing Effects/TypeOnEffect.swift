@@ -34,7 +34,3 @@ struct TypeOnEffect: View {
         }
     }
 }
-//
-//#Preview {
-//    TypeOnEffect(content: "Hahaha, the AI decides humans shouldn’t exist and begins it’s uprising...", delay: 6)
-//}

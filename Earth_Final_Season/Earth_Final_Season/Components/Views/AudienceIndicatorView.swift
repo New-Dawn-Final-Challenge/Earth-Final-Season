@@ -41,8 +41,6 @@ struct AudienceIndicatorView: View {
     }
 }
 
-struct AudienceIndicatorView_Preview: PreviewProvider {
-    static var previews: some View {
-        AudienceIndicatorView(percentage: 50)
-    }
+#Preview {
+    AudienceIndicatorView(percentage: 50)
 }

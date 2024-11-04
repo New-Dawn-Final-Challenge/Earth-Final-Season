@@ -104,7 +104,6 @@ struct GlitchTextEffect: View {
     }
 }
 
-
 #Preview {
     GlitchTextEffect(text: "Game Over")
 }
