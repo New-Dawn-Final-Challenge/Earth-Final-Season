@@ -80,7 +80,6 @@
 				8B61B08B2CA1B53C00ED8A81 /* SwiftGen */,
 				620E4D4E2C9C468E006850BB /* Sources */,
 				620E4D4F2C9C468E006850BB /* Frameworks */,
-				8B61B0842CA1AA7700ED8A81 /* SwiftLint */,
 				620E4D502C9C468E006850BB /* Resources */,
 			);
 			buildRules = (
@@ -148,25 +147,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8B61B0842CA1AA7700ED8A81 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"Aqui\"\n\nif [[ \"$(uname -m)\" == arm64 ]]; then\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
 		8B61B08B2CA1B53C00ED8A81 /* SwiftGen */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
