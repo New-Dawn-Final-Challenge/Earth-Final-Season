@@ -128,15 +128,15 @@ struct GameplayView: View {
             Spacer()
             
             NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
-                HelpButtonView()
+                HelperButtonView(imageName: "questionmark")
             }
             
             NavigationLink(destination: MenuView()) {
-                MenuButtonView()
+                HelperButtonView(imageName: "house.fill")
             }
             
             NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
-                SettingsButtonView()
+                HelperButtonView(imageName: "gearshape.fill")
             }
         }
         .padding(.trailing, 50)
