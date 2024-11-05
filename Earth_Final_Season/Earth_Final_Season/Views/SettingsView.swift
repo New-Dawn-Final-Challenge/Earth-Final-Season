@@ -15,22 +15,22 @@ struct SettingsView: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text("Music")
-                    .font(.title3Font)
+                    .font(Font.title3Font)
                     .padding(.horizontal)
                 HStack {
                     Image(systemName: "speaker.wave.1")
-                    Slider(value: $settingsVM.musicIntensity, in: 0...100)
+                    Slider(value: $settingsVM.musicIntensity, in: SettingsViewConstants.sliderRange)
                     Image(systemName: "speaker.wave.3.fill")
                 }
             }
             .padding()
             VStack(alignment: .leading) {
                 Text("Sound effects")
-                    .font(.title3Font)
+                    .font(Font.title3Font)
                     .padding(.horizontal)
                 HStack {
                     Image(systemName: "speaker.wave.1")
-                    Slider(value: $settingsVM.soundEffectsIntensity, in: 0...100)
+                    Slider(value: $settingsVM.soundEffectsIntensity, in: SettingsViewConstants.sliderRange)
                     Image(systemName: "speaker.wave.3.fill")
                 }
                 .padding()
@@ -38,37 +38,37 @@ struct SettingsView: View {
             
             HStack {
                 Toggle("Haptics enabled", isOn: $settingsVM.hapticsEnabled)
-                    .font(.title3Font)
-                    .toggleStyle(SwitchToggleStyle(tint: .indigo))
+                    .font(Font.title3Font)
+                    .toggleStyle(SwitchToggleStyle(tint: Color.indigo))
                 Spacer()
             }
-            .padding(32)
+            .padding(SettingsViewConstants.padding)
             
-            if (settingsVM.hapticsEnabled) {
-                            VStack(alignment: .leading) {
-                                Text("Haptics intensity")
-                                    .font(.title3Font)
-                                    .padding(.horizontal)
-                                    .onAppear {
-                                        withAnimation(.easeInOut(duration: 0.5)) {
-                                            sliderOpacity = 1
-                                        }
-                                    }
-                                    .onDisappear {
-                                        sliderOpacity = 0
-                                        }
-                                HStack {
-                                    Slider(value: $settingsVM.hapticsIntensity, in: 0...100)
-                                        .opacity(sliderOpacity)
-                                }
+            if settingsVM.hapticsEnabled {
+                VStack(alignment: .leading) {
+                    Text("Haptics intensity")
+                        .font(Font.title3Font)
+                        .padding(.horizontal)
+                        .onAppear {
+                            withAnimation(.easeInOut(duration: SettingsViewConstants.transitionDuration)) {
+                                sliderOpacity = 1
                             }
-                            .transition(.move(edge: .top))
-                            .padding()
                         }
+                        .onDisappear {
+                            sliderOpacity = 0
+                        }
+                    HStack {
+                        Slider(value: $settingsVM.hapticsIntensity, in: SettingsViewConstants.sliderRange)
+                            .opacity(sliderOpacity)
+                    }
+                }
+                .transition(.move(edge: .top))
+                .padding()
+            }
            
             VStack(alignment: .leading) {
                 Text("Gesture")
-                    .font(.title3Font)
+                    .font(Font.title3Font)
                     .padding()
                 Section {
                     VStack(alignment: .leading) {
@@ -77,10 +77,10 @@ struct SettingsView: View {
                         } label: {
                             HStack {
                                 Text("Hold and drag")
-                                    .font(.bodyFont)
+                                    .font(Font.bodyFont)
                                     Spacer()
                                 Image(systemName: "checkmark")
-                                    .opacity(settingsVM.selectedGesture == .holdDrag ? 1:0)
+                                    .opacity(settingsVM.selectedGesture == .holdDrag ? 1 : 0)
                             }
                             .padding(.horizontal)
                         }
@@ -92,18 +92,15 @@ struct SettingsView: View {
                         } label: {
                             HStack {
                                 Text("Tap")
-                                    .font(.bodyFont)
+                                    .font(Font.bodyFont)
                                     Spacer()
                                 Image(systemName: "checkmark")
-                                    .opacity(settingsVM.selectedGesture == .tap ? 1.0:0.0)
+                                    .opacity(settingsVM.selectedGesture == .tap ? 1 : 0)
                             }
                             .padding(.horizontal)
                         }
                     }
-                    
                 }
-                
-                
             }
             .padding(.horizontal, 16)
             Spacer()
@@ -112,7 +109,6 @@ struct SettingsView: View {
     }
 }
 
-// swiftlint:disable min_length
 enum Gesture: Int {
     case holdDrag
     case tap
@@ -123,3 +119,4 @@ extension AnyTransition {
         AnyTransition.move(edge: .top).combined(with: .opacity)
     }
 }
+

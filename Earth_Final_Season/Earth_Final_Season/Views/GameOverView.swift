@@ -17,21 +17,27 @@ struct GameOverView: View {
     var body: some View {
         VStack(alignment: .center) {
             VStack(alignment: .center) {
+                
                 Spacer()
-                GlitchTextEffect(text: "Game Over", intensity: 2)
+                
+                GlitchTextEffect(text: "Game Over", intensity: GameOverViewConstants.glitchTextIntensity)
                     .padding(.vertical)
-                HackerTextView(text: gameplayVM.getGameOverReason() ?? "Crossed the road without looking at both sides",
-                               trigger: trigger,
-                               transition: .identity,
-                               speed: 0.001
+                HackerTextView(
+                    text: gameplayVM.getGameOverReason() ?? "",
+                    trigger: trigger,
+                    transition: .identity,
+                    speed: GameOverViewConstants.hackerTextSpeed
                 )
                 .fontDesign(.monospaced)
-                .lineLimit(4)
+                .lineLimit(GameOverViewConstants.hackerTextLineLimit)
                 .multilineTextAlignment(.center)
                 .font(.bodyFont)
                 .padding()
+                
                 Spacer()
+                
             }
+            
             Button("Restart") {
                 gameplayVM.resetGame()
                 isPresented = false
@@ -41,17 +47,19 @@ struct GameOverView: View {
             .font(.title1Font)
             .buttonStyle(.bordered)
             .tint(.pink)
+            
             Spacer()
+            
         }
         .task {
-            try? await Task.sleep(nanoseconds: 4500000000)
+            try? await Task.sleep(nanoseconds: GameOverViewConstants.buttonOpacityDelay)
             trigger.toggle()
-            withAnimation(.easeInOut(duration: 4.5)) {
+            withAnimation(.easeInOut(duration: GameOverViewConstants.buttonAnimationDuration)) {
                 opacity = 1
             }
         }
         .navigationTitle("")
         .navigationBarBackButtonHidden(true)
-                
     }
 }
+

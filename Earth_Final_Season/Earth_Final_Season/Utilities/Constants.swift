@@ -115,6 +115,61 @@ struct TapViewConstants {
     static let leadingPadding: CGFloat = 130
 }
 
+struct GameEngineConstants {
+    static let initialAudience: Double = 5
+    static let initialIllBeing = 6
+    static let initialSocioPoliticalInstability = 6
+    static let initialEnvironmentalDegradation = 6
+    static let initialYear = 0
 
+    static let minAudienceThreshold: Double = 3
+    static let maxIndicatorThreshold = 12
+    static let eventsPerYear = 2
 
+    static let gameOverAudienceMessage = "The reality has reached zero audience."
+    static let gameOverEnvironmentMessage = "The earth is barren, and nature has collapsed. The damage is irreversible."
+    static let gameOverIllBeingMessage = "The people are overwhelmed by suffering and despair. Society can no longer endure."
+    static let gameOverInstabilityMessage = "Chaos and conflict have torn society apart. Order is lost, and survival is impossible."
+}
+
+struct HapticsConstants {
+    static let defaultIntensity: Float = 1.0
+    static let defaultSharpness: Float = 0.3
+    static let strideInterval: Double = 0.01
+    static let relativeTimeLimit: Double = 0.5
+}
+
+struct GameOverViewConstants {
+    static let glitchTextIntensity: CGFloat = 2
+    static let hackerTextSpeed: Double = 0.001
+    static let hackerTextLineLimit: Int = 4
+    static let buttonAnimationDuration: Double = 4.5
+    static let buttonOpacityDelay: UInt64 = 4500000000  // nanoseconds for task sleep
+}
+
+struct GameplayViewConstants {
+    static let helperButtonsPaddingTrailing: CGFloat = 50
+    static let helperButtonsPaddingTop: CGFloat = 32
+    static let indicatorSpacingMultiplier: CGFloat = 0.05
+    static let panelAccessoryWidthMultiplier: CGFloat = 0.3
+    static let panelAccessoryHeightMultiplier: CGFloat = 0.08
+    static let paddingTopChoiceView: CGFloat = -15
+    static let panelPaddingTop: CGFloat = 30
+    static let panelHorizontalPadding: CGFloat = 30
+}
+
+struct MenuViewConstants {
+    static let titleWidthMultiplier: CGFloat = 0.5
+    static let titleHeightMultiplier: CGFloat = 0.06
+    static let buttonWidthMultiplier: CGFloat = 0.5
+    static let buttonHeightMultiplier: CGFloat = 0.06
+    static let buttonCornerRadius: CGFloat = 10
+    static let verticalSpacing: CGFloat = 20
+}
+
+struct SettingsViewConstants {
+    static let sliderRange: ClosedRange<Float> = 0...100
+    static let padding: CGFloat = 32
+    static let transitionDuration: Double = 0.5
+}
 
