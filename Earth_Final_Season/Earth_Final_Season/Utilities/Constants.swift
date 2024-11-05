@@ -146,7 +146,7 @@ struct Constants{
         static let hackerTextSpeed: Double = 0.001
         static let hackerTextLineLimit: Int = 4
         static let buttonAnimationDuration: Double = 4.5
-        static let buttonOpacityDelay: UInt64 = 4500000000  // nanoseconds for task sleep
+        static let buttonOpacityDelay: UInt64 = 45000  // nanoseconds for task sleep
     }
 
     struct GameplayView {
