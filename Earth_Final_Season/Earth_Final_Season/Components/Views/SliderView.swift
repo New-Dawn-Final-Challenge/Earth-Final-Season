@@ -18,11 +18,11 @@ struct SliderView: View {
     var onChooseOption2: () -> Void
 
     var body: some View {
-        let sliderWidth = getWidth() * SliderViewConstants.widthMultiplier
-        let sliderHeight = getHeight() * SliderViewConstants.heightMultiplier
+        let sliderWidth = getWidth() * Constants.SliderView.widthMultiplier
+        let sliderHeight = getHeight() * Constants.SliderView.heightMultiplier
         
-        let rightLimit = (sliderWidth / SliderViewConstants.sliderLimitFactor)
-        let leftLimit = -(sliderWidth / SliderViewConstants.sliderLimitFactor)
+        let rightLimit = (sliderWidth / Constants.SliderView.sliderLimitFactor)
+        let leftLimit = -(sliderWidth / Constants.SliderView.sliderLimitFactor)
 
         Assets.Images.sliderBar.swiftUIImage
             .resizable()
@@ -32,7 +32,7 @@ struct SliderView: View {
                     Assets.Images.sliderDragger.swiftUIImage
                         .resizable()
                         .scaledToFit()
-                        .padding(SliderViewConstants.draggerPadding) // Set dragger size
+                        .padding(Constants.SliderView.draggerPadding) // Set dragger size
                         .offset(dragOffset)
                         .gesture(
                             DragGesture()
@@ -90,7 +90,7 @@ struct SliderView: View {
                     Spacer()
                 }
             )
-            .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity) * SliderViewConstants.hapticFeedback), trigger: feedbackTrigger)
+            .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity) * Constants.SliderView.hapticFeedback), trigger: feedbackTrigger)
     }
     
     private func checkFirstOptionIndicators() {

@@ -37,7 +37,7 @@ struct GameplayView: View {
                                         image: Assets.Images.optionScreen1.swiftUIImage)
                             .padding(.leading, 130)
                         }
-                        .padding(.top, GameplayViewConstants.paddingTopChoiceView)
+                        .padding(.top, Constants.GameplayView.paddingTopChoiceView)
                         .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
                         
                     case .tap:
@@ -53,7 +53,7 @@ struct GameplayView: View {
                             )
                             .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
                         }
-                        .padding(.top, GameplayViewConstants.paddingTopChoiceView)
+                        .padding(.top, Constants.GameplayView.paddingTopChoiceView)
                     }
                     
                 } else {
@@ -66,8 +66,8 @@ struct GameplayView: View {
                     HStack {
                         Assets.Images.panelAccessoryA.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * GameplayViewConstants.panelAccessoryWidthMultiplier,
-                                   height: getHeight() * GameplayViewConstants.panelAccessoryHeightMultiplier)
+                            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
                         
                         SliderView(
                             onChooseOption1: {
@@ -80,26 +80,26 @@ struct GameplayView: View {
                         
                         Assets.Images.panelAccessoryB.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * GameplayViewConstants.panelAccessoryWidthMultiplier,
-                                   height: getHeight() * GameplayViewConstants.panelAccessoryHeightMultiplier)
+                            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
                     }
-                    .padding(.top, GameplayViewConstants.panelPaddingTop)
+                    .padding(.top, Constants.GameplayView.panelPaddingTop)
                 } else {
                     HStack {
                         Assets.Images.panelAccessoryA.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * GameplayViewConstants.panelAccessoryWidthMultiplier,
-                                   height: getHeight() * GameplayViewConstants.panelAccessoryHeightMultiplier)
+                            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
                         
                         Spacer()
                         
                         Assets.Images.panelAccessoryB.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * GameplayViewConstants.panelAccessoryWidthMultiplier,
-                                   height: getHeight() * GameplayViewConstants.panelAccessoryHeightMultiplier)
+                            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
                     }
-                    .padding(.horizontal, GameplayViewConstants.panelHorizontalPadding)
-                    .padding(.top, GameplayViewConstants.panelPaddingTop)
+                    .padding(.horizontal, Constants.GameplayView.panelHorizontalPadding)
+                    .padding(.top, Constants.GameplayView.panelPaddingTop)
                 }
                 Spacer()
             }
@@ -133,12 +133,12 @@ struct GameplayView: View {
                 SettingsButtonView()
             }
         }
-        .padding(.trailing, GameplayViewConstants.helperButtonsPaddingTrailing)
-        .padding(.top, GameplayViewConstants.helperButtonsPaddingTop)
+        .padding(.trailing, Constants.GameplayView.helperButtonsPaddingTrailing)
+        .padding(.top, Constants.GameplayView.helperButtonsPaddingTop)
     }
     
     private var indicatorsView: some View {
-        HStack(alignment: .center, spacing: getWidth() * GameplayViewConstants.indicatorSpacingMultiplier) {
+        HStack(alignment: .center, spacing: getWidth() * Constants.GameplayView.indicatorSpacingMultiplier) {
             AudienceIndicatorView(percentage: CGFloat(Int(gameplayVM.getIndicators()?.audience ?? 0)))
                 .padding(.bottom)
             

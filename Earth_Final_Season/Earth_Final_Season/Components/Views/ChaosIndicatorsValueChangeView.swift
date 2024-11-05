@@ -20,11 +20,11 @@ struct ChaosIndicatorsValueChangeView: View {
     }
 
     var body: some View {
-        HStack(alignment: .center, spacing: ChaosIndicatorsValueChangeConstants.hStackSpacing) {
+        HStack(alignment: .center, spacing: Constants.ChaosIndicatorsValueChange.hStackSpacing) {
             Image(systemName: gameplayVM.valueIsIncreasing[nIndicator] ? "arrowshape.up.fill" : "arrowshape.down.fill")
                 .resizable()
-                .frame(width: getWidth() * ChaosIndicatorsValueChangeConstants.arrowWidthMultiplier,
-                       height: getHeight() * ChaosIndicatorsValueChangeConstants.arrowHeightMultiplier)
+                .frame(width: getWidth() * Constants.ChaosIndicatorsValueChange.arrowWidthMultiplier,
+                       height: getHeight() * Constants.ChaosIndicatorsValueChange.arrowHeightMultiplier)
             Text(String(gameplayVM.value[nIndicator]))
                 .font(.footnoteFont)
                 .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
@@ -34,7 +34,7 @@ struct ChaosIndicatorsValueChangeView: View {
         .opacity(gameplayVM.shouldShowIndicator[nIndicator] ? 1 : 0)
         .scaleEffect(gameplayVM.scaleChange[nIndicator], anchor: .bottom)
         .onChange(of: gameplayVM.currentState) {
-            withAnimation(Animation.linear(duration: ChaosIndicatorsValueChangeConstants.animationDuration)) {
+            withAnimation(Animation.linear(duration: Constants.ChaosIndicatorsValueChange.animationDuration)) {
                 gameplayVM.getIndicatorValue(indicator: indicator, nIndicator: nIndicator)
             }
         }

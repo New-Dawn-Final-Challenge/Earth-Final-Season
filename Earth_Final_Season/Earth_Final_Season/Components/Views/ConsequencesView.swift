@@ -5,9 +5,9 @@ struct ConsequencesView: View {
     var text: String
 
     var body: some View {
-        RoundedRectangle(cornerRadius: GlobalConstants.cornerRadius)
-            .frame(width: getWidth() * ConsequencesViewConstants.frameWidthMultiplier,
-                   height: getHeight() * ConsequencesViewConstants.frameHeightMultiplier)
+        RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+            .frame(width: getWidth() * Constants.ConsequencesView.frameWidthMultiplier,
+                   height: getHeight() * Constants.ConsequencesView.frameHeightMultiplier)
             .foregroundStyle(Color(UIColor.systemGray4))
             .padding()
             .overlay(

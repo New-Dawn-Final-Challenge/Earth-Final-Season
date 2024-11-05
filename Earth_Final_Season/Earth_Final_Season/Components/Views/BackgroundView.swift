@@ -13,7 +13,7 @@ import Design_System
 struct BackgroundView: View {
     let startDate = Date()
     @State var animate: Bool = false
-    let animation: Animation = Animation.linear(duration: BackgroundViewConstants.animationDuration).repeatForever(autoreverses: true)
+    let animation: Animation = Animation.linear(duration: Constants.BackgroundView.animationDuration).repeatForever(autoreverses: true)
     
     var body: some View {
         ZStack {
@@ -26,9 +26,9 @@ struct BackgroundView: View {
                 background: ""
             )
             
-            Color(red: BackgroundViewConstants.colorRed,
-                  green: BackgroundViewConstants.colorGreen,
-                  blue: BackgroundViewConstants.colorBlue)
+            Color(red: Constants.BackgroundView.colorRed,
+                  green: Constants.BackgroundView.colorGreen,
+                  blue: Constants.BackgroundView.colorBlue)
                 .edgesIgnoringSafeArea(.all)
             
             TimelineView(.animation) { context in
@@ -36,7 +36,7 @@ struct BackgroundView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: getWidth(), height: getHeight())
-                    .opacity(BackgroundViewConstants.opacity)
+                    .opacity(Constants.BackgroundView.opacity)
                     .visualEffect { content, proxy in
                         content
                             .distortionEffect(ShaderLibrary.complexWave(
@@ -55,20 +55,20 @@ struct BackgroundView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: getWidth(), height: getHeight())
-                        .rotationEffect(.degrees(animate ? BackgroundViewConstants.firstRotationAngle : 0))
-                        .scaleEffect(animate ? BackgroundViewConstants.scaleEffectValue : BackgroundViewConstants.scaleEffectValue)
-                        .animation(.easeInOut(duration: BackgroundViewConstants.animationRepeatDuration).repeatForever(autoreverses: true), value: animate)
-                        .frame(width: BackgroundViewConstants.frameWidth1, height: BackgroundViewConstants.frameHeight1,
+                        .rotationEffect(.degrees(animate ? Constants.BackgroundView.firstRotationAngle : 0))
+                        .scaleEffect(animate ? Constants.BackgroundView.scaleEffectValue : Constants.BackgroundView.scaleEffectValue)
+                        .animation(.easeInOut(duration: Constants.BackgroundView.animationRepeatDuration).repeatForever(autoreverses: true), value: animate)
+                        .frame(width: Constants.BackgroundView.frameWidth1, height: Constants.BackgroundView.frameHeight1,
                                alignment: animate ? .bottomLeading : .trailing)
                     
                     Assets.Images.nebula.swiftUIImage
                         .resizable()
                         .scaledToFit()
                         .frame(width: getWidth(), height: getHeight())
-                        .rotationEffect(.degrees(animate ? BackgroundViewConstants.secondRotationAngle : 0))
+                        .rotationEffect(.degrees(animate ? Constants.BackgroundView.secondRotationAngle : 0))
                         .scaleEffect(animate ? 2.0 : 2.0)
-                        .animation(.easeInOut(duration: BackgroundViewConstants.animationRepeatDuration).repeatForever(autoreverses: true), value: animate)
-                        .frame(width: BackgroundViewConstants.frameWidth2, height: BackgroundViewConstants.frameHeight2,
+                        .animation(.easeInOut(duration: Constants.BackgroundView.animationRepeatDuration).repeatForever(autoreverses: true), value: animate)
+                        .frame(width: Constants.BackgroundView.frameWidth2, height: Constants.BackgroundView.frameHeight2,
                                alignment: animate ? .topLeading : .bottomTrailing)
                 }
                 .animation(animation, value: animate)
@@ -89,7 +89,7 @@ struct BackgroundView: View {
                            minHeight: getHeight(),
                            maxHeight: .infinity,
                            alignment: Alignment.topLeading)
-                    .cornerRadius(BackgroundViewConstants.emitterCornerRadius)
+                    .cornerRadius(Constants.BackgroundView.emitterCornerRadius)
             }
             
             Assets.Images.spaceShip.swiftUIImage

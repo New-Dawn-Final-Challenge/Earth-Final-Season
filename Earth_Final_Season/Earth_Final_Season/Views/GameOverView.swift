@@ -20,16 +20,16 @@ struct GameOverView: View {
                 
                 Spacer()
                 
-                GlitchTextEffect(text: "Game Over", intensity: GameOverViewConstants.glitchTextIntensity)
+                GlitchTextEffect(text: "Game Over", intensity: Constants.GameOverView.glitchTextIntensity)
                     .padding(.vertical)
                 HackerTextView(
                     text: gameplayVM.getGameOverReason() ?? "",
                     trigger: trigger,
                     transition: .identity,
-                    speed: GameOverViewConstants.hackerTextSpeed
+                    speed: Constants.GameOverView.hackerTextSpeed
                 )
                 .fontDesign(.monospaced)
-                .lineLimit(GameOverViewConstants.hackerTextLineLimit)
+                .lineLimit(Constants.GameOverView.hackerTextLineLimit)
                 .multilineTextAlignment(.center)
                 .font(.bodyFont)
                 .padding()
@@ -52,9 +52,9 @@ struct GameOverView: View {
             
         }
         .task {
-            try? await Task.sleep(nanoseconds: GameOverViewConstants.buttonOpacityDelay)
+            try? await Task.sleep(nanoseconds: Constants.GameOverView.buttonOpacityDelay)
             trigger.toggle()
-            withAnimation(.easeInOut(duration: GameOverViewConstants.buttonAnimationDuration)) {
+            withAnimation(.easeInOut(duration: Constants.GameOverView.buttonAnimationDuration)) {
                 opacity = 1
             }
         }

@@ -18,14 +18,14 @@ struct CharacterView: View {
             // Image rectangle
             Assets.Images.characterScreen.swiftUIImage
                 .resizable()
-                .frame(width: getWidth() * CharacterViewConstants.imageFrameWidthMultiplier,
-                       height: getHeight() * CharacterViewConstants.imageFrameHeightMultiplier)
+                .frame(width: getWidth() * Constants.CharacterView.imageFrameWidthMultiplier,
+                       height: getHeight() * Constants.CharacterView.imageFrameHeightMultiplier)
                 .overlay(
                     VStack {
                         GlitchContentView(trigger: $triggerChangeChannel)
-                            .frame(width: getWidth() * CharacterViewConstants.glitchViewWidthMultiplier,
-                                   height: getHeight() * CharacterViewConstants.glitchViewHeightMultiplier)
-                            .cornerRadius(GlobalConstants.cornerRadius)
+                            .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,
+                                   height: getHeight() * Constants.CharacterView.glitchViewHeightMultiplier)
+                            .cornerRadius(Constants.Global.cornerRadius)
                         Spacer()
                         
                         Text(characterName)
@@ -35,12 +35,12 @@ struct CharacterView: View {
                             .multilineTextAlignment(.center)
                             .lineLimit(nil)
                             .fixedSize(horizontal: false, vertical: true)
-                            .frame(maxWidth: .infinity, minHeight: CharacterViewConstants.minTextHeight)
+                            .frame(maxWidth: .infinity, minHeight: Constants.CharacterView.minTextHeight)
                     }
                     .onChange(of: characterName) {
                         triggerChangeChannel.toggle()
                     }
-                    .padding(.vertical, CharacterViewConstants.verticalPadding)
+                    .padding(.vertical, Constants.CharacterView.verticalPadding)
                     .padding(.horizontal)
                 )
         }

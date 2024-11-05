@@ -19,7 +19,7 @@ struct SettingsView: View {
                     .padding(.horizontal)
                 HStack {
                     Image(systemName: "speaker.wave.1")
-                    Slider(value: $settingsVM.musicIntensity, in: SettingsViewConstants.sliderRange)
+                    Slider(value: $settingsVM.musicIntensity, in: Constants.SettingsView.sliderRange)
                     Image(systemName: "speaker.wave.3.fill")
                 }
             }
@@ -30,7 +30,7 @@ struct SettingsView: View {
                     .padding(.horizontal)
                 HStack {
                     Image(systemName: "speaker.wave.1")
-                    Slider(value: $settingsVM.soundEffectsIntensity, in: SettingsViewConstants.sliderRange)
+                    Slider(value: $settingsVM.soundEffectsIntensity, in: Constants.SettingsView.sliderRange)
                     Image(systemName: "speaker.wave.3.fill")
                 }
                 .padding()
@@ -42,7 +42,7 @@ struct SettingsView: View {
                     .toggleStyle(SwitchToggleStyle(tint: Color.indigo))
                 Spacer()
             }
-            .padding(SettingsViewConstants.padding)
+            .padding(Constants.SettingsView.padding)
             
             if settingsVM.hapticsEnabled {
                 VStack(alignment: .leading) {
@@ -50,7 +50,7 @@ struct SettingsView: View {
                         .font(Font.title3Font)
                         .padding(.horizontal)
                         .onAppear {
-                            withAnimation(.easeInOut(duration: SettingsViewConstants.transitionDuration)) {
+                            withAnimation(.easeInOut(duration: Constants.SettingsView.transitionDuration)) {
                                 sliderOpacity = 1
                             }
                         }
@@ -58,7 +58,7 @@ struct SettingsView: View {
                             sliderOpacity = 0
                         }
                     HStack {
-                        Slider(value: $settingsVM.hapticsIntensity, in: SettingsViewConstants.sliderRange)
+                        Slider(value: $settingsVM.hapticsIntensity, in: Constants.SettingsView.sliderRange)
                             .opacity(sliderOpacity)
                     }
                 }

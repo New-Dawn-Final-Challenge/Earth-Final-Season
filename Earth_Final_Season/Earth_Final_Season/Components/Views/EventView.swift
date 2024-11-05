@@ -19,8 +19,8 @@ struct EventView: View {
     var body: some View {
         Assets.Images.eventsScreen.swiftUIImage
             .resizable()
-            .frame(width: getWidth() * EventViewConstants.frameWidthMultiplier,
-                   height: getHeight() * EventViewConstants.frameHeightMultiplier)
+            .frame(width: getWidth() * Constants.EventView.frameWidthMultiplier,
+                   height: getHeight() * Constants.EventView.frameHeightMultiplier)
             .padding()
             .foregroundStyle(Color(UIColor.systemGray4))
             .overlay(
@@ -34,7 +34,7 @@ struct EventView: View {
                 .font(.bodyFont)
                 .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, EventViewConstants.horizontalPadding)
+                .padding(.horizontal, Constants.EventView.horizontalPadding)
             )
             .onAppear(perform: updateText)
             .onChange(of: gameplayVM.currentState == .consequence, updateText)

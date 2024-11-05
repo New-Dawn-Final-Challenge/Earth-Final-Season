@@ -21,21 +21,21 @@ struct TapView: View {
             } label: {
                 Assets.Images.optionScreen2.swiftUIImage
                     .resizable()
-                    .frame(width: getWidth() * TapViewConstants.buttonWidthMultiplier,
-                           height: getHeight() * TapViewConstants.buttonHeightMultiplier)
+                    .frame(width: getWidth() * Constants.TapView.buttonWidthMultiplier,
+                           height: getHeight() * Constants.TapView.buttonHeightMultiplier)
                     .padding()
                     .overlay(
                         Text(text1)
                             .font(.bodyFont)
                             .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                            .padding(.horizontal, TapViewConstants.buttonPadding)
+                            .padding(.horizontal, Constants.TapView.buttonPadding)
                     )
                     .shadow(color: Color.orange, radius: CGFloat(shadowRadius1))
-                    .padding(.trailing, TapViewConstants.trailingPadding)
+                    .padding(.trailing, Constants.TapView.trailingPadding)
             }
             .simultaneousGesture(
-                LongPressGesture(minimumDuration: TapViewConstants.longPressMinimumDuration).onEnded { _ in
-                    shadowRadius1 = Int(TapViewConstants.shadowRadius1)
+                LongPressGesture(minimumDuration: Constants.TapView.longPressMinimumDuration).onEnded { _ in
+                    shadowRadius1 = Int(Constants.TapView.shadowRadius1)
                     shadowRadius2 = 0
                     resetIndicatorsShadows()
                     checkOptionIndicators(1)
@@ -51,22 +51,22 @@ struct TapView: View {
             } label: {
                 Assets.Images.optionScreen1.swiftUIImage
                     .resizable()
-                    .frame(width: getWidth() * TapViewConstants.buttonWidthMultiplier,
-                           height: getHeight() * TapViewConstants.buttonHeightMultiplier)
+                    .frame(width: getWidth() * Constants.TapView.buttonWidthMultiplier,
+                           height: getHeight() * Constants.TapView.buttonHeightMultiplier)
                     .padding()
                     .overlay(
                         Text(text2)
                             .font(.bodyFont)
                             .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                            .padding(.horizontal, TapViewConstants.buttonPadding)
+                            .padding(.horizontal, Constants.TapView.buttonPadding)
                     )
                     .shadow(color: Color.pink, radius: CGFloat(shadowRadius2))
-                    .padding(.leading, TapViewConstants.leadingPadding)
+                    .padding(.leading, Constants.TapView.leadingPadding)
             }
             .simultaneousGesture(
-                LongPressGesture(minimumDuration: TapViewConstants.longPressMinimumDuration).onEnded { _ in
+                LongPressGesture(minimumDuration: Constants.TapView.longPressMinimumDuration).onEnded { _ in
                     shadowRadius1 = 0
-                    shadowRadius2 = Int(TapViewConstants.shadowRadius1)
+                    shadowRadius2 = Int(Constants.TapView.shadowRadius1)
                     resetIndicatorsShadows()
                     checkOptionIndicators(2)
                 }
@@ -81,22 +81,22 @@ struct TapView: View {
         let sI = [options?.socioPoliticalInstability1, options?.socioPoliticalInstability2]
         
         if eD[option - 1] != 0 {
-            gameplayVM.environmentalDegradationShadowRadius = Int(TapViewConstants.shadowRadius2)
+            gameplayVM.environmentalDegradationShadowRadius = Int(Constants.TapView.shadowRadius2)
         }
         
         if iB[option - 1] != 0 {
-            gameplayVM.illBeingShadowRadius = Int(TapViewConstants.shadowRadius2)
+            gameplayVM.illBeingShadowRadius = Int(Constants.TapView.shadowRadius2)
         }
         
         if sI[option - 1] != 0 {
-            gameplayVM.sociopoliticalInstabilityShadowRadius = Int(TapViewConstants.shadowRadius2)
+            gameplayVM.sociopoliticalInstabilityShadowRadius = Int(Constants.TapView.shadowRadius2)
         }
     }
     
     private func resetIndicatorsShadows() {
-        gameplayVM.environmentalDegradationShadowRadius = Int(TapViewConstants.shadowResetValue)
-        gameplayVM.illBeingShadowRadius = Int(TapViewConstants.shadowResetValue)
-        gameplayVM.sociopoliticalInstabilityShadowRadius = Int(TapViewConstants.shadowResetValue)
+        gameplayVM.environmentalDegradationShadowRadius = Int(Constants.TapView.shadowResetValue)
+        gameplayVM.illBeingShadowRadius = Int(Constants.TapView.shadowResetValue)
+        gameplayVM.sociopoliticalInstabilityShadowRadius = Int(Constants.TapView.shadowResetValue)
     }
 }
 

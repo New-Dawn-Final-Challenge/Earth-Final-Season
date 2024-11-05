@@ -18,35 +18,35 @@ struct MenuView: View {
             ZStack {
                 BackgroundView()
                 
-                VStack(spacing: MenuViewConstants.verticalSpacing) {
+                VStack(spacing: Constants.MenuView.verticalSpacing) {
                     // Title of the game
                     Text("Earth: Final Season")
-                        .frame(width: getWidth() * MenuViewConstants.titleWidthMultiplier,
-                               height: getHeight() * MenuViewConstants.titleHeightMultiplier)
+                        .frame(width: getWidth() * Constants.MenuView.titleWidthMultiplier,
+                               height: getHeight() * Constants.MenuView.titleHeightMultiplier)
                         .background(Assets.Colors.textSecondary.swiftUIColor)
                         .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                        .cornerRadius(MenuViewConstants.buttonCornerRadius)
+                        .cornerRadius(Constants.MenuView.buttonCornerRadius)
                     
                     // Navigation buttons
                     NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
                                                              leaderboardVM: $leaderboardVM)) {
                         Text("Play")
-                            .frame(width: getWidth() * MenuViewConstants.buttonWidthMultiplier,
-                                   height: getHeight() * MenuViewConstants.buttonHeightMultiplier)
+                            .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                                   height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
                             .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
                             .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                            .cornerRadius(MenuViewConstants.buttonCornerRadius)
+                            .cornerRadius(Constants.MenuView.buttonCornerRadius)
                     }
                     
                     Button(action: {
                         isGameCenterPresented.toggle()
                     }) {
                         Text("Leaderboard")
-                            .frame(width: getWidth() * MenuViewConstants.buttonWidthMultiplier,
-                                   height: getHeight() * MenuViewConstants.buttonHeightMultiplier)
+                            .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                                   height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
                             .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
                             .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                            .cornerRadius(MenuViewConstants.buttonCornerRadius)
+                            .cornerRadius(Constants.MenuView.buttonCornerRadius)
                     }
                     .sheet(isPresented: $isGameCenterPresented) {
                         LeaderboardView()
@@ -54,20 +54,20 @@ struct MenuView: View {
                     
                     NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
                         Text("Settings")
-                            .frame(width: getWidth() * MenuViewConstants.buttonWidthMultiplier,
-                                   height: getHeight() * MenuViewConstants.buttonHeightMultiplier)
+                            .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                                   height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
                             .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
                             .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                            .cornerRadius(MenuViewConstants.buttonCornerRadius)
+                            .cornerRadius(Constants.MenuView.buttonCornerRadius)
                     }
                     
                     NavigationLink(destination: AboutUsView()) {
                         Text("About Us")
-                            .frame(width: getWidth() * MenuViewConstants.buttonWidthMultiplier,
-                                   height: getHeight() * MenuViewConstants.buttonHeightMultiplier)
+                            .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                                   height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
                             .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
                             .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                            .cornerRadius(MenuViewConstants.buttonCornerRadius)
+                            .cornerRadius(Constants.MenuView.buttonCornerRadius)
                     }
                 }
                 .font(.bodyFont)

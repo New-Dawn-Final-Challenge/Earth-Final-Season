@@ -211,7 +211,7 @@ fileprivate extension EmitterCell.Content {
         switch self {
         case let .image(image):
             return image
-        case let .circle(radius):
+        case .circle(_):
             // Generate a random radius for the circle
             let randomRadius = CGFloat.random(in: 10...25) // Define range for random radius
             let size = CGSize(width: randomRadius * 2, height: randomRadius * 2)

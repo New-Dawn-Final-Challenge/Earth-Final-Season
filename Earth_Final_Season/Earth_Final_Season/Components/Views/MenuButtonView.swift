@@ -10,9 +10,9 @@ import Design_System
 
 struct MenuButtonView: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: GlobalConstants.cornerRadius)
-            .frame(width: getWidth() * ButtonViewConstants.frameWidthMultiplier,
-                   height: getHeight() * ButtonViewConstants.frameHeightMultiplier)
+        RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+            .frame(width: getWidth() * Constants.ButtonView.frameWidthMultiplier,
+                   height: getHeight() * Constants.ButtonView.frameHeightMultiplier)
             .foregroundStyle(Assets.Colors.secondaryGreenVariation.swiftUIColor)
             .overlay(
                 Image(systemName: "house.fill")
