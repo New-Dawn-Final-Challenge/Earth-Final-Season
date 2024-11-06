@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct GlitchContentView: View {
     @Binding var trigger: Bool
     @State private var glitchTimer: Timer? = nil
-    let uiImage = Image("image1")
     private let glitchInterval: TimeInterval = 3.0
+    let uiImage = Assets.Images.placeholderCharacter.swiftUIImage
     
     var body: some View {
         VStack {
@@ -66,7 +67,3 @@ struct GlitchContentView: View {
             trigger.toggle()
     }
 }
-
-//#Preview {
-//    GlitchContentView()
-//}
