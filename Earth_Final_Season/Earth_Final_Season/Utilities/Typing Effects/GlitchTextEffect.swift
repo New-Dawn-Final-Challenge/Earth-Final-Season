@@ -10,9 +10,11 @@ import SwiftUI
 struct GlitchTextEffect: View {
     var text: String?
     var intensity: CGFloat = 1.0
+    
     @State private var trigger = false
     @State var timer: Timer?
     @State var duration: Float = 3
+    
     var body: some View {
         VStack {
             ZStack {
@@ -25,6 +27,7 @@ struct GlitchTextEffect: View {
             startGlitchTimer()
         }
     }
+    
     @ViewBuilder
     func glitchTextView(_ text: String, trigger: Bool, intensity: CGFloat) -> some View {
         ZStack {
@@ -87,6 +90,7 @@ struct GlitchTextEffect: View {
             })
         }
     }
+    
     func startGlitchTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) {_ in
             trigger.toggle()
@@ -98,6 +102,7 @@ struct GlitchTextEffect: View {
         }
         
     }
+    
     func stopGlitchTimer() {
         timer?.invalidate()
         timer = nil

@@ -10,7 +10,6 @@ import SwiftUI
 
 @Observable
 class GameEngine {
-    
     weak var delegate: GameEngineDelegate?
     
     var countdown = 6
@@ -51,6 +50,7 @@ class GameEngine {
         }
         return false
     }
+    
     func checkForGameOver() {
         if state == .consequence {
             if indicators.audience <= 3 {

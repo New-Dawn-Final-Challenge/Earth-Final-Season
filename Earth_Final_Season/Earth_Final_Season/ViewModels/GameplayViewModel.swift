@@ -14,7 +14,6 @@ protocol GameEngineDelegate: AnyObject {
 
 @Observable
 class GameplayViewModel: GameEngineDelegate {
-    
     weak var engine: GameEngine?
     
     var environmentalDegradationDecreaseShadowRadius = 0
@@ -46,6 +45,7 @@ class GameplayViewModel: GameEngineDelegate {
             currentEvent = getEvent()
             currentState = .choosing
         }
+        
         if state == .consequence {
             currentState = .consequence
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
@@ -63,6 +63,7 @@ class GameplayViewModel: GameEngineDelegate {
                 }
             }
         }
+        
         if state == .gameOver {
             currentState = .gameOver
         }
@@ -94,7 +95,6 @@ class GameplayViewModel: GameEngineDelegate {
     }
     
     func getIndicatorValue(indicator: String, nIndicator: Int) {
-        
         // Stop showing indicator and reset values if not in consequence state
         guard currentState == .consequence else {
             scaleChange = [0,0,0]
@@ -131,6 +131,7 @@ class GameplayViewModel: GameEngineDelegate {
             environmentalDegradationIncreaseShadowRadius = 0
             return
         }
+        
         let environmentalDegradation = [engine?.currentEvent?.environmentalDegradation1,
                                         engine?.currentEvent?.environmentalDegradation2]
         
@@ -152,7 +153,6 @@ class GameplayViewModel: GameEngineDelegate {
         let illBeingValue = illBeing[n_choice] ?? 0
         let envDegradationValue = environmentalDegradation[n_choice] ?? 0
         let socioPoliticalValue = socioPoliticalInstability[n_choice] ?? 0
-        
         
         if illBeingValue < 0 {
             illBeingDecreaseShadowRadius = 7

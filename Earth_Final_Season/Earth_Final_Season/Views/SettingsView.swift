@@ -112,7 +112,6 @@ struct SettingsView: View {
     }
 }
 
-// swiftlint:disable min_length
 enum Gesture: Int {
     case holdDrag
     case tap

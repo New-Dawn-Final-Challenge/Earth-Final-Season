@@ -24,7 +24,6 @@ struct GlitchFrame: Animatable {
     var center: CGFloat = 0
     var bottom: CGFloat = 0
     var shadowOpacity: CGFloat = 0
-    
 }
 
 @resultBuilder
@@ -40,6 +39,7 @@ struct GlitchView: View {
     var shadow: Color
     var radius: CGFloat = 1
     var frames: [LinearKeyframe<GlitchFrame>]
+    
     init(text: String = "Hahaha, the AI decides humans shouldn’t exist and begins it’s uprising…", trigger: Bool = false, shadow: SwiftUICore.Color = Color.red, radius: CGFloat, @GlitchFrameBuilder frames: @escaping () ->  [LinearKeyframe<GlitchFrame>]) {
         self.text = text
         self.trigger = trigger
@@ -47,6 +47,7 @@ struct GlitchView: View {
         self.radius = radius
         self.frames = frames()
     }
+    
     var body: some View {
         KeyframeAnimator(initialValue: GlitchFrame(), trigger: trigger) { value in
             ZStack {
@@ -61,6 +62,7 @@ struct GlitchView: View {
             }
         }
     }
+    
     @ViewBuilder
     func textView(_ alignment: Alignment, offset: CGFloat, opacity: CGFloat) -> some View {
         Text(text)
