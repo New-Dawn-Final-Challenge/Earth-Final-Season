@@ -10,7 +10,7 @@ import CoreHaptics
 class HapticsManager {
     static let shared = HapticsManager()
     var engine: CHHapticEngine?
-    var intensity: Float = 1
+    var intensity: Float = Constants.Haptics.defaultIntensity
     
     func setIntensity(_ value: Float) {
         self.intensity = value
@@ -31,11 +31,11 @@ class HapticsManager {
         guard CHHapticEngine.capabilitiesForHardware().supportsHaptics else { return }
         
         var events = [CHHapticEvent]()
-        // swiftlint:disable:next min_length
-        for i in stride(from: 0, to: 0.5, by: 0.01) {
-            let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i) * intensity)
-            let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.3)
-            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: i)
+        
+        for i in stride(from: 0, to: Constants.Haptics.relativeTimeLimit, by: Constants.Haptics.strideInterval) {
+            let intensityParam = CHHapticEventParameter(parameterID: .hapticIntensity, value: Float(i) * intensity)
+            let sharpnessParam = CHHapticEventParameter(parameterID: .hapticSharpness, value: Constants.Haptics.defaultSharpness)
+            let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensityParam, sharpnessParam], relativeTime: i)
             events.append(event)
         }
 

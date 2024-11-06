@@ -1,10 +1,3 @@
-//
-//  CharacterView.swift
-//  Earth_Final_Season
-//
-//  Created by Larissa Okabayashi on 24/09/24.
-//
-
 import SwiftUI
 import Design_System
 
@@ -14,7 +7,7 @@ struct CharacterView: View {
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     let screenHeight: CGFloat = UIScreen.main.bounds.height
     @State private var triggerChangeChannel: Bool = false
-    
+
     init(characterImage: String, characterName: String) {
         self.characterImage = characterImage
         self.characterName = characterName
@@ -23,16 +16,16 @@ struct CharacterView: View {
     var body: some View {
         VStack(spacing: 0) {
             // Image rectangle
-             Assets.Images.characterScreen.swiftUIImage
+            Assets.Images.characterScreen.swiftUIImage
                 .resizable()
-                .frame(width: getWidth() * 0.5,
-                       height: getHeight() * 0.18)
+                .frame(width: getWidth() * Constants.CharacterView.imageFrameWidthMultiplier,
+                       height: getHeight() * Constants.CharacterView.imageFrameHeightMultiplier)
                 .overlay(
-                    VStack() {
+                    VStack {
                         GlitchContentView(trigger: $triggerChangeChannel)
-                            .frame(width: getWidth() * 0.28,
-                                   height: getHeight() * 0.10)
-                            .cornerRadius(16)
+                            .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,
+                                   height: getHeight() * Constants.CharacterView.glitchViewHeightMultiplier)
+                            .cornerRadius(Constants.Global.cornerRadius)
                         Spacer()
                         
                         Text(characterName)
@@ -42,12 +35,12 @@ struct CharacterView: View {
                             .multilineTextAlignment(.center)
                             .lineLimit(nil)
                             .fixedSize(horizontal: false, vertical: true)
-                            .frame(maxWidth: .infinity, minHeight: 20)
+                            .frame(maxWidth: .infinity, minHeight: Constants.CharacterView.minTextHeight)
                     }
-                        .onChange(of: characterName) {
-                            triggerChangeChannel.toggle()
-                        }
-                    .padding(.vertical, 30)
+                    .onChange(of: characterName) {
+                        triggerChangeChannel.toggle()
+                    }
+                    .padding(.vertical, Constants.CharacterView.verticalPadding)
                     .padding(.horizontal)
                 )
         }
@@ -57,3 +50,4 @@ struct CharacterView: View {
 #Preview {
     CharacterView(characterImage: "Placeholder", characterName: "Líder conspiracionista")
 }
+

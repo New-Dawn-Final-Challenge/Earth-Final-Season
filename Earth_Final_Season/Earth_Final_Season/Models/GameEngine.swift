@@ -4,7 +4,6 @@
 //
 //  Created by Larissa Okabayashi on 11/10/24.
 //
-
 import Foundation
 import SwiftUI
 
@@ -18,11 +17,11 @@ class GameEngine {
     var lastChosenOption = "choice1"
     var events = [Event]()
     var currentEvent: Event?
-    var indicators = Indicators(audience: 5,
-                                illBeing: 6,
-                                socioPoliticalInstability: 6,
-                                environmentalDegradation: 6,
-                                currentYear: 0)  // Initial Indicators
+    var indicators = Indicators(audience: Constants.GameEngine.initialAudience,
+                                illBeing: Constants.GameEngine.initialIllBeing,
+                                socioPoliticalInstability: Constants.GameEngine.initialSocioPoliticalInstability,
+                                environmentalDegradation: Constants.GameEngine.initialEnvironmentalDegradation,
+                                currentYear: Constants.GameEngine.initialYear)  // Initial Indicators
     
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
@@ -36,37 +35,28 @@ class GameEngine {
     }
     
     func gameEnded() -> Bool {
-        if indicators.audience <= 3 {
-            return true
-        }
-        if indicators.environmentalDegradation >= 12 {
-            return true
-        }
-        if indicators.illBeing >= 12 {
-            return true
-        }
-        if indicators.socioPoliticalInstability >= 12 {
-            return true
-        }
-        return false
+        return indicators.audience <= Constants.GameEngine.minAudienceThreshold ||
+               indicators.environmentalDegradation >= Constants.GameEngine.maxIndicatorThreshold ||
+               indicators.illBeing >= Constants.GameEngine.maxIndicatorThreshold ||
+               indicators.socioPoliticalInstability >= Constants.GameEngine.maxIndicatorThreshold
     }
     
     func checkForGameOver() {
         if state == .consequence {
-            if indicators.audience <= 3 {
-                gameOverReason = "The reality has reached zero audience."
+            if indicators.audience <= Constants.GameEngine.minAudienceThreshold {
+                gameOverReason = Constants.GameEngine.gameOverAudienceMessage
                 applyGameOver()
             }
-            if indicators.environmentalDegradation >= 12 {
-                gameOverReason += "The earth is barren, and nature has collapsed. The damage is irreversible."
+            if indicators.environmentalDegradation >= Constants.GameEngine.maxIndicatorThreshold {
+                gameOverReason += Constants.GameEngine.gameOverEnvironmentMessage
                 applyGameOver()
             }
-            if indicators.illBeing >= 12 {
-                gameOverReason += "The people are overwhelmed by suffering and despair. Society can no longer endure."
+            if indicators.illBeing >= Constants.GameEngine.maxIndicatorThreshold {
+                gameOverReason += Constants.GameEngine.gameOverIllBeingMessage
                 applyGameOver()
             }
-            if indicators.socioPoliticalInstability >= 12 {
-                gameOverReason += "Chaos and conflict have torn society apart. Order is lost, and survival is impossible."
+            if indicators.socioPoliticalInstability >= Constants.GameEngine.maxIndicatorThreshold {
+                gameOverReason += Constants.GameEngine.gameOverInstabilityMessage
                 applyGameOver()
             }
         }
@@ -92,7 +82,7 @@ class GameEngine {
                         currentEvent = nextEvent
                         eventsPassedCount += 1
                         
-                        if eventsPassedCount == 2 {
+                        if eventsPassedCount == Constants.GameEngine.eventsPerYear {
                             indicators.currentYear += 1
                             eventsPassedCount = 0
                         }
@@ -119,14 +109,17 @@ class GameEngine {
                 lastChosenOption = "choice\(option)"
                 state = .consequence
                 delegate?.gameStateChanged(to: .consequence)
-
             }
         }
     }
 
     func resetGame() {
-        if state == .gameOver || state == .initializing{
-            indicators = Indicators(audience: 5, illBeing: 6, socioPoliticalInstability: 6, environmentalDegradation: 6, currentYear: 0)
+        if state == .gameOver || state == .initializing {
+            indicators = Indicators(audience: Constants.GameEngine.initialAudience,
+                                    illBeing: Constants.GameEngine.initialIllBeing,
+                                    socioPoliticalInstability: Constants.GameEngine.initialSocioPoliticalInstability,
+                                    environmentalDegradation: Constants.GameEngine.initialEnvironmentalDegradation,
+                                    currentYear: Constants.GameEngine.initialYear)
             state = .choosing
             let shuffledEvents = events.shuffled()
             self.eventsSequence = shuffledEvents.map { $0.id }

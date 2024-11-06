@@ -53,7 +53,7 @@ struct GameplayView: View {
     private var noMoreEventsView: some View {
         Text("No more events")
             .font(.title)
-            .padding()
+            .padding(20)
     }
     
     private func choiceView(for event: Event) -> some View {
@@ -77,7 +77,7 @@ struct GameplayView: View {
                         image: Assets.Images.optionScreen1.swiftUIImage)
                 .padding(.leading, 130)
         }
-        .padding(.top, -15)
+        .padding(.top, Constants.GameplayView.paddingTopChoiceView)
         .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
     }
     
@@ -88,7 +88,7 @@ struct GameplayView: View {
             text1: event.choice1,
             text2: event.choice2
         )
-        .padding(.top, -15)
+        .padding(.top, Constants.GameplayView.paddingTopChoiceView)
         .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
     }
     
@@ -111,7 +111,7 @@ struct GameplayView: View {
             )
             panelAccessoryB
         }
-        .padding(.top, 30)
+        .padding(.top, Constants.GameplayView.panelPaddingTop)
     }
     
     private var staticPanelView: some View {
@@ -120,20 +120,22 @@ struct GameplayView: View {
             Spacer()
             panelAccessoryB
         }
-        .padding(.horizontal, 30)
-        .padding(.top, 30)
+        .padding(.horizontal, Constants.GameplayView.panelHorizontalPadding)
+        .padding(.top, Constants.GameplayView.panelPaddingTop)
     }
     
     private var panelAccessoryA: some View {
         Assets.Images.panelAccessoryA.swiftUIImage
             .resizable()
-            .frame(width: getWidth() * 0.3, height: getHeight() * 0.08)
+            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
     }
     
     private var panelAccessoryB: some View {
         Assets.Images.panelAccessoryB.swiftUIImage
             .resizable()
-            .frame(width: getWidth() * 0.3, height: getHeight() * 0.08)
+            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
     }
     
     // MARK: - Helper Methods
@@ -145,8 +147,8 @@ struct GameplayView: View {
             helperButton(destination: MenuView(), imageName: "house.fill")
             helperButton(destination: SettingsView(settingsVM: $settingsVM), imageName: "gearshape.fill")
         }
-        .padding(.trailing, 50)
-        .padding(.top, 32)
+        .padding(.trailing, Constants.GameplayView.helperButtonsPaddingTrailing)
+        .padding(.top, Constants.GameplayView.helperButtonsPaddingTop)
     }
     
     private func helperButton<Destination: View>(destination: Destination, imageName: String) -> some View {
@@ -156,8 +158,8 @@ struct GameplayView: View {
     }
     
     private var indicatorsView: some View {
-        HStack(alignment: .center, spacing: getWidth() * 0.05) {
-            AudienceIndicatorView(percentage: Int(gameplayVM.getIndicators()?.audience ?? 0))
+        HStack(alignment: .center, spacing: getWidth() * Constants.GameplayView.indicatorSpacingMultiplier) {
+            AudienceIndicatorView(percentage: CGFloat(Int(gameplayVM.getIndicators()?.audience ?? 0)))
                 .padding(.bottom)
             
             ChaosIndicatorsView(

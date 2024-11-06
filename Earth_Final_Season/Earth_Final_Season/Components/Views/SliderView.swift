@@ -4,7 +4,6 @@
 //
 //  Created by Larissa Fazolin on 30/09/24.
 //
-
 import SwiftUI
 import Design_System
 
@@ -18,10 +17,10 @@ struct SliderView: View {
     var onChooseOption1: () -> Void
     var onChooseOption2: () -> Void
 
-    private var sliderWidth: CGFloat { getWidth() * 0.4 }
-    private var sliderHeight: CGFloat { getHeight() * 0.03 }
-    private var rightLimit: CGFloat { sliderWidth / 2.5 }
-    private var leftLimit: CGFloat { -(sliderWidth / 2.5) }
+    private var sliderWidth: CGFloat { getWidth() * Constants.SliderView.widthMultiplier }
+    private var sliderHeight: CGFloat { getHeight() * Constants.SliderView.heightMultiplier }
+    private var rightLimit: CGFloat { (sliderWidth / Constants.SliderView.sliderLimitFactor) }
+    private var leftLimit: CGFloat { -(sliderWidth / Constants.SliderView.sliderLimitFactor) }
 
     enum Option {
         case option1
@@ -46,10 +45,9 @@ struct SliderView: View {
                     Spacer()
                 }
             )
-            .sensoryFeedback(
-                .impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity) * 0.28),
-                trigger: feedbackTrigger
-            )
+            .sensoryFeedback(.impact(weight: .medium,
+                                     intensity: Double(HapticsManager.shared.intensity) * Constants.SliderView.hapticFeedback),
+                             trigger: feedbackTrigger)
     }
 
     private func handleDragChanged(_ gesture: DragGesture.Value) {

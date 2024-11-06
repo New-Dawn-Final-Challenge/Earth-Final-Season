@@ -16,7 +16,7 @@ struct DraggerView: View {
         Assets.Images.sliderDragger.swiftUIImage
             .resizable()
             .scaledToFit()
-            .padding(-30)
+            .padding(Constants.SliderView.draggerPadding)
             .offset(dragOffset)
     }
 }

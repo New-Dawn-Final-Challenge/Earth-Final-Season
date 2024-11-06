@@ -1,10 +1,3 @@
-//
-//  TapView.swift
-//  Earth_Final_Season
-//
-//  Created by Breno Harris on 21/10/24.
-//
-
 import SwiftUI
 import Design_System
 
@@ -18,15 +11,14 @@ struct TapView: View {
     var onChooseOption2: () -> Void
     var text1: String
     var text2: String
-    var desiredOffset: Float = 28.0
-    
+
     var body: some View {
         VStack(alignment: .center, spacing: -30) {
             createOptionButton(
                 text: text1,
                 shadowRadius: $shadowRadius1,
                 edge: .trailing,
-                paddingValue: 130,
+                paddingValue: Constants.TapView.trailingPadding,
                 onChoose: onChooseOption1,
                 optionIndex: 1
             )
@@ -35,7 +27,7 @@ struct TapView: View {
                 text: text2,
                 shadowRadius: $shadowRadius2,
                 edge: .leading,
-                paddingValue: 130,
+                paddingValue: Constants.TapView.leadingPadding,
                 onChoose: onChooseOption2,
                 optionIndex: 2
             )
@@ -55,19 +47,20 @@ struct TapView: View {
 
             buttonImage
                 .resizable()
-                .frame(width: getWidth() * 0.8, height: getHeight() * 0.12)
+                .frame(width: getWidth() * Constants.TapView.buttonWidthMultiplier,
+                       height: getHeight() * Constants.TapView.buttonHeightMultiplier)
                 .padding()
                 .overlay(
                     Text(text)
                         .font(.bodyFont)
                         .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                        .padding(.horizontal, 50)
+                        .padding(.horizontal, Constants.TapView.buttonPadding)
                 )
                 .shadow(color: shadowColor(for: shadowRadius.wrappedValue), radius: CGFloat(shadowRadius.wrappedValue))
                 .padding(edge, paddingValue)
         }
         .simultaneousGesture(
-            LongPressGesture(minimumDuration: 0.1).onEnded { _ in
+            LongPressGesture(minimumDuration: Constants.TapView.longPressMinimumDuration).onEnded { _ in
                 updateShadowRadius(for: optionIndex)
             }
         )
@@ -80,8 +73,8 @@ struct TapView: View {
     // MARK: - Shadow Handling
     
     private func updateShadowRadius(for option: Int) {
-        shadowRadius1 = option == 1 ? 18 : 0
-        shadowRadius2 = option == 2 ? 18 : 0
+        shadowRadius1 = option == 1 ? Int(Constants.TapView.shadowRadius1) : 0
+        shadowRadius2 = option == 2 ? Int(Constants.TapView.shadowRadius2) : 0
         resetIndicatorsShadows()
         checkOptionIndicators(option)
     }
@@ -112,19 +105,20 @@ struct TapView: View {
         
         switch indicator {
         case "environmentalDegradation":
-            gameplayVM.environmentalDegradationShadowRadius = 14
+            gameplayVM.environmentalDegradationShadowRadius = Int(Constants.TapView.shadowRadius2)
         case "illBeing":
-            gameplayVM.illBeingShadowRadius = 14
+            gameplayVM.illBeingShadowRadius = Int(Constants.TapView.shadowRadius2)
         case "socioPoliticalInstability":
-            gameplayVM.sociopoliticalInstabilityShadowRadius = 14
+            gameplayVM.sociopoliticalInstabilityShadowRadius = Int(Constants.TapView.shadowRadius2)
         default:
             break
         }
     }
     
     private func resetIndicatorsShadows() {
-        gameplayVM.environmentalDegradationShadowRadius = 0
-        gameplayVM.illBeingShadowRadius = 0
-        gameplayVM.sociopoliticalInstabilityShadowRadius = 0
+        gameplayVM.environmentalDegradationShadowRadius = Int(Constants.TapView.shadowResetValue)
+        gameplayVM.illBeingShadowRadius = Int(Constants.TapView.shadowResetValue)
+        gameplayVM.sociopoliticalInstabilityShadowRadius = Int(Constants.TapView.shadowResetValue)
     }
 }
+

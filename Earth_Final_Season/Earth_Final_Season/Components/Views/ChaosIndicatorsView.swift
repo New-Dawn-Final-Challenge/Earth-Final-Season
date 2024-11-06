@@ -20,8 +20,8 @@ struct ChaosIndicatorsView: View {
         ZStack {
             Assets.Images.indicatorsScreen.swiftUIImage
                 .resizable()
-                .frame(width: getWidth() * 0.6,
-                       height: getHeight() * 0.145)
+                .frame(width: getWidth() * Constants.ChaosIndicators.indicatorFrameWidthMultiplier,
+                       height: getHeight() * Constants.ChaosIndicators.indicatorFrameHeightMultiplier)
             
             VStack {
                 Text("Year: \(year)")
@@ -29,7 +29,7 @@ struct ChaosIndicatorsView: View {
                     .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                     .bold()
                 
-                HStack(spacing: 12) {
+                HStack(spacing: Constants.ChaosIndicators.hStackSpacing) {
                     ForEach(indicatorData, id: \.indicator) { data in
                         indicatorView(
                             indicator: data.indicator,
@@ -45,11 +45,11 @@ struct ChaosIndicatorsView: View {
         .padding()
         .onChange(of: gameplayVM.currentState) {
             if gameplayVM.currentState == .consequence {
-                withAnimation(Animation.linear(duration: 1).repeatCount(3, autoreverses: true)) {
+                withAnimation(Animation.linear(duration: Constants.ChaosIndicators.animationDuration).repeatCount(Constants.ChaosIndicators.animationRepeatCount, autoreverses: true)) {
                     gameplayVM.animateIndicatorsChange()
                 }
             } else {
-                withAnimation(Animation.linear(duration: 1)) {
+                withAnimation(Animation.linear(duration: Constants.ChaosIndicators.animationDuration)) {
                     gameplayVM.animateIndicatorsChange()
                 }
             }
@@ -62,17 +62,19 @@ struct ChaosIndicatorsView: View {
                                decreaseSR: CGFloat, increaseSR: CGFloat, neutralSR: CGFloat) -> some View {
         VStack {
             ChaosIndicatorsValueChangeView(indicator: indicator, nIndicator: nIndicator(for: indicator))
-                .frame(width: getWidth() * 0.1, height: getHeight() * 0.01)
+                .frame(width: getWidth() * Constants.ChaosIndicators.changeViewWidthMultiplier,
+                       height: getHeight() * Constants.ChaosIndicators.changeViewHeightMultiplier)
             imageForIndicator(indicator)
                 .resizable()
-                .frame(width: getWidth() * 0.14, height: getHeight() * 0.05)
+                .frame(width: getWidth() * Constants.ChaosIndicators.frameWidthMultiplier,
+                       height: getHeight() * Constants.ChaosIndicators.frameHeightMultiplier)
                 .colorInvert()
                 .colorMultiply(Assets.Colors.bgFillPrimary.swiftUIColor)
                 .overlay(
                     GeometryReader { geometry in
                         Rectangle()
                             .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
-                            .frame(height: CGFloat(value) / 12 * geometry.size.height)
+                            .frame(height: CGFloat(value) / Constants.ChaosIndicators.hStackSpacing * geometry.size.height)
                             .frame(maxHeight: geometry.size.height, alignment: .bottom)
                     }
                 )
