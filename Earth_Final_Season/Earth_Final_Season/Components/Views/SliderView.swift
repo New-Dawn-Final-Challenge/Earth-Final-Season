@@ -23,6 +23,11 @@ struct SliderView: View {
     private var rightLimit: CGFloat { sliderWidth / 2.5 }
     private var leftLimit: CGFloat { -(sliderWidth / 2.5) }
 
+    enum Option {
+        case option1
+        case option2
+    }
+
     var body: some View {
         SliderBarView(sliderWidth: sliderWidth, sliderHeight: sliderHeight)
             .overlay(
@@ -62,25 +67,25 @@ struct SliderView: View {
         
         withAnimation {
             if finalOffsetX == leftLimit {
-                selectOption1()
+                selectOption(.option1)
             } else if finalOffsetX == rightLimit {
-                selectOption2()
+                selectOption(.option2)
             } else {
                 resetAll()
             }
         }
     }
-    
-    private func selectOption1() {
-        HapticsManager.shared.complexSuccess()
-        onChooseOption1()
-        gameplayVM.mainScreenShadowRadius = 12
-        resetAll()
-    }
 
-    private func selectOption2() {
+    private func selectOption(_ option: Option) {
         HapticsManager.shared.complexSuccess()
-        onChooseOption2()
+        
+        switch option {
+        case .option1:
+            onChooseOption1()
+        case .option2:
+            onChooseOption2()
+        }
+        
         gameplayVM.mainScreenShadowRadius = 12
         resetAll()
     }
@@ -93,76 +98,43 @@ struct SliderView: View {
         gameplayVM.option2ShadowRadius = 0
     }
 
-    // Updates shadow radius based on drag position
     private func updateShadowRadius() {
         if finalOffsetX < 0 {
             gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
             gameplayVM.option2ShadowRadius = 0
             resetIndicatorsShadows()
-            checkFirstOptionIndicators()
+            checkOptionIndicators(for: .option1)
         } else {
             gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
             gameplayVM.option1ShadowRadius = 0
             resetIndicatorsShadows()
-            checkSecondOptionIndicators()
+            checkOptionIndicators(for: .option2)
         }
     }
-    
-    private func checkFirstOptionIndicators() {
-        if gameplayVM.getEvent()?.environmentalDegradation1 != 0 {
+
+    private func checkOptionIndicators(for option: Option) {
+        let event = gameplayVM.getEvent()
+        
+        let degradation = (option == .option1) ? event?.environmentalDegradation1 : event?.environmentalDegradation2
+        let illBeing = (option == .option1) ? event?.illBeing1 : event?.illBeing2
+        let instability = (option == .option1) ? event?.socioPoliticalInstability1 : event?.socioPoliticalInstability2
+        
+        if degradation != 0 {
             gameplayVM.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if gameplayVM.getEvent()?.illBeing1 != 0 {
+        if illBeing != 0 {
             gameplayVM.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if gameplayVM.getEvent()?.socioPoliticalInstability1 != 0 {
+        if instability != 0 {
             gameplayVM.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
         }
     }
-    
-    private func checkSecondOptionIndicators() {
-        if gameplayVM.getEvent()?.environmentalDegradation2 != 0 {
-            gameplayVM.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
-        }
-        
-        if gameplayVM.getEvent()?.illBeing2 != 0 {
-            gameplayVM.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
-        }
-        
-        if gameplayVM.getEvent()?.socioPoliticalInstability2 != 0 {
-            gameplayVM.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
-        }
-    }
-    
+
     private func resetIndicatorsShadows() {
         gameplayVM.environmentalDegradationShadowRadius = 0
         gameplayVM.illBeingShadowRadius = 0
         gameplayVM.sociopoliticalInstabilityShadowRadius = 0
-    }
-}
-
-struct SliderBarView: View {
-    let sliderWidth: CGFloat
-    let sliderHeight: CGFloat
-    
-    var body: some View {
-        Assets.Images.sliderBar.swiftUIImage
-            .resizable()
-            .frame(width: sliderWidth, height: sliderHeight)
-    }
-}
-
-struct DraggerView: View {
-    @Binding var dragOffset: CGSize
-    @Binding var feedbackTrigger: CGPoint
-    
-    var body: some View {
-        Assets.Images.sliderDragger.swiftUIImage
-            .resizable()
-            .scaledToFit()
-            .padding(-30)
-            .offset(dragOffset)
     }
 }
