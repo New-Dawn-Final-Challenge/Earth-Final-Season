@@ -174,4 +174,52 @@ struct Constants{
         static let padding: CGFloat = 32
         static let transitionDuration: Double = 0.5
     }
+  
+    struct AnimatedTVEffect {
+        static let frameUpdateInterval: CGFloat = 0.016
+        static let defaultEffectDuration: CGFloat = 1.0
+        static let defaultEffectInterval: CGFloat = 10.0
+        static let noiseOpacity: Double = 0.55
+    }
+
+    struct GameplayViewModel {
+        static let countdownStartValue = 6
+        static let indicatorInitialScale: CGFloat = 0
+        static let indicatorVisibleScale: CGFloat = 1
+        static let shadowRadiusHighlight = 7
+        static let timerInterval: TimeInterval = 1
+    }
+
+    struct GlitchContentView {
+        static let glitchInterval: TimeInterval = 3.0
+        static let keyframeDuration: TimeInterval = 0.1
+        static let initialShadowOpacity: Double = 0.2
+        static let firstShadowOpacity: Double = 0.6
+        static let secondShadowOpacity: Double = 0.8
+        static let thirdShadowOpacity: Double = 0.4
+        static let finalShadowOpacity: Double = 0.1
+        static let offsetTop: CGFloat = 5
+        static let offsetCenter: CGFloat = 0
+        static let offsetBottom: CGFloat = 5
+    }
+
+    struct GlitchImageView {
+        static let offsetRange: ClosedRange<CGFloat> = -20...20
+        static let intensityRange: ClosedRange<CGFloat> = -2...2
+        static let animationDuration: Double = 0.1
+        static let xOffsetMultiplier: CGFloat = 0.5
+        static let yOffsetMultiplier: CGFloat = 0.3
+    }
+    
+    struct Settings {
+        static let defaultMusicIntensity: Float = 33.5
+        static let defaultHapticsIntensity: Float = 100.0
+        static let soundEffectsDefaultIntensity: Float = 63.5
+        static let maxIntensity: Float = 100.0
+        static let userDefaultsMusicKey = "musicIntensity"
+        static let userDefaultsHapticsKey = "hapticsIntensity"
+        static let userDefaultsHapticsEnabledKey = "hapticsEnabled"
+        static let userDefaultsGestureKey = "selectedGesture"
+    }
+
 }

@@ -41,20 +41,20 @@ struct EventView: View {
     }
 
     func updateText() {
-        if gameplayVM.currentState == .consequence {
-            if gameplayVM.getLastChosenOption() == "choice1" {
-                withAnimation {
-                    textToShow = consequence1
-                }
-            } else {
-                withAnimation {
-                    textToShow = consequence2
-                }
-            }
-        } else {
+        guard case gameplayVM.currentState = .consequence else {
             withAnimation {
                 textToShow = eventDescription
             }
+            return
+        }
+        guard case gameplayVM.getLastChosenOption() = "choice1" else {
+            withAnimation {
+                textToShow = consequence2
+            }
+            return
+        }
+        withAnimation {
+            textToShow = consequence1
         }
     }
 }
