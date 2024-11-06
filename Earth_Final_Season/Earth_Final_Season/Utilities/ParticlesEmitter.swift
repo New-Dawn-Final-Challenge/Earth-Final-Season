@@ -69,7 +69,7 @@ public final class InternalParticlesView: UIView {
     }
 }
 
-@_functionBuilder
+@resultBuilder
 struct EmitterCellBuilder {
     static func buildBlock(_ cells: CAEmitterCell...) -> [CAEmitterCell] {
       Array(cells)
@@ -205,28 +205,13 @@ extension EmitterCell {
     }
 }
 
-//fileprivate extension EmitterCell.Content {
-//    var image: UIImage {
-//        switch self {
-//        case let .image(image):
-//            return image
-//        case let .circle(radius):
-//            let size = CGSize(width: radius * 2, height: radius * 2)
-//            return UIGraphicsImageRenderer(size: size).image { context in
-//                context.cgContext.setFillColor(UIColor.white.cgColor)
-//                context.cgContext.addPath(CGPath(ellipseIn: CGRect(origin: .zero, size: size), transform: nil))
-//                context.cgContext.fillPath()
-//            }
-//        }
-//    }
-//}
 
 fileprivate extension EmitterCell.Content {
     var image: UIImage {
         switch self {
         case let .image(image):
             return image
-        case let .circle(radius):
+        case .circle(_):
             // Generate a random radius for the circle
             let randomRadius = CGFloat.random(in: 10...25) // Define range for random radius
             let size = CGSize(width: randomRadius * 2, height: randomRadius * 2)

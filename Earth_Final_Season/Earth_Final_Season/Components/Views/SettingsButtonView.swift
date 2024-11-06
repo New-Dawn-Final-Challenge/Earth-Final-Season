@@ -10,9 +10,9 @@ import Design_System
 
 struct SettingsButtonView: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: 16)
-            .frame(width: getWidth() * 0.1,
-                   height: getHeight() * 0.05)
+        RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+            .frame(width: getWidth() * Constants.ButtonView.frameWidthMultiplier,
+                   height: getHeight() * Constants.ButtonView.frameHeightMultiplier)
             .foregroundStyle(Assets.Colors.secondaryGreenVariation.swiftUIColor)
             .overlay(
                 Image(systemName: "gearshape.fill")

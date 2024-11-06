@@ -19,8 +19,8 @@ struct EventView: View {
     var body: some View {
         Assets.Images.eventsScreen.swiftUIImage
             .resizable()
-            .frame(width: getWidth() * 0.8,
-                   height: getHeight() * 0.15)
+            .frame(width: getWidth() * Constants.EventView.frameWidthMultiplier,
+                   height: getHeight() * Constants.EventView.frameHeightMultiplier)
             .padding()
             .foregroundStyle(Color(UIColor.systemGray4))
             .overlay(
@@ -28,14 +28,13 @@ struct EventView: View {
                     if textToShow == eventDescription {
                         Text(textToShow)
                     } else {
-//                        TypeOnEffect(content: $textToShow, delay: 4)
                         HackerTextView(text: textToShow, speed: 0.05)
                     }
                 }
                 .font(.bodyFont)
                 .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
+                .padding(.horizontal, Constants.EventView.horizontalPadding)
             )
             .onAppear(perform: updateText)
             .onChange(of: gameplayVM.currentState == .consequence, updateText)
@@ -43,23 +42,23 @@ struct EventView: View {
 
     func updateText() {
         if gameplayVM.currentState == .consequence {
-            
-            //ARRUMAR
             if gameplayVM.getLastChosenOption() == "choice1" {
                 withAnimation {
                     textToShow = consequence1
                 }
-            }
-            else {
+            } else {
                 withAnimation {
                     textToShow = consequence2
                 }
             }
-        }
-        else {
+        } else {
             withAnimation {
                 textToShow = eventDescription
             }
         }
     }
+}
+
+#Preview {
+    EventView(eventDescription: "Event description here", consequence1: "Consequence 1", consequence2: "Consequence 2")
 }

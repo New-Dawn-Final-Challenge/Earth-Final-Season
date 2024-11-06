@@ -10,10 +10,7 @@ struct GameplayView: View {
     
     var body: some View {
         ZStack {
-            
-            ZStack {
-                BackgroundView()
-            }
+            BackgroundView()
             
             VStack(spacing: -10) {
                 helperButtonsView
@@ -21,8 +18,6 @@ struct GameplayView: View {
                 indicatorsView
                 
                 if let event = gameplayVM.getEvent() {
-                    
-                    // Change image to current image
                     CharacterView(characterImage: "image1", characterName: event.character)
                     
                     EventView(eventDescription: event.description,
@@ -42,38 +37,37 @@ struct GameplayView: View {
                                         image: Assets.Images.optionScreen1.swiftUIImage)
                             .padding(.leading, 130)
                         }
-                        .padding(.top, -15)
-                        // Hide the choices to focus on the consequence
+                        .padding(.top, Constants.GameplayView.paddingTopChoiceView)
                         .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
                         
                     case .tap:
-                       VStack {
-                           TapView(onChooseOption1:  {
-                               gameplayVM.chooseOption(option: 1)
-                           },
-                                   onChooseOption2: {
-                               gameplayVM.chooseOption(option: 2)
-                           },
-                                   text1: event.choice1,
-                                   text2: event.choice2
-                           )
-                           .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
-                       }
-                       .padding(.top, -15)
-                   }
+                        VStack {
+                            TapView(onChooseOption1: {
+                                gameplayVM.chooseOption(option: 1)
+                            },
+                                    onChooseOption2: {
+                                gameplayVM.chooseOption(option: 2)
+                            },
+                                    text1: event.choice1,
+                                    text2: event.choice2
+                            )
+                            .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                        }
+                        .padding(.top, Constants.GameplayView.paddingTopChoiceView)
+                    }
                     
                 } else {
                     Text("No more events")
                         .font(.title)
-                        .padding()
+                        .padding(20)
                 }
                 
-                if (settingsVM.selectedGesture == .holdDrag) {
-                    HStack() {
+                if settingsVM.selectedGesture == .holdDrag {
+                    HStack {
                         Assets.Images.panelAccessoryA.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * 0.3,
-                                   height: getHeight() * 0.08)
+                            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
                         
                         SliderView(
                             onChooseOption1: {
@@ -86,26 +80,26 @@ struct GameplayView: View {
                         
                         Assets.Images.panelAccessoryB.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * 0.3,
-                                   height: getHeight() * 0.08)
+                            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
                     }
-                    .padding(.top, 30)
+                    .padding(.top, Constants.GameplayView.panelPaddingTop)
                 } else {
                     HStack {
                         Assets.Images.panelAccessoryA.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * 0.3,
-                                   height: getHeight() * 0.08)
+                            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
                         
                         Spacer()
                         
                         Assets.Images.panelAccessoryB.swiftUIImage
                             .resizable()
-                            .frame(width: getWidth() * 0.3,
-                                   height: getHeight() * 0.08)
+                            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
                     }
-                    .padding(.horizontal, 30)
-                    .padding(.top, 30)
+                    .padding(.horizontal, Constants.GameplayView.panelHorizontalPadding)
+                    .padding(.top, Constants.GameplayView.panelPaddingTop)
                 }
                 Spacer()
             }
@@ -139,13 +133,13 @@ struct GameplayView: View {
                 SettingsButtonView()
             }
         }
-        .padding(.trailing, 50)
-        .padding(.top, 32)
+        .padding(.trailing, Constants.GameplayView.helperButtonsPaddingTrailing)
+        .padding(.top, Constants.GameplayView.helperButtonsPaddingTop)
     }
     
     private var indicatorsView: some View {
-        HStack(alignment: .center, spacing: getWidth() * 0.05) {
-            AudienceIndicatorView(percentage: Int(gameplayVM.getIndicators()?.audience ?? 0))
+        HStack(alignment: .center, spacing: getWidth() * Constants.GameplayView.indicatorSpacingMultiplier) {
+            AudienceIndicatorView(percentage: CGFloat(Int(gameplayVM.getIndicators()?.audience ?? 0)))
                 .padding(.bottom)
             
             ChaosIndicatorsView(
@@ -157,3 +151,4 @@ struct GameplayView: View {
         }
     }
 }
+
