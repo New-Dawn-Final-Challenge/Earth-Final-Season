@@ -67,10 +67,10 @@ struct Constants{
     }
 
     struct CharacterView {
-        static let imageFrameWidthMultiplier: CGFloat = 0.5
-        static let imageFrameHeightMultiplier: CGFloat = 0.18
-        static let glitchViewWidthMultiplier: CGFloat = 0.28
-        static let glitchViewHeightMultiplier: CGFloat = 0.10
+        static let imageFrameWidthMultiplier: CGFloat = 0.55
+        static let imageFrameHeightMultiplier: CGFloat = 0.20
+        static let glitchViewWidthMultiplier: CGFloat = 0.52
+        static let glitchViewHeightMultiplier: CGFloat = 0.12
         static let verticalPadding: CGFloat = 30
         static let minTextHeight: CGFloat = 20
     }
