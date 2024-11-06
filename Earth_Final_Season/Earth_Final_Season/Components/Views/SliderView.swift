@@ -18,86 +18,94 @@ struct SliderView: View {
     var onChooseOption1: () -> Void
     var onChooseOption2: () -> Void
 
-    var body: some View {
-        let sliderWidth = getWidth() * 0.4
-        let sliderHeight = getHeight() * 0.03
-        
-        let rightLimit = (sliderWidth / 2.5)
-        let leftLimit = -(sliderWidth / 2.5)
+    private var sliderWidth: CGFloat { getWidth() * 0.4 }
+    private var sliderHeight: CGFloat { getHeight() * 0.03 }
+    private var rightLimit: CGFloat { sliderWidth / 2.5 }
+    private var leftLimit: CGFloat { -(sliderWidth / 2.5) }
 
-        Assets.Images.sliderBar.swiftUIImage
-            .resizable()
-            .frame(width: sliderWidth, height: sliderHeight)
+    var body: some View {
+        SliderBarView(sliderWidth: sliderWidth, sliderHeight: sliderHeight)
             .overlay(
                 VStack {
-                    Assets.Images.sliderDragger.swiftUIImage
-                        .resizable()
-                        .scaledToFit()
-                        .padding(-30) // Set dragger size
-                        .offset(dragOffset)
+                    DraggerView(dragOffset: $dragOffset, feedbackTrigger: $feedbackTrigger)
                         .gesture(
                             DragGesture()
                                 .onChanged { gesture in
-                                    
-                                    if gameplayVM.currentState != .consequence {
-                                        // Calculate the new drag offset within the limits
-                                        finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
-                                        dragOffset = CGSize(width: finalOffsetX, height: 0)
-
-                                        // Update the feedback trigger to the current drag location
-                                        feedbackTrigger = CGPoint(x: dragOffset.width, y: 0)
-
-                                        // Update shadow radius based on the circle's relative position within the slider
-                                        if finalOffsetX < 0 {
-                                            gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
-                                            gameplayVM.option2ShadowRadius = 0
-                                            
-                                            resetIndicatorsShadows()
-                                                       
-                                            checkFirstOptionIndicators()
-                                            
-                                        } else {
-                                            gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
-                                            gameplayVM.option1ShadowRadius = 0
-                                            
-                                            resetIndicatorsShadows()
-
-                                            checkSecondOptionIndicators()
-                                        }
-                                    }
+                                    handleDragChanged(gesture)
                                 }
                                 .onEnded { _ in
-                                    if gameplayVM.currentState != .consequence {
-                                        withAnimation {
-                                            // Option 1 chosen
-                                            if finalOffsetX == leftLimit {
-                                                HapticsManager.shared.complexSuccess()
-                                                onChooseOption1()
-                                                gameplayVM.mainScreenShadowRadius = 12
-                                            }
-
-                                            // Option 2 chosen
-                                            else if finalOffsetX == rightLimit {
-                                                HapticsManager.shared.complexSuccess()
-                                                onChooseOption2()
-                                                gameplayVM.mainScreenShadowRadius = 12
-                                            }
-
-                                            // Reset position and shadows
-                                            resetIndicatorsShadows()
-                                            dragOffset = .zero
-                                            gameplayVM.mainScreenShadowRadius = 0
-                                            gameplayVM.option1ShadowRadius = 0
-                                            gameplayVM.option2ShadowRadius = 0
-                                        }
-                                    }
+                                    handleDragEnded()
                                 }
                         )
                         .padding(.bottom, 30)
                     Spacer()
                 }
             )
-            .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity)*0.28), trigger: feedbackTrigger)
+            .sensoryFeedback(
+                .impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity) * 0.28),
+                trigger: feedbackTrigger
+            )
+    }
+
+    private func handleDragChanged(_ gesture: DragGesture.Value) {
+        guard gameplayVM.currentState != .consequence else { return }
+        
+        finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
+        dragOffset = CGSize(width: finalOffsetX, height: 0)
+        feedbackTrigger = CGPoint(x: dragOffset.width, y: 0)
+        
+        updateShadowRadius()
+    }
+
+    private func handleDragEnded() {
+        guard gameplayVM.currentState != .consequence else { return }
+        
+        withAnimation {
+            if finalOffsetX == leftLimit {
+                selectOption1()
+            } else if finalOffsetX == rightLimit {
+                selectOption2()
+            } else {
+                resetAll()
+            }
+        }
+    }
+    
+    private func selectOption1() {
+        HapticsManager.shared.complexSuccess()
+        onChooseOption1()
+        gameplayVM.mainScreenShadowRadius = 12
+        resetAll()
+    }
+
+    private func selectOption2() {
+        HapticsManager.shared.complexSuccess()
+        onChooseOption2()
+        gameplayVM.mainScreenShadowRadius = 12
+        resetAll()
+    }
+
+    private func resetAll() {
+        resetIndicatorsShadows()
+        dragOffset = .zero
+        gameplayVM.mainScreenShadowRadius = 0
+        gameplayVM.option1ShadowRadius = 0
+        gameplayVM.option2ShadowRadius = 0
+    }
+
+    // Updates shadow radius based on drag position
+    private func updateShadowRadius() {
+        if finalOffsetX < 0 {
+            gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
+            gameplayVM.option2ShadowRadius = 0
+            resetIndicatorsShadows()
+            checkFirstOptionIndicators()
+        } else {
+            gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
+            gameplayVM.option1ShadowRadius = 0
+            resetIndicatorsShadows()
+            checkSecondOptionIndicators()
+        }
     }
     
     private func checkFirstOptionIndicators() {
@@ -132,5 +140,29 @@ struct SliderView: View {
         gameplayVM.environmentalDegradationShadowRadius = 0
         gameplayVM.illBeingShadowRadius = 0
         gameplayVM.sociopoliticalInstabilityShadowRadius = 0
+    }
+}
+
+struct SliderBarView: View {
+    let sliderWidth: CGFloat
+    let sliderHeight: CGFloat
+    
+    var body: some View {
+        Assets.Images.sliderBar.swiftUIImage
+            .resizable()
+            .frame(width: sliderWidth, height: sliderHeight)
+    }
+}
+
+struct DraggerView: View {
+    @Binding var dragOffset: CGSize
+    @Binding var feedbackTrigger: CGPoint
+    
+    var body: some View {
+        Assets.Images.sliderDragger.swiftUIImage
+            .resizable()
+            .scaledToFit()
+            .padding(-30)
+            .offset(dragOffset)
     }
 }
