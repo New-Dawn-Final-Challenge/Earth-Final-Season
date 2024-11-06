@@ -19,24 +19,10 @@ struct MenuView: View {
                 BackgroundView()
                 
                 VStack(spacing: 20) {
-                    // Title of the game
-                    Text("Earth: Final Season")
-                        .frame(width: getWidth() * 0.5,
-                               height: getHeight() * 0.06)
-                        .background(Assets.Colors.textSecondary.swiftUIColor)
-                        .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                        .cornerRadius(10)
+                    gameTitleView
                     
-                    // Navigation buttons
-                    NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
-                                                             leaderboardVM: $leaderboardVM)) {
-                        Text("Play")
-                            .frame(width: getWidth() * 0.5,
-                                   height: getHeight() * 0.06)
-                            .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
-                            .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                            .cornerRadius(10)
-                    }
+                    MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
+                                   label: "Play")
                     
                     Button(action: {
                         isGameCenterPresented.toggle()
@@ -52,27 +38,37 @@ struct MenuView: View {
                         LeaderboardView()
                     }
                     
-                    NavigationLink(destination: SettingsView(settingsVM: $settingsVM)) {
-                        Text("Settings")
-                            .frame(width: getWidth() * 0.5,
-                                   height: getHeight() * 0.06)
-                            .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
-                            .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                            .cornerRadius(10)
-                    }
+                    MenuButtonView(destination: SettingsView(settingsVM: $settingsVM),
+                                   label: "Settings")
                     
-                    NavigationLink(destination: AboutUsView()) {
-                        Text("About Us")
-                            .frame(width: getWidth() * 0.5,
-                                   height: getHeight() * 0.06)
-                            .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
-                            .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
-                            .cornerRadius(10)
-                    }
+                    MenuButtonView(destination: AboutUsView(), label: "About Us")
                 }
                 .font(.bodyFont)
             }
         }
         .navigationBarBackButtonHidden(true)
+    }
+    
+    private var gameTitleView: some View {
+        Text("Earth: Final Season")
+            .frame(width: getWidth() * 0.5, height: getHeight() * 0.06)
+            .background(Assets.Colors.textSecondary.swiftUIColor)
+            .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
+            .cornerRadius(10)
+    }
+}
+
+struct MenuButtonView<Destination: View>: View {
+    var destination: Destination
+    var label: String
+    
+    var body: some View {
+        NavigationLink(destination: destination) {
+            Text(label)
+                .frame(width: getWidth() * 0.5, height: getHeight() * 0.06)
+                .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
+                .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
+                .cornerRadius(10)
+        }
     }
 }
