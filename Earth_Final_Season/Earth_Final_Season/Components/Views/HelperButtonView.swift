@@ -15,10 +15,14 @@ struct HelperButtonView: View {
         RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
             .frame(width: getWidth() * Constants.ButtonView.frameWidthMultiplier,
                    height: getHeight() * Constants.ButtonView.frameHeightMultiplier)
-            .foregroundStyle(Assets.Colors.secondaryGreenVariation.swiftUIColor)
+            .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
+            .overlay(
+                RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+                    .stroke(Assets.Colors.accentPrimary.swiftUIColor)
+            )
             .overlay(
                 Image(systemName: imageName)
-                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                    .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             )
     }
 }
