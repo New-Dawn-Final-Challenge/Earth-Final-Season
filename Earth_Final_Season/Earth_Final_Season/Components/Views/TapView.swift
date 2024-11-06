@@ -38,7 +38,8 @@ struct TapView: View {
                             .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                             .padding(.horizontal, 50)
                     )
-                    .shadow(color: Color.orange, radius: CGFloat(shadowRadius1))
+                    .shadow(color: shadowRadius1 > 0 ? Assets.Colors.secondaryGreen.swiftUIColor : Color.clear,
+                            radius: CGFloat(shadowRadius1))
                     .padding(.trailing, 130)
             }
             .simultaneousGesture(
@@ -70,7 +71,8 @@ struct TapView: View {
                             .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                             .padding(.horizontal, 50)
                     )
-                    .shadow(color: Color.pink, radius: CGFloat(shadowRadius2))
+                    .shadow(color: shadowRadius2 > 0 ? Assets.Colors.secondaryGreen.swiftUIColor : Color.clear,
+                            radius: CGFloat(shadowRadius2))
                     .padding(.leading, 130)
             }
             .simultaneousGesture(
