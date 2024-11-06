@@ -23,7 +23,6 @@
 		620E4DD92C9C7686006850BB /* Exceptions for "Earth_Final_Season" folder in "Earth_Final_Season" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Earth-Final-Season-Info.plist",
 				"Preview Content/README.md",
 			);
 			target = 620E4D512C9C468E006850BB /* Earth_Final_Season */;
