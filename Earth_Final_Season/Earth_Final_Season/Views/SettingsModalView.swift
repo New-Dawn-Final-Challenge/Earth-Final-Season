@@ -93,7 +93,7 @@ struct SettingsModalView: View {
                     }
                 }
                 .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                .font(.title3Font)
+                .font(.bodyFont)
                 .padding(.horizontal, 46)
             }
     }
@@ -106,7 +106,7 @@ struct SettingsModalView: View {
                 HStack {
                     Spacer()
                     Toggle("Haptics", isOn: $vm.hapticsEnabled)
-                        .font(.title3Font)
+                        .font(.bodyFont)
                         .toggleStyle(SwitchToggleStyle(tint: Assets.Colors.bgFillPrimary.swiftUIColor))
                     Spacer()
                 }
@@ -149,7 +149,7 @@ struct SettingsModalView: View {
                         .padding(.horizontal)
                     }
                 }
-                .font(.title3Font)
+                .font(.bodyFont)
                 .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             }
     }
@@ -163,14 +163,14 @@ struct SettingsModalView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .clipShape(RoundedRectangle(cornerRadius: 4))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: 4)
                         .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
                 }
         }
         .padding(.horizontal, 30)
-        .font(.title2Font)
+        .font(.bodyFont)
     }
     
     var menuButton: some View {
@@ -184,14 +184,14 @@ struct SettingsModalView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .clipShape(RoundedRectangle(cornerRadius: 4))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 8)
+                    RoundedRectangle(cornerRadius: 4)
                         .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
                 }
         }
         .padding(.horizontal, 30)
-        .font(.title2Font)
+        .font(.bodyFont)
     }
     
 }
