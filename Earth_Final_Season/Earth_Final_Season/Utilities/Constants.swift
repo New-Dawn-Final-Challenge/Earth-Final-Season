@@ -69,13 +69,13 @@ struct Constants{
     struct BlackPanel {
         static let horizontalSpacing: CGFloat = 6
         static let panelHeight: CGFloat = 0.1
-        static let backgroundPanelHeight: CGFloat = 0.34
+        static let backgroundPanelHeight: CGFloat = 0.36
         static let sidePanelWidth: CGFloat = 0.1
         static let yearPanelWidth: CGFloat = 0.3
         static let indicatorPanelWidth: CGFloat = 0.6
         static let bottomPanelWidth: CGFloat = 1.05
         static let sidePanelPadding: CGFloat = -20
-        static let bottomPadding: CGFloat = 90
+        static let bottomPadding: CGFloat = 80
     }
 
     struct CharacterView {

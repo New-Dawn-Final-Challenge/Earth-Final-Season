@@ -15,10 +15,7 @@ struct GameplayView: View {
             VStack() {
                 helperButtonsView
                 gameContentView
-                
-                ZStack {
-                    blackPanelView
-                }
+                controlPanelView
             }
             .padding(.top, 70)
         }
@@ -127,7 +124,7 @@ struct GameplayView: View {
                    height: getHeight() * Constants.BlackPanel.backgroundPanelHeight)
     }
     
-    private var blackPanelView: some View {
+    private var controlPanelView: some View {
         VStack {
             Spacer()
             
@@ -135,27 +132,38 @@ struct GameplayView: View {
                 panelBackground
                 
                 VStack(alignment: .center) {
-                    // top panel
-                    HStack(spacing: Constants.BlackPanel.horizontalSpacing) {
-                        blackPanelItemView(Assets.Images.leftBlackPanel.swiftUIImage,
-                                           widthMultiplier: Constants.BlackPanel.sidePanelWidth,
-                                           padding: Constants.BlackPanel.sidePanelPadding)
-                        blackPanelItemView(Assets.Images.yearBlackPanel.swiftUIImage,
-                                           widthMultiplier: Constants.BlackPanel.yearPanelWidth)
-                        blackPanelItemView(Assets.Images.indicatorsBlackPanel.swiftUIImage,
-                                           widthMultiplier: Constants.BlackPanel.indicatorPanelWidth)
-                        blackPanelItemView(Assets.Images.rightBlackPanel.swiftUIImage,
-                                           widthMultiplier: Constants.BlackPanel.sidePanelWidth,
-                                           padding: Constants.BlackPanel.sidePanelPadding)
-                    }
+                    topPanelView
+                        .padding(.bottom, -20)
                     
-                    // bottom panel
-                    blackPanelItemView(Assets.Images.draggerBlackPanel.swiftUIImage,
-                                       widthMultiplier: Constants.BlackPanel.bottomPanelWidth)
+                    ZStack {
+                        bottomPanelView
+                        actionControlsView
+                            .padding(.bottom, 40)
+                    }
                 }
                 .padding(.bottom, Constants.BlackPanel.bottomPadding)
             }
         }
+    }
+    
+    private var topPanelView: some View {
+        HStack(spacing: Constants.BlackPanel.horizontalSpacing) {
+            blackPanelItemView(Assets.Images.leftBlackPanel.swiftUIImage,
+                               widthMultiplier: Constants.BlackPanel.sidePanelWidth,
+                               padding: Constants.BlackPanel.sidePanelPadding)
+            blackPanelItemView(Assets.Images.yearBlackPanel.swiftUIImage,
+                               widthMultiplier: Constants.BlackPanel.yearPanelWidth)
+            blackPanelItemView(Assets.Images.indicatorsBlackPanel.swiftUIImage,
+                               widthMultiplier: Constants.BlackPanel.indicatorPanelWidth)
+            blackPanelItemView(Assets.Images.rightBlackPanel.swiftUIImage,
+                               widthMultiplier: Constants.BlackPanel.sidePanelWidth,
+                               padding: Constants.BlackPanel.sidePanelPadding)
+        }
+    }
+    
+    private var bottomPanelView: some View {
+        blackPanelItemView(Assets.Images.draggerBlackPanel.swiftUIImage,
+                           widthMultiplier: Constants.BlackPanel.bottomPanelWidth)
     }
     
     private func blackPanelItemView(_ image: Image, widthMultiplier: CGFloat, padding: CGFloat? = nil) -> some View {
