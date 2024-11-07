@@ -151,14 +151,34 @@ struct GameplayView: View {
             blackPanelItemView(Assets.Images.leftBlackPanel.swiftUIImage,
                                widthMultiplier: Constants.BlackPanel.sidePanelWidth,
                                padding: Constants.BlackPanel.sidePanelPadding)
-            blackPanelItemView(Assets.Images.yearBlackPanel.swiftUIImage,
-                               widthMultiplier: Constants.BlackPanel.yearPanelWidth)
+            
+            ZStack {
+                blackPanelItemView(Assets.Images.yearBlackPanel.swiftUIImage,
+                                   widthMultiplier: Constants.BlackPanel.yearPanelWidth)
+                yearView
+            }
+            
             blackPanelItemView(Assets.Images.indicatorsBlackPanel.swiftUIImage,
                                widthMultiplier: Constants.BlackPanel.indicatorPanelWidth)
+            
             blackPanelItemView(Assets.Images.rightBlackPanel.swiftUIImage,
                                widthMultiplier: Constants.BlackPanel.sidePanelWidth,
                                padding: Constants.BlackPanel.sidePanelPadding)
         }
+    }
+    
+    private var yearView: some View {
+        Assets.Images.yearScreen.swiftUIImage
+            .resizable()
+            .frame(width: getWidth() * Constants.BlackPanel.yearMonitorWidth,
+                   height: getHeight() * Constants.BlackPanel.yearMonitorHeight)
+            .padding(.leading, Constants.BlackPanel.yearMonitorPadding)
+            .overlay(
+                Text("Year\n\(gameplayVM.getIndicators()?.currentYear ?? 0)")
+                    .font(.title3Font)
+                    .multilineTextAlignment(.center)
+                    .padding(.leading, Constants.BlackPanel.yearMonitorPadding)
+            )
     }
     
     private var bottomPanelView: some View {
