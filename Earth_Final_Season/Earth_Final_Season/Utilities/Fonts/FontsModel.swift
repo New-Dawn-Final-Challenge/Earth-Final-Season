@@ -19,6 +19,9 @@ extension Font {
     static var title1Font: Font {
         return .custom("ShareTechMono-Regular", size: UIFont.preferredFont(forTextStyle: .title1).pointSize)
     }
+    static var title2Font: Font {
+        return .custom("ShareTechMono-Regular", size: UIFont.preferredFont(forTextStyle: .title2).pointSize)
+    }
     
     static var title3Font: Font {
         return .custom("ShareTechMono-Regular", size: UIFont.preferredFont(forTextStyle: .title3).pointSize)

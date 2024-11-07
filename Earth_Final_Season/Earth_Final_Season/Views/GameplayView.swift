@@ -5,6 +5,7 @@ struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
     @Binding var settingsVM: SettingsViewModel
     @Binding var leaderboardVM: LeaderboardViewModel
+    @Environment(\.dismiss) var dismiss
     
     @State private var showGameOver = false
     
@@ -19,6 +20,19 @@ struct GameplayView: View {
                 Spacer()
             }
         }
+        .fullScreenCover(isPresented: $settingsVM.isPresented) {
+                    ZStack {
+                        Color.black.opacity(0.7)
+                            .ignoresSafeArea(edges: .all)
+                        SettingsModalView(vm: $settingsVM, doStuff: {
+                            // voltar pra tela anterior
+                            print("Dismissei!")
+                            dismiss()
+                        })
+                            .frame(width: 400, height: 800)
+                    }
+                        .presentationBackground(.clear)
+                }
         .navigationBarBackButtonHidden()
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.getState()) {
@@ -143,9 +157,13 @@ struct GameplayView: View {
     private var helperButtonsView: some View {
         HStack {
             Spacer()
-            helperButton(destination: SettingsView(settingsVM: $settingsVM), imageName: "questionmark")
-            helperButton(destination: MenuView(), imageName: "house.fill")
-            helperButton(destination: SettingsView(settingsVM: $settingsVM), imageName: "gearshape.fill")
+            helperButton(destination: EmptyView(), imageName: "questionmark")
+            
+            Button {
+                settingsVM.isPresented.toggle()
+            } label: {
+                HelperButtonView(imageName: "gearshape.fill")
+            }
         }
         .padding(.trailing, Constants.GameplayView.helperButtonsPaddingTrailing)
         .padding(.top, Constants.GameplayView.helperButtonsPaddingTop)

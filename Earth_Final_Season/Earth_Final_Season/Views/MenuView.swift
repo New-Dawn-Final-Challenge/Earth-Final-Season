@@ -12,6 +12,7 @@ struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
     @State private var isGameCenterPresented = false
+    @State private var sobeSettings = false
     
     var body: some View {
         NavigationStack {
@@ -38,14 +39,36 @@ struct MenuView: View {
                         LeaderboardView()
                     }
                     
-                    MenuButtonView(destination: SettingsView(settingsVM: $settingsVM),
-                                   label: "Settings")
+                    Button {
+                        settingsVM.isPresented.toggle()
+                    } label: {
+                        Text("Settings")
+                            .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                                   height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
+                            .background(Assets.Colors.secondaryGreenVariation.swiftUIColor)
+                            .foregroundColor(Assets.Colors.fillPrimary.swiftUIColor)
+                            .cornerRadius(Constants.MenuView.buttonCornerRadius)
+                    }
+                    
                     
                     MenuButtonView(destination: AboutUsView(), label: "About Us")
                 }
                 .font(.bodyFont)
             }
         }
+        .fullScreenCover(isPresented: $settingsVM.isPresented) {
+                    ZStack {
+                        Color.black.opacity(0.7)
+                            .ignoresSafeArea(edges: .all)
+                        SettingsModalView(vm: $settingsVM, doStuff: {
+                            // voltar pra tela anterior
+                            print("Dismissei no menu")
+                            
+                        })
+                            .frame(width: 400, height: 800)
+                    }
+                        .presentationBackground(.clear)
+                }
         .navigationBarBackButtonHidden(true)
     }
     
