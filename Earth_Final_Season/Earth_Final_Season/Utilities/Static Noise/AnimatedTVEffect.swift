@@ -1,17 +1,8 @@
-//
-//  AnimatedTVEffect.swift
-//  Earth_Final_Season
-//
-//  Created by Ana Elisa Lima on 23/10/24.
-//
-
 import SwiftUI
 
 struct AnimatedTVEffect: View {
     @State private var elapsed: CGFloat = 0.0
     @State private var showEffect: Bool = false
-    private let effectDuration: CGFloat = 1.0
-    private let effectInterval: CGFloat = 10.0
     
     var body: some View {
         ZStack {
@@ -19,8 +10,9 @@ struct AnimatedTVEffect: View {
                 GlitchImageView()
                     .scaledToFit()
                     .distortionEffect(
-                        ShaderLibrary.wave(
-                            .float(elapsed)), maxSampleOffset: .zero)
+                        ShaderLibrary.wave(.float(elapsed)),
+                        maxSampleOffset: .zero
+                    )
                 
                 Text("Static Noise Effect")
                     .font(.largeTitle)
@@ -29,19 +21,19 @@ struct AnimatedTVEffect: View {
             
             MetalStaticNoiseView()
                 .edgesIgnoringSafeArea(.all)
-                .opacity(0.55)
+                .opacity(Constants.AnimatedTVEffect.noiseOpacity)
                 .zIndex(3)
         }
         .ignoresSafeArea()
         .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true) { timer in
-                elapsed += 0.016
+            Timer.scheduledTimer(withTimeInterval: Constants.AnimatedTVEffect.frameUpdateInterval, repeats: true) { timer in
+                elapsed += Constants.AnimatedTVEffect.frameUpdateInterval
                 
-                if Int(elapsed) % Int(effectInterval) == 0 {
+                if Int(elapsed) % Int(Constants.AnimatedTVEffect.defaultEffectInterval) == 0 {
                     showEffect = true
                 }
                 
-                if showEffect && elapsed.truncatingRemainder(dividingBy: effectInterval) > effectDuration {
+                if showEffect && elapsed.truncatingRemainder(dividingBy: Constants.AnimatedTVEffect.defaultEffectInterval) > Constants.AnimatedTVEffect.defaultEffectDuration {
                     showEffect = false
                 }
             }
@@ -52,3 +44,4 @@ struct AnimatedTVEffect: View {
 #Preview {
     AnimatedTVEffect()
 }
+

@@ -99,6 +99,9 @@ class GameEngine {
                 currentEvent = nil
             }
         }
+        if !gameEnded() {
+            state = .choosing
+        }
     }
     
     func chooseOption(option: Int) {

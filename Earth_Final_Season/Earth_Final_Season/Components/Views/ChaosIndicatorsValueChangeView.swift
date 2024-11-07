@@ -33,7 +33,7 @@ struct ChaosIndicatorsValueChangeView: View {
         .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ? Assets.Colors.secondaryPurple.swiftUIColor : Assets.Colors.secondaryBlue.swiftUIColor)
         .opacity(gameplayVM.shouldShowIndicator[nIndicator] ? 1 : 0)
         .scaleEffect(gameplayVM.scaleChange[nIndicator], anchor: .bottom)
-        .onChange(of: gameplayVM.currentState) {
+        .onChange(of: gameplayVM.getState()) {
             withAnimation(Animation.linear(duration: Constants.ChaosIndicatorsValueChange.animationDuration)) {
                 gameplayVM.getIndicatorValue(indicator: indicator, nIndicator: nIndicator)
             }

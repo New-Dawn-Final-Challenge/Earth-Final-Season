@@ -51,7 +51,7 @@ struct SliderView: View {
     }
 
     private func handleDragChanged(_ gesture: DragGesture.Value) {
-        guard gameplayVM.currentState != .consequence else { return }
+        guard gameplayVM.getState() != .consequence else { return }
         
         finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
         dragOffset = CGSize(width: finalOffsetX, height: 0)
@@ -61,7 +61,7 @@ struct SliderView: View {
     }
 
     private func handleDragEnded() {
-        guard gameplayVM.currentState != .consequence else { return }
+        guard gameplayVM.getState() != .consequence else { return }
         
         withAnimation {
             if finalOffsetX == leftLimit {

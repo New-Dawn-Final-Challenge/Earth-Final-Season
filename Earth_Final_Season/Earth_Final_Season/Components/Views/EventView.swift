@@ -37,24 +37,24 @@ struct EventView: View {
                 .padding(.horizontal, Constants.EventView.horizontalPadding)
             )
             .onAppear(perform: updateText)
-            .onChange(of: gameplayVM.currentState == .consequence, updateText)
+            .onChange(of: gameplayVM.getState() == .consequence, updateText)
     }
 
     func updateText() {
-        if gameplayVM.currentState == .consequence {
-            if gameplayVM.getLastChosenOption() == "choice1" {
-                withAnimation {
-                    textToShow = consequence1
-                }
-            } else {
-                withAnimation {
-                    textToShow = consequence2
-                }
-            }
-        } else {
+        guard gameplayVM.getState() == .consequence else {
             withAnimation {
                 textToShow = eventDescription
             }
+            return
+        }
+        guard case gameplayVM.getLastChosenOption() = "choice1" else {
+            withAnimation {
+                textToShow = consequence2
+            }
+            return
+        }
+        withAnimation {
+            textToShow = consequence1
         }
     }
 }
