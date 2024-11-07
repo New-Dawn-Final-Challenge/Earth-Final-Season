@@ -23,7 +23,6 @@ class GameplayViewModel: GameEngineDelegate {
     var sociopoliticalInstabilityDecreaseShadowRadius = 0
     var sociopoliticalInstabilityIncreaseShadowRadius = 0
     var sociopoliticalInstabilityShadowRadius = 0
-    var currentState: States = .initializing
     var currentEvent: Event?
     
     var timer: Timer?
@@ -37,10 +36,8 @@ class GameplayViewModel: GameEngineDelegate {
     func gameStateChanged(to state: States) {
         if state == .choosing {
             currentEvent = getEvent()
-            currentState = .choosing
         }
         if state == .consequence {
-            currentState = .consequence
             timer = Timer.scheduledTimer(withTimeInterval: Constants.GameplayViewModel.timerInterval, repeats: true) { _ in
                 if self.countdown > 0 {
                     self.countdown -= 1
@@ -50,20 +47,19 @@ class GameplayViewModel: GameEngineDelegate {
                     self.countdown = Constants.GameplayViewModel.countdownStartValue
                     
                     self.engine?.goToNextEvent()
-                    if !(self.engine?.gameEnded() ?? true) {
-                        self.currentState = .choosing
-                    }
                 }
             }
         }
         if state == .gameOver {
-            currentState = .gameOver
         }
     }
     
+    func getState() -> States? {
+        return engine?.state
+    }
+    
     func getEvent() -> Event? {
-        currentEvent = engine?.currentEvent
-        return currentEvent
+        return engine?.currentEvent
     }
     
     func getIndicators() -> Indicators? {
@@ -89,7 +85,7 @@ class GameplayViewModel: GameEngineDelegate {
     func getIndicatorValue(indicator: String, nIndicator: Int) {
         
         // Stop showing indicator and reset values if not in consequence state
-        guard currentState == .consequence else {
+        guard getState() == .consequence else {
             scaleChange = Array(repeating: Constants.GameplayViewModel.indicatorInitialScale, count: 3)
             shouldShowIndicator = Array(repeating: false, count: 3)
             valueIsIncreasing = Array(repeating: false, count: 3)

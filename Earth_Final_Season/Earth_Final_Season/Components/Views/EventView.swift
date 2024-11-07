@@ -37,11 +37,11 @@ struct EventView: View {
                 .padding(.horizontal, Constants.EventView.horizontalPadding)
             )
             .onAppear(perform: updateText)
-            .onChange(of: gameplayVM.currentState == .consequence, updateText)
+            .onChange(of: gameplayVM.getState() == .consequence, updateText)
     }
 
     func updateText() {
-        guard case gameplayVM.currentState = .consequence else {
+        guard gameplayVM.getState() == .consequence else {
             withAnimation {
                 textToShow = eventDescription
             }

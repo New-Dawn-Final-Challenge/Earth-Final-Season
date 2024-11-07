@@ -120,9 +120,9 @@ struct ChaosIndicatorsView: View {
             }
         }
         .padding()
-        .onChange(of: gameplayVM.currentState) {
+        .onChange(of: gameplayVM.getState()) {
             
-            guard case gameplayVM.currentState = .consequence else {
+            guard gameplayVM.getState() == .consequence else {
                 
                 withAnimation(Animation.linear(duration: Constants.ChaosIndicators.animationDuration)) {
                     gameplayVM.animateIndicatorsChange()

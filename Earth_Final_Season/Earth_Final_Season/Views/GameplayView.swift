@@ -38,7 +38,7 @@ struct GameplayView: View {
                             .padding(.leading, 130)
                         }
                         .padding(.top, Constants.GameplayView.paddingTopChoiceView)
-                        .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                        .opacity(gameplayVM.getState() == .consequence ? 0 : 1)
                         
                     case .tap:
                         VStack {
@@ -51,7 +51,7 @@ struct GameplayView: View {
                                     text1: event.choice1,
                                     text2: event.choice2
                             )
-                            .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+                            .opacity(gameplayVM.getState() == .consequence ? 0 : 1)
                         }
                         .padding(.top, Constants.GameplayView.paddingTopChoiceView)
                     }
@@ -106,9 +106,9 @@ struct GameplayView: View {
         }
         .navigationBarBackButtonHidden()
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
-        .onChange(of: gameplayVM.currentState == .gameOver) {
+        .onChange(of: gameplayVM.getState() == .gameOver) {
             Task {
-                showGameOver = gameplayVM.currentState == .gameOver
+                showGameOver = gameplayVM.getState() == .gameOver
                 await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
             }
         }

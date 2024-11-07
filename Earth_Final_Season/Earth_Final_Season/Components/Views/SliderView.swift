@@ -37,7 +37,7 @@ struct SliderView: View {
                         .gesture(
                             DragGesture()
                                 .onChanged { gesture in
-                                    if gameplayVM.currentState != .consequence {
+                                    if gameplayVM.getState() != .consequence {
                                         // Calculate the new drag offset within the limits
                                         finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
                                         dragOffset = CGSize(width: finalOffsetX, height: 0)
@@ -60,7 +60,7 @@ struct SliderView: View {
                                     }
                                 }
                                 .onEnded { _ in
-                                    if gameplayVM.currentState != .consequence {
+                                    if gameplayVM.getState() != .consequence {
                                         withAnimation {
                                             // Option 1 chosen
                                             if finalOffsetX == leftLimit {
