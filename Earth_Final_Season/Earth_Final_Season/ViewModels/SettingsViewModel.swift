@@ -9,9 +9,9 @@ import Foundation
 
 @Observable
 class SettingsViewModel {
-    var soundEffectsIntensity: Float = 63.5
+    var soundEffectsIntensity: Float = Constants.Settings.soundEffectsDefaultIntensity
     
-    var musicIntensity: Float = 33.5 {
+    var musicIntensity: Float = Constants.Settings.defaultMusicIntensity {
         didSet {
             SoundtrackAudioManager.shared.changeVolume(intensity: musicIntensity / Constants.Settings.maxIntensity)
             UserDefaults.standard.set(musicIntensity, forKey: Constants.Settings.userDefaultsMusicKey)
@@ -40,8 +40,8 @@ class SettingsViewModel {
     
     init() {
         // Load values from UserDefaults
-        self.musicIntensity = UserDefaults.standard.float(forKey: "musicIntensity") != 0 ? UserDefaults.standard.float(forKey: "musicIntensity") : 33.5
-        self.hapticsIntensity = UserDefaults.standard.float(forKey: "hapticsIntensity") != 0 ? UserDefaults.standard.float(forKey: "hapticsIntensity") : 100.0
+        self.musicIntensity = UserDefaults.standard.float(forKey: "musicIntensity") != 0 ? UserDefaults.standard.float(forKey: "musicIntensity") : Constants.Settings.defaultMusicIntensity
+        self.hapticsIntensity = UserDefaults.standard.float(forKey: "hapticsIntensity") != 0 ? UserDefaults.standard.float(forKey: "hapticsIntensity") : Constants.Settings.defaultHapticsIntensity
         self.hapticsEnabled = UserDefaults.standard.bool(forKey: "hapticsEnabled")
         
         let rawValue = UserDefaults.standard.integer(forKey: "selectedGesture")

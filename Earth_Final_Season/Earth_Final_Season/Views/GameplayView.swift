@@ -21,8 +21,8 @@ struct GameplayView: View {
         }
         .navigationBarBackButtonHidden()
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
-        .onChange(of: gameplayVM.currentState) {
-            if gameplayVM.currentState == .gameOver {
+        .onChange(of: gameplayVM.getState()) {
+            if gameplayVM.getState() == .gameOver {
                 Task {
                     showGameOver = true
                     await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
@@ -78,7 +78,7 @@ struct GameplayView: View {
                 .padding(.leading, 130)
         }
         .padding(.top, Constants.GameplayView.paddingTopChoiceView)
-        .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+        .opacity(gameplayVM.getState() == .consequence ? 0 : 1)
     }
     
     private func tapChoicesView(event: Event) -> some View {
@@ -89,7 +89,7 @@ struct GameplayView: View {
             text2: event.choice2
         )
         .padding(.top, Constants.GameplayView.paddingTopChoiceView)
-        .opacity(gameplayVM.currentState == .consequence ? 0 : 1)
+        .opacity(gameplayVM.getState() == .consequence ? 0 : 1)
     }
     
     private var actionControlsView: some View {
