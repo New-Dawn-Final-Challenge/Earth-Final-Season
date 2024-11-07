@@ -82,7 +82,7 @@ struct SettingsModalView: View {
             .overlay {
                 VStack {
                     HStack {
-                        Text("Music")
+                        Text("Music ")
                         Slider(value: $vm.musicIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
