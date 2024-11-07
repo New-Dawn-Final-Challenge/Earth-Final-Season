@@ -11,13 +11,16 @@ struct GameplayView: View {
     var body: some View {
         ZStack {
             BackgroundView()
-            VStack(spacing: -10) {
+            
+            VStack() {
                 helperButtonsView
-                indicatorsView
                 gameContentView
-                actionControlsView
-                Spacer()
+                
+                ZStack {
+                    blackPanelView
+                }
             }
+            .padding(.top, 70)
         }
         .navigationBarBackButtonHidden()
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
@@ -39,11 +42,13 @@ struct GameplayView: View {
     private var gameContentView: some View {
         Group {
             if let event = gameplayVM.getEvent() {
-                CharacterView(characterImage: "image1", characterName: event.character)
-                EventView(eventDescription: event.description,
-                          consequence1: event.consequenceDescription1,
-                          consequence2: event.consequenceDescription2)
-                choiceView(for: event)
+                VStack(spacing: -6) {
+                    CharacterView(characterImage: "image1", characterName: event.character)
+                    EventView(eventDescription: event.description,
+                              consequence1: event.consequenceDescription1,
+                              consequence2: event.consequenceDescription2)
+                    choiceView(for: event)
+                }
             } else {
                 noMoreEventsView
             }
@@ -112,6 +117,53 @@ struct GameplayView: View {
             panelAccessoryB
         }
         .padding(.top, Constants.GameplayView.panelPaddingTop)
+    }
+    
+    private var panelBackground: some View {
+        Rectangle()
+            .edgesIgnoringSafeArea(.all)
+            .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+            .frame(width: getWidth() * 1,
+                   height: getHeight() * Constants.BlackPanel.backgroundPanelHeight)
+    }
+    
+    private var blackPanelView: some View {
+        VStack {
+            Spacer()
+            
+            ZStack {
+                panelBackground
+                
+                VStack(alignment: .center) {
+                    // top panel
+                    HStack(spacing: Constants.BlackPanel.horizontalSpacing) {
+                        blackPanelItemView(Assets.Images.leftBlackPanel.swiftUIImage,
+                                           widthMultiplier: Constants.BlackPanel.sidePanelWidth,
+                                           padding: Constants.BlackPanel.sidePanelPadding)
+                        blackPanelItemView(Assets.Images.yearBlackPanel.swiftUIImage,
+                                           widthMultiplier: Constants.BlackPanel.yearPanelWidth)
+                        blackPanelItemView(Assets.Images.indicatorsBlackPanel.swiftUIImage,
+                                           widthMultiplier: Constants.BlackPanel.indicatorPanelWidth)
+                        blackPanelItemView(Assets.Images.rightBlackPanel.swiftUIImage,
+                                           widthMultiplier: Constants.BlackPanel.sidePanelWidth,
+                                           padding: Constants.BlackPanel.sidePanelPadding)
+                    }
+                    
+                    // bottom panel
+                    blackPanelItemView(Assets.Images.draggerBlackPanel.swiftUIImage,
+                                       widthMultiplier: Constants.BlackPanel.bottomPanelWidth)
+                }
+                .padding(.bottom, Constants.BlackPanel.bottomPadding)
+            }
+        }
+    }
+    
+    private func blackPanelItemView(_ image: Image, widthMultiplier: CGFloat, padding: CGFloat? = nil) -> some View {
+        image
+            .resizable()
+            .frame(width: getWidth() * widthMultiplier,
+                   height: getHeight() * Constants.BlackPanel.panelHeight)
+            .padding(.horizontal, padding ?? 0)
     }
     
     private var staticPanelView: some View {
