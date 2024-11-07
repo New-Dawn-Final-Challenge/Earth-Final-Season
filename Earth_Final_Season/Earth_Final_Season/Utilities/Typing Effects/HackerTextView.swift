@@ -13,12 +13,16 @@ struct HackerTextView: View {
     var transition: ContentTransition = .interpolate
     var duration: CGFloat = 1
     var speed: CGFloat = 0.1
+    
     @State private var animatedText = ""
+    
     var randomCharacters: [Character] = {
         let string = "abcdefghijklnmopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()/?[]{};:=+-"
         return Array(string)
     }()
+    
     @State var animationID: String = UUID().uuidString
+    
     var body: some View {
         Text(animatedText)
 //            .fontDesign(.monospaced)
@@ -132,8 +136,6 @@ private struct Exampleview: View {
             .tint(.pink)
             
             Spacer()
-
-            
         }
         .task {
             try? await Task.sleep(nanoseconds: 4500000000)

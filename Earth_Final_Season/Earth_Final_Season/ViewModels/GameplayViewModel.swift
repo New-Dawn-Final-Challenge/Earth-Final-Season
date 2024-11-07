@@ -7,7 +7,6 @@ protocol GameEngineDelegate: AnyObject {
 
 @Observable
 class GameplayViewModel: GameEngineDelegate {
-    
     weak var engine: GameEngine?
     
     var environmentalDegradationDecreaseShadowRadius = 0
@@ -37,6 +36,7 @@ class GameplayViewModel: GameEngineDelegate {
         if state == .choosing {
             currentEvent = getEvent()
         }
+        
         if state == .consequence {
             timer = Timer.scheduledTimer(withTimeInterval: Constants.GameplayViewModel.timerInterval, repeats: true) { _ in
                 if self.countdown > 0 {
@@ -50,6 +50,7 @@ class GameplayViewModel: GameEngineDelegate {
                 }
             }
         }
+        
         if state == .gameOver {
         }
     }
@@ -83,7 +84,6 @@ class GameplayViewModel: GameEngineDelegate {
     }
     
     func getIndicatorValue(indicator: String, nIndicator: Int) {
-        
         // Stop showing indicator and reset values if not in consequence state
         guard getState() == .consequence else {
             scaleChange = Array(repeating: Constants.GameplayViewModel.indicatorInitialScale, count: 3)
@@ -119,6 +119,7 @@ class GameplayViewModel: GameEngineDelegate {
             environmentalDegradationIncreaseShadowRadius = 0
             return
         }
+        
         let environmentalDegradation = [engine?.currentEvent?.environmentalDegradation1,
                                         engine?.currentEvent?.environmentalDegradation2]
         

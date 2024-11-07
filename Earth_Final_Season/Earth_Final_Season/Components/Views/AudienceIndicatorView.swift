@@ -39,3 +39,7 @@ struct AudienceIndicatorView: View {
         }
     }
 }
+
+#Preview {
+    AudienceIndicatorView(percentage: 50)
+}

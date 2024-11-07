@@ -1,17 +1,18 @@
 //
-//  GlitchView.swift
+//  GlitchCharacterEffect.swift
 //  Earth_Final_Season
 //
-//  Created by Breno Harris on 22/10/24.
+//  Created by Ana Elisa Lima on 05/11/24.
 //
 
 import SwiftUI
 
-struct GlitchFrame: Animatable {
-    var animatableData: AnimatablePair<CGFloat, AnimatablePair<CGFloat, AnimatablePair<CGFloat, CGFloat>>> {
+struct CharacterGlitch: Animatable {
+    var animatableData: AnimatablePair<CGFloat, AnimatablePair<CGFloat, AnimatablePair<CGFloat, CGFloat >>> {
         get {
             return .init(top, .init(center, .init(bottom, shadowOpacity)))
         }
+        
         set {
             top = newValue.first
             center = newValue.second.first
@@ -20,35 +21,40 @@ struct GlitchFrame: Animatable {
         }
     }
     
+    // X-Offset's
+    // swiftlint:disable:next minlength
     var top: CGFloat = 0
     var center: CGFloat = 0
     var bottom: CGFloat = 0
     var shadowOpacity: CGFloat = 0
-    
 }
 
+// Result Builder
 @resultBuilder
-struct GlitchFrameBuilder {
-    static func buildBlock(_ components: LinearKeyframe<GlitchFrame>...) -> [LinearKeyframe<GlitchFrame>] {
+struct GlitchCharacterBuilder {
+    static func buildBlock(_ components: LinearKeyframe<CharacterGlitch>...) -> [LinearKeyframe<CharacterGlitch>] {
         return components
     }
 }
 
-struct GlitchView: View {
+struct GlitchCharacterEffect: View {
     var text: String
     var trigger: Bool
     var shadow: Color
-    var radius: CGFloat = 1
-    var frames: [LinearKeyframe<GlitchFrame>]
-    init(text: String = "Hahaha, the AI decides humans shouldn’t exist and begins it’s uprising…", trigger: Bool = false, shadow: SwiftUICore.Color = Color.red, radius: CGFloat, @GlitchFrameBuilder frames: @escaping () ->  [LinearKeyframe<GlitchFrame>]) {
+    var radius: CGFloat
+    var frames: [LinearKeyframe<CharacterGlitch>]
+    
+    init(text: String, trigger: Bool, shadow: Color = .red, radius: CGFloat = 1, @GlitchCharacterBuilder frames: @escaping  () -> [LinearKeyframe<CharacterGlitch>]) {
         self.text = text
         self.trigger = trigger
         self.shadow = shadow
         self.radius = radius
         self.frames = frames()
     }
+    
+    // Configuration
     var body: some View {
-        KeyframeAnimator(initialValue: GlitchFrame(), trigger: trigger) { value in
+        KeyframeAnimator(initialValue: CharacterGlitch(), trigger: trigger) { value in
             ZStack {
                 textView(.top, offset: value.top, opacity: value.shadowOpacity)
                 textView(.center, offset: value.center, opacity: value.shadowOpacity)
@@ -61,6 +67,8 @@ struct GlitchView: View {
             }
         }
     }
+    
+    // Text View
     @ViewBuilder
     func textView(_ alignment: Alignment, offset: CGFloat, opacity: CGFloat) -> some View {
         Text(text)
@@ -87,15 +95,13 @@ struct GlitchView: View {
                 }
         }
             .shadow(color: shadow.opacity(opacity), radius: radius, x: offset, y:
-                        offset/2)
+                        offset / 2)
             .offset(x: offset)
     }
+    
+    @ViewBuilder
+    func ExtendedSpacer() -> some View {
+        Spacer(minLength: 0)
+            .frame(maxHeight: .infinity)
+    }
 }
-
-
-
-
-//
-//#Preview {
-//    GlitchView()
-//}
