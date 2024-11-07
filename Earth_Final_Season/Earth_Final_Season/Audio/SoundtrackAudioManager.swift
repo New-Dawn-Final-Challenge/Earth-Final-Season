@@ -1,5 +1,6 @@
 import Foundation
 import AVFoundation
+
 class SoundtrackAudioManager {
     
     static let shared = SoundtrackAudioManager()
@@ -75,15 +76,3 @@ class SoundtrackAudioManager {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

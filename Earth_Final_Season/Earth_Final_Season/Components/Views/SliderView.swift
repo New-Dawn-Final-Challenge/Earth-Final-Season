@@ -17,110 +17,119 @@ struct SliderView: View {
     var onChooseOption1: () -> Void
     var onChooseOption2: () -> Void
 
-    var body: some View {
-        let sliderWidth = getWidth() * Constants.SliderView.widthMultiplier
-        let sliderHeight = getHeight() * Constants.SliderView.heightMultiplier
-        
-        let rightLimit = (sliderWidth / Constants.SliderView.sliderLimitFactor)
-        let leftLimit = -(sliderWidth / Constants.SliderView.sliderLimitFactor)
+    private var sliderWidth: CGFloat { getWidth() * Constants.SliderView.widthMultiplier }
+    private var sliderHeight: CGFloat { getHeight() * Constants.SliderView.heightMultiplier }
+    private var rightLimit: CGFloat { (sliderWidth / Constants.SliderView.sliderLimitFactor) }
+    private var leftLimit: CGFloat { -(sliderWidth / Constants.SliderView.sliderLimitFactor) }
 
-        Assets.Images.sliderBar.swiftUIImage
-            .resizable()
-            .frame(width: sliderWidth, height: sliderHeight)
+    enum Option {
+        case option1
+        case option2
+    }
+
+    var body: some View {
+        SliderBarView(sliderWidth: sliderWidth, sliderHeight: sliderHeight)
             .overlay(
                 VStack {
-                    Assets.Images.sliderDragger.swiftUIImage
-                        .resizable()
-                        .scaledToFit()
-                        .padding(Constants.SliderView.draggerPadding) // Set dragger size
-                        .offset(dragOffset)
+                    DraggerView(dragOffset: $dragOffset, feedbackTrigger: $feedbackTrigger)
                         .gesture(
                             DragGesture()
                                 .onChanged { gesture in
-                                    if gameplayVM.currentState != .consequence {
-                                        // Calculate the new drag offset within the limits
-                                        finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
-                                        dragOffset = CGSize(width: finalOffsetX, height: 0)
-
-                                        // Update the feedback trigger to the current drag location
-                                        feedbackTrigger = CGPoint(x: dragOffset.width, y: 0)
-
-                                        // Update shadow radius based on the circle's relative position within the slider
-                                        if finalOffsetX < 0 {
-                                            gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
-                                            gameplayVM.option2ShadowRadius = 0
-                                            resetIndicatorsShadows()
-                                            checkFirstOptionIndicators()
-                                        } else {
-                                            gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
-                                            gameplayVM.option1ShadowRadius = 0
-                                            resetIndicatorsShadows()
-                                            checkSecondOptionIndicators()
-                                        }
-                                    }
+                                    handleDragChanged(gesture)
                                 }
                                 .onEnded { _ in
-                                    if gameplayVM.currentState != .consequence {
-                                        withAnimation {
-                                            // Option 1 chosen
-                                            if finalOffsetX == leftLimit {
-                                                HapticsManager.shared.complexSuccess()
-                                                onChooseOption1()
-                                                gameplayVM.mainScreenShadowRadius = 12
-                                            }
-
-                                            // Option 2 chosen
-                                            else if finalOffsetX == rightLimit {
-                                                HapticsManager.shared.complexSuccess()
-                                                onChooseOption2()
-                                                gameplayVM.mainScreenShadowRadius = 12
-                                            }
-
-                                            // Reset position and shadows
-                                            resetIndicatorsShadows()
-                                            dragOffset = .zero
-                                            gameplayVM.mainScreenShadowRadius = 0
-                                            gameplayVM.option1ShadowRadius = 0
-                                            gameplayVM.option2ShadowRadius = 0
-                                        }
-                                    }
+                                    handleDragEnded()
                                 }
                         )
                         .padding(.bottom, 30)
                     Spacer()
                 }
             )
-            .sensoryFeedback(.impact(weight: .medium, intensity: Double(HapticsManager.shared.intensity) * Constants.SliderView.hapticFeedback), trigger: feedbackTrigger)
+            .sensoryFeedback(.impact(weight: .medium,
+                                     intensity: Double(HapticsManager.shared.intensity) * Constants.SliderView.hapticFeedback),
+                             trigger: feedbackTrigger)
     }
-    
-    private func checkFirstOptionIndicators() {
-        if gameplayVM.getEvent()?.environmentalDegradation1 != 0 {
+
+    private func handleDragChanged(_ gesture: DragGesture.Value) {
+        guard gameplayVM.currentState != .consequence else { return }
+        
+        finalOffsetX = min(max(gesture.translation.width, leftLimit), rightLimit)
+        dragOffset = CGSize(width: finalOffsetX, height: 0)
+        feedbackTrigger = CGPoint(x: dragOffset.width, y: 0)
+        
+        updateShadowRadius()
+    }
+
+    private func handleDragEnded() {
+        guard gameplayVM.currentState != .consequence else { return }
+        
+        withAnimation {
+            if finalOffsetX == leftLimit {
+                selectOption(.option1)
+            } else if finalOffsetX == rightLimit {
+                selectOption(.option2)
+            } else {
+                resetAll()
+            }
+        }
+    }
+
+    private func selectOption(_ option: Option) {
+        HapticsManager.shared.complexSuccess()
+        
+        switch option {
+        case .option1:
+            onChooseOption1()
+        case .option2:
+            onChooseOption2()
+        }
+        
+        gameplayVM.mainScreenShadowRadius = 12
+        resetAll()
+    }
+
+    private func resetAll() {
+        resetIndicatorsShadows()
+        dragOffset = .zero
+        gameplayVM.mainScreenShadowRadius = 0
+        gameplayVM.option1ShadowRadius = 0
+        gameplayVM.option2ShadowRadius = 0
+    }
+
+    private func updateShadowRadius() {
+        if finalOffsetX < 0 {
+            gameplayVM.option1ShadowRadius = Int(abs(finalOffsetX) / 6)
+            gameplayVM.option2ShadowRadius = 0
+            resetIndicatorsShadows()
+            checkOptionIndicators(for: .option1)
+        } else {
+            gameplayVM.option2ShadowRadius = Int(finalOffsetX / 6)
+            gameplayVM.option1ShadowRadius = 0
+            resetIndicatorsShadows()
+            checkOptionIndicators(for: .option2)
+        }
+    }
+
+    private func checkOptionIndicators(for option: Option) {
+        let event = gameplayVM.getEvent()
+        
+        let degradation = (option == .option1) ? event?.environmentalDegradation1 : event?.environmentalDegradation2
+        let illBeing = (option == .option1) ? event?.illBeing1 : event?.illBeing2
+        let instability = (option == .option1) ? event?.socioPoliticalInstability1 : event?.socioPoliticalInstability2
+        
+        if degradation != 0 {
             gameplayVM.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if gameplayVM.getEvent()?.illBeing1 != 0 {
+        if illBeing != 0 {
             gameplayVM.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
         }
         
-        if gameplayVM.getEvent()?.socioPoliticalInstability1 != 0 {
+        if instability != 0 {
             gameplayVM.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
         }
     }
-    
-    private func checkSecondOptionIndicators() {
-        if gameplayVM.getEvent()?.environmentalDegradation2 != 0 {
-            gameplayVM.environmentalDegradationShadowRadius = Int(abs(finalOffsetX) / 10)
-        }
-        
-        if gameplayVM.getEvent()?.illBeing2 != 0 {
-            gameplayVM.illBeingShadowRadius = Int(abs(finalOffsetX) / 10)
-        }
-        
-        if gameplayVM.getEvent()?.socioPoliticalInstability2 != 0 {
-            gameplayVM.sociopoliticalInstabilityShadowRadius = Int(abs(finalOffsetX) / 10)
-        }
-    }
-    
+
     private func resetIndicatorsShadows() {
         gameplayVM.environmentalDegradationShadowRadius = 0
         gameplayVM.illBeingShadowRadius = 0

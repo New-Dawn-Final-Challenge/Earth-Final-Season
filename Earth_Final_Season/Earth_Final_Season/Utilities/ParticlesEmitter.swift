@@ -8,8 +8,7 @@
 import SwiftUI
 import UIKit
 
-
-/// Class that wraps the CAEmitterCell in a class compatible with SwiftUI
+// Class that wraps the CAEmitterCell in a class compatible with SwiftUI
 public struct ParticlesEmitter: UIViewRepresentable {
     var center: CGPoint = .zero
     var emitterSize: CGSize = .init(width: 1, height: 1)
@@ -47,12 +46,11 @@ extension ParticlesEmitter {
     }
 }
 
-
-/// The container view class for the particles, as the project is using a CAEmitterLayer
+// The container view class for the particles, as the project is using a CAEmitterLayer
 public final class InternalParticlesView: UIView {
     private var particleEmitter: CAEmitterLayer?
     
-    /// Function that adds the emitter cells to the layer
+    // Function that adds the emitter cells to the layer
     /// - Parameter center: center of the emitter
     /// - Parameter size: size of the emitter
     /// - Parameter cells: all the CAEmitterCell
@@ -100,10 +98,9 @@ class EmitterCell: CAEmitterCell {
     }
 }
 
-
 extension EmitterCell {
-    /// Content for the emitter cell, it is either an image, or a circle.
-    /// NB: It could easily be extended for other shapes.
+    // Content for the emitter cell, it is either an image, or a circle.
+    // NB: It could easily be extended for other shapes.
     public enum Content {
         case image(UIImage)
         case circle(CGFloat)
@@ -229,4 +226,3 @@ fileprivate extension EmitterCell.Content {
         }
     }
 }
-
