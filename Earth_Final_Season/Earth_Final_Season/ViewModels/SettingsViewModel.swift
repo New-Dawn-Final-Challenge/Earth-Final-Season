@@ -9,6 +9,7 @@ import Foundation
 
 @Observable
 class SettingsViewModel {
+    var isPresented = false
     var soundEffectsIntensity: Float = Constants.Settings.soundEffectsDefaultIntensity
     
     var musicIntensity: Float = Constants.Settings.defaultMusicIntensity {
