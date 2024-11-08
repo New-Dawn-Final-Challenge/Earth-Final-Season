@@ -65,17 +65,18 @@ struct ChaosIndicatorsView: View {
                 .overlay(
                     GeometryReader { geometry in
                         Rectangle()
-                            .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
+                            .foregroundStyle(Assets.Colors.secondaryGreenVariation.swiftUIColor)
                             .frame(height: CGFloat(value) / CGFloat(Constants.GameEngine.maxIndicatorThreshold) * geometry.size.height)
                             .frame(maxHeight: geometry.size.height, alignment: .bottom)
                     }
                 )
                 .mask(imageForIndicator(indicator).resizable())
-                .shadow(color: Assets.Colors.secondaryBlue.swiftUIColor,
+                .shadow(color: neutralSR == 0 ? Color.clear : Assets.Colors.secondaryGreen.swiftUIColor,
+                        radius: neutralSR)
+                .shadow(color: decreaseSR == 0 ? Color.clear : Assets.Colors.secondaryOrange.swiftUIColor,
                         radius: decreaseSR)
-                .shadow(color: Assets.Colors.secondaryPurpleVariation.swiftUIColor,
+                .shadow(color: increaseSR == 0 ? Color.clear : Assets.Colors.secondaryBlue.swiftUIColor,
                         radius: increaseSR)
-                .shadow(color: Assets.Colors.secondaryGreen.swiftUIColor, radius: neutralSR)
         }
     }
 

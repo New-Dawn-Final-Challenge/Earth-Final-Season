@@ -20,18 +20,18 @@ struct AudienceIndicatorView: View {
                 .resizable()
                 .frame(width: getWidth() * Constants.AudienceIndicator.imageWidthMultiplier,
                        height: getHeight() * Constants.AudienceIndicator.imageHeightMultiplier)
-                .foregroundStyle(Assets.Colors.secondaryGreenVariation.swiftUIColor)
+                .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
 
             ZStack(alignment: .bottom) {
                 // Background Bar (empty part)
                 Rectangle()
-                    .fill(Assets.Colors.accentPrimary.swiftUIColor)
+                    .fill(Color(UIColor.systemGray))
                     .frame(width: getWidth() * Constants.AudienceIndicator.barWidthMultiplier,
                            height: getHeight() * Constants.AudienceIndicator.barHeightMultiplier)
 
                 // Filled Bar (based on percentage, scaled so 3 is 0% and 11 is 100%)
                 Rectangle()
-                    .fill(Assets.Colors.secondaryGreen.swiftUIColor)
+                    .fill(Assets.Colors.textSecondary.swiftUIColor)
                     .frame(width: getWidth() * Constants.AudienceIndicator.barWidthMultiplier,
                            height: max(0, CGFloat(percentage - Constants.AudienceIndicator.percentageOffset) / Constants.AudienceIndicator.percentageScaleFactor * (getHeight() * Constants.AudienceIndicator.barHeightMultiplier)))
             }

@@ -180,7 +180,7 @@ struct GameplayView: View {
             .overlay(
                 Text("Year\n\(gameplayVM.getIndicators()?.currentYear ?? 0)")
                     .font(.title3Font)
-                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                    .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                     .multilineTextAlignment(.center)
                     .padding(.leading, Constants.BlackPanel.yearMonitorPadding)
             )
