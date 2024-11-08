@@ -14,31 +14,23 @@ struct ChaosIndicatorsView: View {
     let illBeing: Int
     let socioPoliticalInstability: Int
     let environmentalDegradation: Int
-    let year: String
     
     var body: some View {
         ZStack {
             Assets.Images.indicatorsScreen.swiftUIImage
                 .resizable()
                 .frame(width: getWidth() * Constants.ChaosIndicators.indicatorFrameWidthMultiplier,
-                       height: getHeight() * Constants.ChaosIndicators.indicatorFrameHeightMultiplier)
-            
-            VStack {
-                Text("Year: \(year)")
-                    .font(.bodyFont)
-                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                    .bold()
-                
-                HStack(spacing: Constants.ChaosIndicators.hStackSpacing) {
-                    ForEach(indicatorData, id: \.indicator) { data in
-                        indicatorView(
-                            indicator: data.indicator,
-                            value: data.value,
-                            decreaseSR: data.decreaseSR,
-                            increaseSR: data.increaseSR,
-                            neutralSR: data.neutralSR
-                        )
-                    }
+                       height: getHeight() * Constants.ChaosIndicators.indicatorMonitorHeightMultiplier)
+
+            HStack(spacing: Constants.ChaosIndicators.hStackSpacing) {
+                ForEach(indicatorData, id: \.indicator) { data in
+                    indicatorView(
+                        indicator: data.indicator,
+                        value: data.value,
+                        decreaseSR: data.decreaseSR,
+                        increaseSR: data.increaseSR,
+                        neutralSR: data.neutralSR
+                    )
                 }
             }
         }
@@ -74,7 +66,7 @@ struct ChaosIndicatorsView: View {
                     GeometryReader { geometry in
                         Rectangle()
                             .foregroundStyle(Assets.Colors.secondaryOrange.swiftUIColor)
-                            .frame(height: CGFloat(value) / Constants.ChaosIndicators.hStackSpacing * geometry.size.height)
+                            .frame(height: CGFloat(value) / CGFloat(Constants.GameEngine.maxIndicatorThreshold) * geometry.size.height)
                             .frame(maxHeight: geometry.size.height, alignment: .bottom)
                     }
                 )

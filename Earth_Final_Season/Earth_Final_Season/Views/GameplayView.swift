@@ -17,7 +17,7 @@ struct GameplayView: View {
                 gameContentView
                 controlPanelView
             }
-            .padding(.top, 70)
+            .padding(.top, 80)
         }
         .navigationBarBackButtonHidden()
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
@@ -50,6 +50,7 @@ struct GameplayView: View {
                 noMoreEventsView
             }
         }
+        .padding(.bottom, -12)
     }
     
     private var noMoreEventsView: some View {
@@ -158,8 +159,11 @@ struct GameplayView: View {
                 yearView
             }
             
-            blackPanelItemView(Assets.Images.indicatorsBlackPanel.swiftUIImage,
-                               widthMultiplier: Constants.BlackPanel.indicatorPanelWidth)
+            ZStack {
+                blackPanelItemView(Assets.Images.indicatorsBlackPanel.swiftUIImage,
+                                   widthMultiplier: Constants.BlackPanel.indicatorPanelWidth)
+                indicatorsView
+            }
             
             blackPanelItemView(Assets.Images.rightBlackPanel.swiftUIImage,
                                widthMultiplier: Constants.BlackPanel.sidePanelWidth,
@@ -176,6 +180,7 @@ struct GameplayView: View {
             .overlay(
                 Text("Year\n\(gameplayVM.getIndicators()?.currentYear ?? 0)")
                     .font(.title3Font)
+                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                     .multilineTextAlignment(.center)
                     .padding(.leading, Constants.BlackPanel.yearMonitorPadding)
             )
@@ -240,13 +245,11 @@ struct GameplayView: View {
     private var indicatorsView: some View {
         HStack(alignment: .center, spacing: getWidth() * Constants.GameplayView.indicatorSpacingMultiplier) {
             AudienceIndicatorView(percentage: CGFloat(Int(gameplayVM.getIndicators()?.audience ?? 0)))
-                .padding(.bottom)
             
             ChaosIndicatorsView(
                 illBeing: gameplayVM.getIndicators()?.illBeing ?? 0,
                 socioPoliticalInstability: gameplayVM.getIndicators()?.socioPoliticalInstability ?? 0,
-                environmentalDegradation: gameplayVM.getIndicators()?.environmentalDegradation ?? 0,
-                year: String(gameplayVM.getIndicators()?.currentYear ?? 0)
+                environmentalDegradation: gameplayVM.getIndicators()?.environmentalDegradation ?? 0
             )
         }
     }
