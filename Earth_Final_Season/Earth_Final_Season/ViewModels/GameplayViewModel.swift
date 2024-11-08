@@ -1,10 +1,3 @@
-//
-//  GameplayViewModel.swift
-//  Earth_Final_Season
-//
-//  Created by Larissa Fazolin on 19/09/24.
-//
-
 import Foundation
 import SwiftUI
 
@@ -29,49 +22,45 @@ class GameplayViewModel: GameEngineDelegate {
     var sociopoliticalInstabilityDecreaseShadowRadius = 0
     var sociopoliticalInstabilityIncreaseShadowRadius = 0
     var sociopoliticalInstabilityShadowRadius = 0
-    var currentState: States = .initializing
     var currentEvent: Event?
     
     var timer: Timer?
-    var countdown = 6
+    var countdown = Constants.GameplayViewModel.countdownStartValue
     
-    var scaleChange: [CGFloat] = [0,0,0]
-    var shouldShowIndicator: [Bool] = [false,false,false]
-    var valueIsIncreasing: [Bool] = [false,false,false]
-    var value: [Int] = [0,0,0]
+    var scaleChange: [CGFloat] = Array(repeating: Constants.GameplayViewModel.indicatorInitialScale, count: 3)
+    var shouldShowIndicator: [Bool] = Array(repeating: false, count: 3)
+    var valueIsIncreasing: [Bool] = Array(repeating: false, count: 3)
+    var value: [Int] = Array(repeating: 0, count: 3)
     
     func gameStateChanged(to state: States) {
         if state == .choosing {
             currentEvent = getEvent()
-            currentState = .choosing
         }
         
         if state == .consequence {
-            currentState = .consequence
-            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            timer = Timer.scheduledTimer(withTimeInterval: Constants.GameplayViewModel.timerInterval, repeats: true) { _ in
                 if self.countdown > 0 {
                     self.countdown -= 1
                 } else {
                     self.timer?.invalidate()
                     self.timer = nil
-                    self.countdown = 6
+                    self.countdown = Constants.GameplayViewModel.countdownStartValue
                     
                     self.engine?.goToNextEvent()
-                    if !(self.engine?.gameEnded() ?? true) {
-                        self.currentState = .choosing
-                    }
                 }
             }
         }
         
         if state == .gameOver {
-            currentState = .gameOver
         }
     }
     
+    func getState() -> States? {
+        return engine?.state
+    }
+    
     func getEvent() -> Event? {
-        currentEvent = engine?.currentEvent
-        return currentEvent
+        return engine?.currentEvent
     }
     
     func getIndicators() -> Indicators? {
@@ -96,11 +85,11 @@ class GameplayViewModel: GameEngineDelegate {
     
     func getIndicatorValue(indicator: String, nIndicator: Int) {
         // Stop showing indicator and reset values if not in consequence state
-        guard currentState == .consequence else {
-            scaleChange = [0,0,0]
-            shouldShowIndicator = [false, false, false]
-            valueIsIncreasing = [false, false, false]
-            value = [0,0,0]
+        guard getState() == .consequence else {
+            scaleChange = Array(repeating: Constants.GameplayViewModel.indicatorInitialScale, count: 3)
+            shouldShowIndicator = Array(repeating: false, count: 3)
+            valueIsIncreasing = Array(repeating: false, count: 3)
+            value = Array(repeating: 0, count: 3)
             return
         }
         
@@ -117,11 +106,10 @@ class GameplayViewModel: GameEngineDelegate {
         value[nIndicator] = chosenValue
         valueIsIncreasing[nIndicator] = value[nIndicator] > 0
         shouldShowIndicator[nIndicator] = value[nIndicator] != 0
-        scaleChange[nIndicator] = 1
+        scaleChange[nIndicator] = Constants.GameplayViewModel.indicatorVisibleScale
     }
     
     func animateIndicatorsChange() {
-        // stopped showing consequence: stop showing indicator and reset value
         if engine?.state != .consequence {
             sociopoliticalInstabilityDecreaseShadowRadius = 0
             sociopoliticalInstabilityIncreaseShadowRadius = 0
@@ -147,7 +135,7 @@ class GameplayViewModel: GameEngineDelegate {
                 n_choice = 0
             case "choice2":
                 n_choice = 1
-            default :    break
+            default: break
         }
         
         let illBeingValue = illBeing[n_choice] ?? 0
@@ -155,21 +143,22 @@ class GameplayViewModel: GameEngineDelegate {
         let socioPoliticalValue = socioPoliticalInstability[n_choice] ?? 0
         
         if illBeingValue < 0 {
-            illBeingDecreaseShadowRadius = 7
+            illBeingDecreaseShadowRadius = Constants.GameplayViewModel.shadowRadiusHighlight
         } else if illBeingValue > 0 {
-            illBeingIncreaseShadowRadius = 7
+            illBeingIncreaseShadowRadius = Constants.GameplayViewModel.shadowRadiusHighlight
         }
         
         if envDegradationValue < 0 {
-            environmentalDegradationDecreaseShadowRadius = 7
+            environmentalDegradationDecreaseShadowRadius = Constants.GameplayViewModel.shadowRadiusHighlight
         } else if envDegradationValue > 0 {
-            environmentalDegradationIncreaseShadowRadius = 7
+            environmentalDegradationIncreaseShadowRadius = Constants.GameplayViewModel.shadowRadiusHighlight
         }
         
         if socioPoliticalValue < 0 {
-            sociopoliticalInstabilityDecreaseShadowRadius = 7
+            sociopoliticalInstabilityDecreaseShadowRadius = Constants.GameplayViewModel.shadowRadiusHighlight
         } else if socioPoliticalValue > 0 {
-            sociopoliticalInstabilityIncreaseShadowRadius = 7
+            sociopoliticalInstabilityIncreaseShadowRadius = Constants.GameplayViewModel.shadowRadiusHighlight
         }
     }
 }
+

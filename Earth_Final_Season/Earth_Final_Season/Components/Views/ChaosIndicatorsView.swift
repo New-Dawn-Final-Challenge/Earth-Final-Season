@@ -35,15 +35,19 @@ struct ChaosIndicatorsView: View {
             }
         }
         .padding()
-        .onChange(of: gameplayVM.currentState) {
-            if gameplayVM.currentState == .consequence {
-                withAnimation(Animation.linear(duration: Constants.ChaosIndicators.animationDuration).repeatCount(Constants.ChaosIndicators.animationRepeatCount, autoreverses: true)) {
-                    gameplayVM.animateIndicatorsChange()
-                }
-            } else {
+        .onChange(of: gameplayVM.getState()) {
+            
+            guard gameplayVM.getState() == .consequence else {
+                
                 withAnimation(Animation.linear(duration: Constants.ChaosIndicators.animationDuration)) {
                     gameplayVM.animateIndicatorsChange()
                 }
+                return
+                
+            }
+            
+            withAnimation(Animation.linear(duration: Constants.ChaosIndicators.animationDuration).repeatCount(Constants.ChaosIndicators.animationRepeatCount, autoreverses: true)) {
+                gameplayVM.animateIndicatorsChange()
             }
         }
     }
