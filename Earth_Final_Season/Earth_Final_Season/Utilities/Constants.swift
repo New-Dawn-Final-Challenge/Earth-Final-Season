@@ -171,6 +171,8 @@ struct Constants{
         static let indicatorSpacingMultiplier: CGFloat = -0.02
         static let panelAccessoryWidthMultiplier: CGFloat = 0.3
         static let panelAccessoryHeightMultiplier: CGFloat = 0.08
+        static let staticPanelWidth: CGFloat = 1.05
+        static let staticPanelHeight: CGFloat = 0.08
         static let paddingTopChoiceView: CGFloat = -15
         static let panelPaddingTop: CGFloat = 30
         static let panelHorizontalPadding: CGFloat = 30

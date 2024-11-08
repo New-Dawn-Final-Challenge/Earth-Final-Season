@@ -201,9 +201,10 @@ struct GameplayView: View {
     
     private var staticPanelView: some View {
         HStack {
-            panelAccessoryA
-            Spacer()
-            panelAccessoryB
+            Assets.Images.accessibilityPanel.swiftUIImage
+                .resizable()
+                .frame(width: getWidth() * Constants.GameplayView.staticPanelWidth,
+                       height: getHeight() * Constants.GameplayView.staticPanelHeight)
         }
         .padding(.horizontal, Constants.GameplayView.panelHorizontalPadding)
         .padding(.top, Constants.GameplayView.panelPaddingTop)
