@@ -77,14 +77,26 @@ struct GameOverTestView: View {
     }
     
     private var gameOverImage: some View {
-        Assets.Images.eventsScreen.swiftUIImage
-            .resizable()
-            .frame(maxWidth: .infinity, maxHeight: getHeight() * 0.2)
+        ZStack {
+            // Background image
+            Assets.Images.eventsScreen.swiftUIImage
+                .resizable()
+                .frame(width: getWidth() * 0.8,
+                       height: getHeight() * 0.16)
+            
+            // Foreground image with padding
+            Assets.Images.audienceEnd.swiftUIImage
+                .resizable()
+                .clipShape(RoundedRectangle(cornerRadius: 40))
+                .padding(.horizontal, 24)
+                .padding(.vertical, 12)
+        }
     }
+
     private var gameOverDescription: some View {
         VStack(spacing: 12) {
             Text("Environmental Degradation reached its peak!")
-                .shadow(color: .black, radius: 0.5, x: 0, y: 0)
+                .shadow(color: .black, radius: 0.3, x: 0, y: 0)
 
             Text("Chemtrails in the sky give sunrays a strange purple glow. The waters stink of green, the weather is either burning hot, or deadly cold, and fruits and crops never grow. Toc toc: any human alive? The answer is no.")
         }
@@ -93,7 +105,8 @@ struct GameOverTestView: View {
         .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
         .multilineTextAlignment(.center)
         .padding(40)
-        .frame(maxWidth: .infinity)
+        .frame(width: getWidth() * 0.8,
+               height: getHeight() * 0.35)
         .background(
             Assets.Images.characterScreen.swiftUIImage
                 .resizable()
