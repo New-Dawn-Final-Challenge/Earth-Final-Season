@@ -22,12 +22,13 @@ struct Earth_Final_SeasonApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MenuView()
-                .environment(gameEngine)
-                .environment(gameplayVM)
-            .task {
-                SoundtrackAudioManager.shared.playSoundtrack(named: "lowtoneST")
-            }
+            GameOverTestView()
+//            MenuView()
+//                .environment(gameEngine)
+//                .environment(gameplayVM)
+//            .task {
+//                SoundtrackAudioManager.shared.playSoundtrack(named: "lowtoneST")
+//            }
         }
     }
 }
