@@ -53,7 +53,7 @@ struct GameplayView: View {
     private var gameContentView: some View {
         Group {
             if let event = gameplayVM.getEvent() {
-                CharacterView(characterImage: "image1", characterName: event.character)
+                CharacterView(character: event.character)
                 EventView(eventDescription: event.description,
                           consequence1: event.consequenceDescription1,
                           consequence2: event.consequenceDescription2)

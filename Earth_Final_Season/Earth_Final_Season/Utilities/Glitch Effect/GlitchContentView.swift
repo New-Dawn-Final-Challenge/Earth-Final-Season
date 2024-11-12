@@ -12,7 +12,7 @@ struct GlitchContentView: View {
     @Binding var trigger: Bool
     @State private var glitchTimer: Timer? = nil
     private let glitchInterval: TimeInterval = 3.0
-    let uiImage = Assets.Images.placeholderCharacter.swiftUIImage
+    var uiImage : Image
     
     var body: some View {
         VStack {
