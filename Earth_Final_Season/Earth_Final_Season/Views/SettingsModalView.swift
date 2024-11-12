@@ -13,65 +13,62 @@ struct SettingsModalView: View {
     var doStuff: ()-> Void
     
     var body: some View {
-        NavigationView {
-            VStack {
-                VStack(spacing: 20) {
-                    Text3dEffect(text: "Settings")
-                        .font(.largeTitleFont)
-                    
-                    musicView
-                    
-                    hapticsView
-                    
-                    Assets
-                        .Images
-                        .gestureScreen
-                        .swiftUIImage
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .overlay {
-                            VStack {
-                                HStack {
-                                    Text("Gesture")
-                                        .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                                        .font(.title3Font)
-                                        .padding(.leading, 36)
-                                    Spacer()
-                                }
-                                
-                                gestureSelectionView
-                                
-                                Group {
-                                    Text("The standard gesture is ") +
-                                    Text("Hold and Drag")
-                                        .underline(true) +
-                                    Text(", while Tap is recommended for accessibility")
-                                }
-                                .padding(.horizontal, 28)
-                                .font(.footnoteFont)
-                                .foregroundStyle(.secondary)
-                            }
+        VStack(spacing: 12) {
+            Text3dEffect(text: "Settings")
+                .font(.largeTitleFont)
+            
+            musicView
+            
+            hapticsView
+            
+            Assets
+                .Images
+                .gestureScreen
+                .swiftUIImage
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .overlay {
+                    VStack {
+                        HStack {
+                            Text("Gesture")
+                                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                                .font(.bodyFont)
+                                .padding(.leading, 36)
+                            Spacer()
                         }
-                        .foregroundStyle(.black)
-                    
-                    resumeButton
-                    
-                    menuButton
-                    
+                        
+                        gestureSelectionView
+                        
+                        Group {
+                            Text("The standard gesture is ") +
+                            Text("Hold and Drag").underline(true) +
+                            Text(", while ") +
+                            Text("Tap").underline(true) +
+                            Text(" is recommended for accessibility")
+                        }
+                        .padding(.horizontal, 36)
+                        .font(.footnoteFont)
+                        .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 24)
                 }
-                .padding()
+                .foregroundStyle(.black)
+            
+            resumeButton
+            
+            menuButton
+            
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2)
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(.black)
-                        )
+                        .fill(.black)
                 )
-                .padding()
-            }
-            .padding()
-        }
+        )
+        .padding()
     }
     
     var musicView: some View {
@@ -79,13 +76,13 @@ struct SettingsModalView: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .overlay {
-                VStack {
-                    HStack {
+                VStack(alignment: .leading) {
+                    HStack(spacing: 12) {
                         Text("Music ")
                         Slider(value: $vm.musicIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
-                    HStack {
+                    HStack(spacing: 12) {
                         Text("Sounds")
                         Slider(value: $vm.soundEffectsIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
@@ -93,7 +90,7 @@ struct SettingsModalView: View {
                 }
                 .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                 .font(.bodyFont)
-                .padding(.horizontal, 46)
+                .padding(.horizontal, 30)
             }
     }
     
@@ -103,14 +100,13 @@ struct SettingsModalView: View {
             .aspectRatio(contentMode: .fit)
             .overlay {
                 HStack {
-                    Spacer()
                     Toggle("Haptics", isOn: $vm.hapticsEnabled)
                         .font(.bodyFont)
                         .toggleStyle(SwitchToggleStyle(tint: Assets.Colors.bgFillPrimary.swiftUIColor))
                     Spacer()
                 }
-                .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .padding(.horizontal, 46)
+                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                .padding(.horizontal, 30)
             }
         
     }
@@ -135,7 +131,8 @@ struct SettingsModalView: View {
                         .padding(.horizontal)
                     }
                     Divider()
-                        .padding(.horizontal)
+                        .overlay(Assets.Colors.accentPrimary.swiftUIColor)
+                        .padding(.leading)
                     Button {
                         vm.selectedGesture = .tap
                     } label: {
@@ -162,9 +159,9 @@ struct SettingsModalView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 4))
+                .clipShape(RoundedRectangle(cornerRadius: 16))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 4)
+                    RoundedRectangle(cornerRadius: 16)
                         .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
                 }
         }
@@ -183,9 +180,9 @@ struct SettingsModalView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 4))
+                .clipShape(RoundedRectangle(cornerRadius: 16))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 4)
+                    RoundedRectangle(cornerRadius: 16)
                         .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
                 }
         }
