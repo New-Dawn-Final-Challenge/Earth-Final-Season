@@ -13,6 +13,7 @@ class GameEngine {
     
     var countdown = 6
     var timer: Timer?
+    var gameOverTitle = ""
     var gameOverReason = ""
     var lastChosenOption = "choice1"
     var events = [Event]()
@@ -44,18 +45,22 @@ class GameEngine {
     func checkForGameOver() {
         if state == .consequence {
             if indicators.audience <= Constants.GameEngine.minAudienceThreshold {
+                gameOverTitle = Constants.GameEngine.gameOverAudienceTitle
                 gameOverReason = Constants.GameEngine.gameOverAudienceMessage
                 applyGameOver()
             }
             if indicators.environmentalDegradation >= Constants.GameEngine.maxIndicatorThreshold {
+                gameOverTitle = Constants.GameEngine.gameOverEnvironmentTitle
                 gameOverReason += Constants.GameEngine.gameOverEnvironmentMessage
                 applyGameOver()
             }
             if indicators.illBeing >= Constants.GameEngine.maxIndicatorThreshold {
+                gameOverTitle = Constants.GameEngine.gameOverIllBeingTitle
                 gameOverReason += Constants.GameEngine.gameOverIllBeingMessage
                 applyGameOver()
             }
             if indicators.socioPoliticalInstability >= Constants.GameEngine.maxIndicatorThreshold {
+                gameOverTitle = Constants.GameEngine.gameOverInstabilityTitle
                 gameOverReason += Constants.GameEngine.gameOverInstabilityMessage
                 applyGameOver()
             }

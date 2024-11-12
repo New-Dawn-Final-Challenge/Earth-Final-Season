@@ -39,9 +39,14 @@ struct GameplayView: View {
                 }
             }
         }
-        .navigationDestination(isPresented: $showGameOver) {
-            GameOverView(isPresented: $showGameOver)
+        .fullScreenCover(isPresented: $showGameOver) {
+            ZStack {
+                Color.black.opacity(0.6).ignoresSafeArea(.all)
+                GameOverView(isPresented: $showGameOver)
+            }
+            .presentationBackground(.clear)
         }
+
     }
     
     // MARK: - View Components

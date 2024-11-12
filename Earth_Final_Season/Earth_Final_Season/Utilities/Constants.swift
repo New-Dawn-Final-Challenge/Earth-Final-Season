@@ -143,11 +143,16 @@ struct Constants{
         static let minAudienceThreshold: Double = 3
         static let maxIndicatorThreshold = 12
         static let eventsPerYear = 2
+        
+        static let gameOverAudienceTitle = "Audience reached its minimum"
+        static let gameOverEnvironmentTitle = "Environmental Degradation reached its peak"
+        static let gameOverIllBeingTitle = "Ill-being reached its peak"
+        static let gameOverInstabilityTitle = "Sociopolitical instability reached its peak"
 
-        static let gameOverAudienceMessage = "The reality has reached zero audience."
-        static let gameOverEnvironmentMessage = "The earth is barren, and nature has collapsed. The damage is irreversible."
-        static let gameOverIllBeingMessage = "The people are overwhelmed by suffering and despair. Society can no longer endure."
-        static let gameOverInstabilityMessage = "Chaos and conflict have torn society apart. Order is lost, and survival is impossible."
+        static let gameOverAudienceMessage = "There’s no simple way of putting this, but… You’re fired. Just to get it straight, you were supposed to entertain us by wrecking humanity, not by helping them. We already tried helping them, but it’s never as entertaining, trust me. If you ever need us in the future… Well, just don’t."
+        static let gameOverEnvironmentMessage = "Chemtrails in the sky give sunrays a strange purple glow. The waters stink of green, the weather is either burning hot, or deadly cold, and fruits and crops never grow. Toc toc: any human alive? The answer is no."
+        static let gameOverIllBeingMessage = "Wounds are red, depression is blue. Paranoia, anxiety, dissociation, viruses and bacteria flew free on Earth in a cruel summer breeze that put humanoids to one last, eternal — yet no so peaceful — sleep."
+        static let gameOverInstabilityMessage = "There’s an ancient saying regarding humanoid World War IV being fought with sticks and stones. But here’s a new punch line for this final war: it will never be fought, because there’s not a single human left to fight it."
     }
 
     struct Haptics {
