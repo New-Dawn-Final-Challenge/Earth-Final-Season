@@ -34,6 +34,7 @@ struct CharacterView: View {
                                           uiImage: characterImage)
                         .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,
                                height: getHeight() * Constants.CharacterView.glitchViewHeightMultiplier)
+                        
                         .mask(
                             RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
                                 .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,
