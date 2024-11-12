@@ -13,6 +13,7 @@ struct Constants{
     
     struct Global{
         static let cornerRadius: CGFloat = 16
+        static let lineWidth: CGFloat = 1
     }
 
     struct AudienceIndicator {
@@ -164,11 +165,22 @@ struct Constants{
     }
 
     struct GameOverView {
+        static let vstackSpacing: CGFloat = 16
+        static let vstackComponentsSpacing: CGFloat = 12
         static let glitchTextIntensity: CGFloat = 2
-        static let hackerTextSpeed: Double = 0.001
-        static let hackerTextLineLimit: Int = 4
-        static let buttonAnimationDuration: Double = 4.5
-        static let buttonOpacityDelay: UInt64 = 45000  // nanoseconds for task sleep
+        static let starViewOpacity: CGFloat = 0.6
+        static let starViewRadius: CGFloat = 2
+        static let starViewX: CGFloat = -2
+        static let starViewY: CGFloat = 2
+        static let gameOverMonitorImageWidth: CGFloat = 0.7
+        static let gameOverMonitorImageHeight: CGFloat = 0.15
+        static let gameOverImageRadius: CGFloat = 40
+        static let gameOverImagePaddingHorizontal: CGFloat = 50
+        static let gameOverImagePaddingVertical: CGFloat = 12
+        static let titleShadowRadius: CGFloat = 0.3
+        static let descriptionPadding: CGFloat = 35
+        static let descriptionWidth: CGFloat = 0.8
+        static let descriptionHeight: CGFloat = 0.48
     }
 
     struct GameplayView {

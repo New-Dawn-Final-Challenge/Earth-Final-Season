@@ -61,10 +61,10 @@ struct SettingsModalView: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
+            RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+                .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
                 .background(
-                    RoundedRectangle(cornerRadius: 16)
+                    RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
                         .fill(.black)
                 )
         )
@@ -115,7 +115,7 @@ struct SettingsModalView: View {
     var gestureSelectionView: some View {
         Rectangle()
             .fill(Assets.Colors.bgFillPrimary.swiftUIColor)
-            .clipShape(.rect(cornerRadius: 16))
+            .clipShape(.rect(cornerRadius: Constants.Global.cornerRadius))
             .frame(width: 240, height: 80)
             .overlay {
                 VStack {
@@ -159,10 +159,10 @@ struct SettingsModalView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .clipShape(RoundedRectangle(cornerRadius: Constants.Global.cornerRadius))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
                 }
         }
         .padding(.horizontal, 30)
@@ -180,10 +180,10 @@ struct SettingsModalView: View {
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .clipShape(RoundedRectangle(cornerRadius: Constants.Global.cornerRadius))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
                 }
         }
         .padding(.horizontal, 30)

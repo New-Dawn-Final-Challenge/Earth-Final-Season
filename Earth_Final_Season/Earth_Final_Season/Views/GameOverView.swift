@@ -18,7 +18,7 @@ struct GameOverView: View {
         ZStack {
             popUpBackground
             
-            VStack(spacing: 12) {
+            VStack(spacing: Constants.GameOverView.vstackSpacing) {
                 Spacer()
                 
                 gameOverTitle
@@ -36,11 +36,11 @@ struct GameOverView: View {
     }
     
     private var popUpBackground: some View {
-        RoundedRectangle(cornerRadius: 16)
+        RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
             .stroke(Assets.Colors.accentPrimary.swiftUIColor,
-                    lineWidth: 1)
+                    lineWidth: Constants.Global.lineWidth)
             .background(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
                     .foregroundStyle(Color.black)
             )
     }
@@ -71,38 +71,40 @@ struct GameOverView: View {
     
     private var starView: some View {
         Image(systemName: "star.fill")
-            .shadow(color: Assets.Colors.accentPrimary.swiftUIColor.opacity(0.6),
-                    radius: 2, x: -2, y: 2)
+            .shadow(color: Assets.Colors.accentPrimary.swiftUIColor.opacity(Constants.GameOverView.starViewOpacity),
+                    radius: Constants.GameOverView.starViewRadius,
+                    x: Constants.GameOverView.starViewX,
+                    y: Constants.GameOverView.starViewY)
     }
     
     private func gameOverImage(image: Image) -> some View {
         ZStack {
             Assets.Images.eventsScreen.swiftUIImage
                 .resizable()
-                .frame(width: getWidth() * 0.7,
-                       height: getHeight() * 0.15)
+                .frame(width: getWidth() * Constants.GameOverView.gameOverMonitorImageWidth,
+                       height: getHeight() * Constants.GameOverView.gameOverMonitorImageHeight)
             
             image
                 .resizable()
-                .clipShape(RoundedRectangle(cornerRadius: 40))
-                .padding(.horizontal, 50)
-                .padding(.vertical, 12)
+                .clipShape(RoundedRectangle(cornerRadius: Constants.GameOverView.gameOverImageRadius))
+                .padding(.horizontal, Constants.GameOverView.gameOverImagePaddingHorizontal)
+                .padding(.vertical, Constants.GameOverView.gameOverImagePaddingVertical)
         }
     }
     
     private func gameOverDescription(title: String, description: String) -> some View {
-        VStack(spacing: 12) {
+        VStack(spacing: Constants.GameOverView.vstackComponentsSpacing) {
             Text(title)
-                .shadow(color: .black, radius: 0.3, x: 0, y: 0)
+                .shadow(color: .black, radius: Constants.GameOverView.titleShadowRadius)
             Text(description)
         }
         .fixedSize(horizontal: false, vertical: true)
         .font(.bodyFont)
         .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
         .multilineTextAlignment(.center)
-        .padding(35)
-        .frame(width: getWidth() * 0.8,
-               height: getHeight() * 0.42)
+        .padding(Constants.GameOverView.descriptionPadding)
+        .frame(width: getWidth() * Constants.GameOverView.descriptionWidth,
+               height: getHeight() * Constants.GameOverView.descriptionHeight)
         .background(
             Assets.Images.characterScreen.swiftUIImage
                 .resizable()
@@ -116,10 +118,10 @@ struct GameOverView: View {
                 .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
                 .frame(maxWidth: .infinity)
                 .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .clipShape(RoundedRectangle(cornerRadius: Constants.Global.cornerRadius))
                 .overlay {
-                    RoundedRectangle(cornerRadius: 16)
-                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 1)
+                    RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
                 }
         }
         .padding(.horizontal)
@@ -127,7 +129,7 @@ struct GameOverView: View {
     }
     
     private var gameOverButtons: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: Constants.GameOverView.vstackComponentsSpacing) {
             buttonView(label: "Play again") {
                 gameplayVM.resetGame()
                 isPresented.toggle()
@@ -141,60 +143,3 @@ struct GameOverView: View {
         }
     }
 }
-
-//struct GameOverView: View {
-//    @Environment(GameplayViewModel.self) private var gameplayVM
-//    @Binding var isPresented: Bool
-//    @State private var trigger = false
-//    @State private var opacity: Double = 0.0
-//    var text = ""
-//    
-//    var body: some View {
-//        VStack(alignment: .center) {
-//            VStack(alignment: .center) {
-//                
-//                Spacer()
-//                
-//                GlitchTextEffect(text: "Game Over", intensity: Constants.GameOverView.glitchTextIntensity)
-//                    .padding(.vertical)
-//                HackerTextView(
-//                    text: gameplayVM.getGameOverReason() ?? "",
-//                    trigger: trigger,
-//                    transition: .identity,
-//                    speed: Constants.GameOverView.hackerTextSpeed
-//                )
-//                .fontDesign(.monospaced)
-//                .lineLimit(Constants.GameOverView.hackerTextLineLimit)
-//                .multilineTextAlignment(.center)
-//                .font(.bodyFont)
-//                .padding()
-//                
-//                Spacer()
-//                
-//            }
-//            
-//            Button("Restart") {
-//                gameplayVM.resetGame()
-//                isPresented = false
-//            }
-//            .padding()
-//            .opacity(opacity)
-//            .font(.title1Font)
-//            .buttonStyle(.bordered)
-//            .tint(.pink)
-//            
-//            Spacer()
-//            
-//        }
-//        .task {
-//            try? await Task.sleep(nanoseconds: Constants.GameOverView.buttonOpacityDelay)
-//            trigger.toggle()
-//            withAnimation(.easeInOut(duration: Constants.GameOverView.buttonAnimationDuration)) {
-//                opacity = 1
-//            }
-//        }
-//        .navigationTitle("")
-//        .navigationBarBackButtonHidden(true)
-//    }
-//}
-//
