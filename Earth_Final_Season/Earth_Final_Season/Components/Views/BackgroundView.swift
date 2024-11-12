@@ -26,9 +26,7 @@ struct BackgroundView: View {
                 background: ""
             )
             
-            Color(red: Constants.BackgroundView.colorRed,
-                  green: Constants.BackgroundView.colorGreen,
-                  blue: Constants.BackgroundView.colorBlue)
+            Color(Assets.Colors.bgFillPrimary.swiftUIColor)
                 .edgesIgnoringSafeArea(.all)
             
             TimelineView(.animation) { context in
@@ -94,7 +92,8 @@ struct BackgroundView: View {
             
             Assets.Images.spaceShip.swiftUIImage
                 .resizable()
-                .scaledToFit()
+                .edgesIgnoringSafeArea(.all)
+                .scaledToFill()
                 .frame(width: getWidth(), height: getHeight())
         }
     }

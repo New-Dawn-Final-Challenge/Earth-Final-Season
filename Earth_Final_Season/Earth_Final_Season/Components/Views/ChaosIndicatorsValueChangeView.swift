@@ -27,10 +27,10 @@ struct ChaosIndicatorsValueChangeView: View {
                        height: getHeight() * Constants.ChaosIndicatorsValueChange.arrowHeightMultiplier)
             Text(String(gameplayVM.value[nIndicator]))
                 .font(.footnoteFont)
-                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                 .multilineTextAlignment(.center)
         }
-        .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ? Assets.Colors.secondaryPurple.swiftUIColor : Assets.Colors.secondaryBlue.swiftUIColor)
+        .foregroundStyle(gameplayVM.valueIsIncreasing[nIndicator] ? Assets.Colors.secondaryBlue.swiftUIColor : Assets.Colors.secondaryOrange.swiftUIColor)
         .opacity(gameplayVM.shouldShowIndicator[nIndicator] ? 1 : 0)
         .scaleEffect(gameplayVM.scaleChange[nIndicator], anchor: .bottom)
         .onChange(of: gameplayVM.getState()) {

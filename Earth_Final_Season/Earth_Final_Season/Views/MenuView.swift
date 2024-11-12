@@ -11,9 +11,8 @@ import Design_System
 struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
+    
     @State private var isGameCenterPresented = false
-    
-    
     @State private var dragOffset = CGSize.zero
     @State private var finalOffsetX: CGFloat = 0
     @State private var feedbackTrigger: CGPoint = .zero
@@ -24,41 +23,28 @@ struct MenuView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                BackgroundView()
-                    .position(x: getWidth()/2, y: getHeight()/Constants.MenuView.backgroundHeightDivider)
-                    .overlay(
-                        Color.black.opacity(0.5) // Adjust opacity for desired darkness
-                    )
-                
-                Assets.Images.globeView.swiftUIImage
-                    .position(x: getWidth()/2, y: getHeight()/Constants.MenuView.globeHeightDivider)
-                
-                VStack() {
-                    
-                    Spacer()
-                    
-                    gameTitleView
-                        .padding(.top, getHeight()/Constants.MenuView.gamePaddingTop)
-                        .padding(.bottom, getHeight()/Constants.MenuView.gamePaddingBottom)
-                  
-                    buttonView
-                    
-                    Spacer()
-                    
-                    sliderControlView
-                        .position(x: getWidth()/2, y: getHeight()/6)
+                ZStack {
+                    BackgroundView()
+                    // ControlPanelView(settingsVM: $settingsVM)
                 }
-                .font(.bodyFont)
+                .overlay(Color.black.opacity(0.6)).blur(radius: 1.5)
+                
+                VStack {
+                    Spacer()
+                    
+                    Assets.Images.titleView.swiftUIImage
+                    Assets.Images.globeView.swiftUIImage
+                    buttonsView
+                    
+                    Spacer()
+                }
             }
+            .font(.bodyFont)
         }
         .navigationBarBackButtonHidden(true)
     }
     
-    private var gameTitleView: some View {
-        Assets.Images.titleView.swiftUIImage
-    }
-    
-    private var buttonView: some View {
+    private var buttonsView: some View {
         VStack(spacing: Constants.MenuView.verticalSpacing){
             MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
                            label: "Play")
@@ -72,9 +58,9 @@ struct MenuView: View {
                     .background(Assets.Colors.bgFillPrimary.swiftUIColor)
                     .foregroundColor(Color.white)
                     .cornerRadius(Constants.MenuView.buttonCornerRadius)
-                    .overlay( // Contorno colorido ao redor do botão
+                    .overlay(
                         RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                            .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2) // Ajuste a cor e a espessura do contorno
+                            .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2)
                     )
             }
             .sheet(isPresented: $isGameCenterPresented) {
@@ -86,39 +72,6 @@ struct MenuView: View {
             
             MenuButtonView(destination: AboutUsView(), label: "About Us")
         }
-    }
-    
-    private var sliderControlView: some View {
-        VStack{
-            Assets.Images.monitorsAll.swiftUIImage
-                .resizable()
-                .scaledToFit()
-                .blur(radius: 1, opaque: true)
-                .overlay(
-                    Color.black.opacity(0.5) // Adjust opacity for desired darkness
-                )
-        }
+        .padding(.top, -45)
     }
 }
-
-struct MenuButtonView<Destination: View>: View {
-    var destination: Destination
-    var label: String
-    
-    var body: some View {
-        NavigationLink(destination: destination) {
-            Text(label)
-                .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
-                       height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
-                .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                .foregroundColor(Color.white)
-                .cornerRadius(Constants.MenuView.buttonCornerRadius)
-                .overlay( // Contorno colorido ao redor do botão
-                   RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                    .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2) // Ajuste a cor e a espessura do contorno
-               )
-        }
-    }
-}
-
-

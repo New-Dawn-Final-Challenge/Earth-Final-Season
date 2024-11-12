@@ -66,7 +66,6 @@ struct SettingsModalView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(.black)
-                                .opacity(0.5)
                         )
                 )
                 .padding()
