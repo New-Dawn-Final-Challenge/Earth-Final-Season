@@ -46,11 +46,7 @@ struct GameOverView: View {
     }
     
     private var gameOverTitle: some View {
-        Text("Game Over")
-            .font(.largeTitleFont)
-            .foregroundStyle(Assets.Colors.alert.swiftUIColor)
-            .shadow(color: Assets.Colors.alert.swiftUIColor,
-                    radius: 3, x: -3, y: 3)
+        GlitchTextEffect(text: "Game Over", intensity: Constants.GameOverView.glitchTextIntensity)
     }
     
     private var yearReachedText: some View {
