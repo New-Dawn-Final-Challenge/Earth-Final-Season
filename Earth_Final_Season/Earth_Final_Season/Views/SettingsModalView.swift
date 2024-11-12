@@ -99,7 +99,7 @@ struct SettingsModalView: View {
     }
     
     var hapticsView: some View {
-        Assets.Images.hapticScreen.swiftUIImage
+        Assets.Images.hapticsScreen.swiftUIImage
             .resizable()
             .aspectRatio(contentMode: .fit)
             .overlay {
