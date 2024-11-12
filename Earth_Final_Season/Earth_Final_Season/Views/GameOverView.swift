@@ -22,7 +22,7 @@ struct GameOverView: View {
                 
                 gameOverTitle
                 yearReachedText
-                gameOverImage
+                gameOverImage(image: gameplayVM.getGameOverImage() ?? Assets.Images.placeholderCharacter.swiftUIImage)
                 gameOverDescription(title: gameplayVM.getGameOverTitle() ?? "",
                                     description: gameplayVM.getGameOverReason() ?? "")
                 gameOverButtons
@@ -78,17 +78,17 @@ struct GameOverView: View {
                     radius: 2, x: -2, y: 2)
     }
     
-    private var gameOverImage: some View {
+    private func gameOverImage(image: Image) -> some View {
         ZStack {
             Assets.Images.eventsScreen.swiftUIImage
                 .resizable()
-                .frame(width: getWidth() * 0.8,
-                       height: getHeight() * 0.14)
+                .frame(width: getWidth() * 0.7,
+                       height: getHeight() * 0.15)
             
-            Assets.Images.audienceEnd.swiftUIImage
+            image
                 .resizable()
                 .clipShape(RoundedRectangle(cornerRadius: 40))
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 50)
                 .padding(.vertical, 12)
         }
     }

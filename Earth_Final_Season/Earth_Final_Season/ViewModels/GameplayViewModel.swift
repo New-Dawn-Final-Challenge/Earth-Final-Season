@@ -75,6 +75,10 @@ class GameplayViewModel: GameEngineDelegate {
         return engine?.gameOverReason
     }
     
+    func getGameOverImage() -> Image? {
+        return engine?.gameOverImage
+    }
+    
     func getLastChosenOption() -> String? {
         return engine?.lastChosenOption
     }
