@@ -13,6 +13,7 @@ class LeaderboardViewModel: ObservableObject {
     let leaderboardIdentifier = "com.EarthFinalSeason.Leaderboard"
     var isGameCenterPresented = false
     var playersList: [Player] = []
+    var highestScore: Int = 0
     
     // Game Center Authentication
     func authenticateUser() {
@@ -55,23 +56,43 @@ class LeaderboardViewModel: ObservableObject {
         }
     }
     
-    // Get Local Player's Highest Score
     func getLocalPlayerHighestScore() async {
         do {
+            // Load the leaderboard entries
             let leaderboards = try await GKLeaderboard.loadLeaderboards(IDs: [leaderboardIdentifier])
+            
+            // Find the leaderboard for the current game
             if let leaderboard = leaderboards.first(where: { $0.baseLeaderboardID == leaderboardIdentifier }) {
-                // Load the global leaderboard entries with a time scope (allTime)
-                let entries = try await leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...100)) // Load a wide range
+                // Load the global leaderboard entries with a wide range
+                let entries = try await leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...100))
                 
                 // Find the entry for the local player
                 if let localPlayerEntry = entries.1.first(where: { $0.player == GKLocalPlayer.local }) {
-                    print("Local player's highest score: \(localPlayerEntry.formattedScore)")
+                    // Strip non-numeric characters and convert to an integer
+                    if let numericScore = extractNumericScore(from: localPlayerEntry.formattedScore) {
+                        highestScore = numericScore
+                        print("Local player's highest score: \(highestScore)")
+                    } else {
+                        print("Failed to extract numeric score from formatted score.")
+                    }
                 } else {
                     print("No score available for the local player.")
                 }
+            } else {
+                print("No leaderboard found with the given identifier.")
             }
         } catch {
             print("Error retrieving local player's highest score: \(error.localizedDescription)")
         }
     }
+
+    // Function to extract the numeric part of the formatted score
+    func extractNumericScore(from formattedScore: String) -> Int? {
+        // Use a regular expression to match numeric characters
+        let numericScore = formattedScore.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        
+        // Return the numeric score as an integer
+        return Int(numericScore)
+    }
+
 }

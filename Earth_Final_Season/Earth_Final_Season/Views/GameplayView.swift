@@ -30,20 +30,24 @@ struct GameplayView: View {
             .presentationBackground(.clear)
         }
         .navigationBarBackButtonHidden()
+        .onAppear {
+            Task {
+                await leaderboardVM.getLocalPlayerHighestScore()
+            }
+        }
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
         .onChange(of: gameplayVM.getState()) {
             if gameplayVM.getState() == .gameOver {
                 Task {
                     showGameOver = true
                     await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
-                    await leaderboardVM.getLocalPlayerHighestScore()
                 }
             }
         }
         .fullScreenCover(isPresented: $showGameOver) {
             ZStack {
                 Color.black.opacity(0.6).ignoresSafeArea(.all)
-                GameOverView(isPresented: $showGameOver, doStuff: {
+                GameOverView(isPresented: $showGameOver, leaderboardVM: $leaderboardVM, doStuff: {
                     dismiss()
                 })
             }

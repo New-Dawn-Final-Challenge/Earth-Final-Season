@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Design_System
+import GameKit
 
 struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
@@ -42,6 +43,11 @@ struct MenuView: View {
             .font(.bodyFont)
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !GKLocalPlayer.local.isAuthenticated {
+                leaderboardVM.authenticateUser()
+            }
+        }
     }
     
     private var buttonsView: some View {

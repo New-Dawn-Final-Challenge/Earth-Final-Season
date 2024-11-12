@@ -11,6 +11,7 @@ import Design_System
 struct GameOverView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
     @Binding var isPresented: Bool
+    @Binding var leaderboardVM: LeaderboardViewModel
     var doStuff: ()-> Void
     
     var body: some View {
@@ -54,22 +55,22 @@ struct GameOverView: View {
     
     private var yearReachedText: some View {
         VStack {
-            HStack(alignment: .bottom) {
-                starView
-                Text("New Record!")
-                starView
+            if (gameplayVM.getIndicators()?.currentYear ?? 0) <= leaderboardVM.highestScore {
+                // Player did not beat the previous highest score
+                Text("You ran the show for \(gameplayVM.getIndicators()?.currentYear ?? 0) years")
+            } else {
+                // Player reached a new record
+                HStack(alignment: .bottom) {
+                    starView
+                    Text("New Record!")
+                    starView
+                }
+                Text("\(gameplayVM.getIndicators()?.currentYear ?? 0) years")
             }
-            
-            Text("12 years")
         }
         .font(.title3Font)
         .foregroundStyle(Assets.Colors.accentPrimary.swiftUIColor)
         .multilineTextAlignment(.center)
-        
-//        Text("You ran the show for 12 years")
-//            .font(.title3Font)
-//            .foregroundStyle(Assets.Colors.accentPrimary.swiftUIColor)
-//            .multilineTextAlignment(.center)
     }
     
     private var starView: some View {
@@ -105,7 +106,7 @@ struct GameOverView: View {
         .multilineTextAlignment(.center)
         .padding(35)
         .frame(width: getWidth() * 0.8,
-               height: getHeight() * 0.4)
+               height: getHeight() * 0.42)
         .background(
             Assets.Images.characterScreen.swiftUIImage
                 .resizable()
