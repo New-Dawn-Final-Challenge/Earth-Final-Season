@@ -45,23 +45,34 @@ class GameEngine {
     func checkForGameOver() {
         if state == .consequence {
             if indicators.audience <= Constants.GameEngine.minAudienceThreshold {
-                gameOverTitle = Constants.GameEngine.gameOverAudienceTitle
-                gameOverReason = Constants.GameEngine.gameOverAudienceMessage
+                if gameOverReason.isEmpty {
+                    gameOverTitle = Constants.GameEngine.gameOverAudienceTitle
+                    gameOverReason = Constants.GameEngine.gameOverAudienceMessage
+                }
                 applyGameOver()
             }
+            
             if indicators.environmentalDegradation >= Constants.GameEngine.maxIndicatorThreshold {
-                gameOverTitle = Constants.GameEngine.gameOverEnvironmentTitle
-                gameOverReason += Constants.GameEngine.gameOverEnvironmentMessage
+                if gameOverReason.isEmpty {
+                    gameOverTitle = Constants.GameEngine.gameOverEnvironmentTitle
+                    gameOverReason += Constants.GameEngine.gameOverEnvironmentMessage
+                }
                 applyGameOver()
             }
+            
             if indicators.illBeing >= Constants.GameEngine.maxIndicatorThreshold {
-                gameOverTitle = Constants.GameEngine.gameOverIllBeingTitle
-                gameOverReason += Constants.GameEngine.gameOverIllBeingMessage
+                if gameOverReason.isEmpty {
+                    gameOverTitle = Constants.GameEngine.gameOverIllBeingTitle
+                    gameOverReason += Constants.GameEngine.gameOverIllBeingMessage
+                }
                 applyGameOver()
             }
+            
             if indicators.socioPoliticalInstability >= Constants.GameEngine.maxIndicatorThreshold {
-                gameOverTitle = Constants.GameEngine.gameOverInstabilityTitle
-                gameOverReason += Constants.GameEngine.gameOverInstabilityMessage
+                if gameOverReason.isEmpty {
+                    gameOverTitle = Constants.GameEngine.gameOverInstabilityTitle
+                    gameOverReason += Constants.GameEngine.gameOverInstabilityMessage
+                }
                 applyGameOver()
             }
         }

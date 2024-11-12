@@ -42,7 +42,9 @@ struct GameplayView: View {
         .fullScreenCover(isPresented: $showGameOver) {
             ZStack {
                 Color.black.opacity(0.6).ignoresSafeArea(.all)
-                GameOverView(isPresented: $showGameOver)
+                GameOverView(isPresented: $showGameOver, doStuff: {
+                    dismiss()
+                })
             }
             .presentationBackground(.clear)
         }

@@ -11,6 +11,7 @@ import Design_System
 struct GameOverView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
     @Binding var isPresented: Bool
+    var doStuff: ()-> Void
     
     var body: some View {
         ZStack {
@@ -131,10 +132,14 @@ struct GameOverView: View {
     private var gameOverButtons: some View {
         VStack(spacing: 12) {
             buttonView(label: "Play again") {
-                // action
+                gameplayVM.resetGame()
+                isPresented.toggle()
             }
+            
             buttonView(label: "Menu") {
-                // action
+                gameplayVM.resetGame()
+                isPresented.toggle()
+                doStuff()
             }
         }
     }
