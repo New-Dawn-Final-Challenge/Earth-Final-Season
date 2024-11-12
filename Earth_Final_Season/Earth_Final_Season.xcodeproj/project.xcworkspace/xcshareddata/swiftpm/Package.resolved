@@ -7,7 +7,11 @@
       "location" : "https://github.com/New-Dawn-Final-Challenge/Design-System.git",
       "state" : {
         "branch" : "main",
+<<<<<<< HEAD
         "revision" : "e0090e05972bbf6ce3547d65d2af2c69e196a6a1"
+=======
+        "revision" : "e8a4c3c378f34897a47c44d6d6695b46c2e6a527"
+>>>>>>> develop
       }
     }
   ],

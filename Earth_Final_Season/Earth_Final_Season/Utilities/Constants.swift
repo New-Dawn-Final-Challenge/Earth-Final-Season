@@ -168,6 +168,10 @@ struct Constants{
         static let buttonHeightMultiplier: CGFloat = 0.06
         static let buttonCornerRadius: CGFloat = 10
         static let verticalSpacing: CGFloat = 20
+        static let backgroundHeightDivider: CGFloat = 2.7
+        static let globeHeightDivider: CGFloat = 2.9
+        static let gamePaddingTop: CGFloat = 18
+        static let gamePaddingBottom: CGFloat = 7
     }
 
     struct SettingsView {
