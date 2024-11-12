@@ -9,51 +9,118 @@ import SwiftUI
 import Design_System
 
 struct CharacterView: View {
-    let characterImage: String
-    let characterName: String
+    @State var characterImage: Image = Image("image1")
+    private var characterName: String
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     let screenHeight: CGFloat = UIScreen.main.bounds.height
     @State private var triggerChangeChannel: Bool = false
-
-    init(characterImage: String, characterName: String) {
-        self.characterImage = characterImage
-        self.characterName = characterName
+    
+    
+    init(character: String) {
+        self.characterName = character
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            // Image rectangle
+        VStack {
             Assets.Images.characterScreen.swiftUIImage
                 .resizable()
                 .frame(width: getWidth() * Constants.CharacterView.imageFrameWidthMultiplier,
                        height: getHeight() * Constants.CharacterView.imageFrameHeightMultiplier)
+                
                 .overlay(
-                    // Change the distance between image and text
+                    
                     VStack (spacing: 7) {
-                        GlitchContentView(trigger: $triggerChangeChannel)
-                            .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,
-                                   height: getHeight() * Constants.CharacterView.glitchViewHeightMultiplier)
-                            .cornerRadius(Constants.Global.cornerRadius)
+                        GlitchContentView(trigger: $triggerChangeChannel,
+                                          uiImage: characterImage)
+                        .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,
+                               height: getHeight() * Constants.CharacterView.glitchViewHeightMultiplier)
+                        .mask(
+                            RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+                                .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,
+                                       height: getHeight() * Constants.CharacterView.glitchViewHeightMultiplier)
+                                .clipShape(
+                                    .rect(
+                                        topLeadingRadius:  getWidth() * Constants.CharacterView.characterViewCornerRadiusMultiplier,
+                                        bottomLeadingRadius: getWidth() * Constants.CharacterView.characterViewCornerRadiusMultiplier / 2,
+                                        bottomTrailingRadius: getWidth() * Constants.CharacterView.characterViewCornerRadiusMultiplier / 2 ,
+                                        topTrailingRadius: getWidth() * Constants.CharacterView.characterViewCornerRadiusMultiplier
+                                    )
+                                )
+
+                        )
                         
                         GlitchCharacterView(trigger: $triggerChangeChannel, characterName: characterName)
                             .lineLimit(nil)
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity, minHeight: 20)
                     }
-                    
-                    .onChange(of: characterName) {
-                        triggerChangeChannel.toggle()
-                    }
-                    // Here, the image won't move if the text changes from two-lines to one-line or vice versa
-                    .padding(.vertical, Constants.CharacterView.verticalPadding)
-                    .padding(.horizontal)
-                    .offset(y: -10)
+                        .onChange(of: characterName) {
+                            triggerChangeChannel.toggle()
+                            getImageByName()
+                        }
+                        .padding(.vertical, Constants.CharacterView.verticalPadding)
+                        .padding(.horizontal)
+                        .offset(y: -10)
                 )
+                
+        }
+        .onAppear {
+            triggerChangeChannel.toggle()
+            getImageByName()
+        }
+        
+    }
+    
+    func getImageByName() {
+        switch characterName {
+        case "Ultra New Age environmentalist":
+            characterImage =  Assets.Images.ultraNewAgeEnvironmentalist.swiftUIImage
+        case "Fearless Economist":
+            characterImage =  Assets.Images.fearlessEconomist.swiftUIImage
+            
+        case "Apocalyptical cat":
+            characterImage =  Assets.Images.apocalypticalCat.swiftUIImage
+            
+        case "Chronically online teenager":
+            characterImage =  Assets.Images.chronicallyOnlineTeenager.swiftUIImage
+            
+        case "Conspiracy theorist":
+            characterImage =  Assets.Images.conspiracyTheoristPodcaster.swiftUIImage
+            
+        case "Chaotic billionaire":
+            characterImage =  Assets.Images.chaocticBillionaire.swiftUIImage
+            
+        case "Evil researcher":
+            characterImage =  Assets.Images.evilResearcher.swiftUIImage
+            
+        case "Experimentalist geneticist":
+            characterImage =  Assets.Images.experimentalistGeneticist.swiftUIImage
+            
+        case "Indie physician":
+            characterImage =  Assets.Images.indiePhysician.swiftUIImage
+            
+        case "President in denial":
+            characterImage =  Assets.Images.presidentInDenial.swiftUIImage
+            
+        case "Questionable religious leader":
+            characterImage =  Assets.Images.questionableReligiousLeader.swiftUIImage
+            
+        case "Robot vacuum cleaner":
+            characterImage =  Assets.Images.robotVacumCleaner.swiftUIImage
+            
+        case "Sensionalist TV host":
+            characterImage =  Assets.Images.sensionalistTVHost.swiftUIImage
+            
+        case "Slow logistic engineer":
+            characterImage =  Assets.Images.slowLogisticEngineer.swiftUIImage
+            
+        default:
+            characterImage =  Image("image1")
         }
     }
 }
 
 #Preview {
-    CharacterView(characterImage: "Placeholder", characterName: "Líder conspiracionista")
+    CharacterView(character: "Sensionalist TV host")
 }
 
