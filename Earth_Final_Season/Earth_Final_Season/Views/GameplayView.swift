@@ -36,6 +36,7 @@ struct GameplayView: View {
                 Task {
                     showGameOver = true
                     await leaderboardVM.submitScore(scoreToSubmit: gameplayVM.getIndicators()?.currentYear ?? 0)
+                    await leaderboardVM.getLocalPlayerHighestScore()
                 }
             }
         }

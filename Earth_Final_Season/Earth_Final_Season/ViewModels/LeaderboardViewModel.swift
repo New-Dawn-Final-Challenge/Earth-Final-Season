@@ -54,4 +54,24 @@ class LeaderboardViewModel: ObservableObject {
             print("Error submitting score: \(error.localizedDescription)")
         }
     }
+    
+    // Get Local Player's Highest Score
+    func getLocalPlayerHighestScore() async {
+        do {
+            let leaderboards = try await GKLeaderboard.loadLeaderboards(IDs: [leaderboardIdentifier])
+            if let leaderboard = leaderboards.first(where: { $0.baseLeaderboardID == leaderboardIdentifier }) {
+                // Load the global leaderboard entries with a time scope (allTime)
+                let entries = try await leaderboard.loadEntries(for: .global, timeScope: .allTime, range: NSRange(1...100)) // Load a wide range
+                
+                // Find the entry for the local player
+                if let localPlayerEntry = entries.1.first(where: { $0.player == GKLocalPlayer.local }) {
+                    print("Local player's highest score: \(localPlayerEntry.formattedScore)")
+                } else {
+                    print("No score available for the local player.")
+                }
+            }
+        } catch {
+            print("Error retrieving local player's highest score: \(error.localizedDescription)")
+        }
+    }
 }

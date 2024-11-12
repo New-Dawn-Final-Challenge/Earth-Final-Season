@@ -140,8 +140,8 @@ struct Constants{
         static let initialEnvironmentalDegradation = 6
         static let initialYear = 0
 
-        static let minAudienceThreshold: Double = 3
-        static let maxIndicatorThreshold = 12
+        static let minAudienceThreshold: Double = 5
+        static let maxIndicatorThreshold = 7
         static let eventsPerYear = 2
         
         static let gameOverAudienceTitle = "Audience reached its minimum"
