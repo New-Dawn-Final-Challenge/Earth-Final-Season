@@ -189,7 +189,7 @@ struct Constants{
         static let descriptionTextPadding: CGFloat = 30
         static let gameImageWidth: CGFloat = 0.25
         static let gameImageHeight: CGFloat = 0.12
-        static let gameImagePadding: CGFloat = 6
+        static let gameImagePadding: CGFloat = -8
         static let membersGridPadding: CGFloat = -12
     }
 

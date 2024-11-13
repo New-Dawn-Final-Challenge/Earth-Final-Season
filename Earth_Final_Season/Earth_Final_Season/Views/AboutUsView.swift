@@ -10,8 +10,9 @@ import Design_System
 
 struct AboutUsView: View {
     @Binding var vm: AboutUsViewModel
-    var doStuff: ()-> Void
-    
+    @State private var triggerGlitch = false
+    var doStuff: () -> Void
+
     init(vm: Binding<AboutUsViewModel>, text: String, doStuff: @escaping () -> Void) {
         print("Inicializando a VM")
         print(text)
@@ -35,6 +36,10 @@ struct AboutUsView: View {
             .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             .font(.bodyFont)
             .padding()
+            .onAppear {
+                triggerGlitch = true
+                SoundtrackAudioManager.shared.playSoundEffect(named: "changeCharacter", fileExtension: "wav", volume: 0.15)
+            }
         }
         .padding()
     }
@@ -54,7 +59,7 @@ struct AboutUsView: View {
     }
     
     private var descriptionText: some View {
-        Text("This game was developed at the Apple Developer Academy")
+        HackerTextView(text: "This game was developed at the Apple Developer Academy", speed: 0.05)
             .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             .font(.bodyFont)
             .multilineTextAlignment(.center)
@@ -67,17 +72,17 @@ struct AboutUsView: View {
             .frame(width: getWidth() * Constants.AboutUsView.gameImageWidth,
                    height: getHeight() * Constants.AboutUsView.gameImageHeight)
             .overlay(
-                image
-                    .resizable()
+                GlitchContentView(trigger: $triggerGlitch, uiImage: image)
                     .padding(Constants.AboutUsView.gameImagePadding)
             )
     }
+
     
     private func memberMonitor(for member: TeamMember) -> some View {
         VStack {
             memberImage(image: member.image)
-            Text(member.name)
-            Text(member.role)
+            HackerTextView(text: member.name, speed: 0.05)
+            HackerTextView(text: member.role, speed: 0.05)
         }
         .font(.footnoteFont)
     }
