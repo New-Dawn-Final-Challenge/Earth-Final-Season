@@ -23,10 +23,10 @@ struct AboutUsView: View {
         ZStack {
             popUpBackground
             
-            VStack(spacing: 24) {
+            VStack(spacing: Constants.AboutUsView.vstackSpacing) {
                 titleText
                 descriptionText
-                membersGrid(spacing: 40)
+                membersGrid(spacing: Constants.AboutUsView.membersGridSpacing)
                 buttonView(label: "Menu") {
                     vm.isPresentedInMenu.toggle()
                     doStuff()
@@ -58,18 +58,18 @@ struct AboutUsView: View {
             .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             .font(.bodyFont)
             .multilineTextAlignment(.center)
-            .padding(.horizontal, 30)
+            .padding(.horizontal, Constants.AboutUsView.descriptionTextPadding)
     }
     
     private func memberImage(image: Image) -> some View {
         Assets.Images.characterScreen.swiftUIImage
             .resizable()
-            .frame(width: getWidth() * 0.25,
-                   height: getHeight() * 0.12)
+            .frame(width: getWidth() * Constants.AboutUsView.gameImageWidth,
+                   height: getHeight() * Constants.AboutUsView.gameImageHeight)
             .overlay(
                 image
                     .resizable()
-                    .padding(6)
+                    .padding(Constants.AboutUsView.gameImagePadding)
             )
     }
     
@@ -94,7 +94,7 @@ struct AboutUsView: View {
             }
             HStack(spacing: spacing) {
                 memberMonitor(for: .lariO)
-                    .padding(.horizontal, -12)
+                    .padding(.horizontal, Constants.AboutUsView.membersGridPadding)
                 memberMonitor(for: .luan)
             }
         }
