@@ -22,7 +22,7 @@ struct MenuButtonView<Destination: View>: View {
                 .cornerRadius(Constants.MenuView.buttonCornerRadius)
                 .overlay(
                    RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                    .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2)
+                    .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
                )
         }
     }

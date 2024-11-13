@@ -4,8 +4,10 @@
 //
 //  Created by Larissa Okabayashi on 11/10/24.
 //
+
 import Foundation
 import SwiftUI
+import Design_System
 
 @Observable
 class GameEngine {
@@ -13,7 +15,9 @@ class GameEngine {
     
     var countdown = 6
     var timer: Timer?
+    var gameOverTitle = ""
     var gameOverReason = ""
+    var gameOverImage: Image?
     var lastChosenOption = "choice1"
     var events = [Event]()
     var currentEvent: Event?
@@ -44,19 +48,38 @@ class GameEngine {
     func checkForGameOver() {
         if state == .consequence {
             if indicators.audience <= Constants.GameEngine.minAudienceThreshold {
-                gameOverReason = Constants.GameEngine.gameOverAudienceMessage
+                if gameOverReason.isEmpty {
+                    gameOverTitle = Constants.GameEngine.gameOverAudienceTitle
+                    gameOverReason = Constants.GameEngine.gameOverAudienceMessage
+                    gameOverImage = Assets.Images.audienceEnd.swiftUIImage
+                }
                 applyGameOver()
             }
+            
             if indicators.environmentalDegradation >= Constants.GameEngine.maxIndicatorThreshold {
-                gameOverReason += Constants.GameEngine.gameOverEnvironmentMessage
+                if gameOverReason.isEmpty {
+                    gameOverTitle = Constants.GameEngine.gameOverEnvironmentTitle
+                    gameOverReason = Constants.GameEngine.gameOverEnvironmentMessage
+                    gameOverImage = Assets.Images.environmentalEnd.swiftUIImage
+                }
                 applyGameOver()
             }
+            
             if indicators.illBeing >= Constants.GameEngine.maxIndicatorThreshold {
-                gameOverReason += Constants.GameEngine.gameOverIllBeingMessage
+                if gameOverReason.isEmpty {
+                    gameOverTitle = Constants.GameEngine.gameOverIllBeingTitle
+                    gameOverReason = Constants.GameEngine.gameOverIllBeingMessage
+                    gameOverImage = Assets.Images.illBeingEnd.swiftUIImage
+                }
                 applyGameOver()
             }
+            
             if indicators.socioPoliticalInstability >= Constants.GameEngine.maxIndicatorThreshold {
-                gameOverReason += Constants.GameEngine.gameOverInstabilityMessage
+                if gameOverReason.isEmpty {
+                    gameOverTitle = Constants.GameEngine.gameOverInstabilityTitle
+                    gameOverReason = Constants.GameEngine.gameOverInstabilityMessage
+                    gameOverImage = Assets.Images.socioPoliticalEnd.swiftUIImage
+                }
                 applyGameOver()
             }
         }

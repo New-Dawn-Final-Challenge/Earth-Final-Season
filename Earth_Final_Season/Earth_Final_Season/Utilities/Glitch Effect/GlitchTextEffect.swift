@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Design_System
 
 struct GlitchTextEffect: View {
     var text: String?
@@ -19,8 +20,8 @@ struct GlitchTextEffect: View {
         VStack {
             ZStack {
                 glitchTextView(text ?? "", trigger: trigger, intensity: intensity)
-                    .font(.hugeTitleFont)
-                    .bold()
+                    .font(.largeTitleFont)
+                    .foregroundStyle(Assets.Colors.alert.swiftUIColor)
             }
         }
         .onAppear {
