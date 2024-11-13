@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Design_System
+import GameKit
 
 struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
@@ -42,6 +43,11 @@ struct MenuView: View {
             .font(.bodyFont)
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if !GKLocalPlayer.local.isAuthenticated {
+                leaderboardVM.authenticateUser()
+            }
+        }
     }
     
     private var buttonsView: some View {
@@ -60,7 +66,7 @@ struct MenuView: View {
                     .cornerRadius(Constants.MenuView.buttonCornerRadius)
                     .overlay(
                         RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                            .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2)
+                            .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
                     )
             }
             .sheet(isPresented: $isGameCenterPresented) {
