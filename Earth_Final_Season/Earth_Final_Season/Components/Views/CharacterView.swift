@@ -29,7 +29,7 @@ struct CharacterView: View {
                 
                 .overlay(
                     
-                    VStack (spacing: 7) {
+                    VStack (spacing: 9) {
                         GlitchContentView(trigger: $triggerChangeChannel,
                                           uiImage: characterImage)
                         .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,
@@ -48,6 +48,7 @@ struct CharacterView: View {
                                 )
 
                         )
+                        .padding(.top, 8)
                         
                         GlitchCharacterView(trigger: $triggerChangeChannel, characterName: characterName)
                             .lineLimit(nil)
@@ -57,6 +58,7 @@ struct CharacterView: View {
                         .onChange(of: characterName) {
                             triggerChangeChannel.toggle()
                             getImageByName()
+                            SoundtrackAudioManager.shared.playSoundEffect(named: "changeCharacter", fileExtension: "wav", volume: 0.15)
                         }
                         .padding(.vertical, Constants.CharacterView.verticalPadding)
                         .padding(.horizontal)
@@ -72,46 +74,46 @@ struct CharacterView: View {
     }
     
     func getImageByName() {
-        switch characterName {
-        case "Ultra New Age environmentalist":
+        switch characterName.lowercased() {
+        case "ultra new age environmentalist":
             characterImage =  Assets.Images.ultraNewAgeEnvironmentalist.swiftUIImage
-        case "Fearless Economist":
+        case "fearless economist":
             characterImage =  Assets.Images.fearlessEconomist.swiftUIImage
             
-        case "Apocalyptical cat":
+        case "apocalyptical cat":
             characterImage =  Assets.Images.apocalypticalCat.swiftUIImage
             
-        case "Chronically online teenager":
+        case "chronically online teenager":
             characterImage =  Assets.Images.chronicallyOnlineTeenager.swiftUIImage
             
-        case "Conspiracy theorist":
+        case "conspiracy theorist":
             characterImage =  Assets.Images.conspiracyTheoristPodcaster.swiftUIImage
             
-        case "Chaotic billionaire":
+        case "chaotic billionaire":
             characterImage =  Assets.Images.chaocticBillionaire.swiftUIImage
             
-        case "Evil researcher":
+        case "evil researcher":
             characterImage =  Assets.Images.evilResearcher.swiftUIImage
             
-        case "Experimentalist geneticist":
+        case "experimentalist geneticist":
             characterImage =  Assets.Images.experimentalistGeneticist.swiftUIImage
             
-        case "Indie physician":
+        case "indie physician":
             characterImage =  Assets.Images.indiePhysician.swiftUIImage
             
-        case "President in denial":
+        case "president in denial":
             characterImage =  Assets.Images.presidentInDenial.swiftUIImage
             
-        case "Questionable religious leader":
+        case "questionable religious leader":
             characterImage =  Assets.Images.questionableReligiousLeader.swiftUIImage
             
-        case "Robot vacuum cleaner":
+        case "robot vacuum cleaner":
             characterImage =  Assets.Images.robotVacumCleaner.swiftUIImage
             
-        case "Sensionalist TV host":
+        case "sensationalist tv host":
             characterImage =  Assets.Images.sensionalistTVHost.swiftUIImage
             
-        case "Slow logistic engineer":
+        case "slow logistics engineer":
             characterImage =  Assets.Images.slowLogisticEngineer.swiftUIImage
             
         default:
@@ -121,6 +123,6 @@ struct CharacterView: View {
 }
 
 #Preview {
-    CharacterView(character: "Sensionalist TV host")
+    CharacterView(character: "Slow Logistics Engineer")
 }
 
