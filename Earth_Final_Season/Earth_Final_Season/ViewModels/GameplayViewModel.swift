@@ -85,6 +85,7 @@ class GameplayViewModel: GameEngineDelegate {
     
     func chooseOption(option: Int) {
         engine?.chooseOption(option: option)
+        SoundtrackAudioManager.shared.playSoundEffect(named: "choice")
     }
     
     func resetGame() {

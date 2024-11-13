@@ -72,9 +72,34 @@ struct MenuView: View {
             .sheet(isPresented: $isGameCenterPresented) {
                 LeaderboardView()
             }
+            .fullScreenCover(isPresented: $settingsVM.isPresentedinMenu) {
+                ZStack {
+                    Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                    SettingsModalView(vm: $settingsVM, text: "Menu Settings", doStuff: {
+                        // do nothing
+                        // ta sobre escrevendo a outra closure
+                        print("Do menu")
+                    })
+                    .frame(width: 400, height: 800)
+                }
+                .presentationBackground(.clear)
+            }
             
-            MenuButtonView(destination: SettingsView(settingsVM: $settingsVM),
-                           label: "Settings")
+            Button {
+                settingsVM.isPresentedinMenu.toggle()
+            } label: {
+                Text("Settings")
+                    .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                           height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
+                    .background(Assets.Colors.bgFillPrimary.swiftUIColor)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(Constants.MenuView.buttonCornerRadius)
+                    .overlay(
+                       RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
+                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2)
+                   )
+            }
+            
             
             MenuButtonView(destination: AboutUsView(), label: "About Us")
         }

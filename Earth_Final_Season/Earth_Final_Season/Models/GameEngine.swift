@@ -88,8 +88,7 @@ class GameEngine {
     func applyGameOver() {
         self.state = .gameOver
         self.delegate?.gameStateChanged(to: .gameOver)
-        SoundtrackAudioManager.shared.stopSoundtrack()
-        SoundtrackAudioManager.shared.playSoundEffect(named: "game-over")
+        SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameover", duration: 0.5)
     }
 
     func goToNextEvent() {
@@ -146,6 +145,8 @@ class GameEngine {
                                     socioPoliticalInstability: Constants.GameEngine.initialSocioPoliticalInstability,
                                     environmentalDegradation: Constants.GameEngine.initialEnvironmentalDegradation,
                                     currentYear: Constants.GameEngine.initialYear)
+            let isReseting = state == .gameOver
+            
             state = .choosing
             let shuffledEvents = events.shuffled()
             self.eventsSequence = shuffledEvents.map { $0.id }
@@ -153,7 +154,9 @@ class GameEngine {
             eventsPassedCount = 0
             gameOverReason = ""
             SoundtrackAudioManager.shared.stopAllSoundEffects()
-            SoundtrackAudioManager.shared.playSoundtrack(named: "lowtoneST")
+            if (isReseting) {
+                SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameplay", duration: 0.5)
+            }
         }
     }
 }

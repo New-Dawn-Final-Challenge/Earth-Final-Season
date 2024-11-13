@@ -26,7 +26,7 @@ struct Earth_Final_SeasonApp: App {
                 .environment(gameEngine)
                 .environment(gameplayVM)
             .task {
-                SoundtrackAudioManager.shared.playSoundtrack(named: "lowtoneST")
+                SoundtrackAudioManager.shared.playSoundtrack(named: "menu")
             }
         }
     }

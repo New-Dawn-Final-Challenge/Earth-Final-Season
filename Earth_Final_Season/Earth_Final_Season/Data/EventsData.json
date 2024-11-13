@@ -1003,7 +1003,7 @@
   },
   {
     "id": "57",
-    "character": "Slow Logistic Engineer",
+    "character": "Slow logistics Engineer",
     "Main area": "Environmental degradation",
     "description": "Too many cycle lanes in big cities. We should do something about it!",
     "choice1": "Prohibit cycle lanes",
@@ -1022,7 +1022,7 @@
   },
   {
     "id": "58",
-    "character": "Slow Logistic Engineer",
+    "character": "Slow logistics Engineer",
     "Main area": "Environmental degradation",
     "description": "Too many people are using e-commerce. We should replace every human worker with drones",
     "choice1": "Replace 1 human with 1 drone",
@@ -1041,7 +1041,7 @@
   },
   {
     "id": "59",
-    "character": "Slow Logistic Engineer",
+    "character": "Slow logistics Engineer",
     "Main area": "Environmental degradation",
     "description": "What if we give away roller skates and scooters to the population? They might cause accidents...",
     "choice1": "Give away roller skates and scooters",
@@ -1060,7 +1060,7 @@
   },
   {
     "id": "60",
-    "character": "Slow Logistic Engineer",
+    "character": "Slow Logistics Engineer",
     "Main area": "Environmental degradation",
     "description": "Whoever said humans CAN'T build an intercontinental train?",
     "choice1": "Yes!!! Build it between Africa and Asia",
@@ -1079,7 +1079,7 @@
   },
   {
     "id": "61",
-    "character": "Slow Logistic Engineer",
+    "character": "Slow Logistics Engineer",
     "Main area": "Environmental degradation",
     "description": "People should be closer to each other! Let's reduce the number of available buses",
     "choice1": "Reduce number of available buses",
@@ -1478,7 +1478,7 @@
   },
   {
     "id": "82",
-    "character": "Slow Logistic Engineer",
+    "character": "Slow Logistics Engineer",
     "Main area": "Environmental degradation",
     "description": "What about building a train that crosses the Brazilian Amazon?",
     "choice1": "Where there is empty space, there is room for construction. Let's go!",
@@ -1497,7 +1497,7 @@
   },
   {
     "id": "83",
-    "character": "Slow Logistic Engineer",
+    "character": "Slow Logistics Engineer",
     "Main area": "Environmental degradation",
     "description": "Let's build roads for specific cars. What type should I choose?",
     "choice1": "Electric cars",
