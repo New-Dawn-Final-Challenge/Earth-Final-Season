@@ -29,7 +29,7 @@ struct CharacterView: View {
                 
                 .overlay(
                     
-                    VStack (spacing: 9) {
+                    VStack (spacing: 14) {
                         GlitchContentView(trigger: $triggerChangeChannel,
                                           uiImage: characterImage)
                         .frame(width: getWidth() * Constants.CharacterView.glitchViewWidthMultiplier,

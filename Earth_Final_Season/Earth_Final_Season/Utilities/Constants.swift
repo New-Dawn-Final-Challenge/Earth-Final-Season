@@ -85,9 +85,9 @@ struct Constants{
 
     struct CharacterView {
         static let imageFrameWidthMultiplier: CGFloat = 0.55
-        static let imageFrameHeightMultiplier: CGFloat = 0.20
-        static let glitchViewWidthMultiplier: CGFloat = 0.48
-        static let characterViewCornerRadiusMultiplier: CGFloat = 0.08
+        static let imageFrameHeightMultiplier: CGFloat = 0.22
+        static let glitchViewWidthMultiplier: CGFloat = 0.54
+        static let characterViewCornerRadiusMultiplier: CGFloat = 0.12
         static let glitchViewHeightMultiplier: CGFloat = 0.12
         static let verticalPadding: CGFloat = 30
         static let minTextHeight: CGFloat = 20
@@ -165,8 +165,8 @@ struct Constants{
     }
 
     struct GameOverView {
-        static let vstackSpacing: CGFloat = 16
-        static let vstackComponentsSpacing: CGFloat = 12
+        static let vstackSpacing: CGFloat = 12
+        static let vstackComponentsSpacing: CGFloat = 6
         static let glitchTextIntensity: CGFloat = 2
         static let starViewOpacity: CGFloat = 0.6
         static let starViewRadius: CGFloat = 2
@@ -180,7 +180,7 @@ struct Constants{
         static let titleShadowRadius: CGFloat = 0.3
         static let descriptionPadding: CGFloat = 35
         static let descriptionWidth: CGFloat = 0.8
-        static let descriptionHeight: CGFloat = 0.48
+        static let descriptionHeight: CGFloat = 0.4
     }
 
     struct GameplayView {
