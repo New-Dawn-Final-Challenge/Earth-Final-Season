@@ -70,11 +70,7 @@ struct MenuView: View {
             .fullScreenCover(isPresented: $settingsVM.isPresentedinMenu) {
                 ZStack {
                     Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                    SettingsModalView(vm: $settingsVM, text: "Menu Settings", doStuff: {
-                        // do nothing
-                        print("Do menu")
-                    })
-                    .frame(width: 400, height: 800)
+                    SettingsModalView(vm: $settingsVM, text: "Menu Settings", doStuff: {})
                 }
                 .presentationBackground(.clear)
             }

@@ -20,64 +20,70 @@ struct SettingsModalView: View {
     }
     
     var body: some View {
-        VStack(spacing: 12) {
-            Text3dEffect(text: "Settings")
-                .font(.largeTitleFont)
+        ZStack {
+            popUpBackground
             
-            musicView
-            
-            hapticsView
-            
-            Assets
-                .Images
-                .gestureScreen
-                .swiftUIImage
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .overlay {
-                    VStack {
-                        HStack {
-                            Text("Gesture")
-                                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                                .font(.bodyFont)
-                                .padding(.leading, 36)
-                            Spacer()
+            VStack(spacing: 6) {
+                Text3dEffect(text: "Settings")
+                    .font(.largeTitleFont)
+                
+                musicView
+                
+                hapticsView
+                
+                Assets
+                    .Images
+                    .gestureScreen
+                    .swiftUIImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .overlay {
+                        VStack {
+                            HStack {
+                                Text("Gesture")
+                                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                                    .font(.bodyFont)
+                                    .padding(.leading, 36)
+                                Spacer()
+                            }
+                            
+                            gestureSelectionView
+                            
+                            Group {
+                                Text("The standard gesture is ") +
+                                Text("Hold and Drag").underline(true) +
+                                Text(", while ") +
+                                Text("Tap").underline(true) +
+                                Text(" is recommended for accessibility")
+                            }
+                            .padding(.horizontal, 36)
+                            .font(.footnoteFont)
+                            .foregroundStyle(.secondary)
                         }
-                        
-                        gestureSelectionView
-                        
-                        Group {
-                            Text("The standard gesture is ") +
-                            Text("Hold and Drag").underline(true) +
-                            Text(", while ") +
-                            Text("Tap").underline(true) +
-                            Text(" is recommended for accessibility")
-                        }
-                        .padding(.horizontal, 36)
-                        .font(.footnoteFont)
-                        .foregroundStyle(.secondary)
+                        .padding(.vertical, 24)
                     }
-                    .padding(.vertical, 24)
-                }
-                .foregroundStyle(.black)
-            
-            resumeButton
-            
-            menuButton
-            
+                    .foregroundStyle(.black)
+                
+                resumeButton
+                
+                menuButton
+                
+            }
+            .padding()
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
-                .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
-                .background(
-                    RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
-                        .fill(.black)
-                )
-        )
         .padding()
     }
     
+    var popUpBackground: some View {
+        RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+            .stroke(Assets.Colors.accentPrimary.swiftUIColor,
+                    lineWidth: Constants.Global.lineWidth)
+            .background(
+                RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+                    .foregroundStyle(Color.black)
+            )
+    }
+
     var musicView: some View {
         Assets.Images.musicSoundScreen.swiftUIImage
             .resizable()
