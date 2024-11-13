@@ -19,16 +19,12 @@ struct GameOverView: View {
             popUpBackground
             
             VStack(spacing: Constants.GameOverView.vstackSpacing) {
-                Spacer()
-                
                 gameOverTitle
                 yearReachedText
                 gameOverImage(image: gameplayVM.getGameOverImage() ?? Assets.Images.placeholderCharacter.swiftUIImage)
                 gameOverDescription(title: gameplayVM.getGameOverTitle() ?? "",
                                     description: gameplayVM.getGameOverReason() ?? "")
                 gameOverButtons
-                
-                Spacer()
             }
             .padding()
         }
