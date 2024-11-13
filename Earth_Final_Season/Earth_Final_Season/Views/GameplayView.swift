@@ -19,10 +19,12 @@ struct GameplayView: View {
                 ControlPanelView(settingsVM: $settingsVM)
             }
         }
-        .fullScreenCover(isPresented: $settingsVM.isPresented) {
+        .fullScreenCover(isPresented: $settingsVM.isPresentedinGameplay) {
             ZStack {
                 Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                SettingsModalView(vm: $settingsVM, doStuff: {
+                SettingsModalView(vm: $settingsVM, text: "Game play Settings", doStuff: {
+                    SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "menu", duration: 1.0)
+                    print("Da gameplay")
                     dismiss()
                 })
                 .frame(width: 400, height: 800)
@@ -31,6 +33,9 @@ struct GameplayView: View {
         }
         .navigationBarBackButtonHidden()
         .onAppear(perform: HapticsManager.shared.prepareHaptics)
+        .onAppear {
+            SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameplay", duration: 1.0)
+        }
         .onChange(of: gameplayVM.getState()) {
             if gameplayVM.getState() == .gameOver {
                 Task {
@@ -111,7 +116,7 @@ struct GameplayView: View {
             helperButton(destination: EmptyView(), imageName: "questionmark")
             
             Button {
-                settingsVM.isPresented.toggle()
+                settingsVM.isPresentedinGameplay.toggle()
             } label: {
                 HelperButtonView(imageName: "gearshape.fill")
             }

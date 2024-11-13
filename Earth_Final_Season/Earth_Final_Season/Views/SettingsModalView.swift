@@ -12,6 +12,13 @@ struct SettingsModalView: View {
     @Binding var vm: SettingsViewModel
     var doStuff: ()-> Void
     
+    init(vm: Binding<SettingsViewModel>, text: String, doStuff: @escaping () -> Void) {
+        print("Inicializando a VM")
+        print(text)
+        self._vm = vm
+        self.doStuff = doStuff
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -155,7 +162,8 @@ struct SettingsModalView: View {
     
     var resumeButton: some View {
         Button {
-            self.vm.isPresented.toggle()
+            self.vm.isPresentedinGameplay = false
+            self.vm.isPresentedinMenu = false
         } label: {
             Text("Resume")
                 .padding(16)
@@ -174,7 +182,8 @@ struct SettingsModalView: View {
     
     var menuButton: some View {
         Button {
-            self.vm.isPresented.toggle()
+            self.vm.isPresentedinGameplay = false
+            self.vm.isPresentedinMenu = false
             doStuff()
             
         } label: {

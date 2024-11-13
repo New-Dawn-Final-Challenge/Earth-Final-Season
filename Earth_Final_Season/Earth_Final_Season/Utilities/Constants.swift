@@ -85,8 +85,8 @@ struct Constants{
     struct CharacterView {
         static let imageFrameWidthMultiplier: CGFloat = 0.55
         static let imageFrameHeightMultiplier: CGFloat = 0.20
-        static let glitchViewWidthMultiplier: CGFloat = 0.54
-        static let characterViewCornerRadiusMultiplier: CGFloat = 0.12
+        static let glitchViewWidthMultiplier: CGFloat = 0.48
+        static let characterViewCornerRadiusMultiplier: CGFloat = 0.08
         static let glitchViewHeightMultiplier: CGFloat = 0.12
         static let verticalPadding: CGFloat = 30
         static let minTextHeight: CGFloat = 20
@@ -236,9 +236,11 @@ struct Constants{
     
     struct Settings {
         static let defaultMusicIntensity: Float = 33.5
+        static let defaultEffectsIntensity: Float = 50.0
         static let defaultHapticsIntensity: Float = 100.0
         static let soundEffectsDefaultIntensity: Float = 63.5
         static let maxIntensity: Float = 100.0
+        static let userDefaultsEffectsKey = "effectsIntensity"
         static let userDefaultsMusicKey = "musicIntensity"
         static let userDefaultsHapticsKey = "hapticsIntensity"
         static let userDefaultsHapticsEnabledKey = "hapticsEnabled"
