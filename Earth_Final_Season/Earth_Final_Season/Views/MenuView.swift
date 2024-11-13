@@ -12,14 +12,9 @@ import GameKit
 struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
+    @State var aboutUsVM = AboutUsViewModel()
     
     @State private var isGameCenterPresented = false
-    @State private var dragOffset = CGSize.zero
-    @State private var finalOffsetX: CGFloat = 0
-    @State private var feedbackTrigger: CGPoint = .zero
-    
-    private var sliderWidth: CGFloat { getWidth() * Constants.SliderView.widthMultiplier }
-    private var sliderHeight: CGFloat { getHeight() * Constants.SliderView.heightMultiplier }
     
     var body: some View {
         NavigationStack {
@@ -77,7 +72,6 @@ struct MenuView: View {
                     Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
                     SettingsModalView(vm: $settingsVM, text: "Menu Settings", doStuff: {
                         // do nothing
-                        // ta sobre escrevendo a outra closure
                         print("Do menu")
                     })
                     .frame(width: 400, height: 800)
@@ -96,12 +90,31 @@ struct MenuView: View {
                     .cornerRadius(Constants.MenuView.buttonCornerRadius)
                     .overlay(
                        RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2)
+                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
                    )
             }
             
-            
-            MenuButtonView(destination: AboutUsView(), label: "About Us")
+            Button {
+                aboutUsVM.isPresentedInMenu.toggle()
+            } label: {
+                Text("About Us")
+                    .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                           height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
+                    .background(Assets.Colors.bgFillPrimary.swiftUIColor)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(Constants.MenuView.buttonCornerRadius)
+                    .overlay(
+                       RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
+                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
+                   )
+            }
+            .fullScreenCover(isPresented: $aboutUsVM.isPresentedInMenu) {
+                ZStack {
+                    Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                    AboutUsView(vm: $aboutUsVM, text: "About Us", doStuff: {})
+                }
+                .presentationBackground(.clear)
+            }
         }
         .padding(.top, -45)
     }

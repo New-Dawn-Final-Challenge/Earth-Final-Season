@@ -189,6 +189,16 @@ struct Constants{
         static let descriptionWidth: CGFloat = 0.8
         static let descriptionHeight: CGFloat = 0.4
     }
+    
+    struct AboutUsView {
+        static let vstackSpacing: CGFloat = 24
+        static let membersGridSpacing: CGFloat = 40
+        static let descriptionTextPadding: CGFloat = 30
+        static let gameImageWidth: CGFloat = 0.25
+        static let gameImageHeight: CGFloat = 0.12
+        static let gameImagePadding: CGFloat = 6
+        static let membersGridPadding: CGFloat = -12
+    }
 
     struct GameplayView {
         static let helperButtonsPaddingTrailing: CGFloat = 50
