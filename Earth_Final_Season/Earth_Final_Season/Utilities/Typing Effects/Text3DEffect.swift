@@ -24,6 +24,7 @@ struct Text3dEffect: View {
             Text(text)
                 .foregroundStyle(.white)
         }
+        .font(.largeTitleFont)
     }
 }
 
