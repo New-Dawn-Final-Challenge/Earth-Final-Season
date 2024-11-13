@@ -40,7 +40,7 @@ struct SettingsModalView: View {
                     .overlay {
                         VStack {
                             HStack {
-                                Text("Gesture")
+                                HackerTextView(text: "Gesture", speed: 0.05)
                                     .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                                     .font(.bodyFont)
                                     .padding(.leading, 36)
@@ -50,11 +50,7 @@ struct SettingsModalView: View {
                             gestureSelectionView
                             
                             Group {
-                                Text("The standard gesture is ") +
-                                Text("Hold and Drag").underline(true) +
-                                Text(", while ") +
-                                Text("Tap").underline(true) +
-                                Text(" is recommended for accessibility")
+                                HackerTextView(text: "The standard gesture is Hold and Drag, while Tap is recommended for accessibilty", speed: 0.05)
                             }
                             .padding(.horizontal, 36)
                             .font(.footnoteFont)
@@ -91,12 +87,12 @@ struct SettingsModalView: View {
             .overlay {
                 VStack(alignment: .leading) {
                     HStack(spacing: 12) {
-                        Text("Music ")
+                        HackerTextView(text: "Music", speed: 0.05)
                         Slider(value: $vm.musicIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
                     HStack(spacing: 12) {
-                        Text("Sounds")
+                        HackerTextView(text: "Sounds", speed: 0.05)
                         Slider(value: $vm.soundEffectsIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
@@ -113,7 +109,8 @@ struct SettingsModalView: View {
             .aspectRatio(contentMode: .fit)
             .overlay {
                 HStack {
-                    Toggle("Haptics", isOn: $vm.hapticsEnabled)
+                    HackerTextView(text: "Haptics", speed: 0.05)
+                    Toggle("", isOn: $vm.hapticsEnabled)
                         .font(.bodyFont)
                         .toggleStyle(SwitchToggleStyle(tint: Assets.Colors.bgFillPrimary.swiftUIColor))
                     Spacer()
@@ -136,7 +133,7 @@ struct SettingsModalView: View {
                         vm.selectedGesture = .holdDrag
                     } label: {
                         HStack {
-                            Text("Hold and Drag")
+                            HackerTextView(text: "Hold and Drag", speed: 0.05)
                             Spacer()
                             Image(systemName: "checkmark")
                                 .opacity(vm.selectedGesture == .holdDrag ? 1 : 0)
@@ -150,7 +147,7 @@ struct SettingsModalView: View {
                         vm.selectedGesture = .tap
                     } label: {
                         HStack {
-                            Text("Tap")
+                            HackerTextView(text: "Tap", speed: 0.05)
                             Spacer()
                             Image(systemName: "checkmark")
                                 .opacity(vm.selectedGesture == .tap ? 1 : 0)
