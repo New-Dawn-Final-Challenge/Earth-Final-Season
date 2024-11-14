@@ -86,12 +86,12 @@ struct SettingsModalView: View {
             .aspectRatio(contentMode: .fit)
             .overlay {
                 VStack(alignment: .leading) {
-                    HStack(spacing: 12) {
+                    HStack(spacing: 24) {
                         HackerTextView(text: "Music", speed: 0.05)
                         Slider(value: $vm.musicIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
-                    HStack(spacing: 12) {
+                    HStack(spacing: 16) {
                         HackerTextView(text: "Sounds", speed: 0.05)
                         Slider(value: $vm.soundEffectsIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
