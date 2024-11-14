@@ -194,7 +194,7 @@ struct Constants{
     }
 
     struct GameplayView {
-        static let helperButtonsPaddingTrailing: CGFloat = 50
+        static let helperButtonsPaddingTrailing: CGFloat = 60
         static let helperButtonsPaddingTop: CGFloat = 32
         static let indicatorSpacingMultiplier: CGFloat = -0.02
         static let panelAccessoryWidthMultiplier: CGFloat = 0.3

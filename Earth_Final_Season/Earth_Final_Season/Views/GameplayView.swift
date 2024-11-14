@@ -124,7 +124,7 @@ struct GameplayView: View {
     private var helperButtonsView: some View {
         HStack {
             Spacer()
-            helperButton(destination: EmptyView(), imageName: "questionmark")
+//            helperButton(destination: EmptyView(), imageName: "questionmark")
             
             Button {
                 settingsVM.isPresentedinGameplay.toggle()

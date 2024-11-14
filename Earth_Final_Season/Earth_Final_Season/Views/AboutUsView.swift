@@ -59,7 +59,7 @@ struct AboutUsView: View {
     }
     
     private var descriptionText: some View {
-        HackerTextView(text: "This game was developed at the Apple Developer Academy", speed: 0.05)
+        Text("This game was developed at the Apple Developer Academy")
             .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             .font(.bodyFont)
             .multilineTextAlignment(.center)
