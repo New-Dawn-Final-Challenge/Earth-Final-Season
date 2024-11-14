@@ -110,8 +110,8 @@ struct SettingsModalView: View {
             .overlay {
                 HStack {
                     HackerTextView(text: "Haptics", speed: 0.05)
-                    Toggle("", isOn: $vm.hapticsEnabled)
                         .font(.bodyFont)
+                    Toggle("", isOn: $vm.hapticsEnabled)
                         .toggleStyle(SwitchToggleStyle(tint: Assets.Colors.bgFillPrimary.swiftUIColor))
                     Spacer()
                 }
