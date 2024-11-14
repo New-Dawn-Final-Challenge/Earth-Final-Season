@@ -8,5 +8,5 @@
 import Foundation
 
 enum States{
-    case initializing, choosing, consequence, gameOver
+    case initializing, choosing, consequence, gameOver, specialGameOver
 }

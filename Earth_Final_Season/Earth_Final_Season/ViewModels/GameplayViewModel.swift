@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Design_System
 
 protocol GameEngineDelegate: AnyObject {
     func gameStateChanged(to state: States)
@@ -26,18 +27,24 @@ class GameplayViewModel: GameEngineDelegate {
     
     var timer: Timer?
     var countdown = Constants.GameplayViewModel.countdownStartValue
+    var specialEnding = false
     
     var scaleChange: [CGFloat] = Array(repeating: Constants.GameplayViewModel.indicatorInitialScale, count: 3)
     var shouldShowIndicator: [Bool] = Array(repeating: false, count: 3)
     var valueIsIncreasing: [Bool] = Array(repeating: false, count: 3)
     var value: [Int] = Array(repeating: 0, count: 3)
     
+    // for special game over
+    var specialGameOverImage: Image?
+    var specialGameOverText: String?
+    
     func gameStateChanged(to state: States) {
-        if state == .choosing {
-            currentEvent = getEvent()
-        }
         
-        if state == .consequence {
+        switch (state) {
+        case .choosing:
+            currentEvent = getEvent()
+            
+        case .consequence:
             timer = Timer.scheduledTimer(withTimeInterval: Constants.GameplayViewModel.timerInterval, repeats: true) { _ in
                 if self.countdown > 0 {
                     self.countdown -= 1
@@ -49,10 +56,12 @@ class GameplayViewModel: GameEngineDelegate {
                     self.engine?.goToNextEvent()
                 }
             }
+            
+        default:
+            return
         }
         
-        if state == .gameOver {
-        }
+        
     }
     
     func getState() -> States? {
