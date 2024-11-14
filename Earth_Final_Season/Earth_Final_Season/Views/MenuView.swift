@@ -10,11 +10,14 @@ import Design_System
 import GameKit
 
 struct MenuView: View {
+    @State var menuVM = MenuViewModel()
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
     @State var aboutUsVM = AboutUsViewModel()
-    
+
+    @State private var navigateToGameplay = false
     @State private var isGameCenterPresented = false
+    @State private var isShowingVideo: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -44,12 +47,43 @@ struct MenuView: View {
             }
         }
     }
-    
+
     private var buttonsView: some View {
         VStack(spacing: Constants.MenuView.verticalSpacing){
-            MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
-                           label: "Play")
-            
+            if menuVM.firstTimePlaying {
+                Button (action: {
+                    isShowingVideo = true
+                    SoundtrackAudioManager.shared.stopSoundtrack()
+                },
+                        label: {
+                    Text("Play")
+                        .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                               height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
+                        .background(Assets.Colors.bgFillPrimary.swiftUIColor)
+                        .foregroundColor(Color.white)
+                        .cornerRadius(Constants.MenuView.buttonCornerRadius)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
+                                .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2)
+                        )
+                })
+                .fullScreenCover(isPresented: $isShowingVideo) {
+                    VideoView(menuVM: $menuVM,
+                              navigateToGameplay: $navigateToGameplay)
+                }
+            }
+
+            else {
+                MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
+                               label: "Play")
+            }
+
+            NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
+                                                     leaderboardVM: $leaderboardVM),
+                           isActive: $navigateToGameplay) {
+                EmptyView()
+            }
+
             Button(action: {
                 isGameCenterPresented.toggle()
             }) {
