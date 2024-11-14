@@ -182,8 +182,8 @@ struct Constants{
         static let gameOverMonitorImageWidth: CGFloat = 0.7
         static let gameOverMonitorImageHeight: CGFloat = 0.15
         static let gameOverImageRadius: CGFloat = 40
-        static let gameOverImagePaddingHorizontal: CGFloat = 50
-        static let gameOverImagePaddingVertical: CGFloat = 12
+        static let gameOverImagePaddingHorizontal: CGFloat = 40
+        static let gameOverImagePaddingVertical: CGFloat = 18
         static let titleShadowRadius: CGFloat = 0.3
         static let descriptionPadding: CGFloat = 35
         static let descriptionWidth: CGFloat = 0.8
@@ -196,12 +196,12 @@ struct Constants{
         static let descriptionTextPadding: CGFloat = 30
         static let gameImageWidth: CGFloat = 0.25
         static let gameImageHeight: CGFloat = 0.12
-        static let gameImagePadding: CGFloat = 6
+        static let gameImagePadding: CGFloat = -8
         static let membersGridPadding: CGFloat = -12
     }
 
     struct GameplayView {
-        static let helperButtonsPaddingTrailing: CGFloat = 50
+        static let helperButtonsPaddingTrailing: CGFloat = 60
         static let helperButtonsPaddingTop: CGFloat = 32
         static let indicatorSpacingMultiplier: CGFloat = -0.02
         static let panelAccessoryWidthMultiplier: CGFloat = 0.3

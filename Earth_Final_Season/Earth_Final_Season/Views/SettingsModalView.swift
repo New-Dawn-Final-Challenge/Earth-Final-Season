@@ -20,77 +20,79 @@ struct SettingsModalView: View {
     }
     
     var body: some View {
-        VStack(spacing: 12) {
-            Text3dEffect(text: "Settings")
-                .font(.largeTitleFont)
+        ZStack {
+            popUpBackground
             
-            musicView
-            
-            hapticsView
-            
-            Assets
-                .Images
-                .gestureScreen
-                .swiftUIImage
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .overlay {
-                    VStack {
-                        HStack {
-                            Text("Gesture")
-                                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                                .font(.bodyFont)
-                                .padding(.leading, 36)
-                            Spacer()
+            VStack(spacing: 6) {
+                Text3dEffect(text: "Settings")
+                    .font(.largeTitleFont)
+                
+                musicView
+                
+                hapticsView
+                
+                Assets
+                    .Images
+                    .gestureScreen
+                    .swiftUIImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .overlay {
+                        VStack {
+                            HStack {
+                                HackerTextView(text: "Gesture", speed: 0.05)
+                                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                                    .font(.bodyFont)
+                                    .padding(.leading, 36)
+                                Spacer()
+                            }
+                            
+                            gestureSelectionView
+                            
+                            Group {
+                                HackerTextView(text: "The standard gesture is Hold and Drag, while Tap is recommended for accessibilty", speed: 0.05)
+                            }
+                            .padding(.horizontal, 36)
+                            .font(.footnoteFont)
+                            .foregroundStyle(.secondary)
                         }
-                        
-                        gestureSelectionView
-                        
-                        Group {
-                            Text("The standard gesture is ") +
-                            Text("Hold and Drag").underline(true) +
-                            Text(", while ") +
-                            Text("Tap").underline(true) +
-                            Text(" is recommended for accessibility")
-                        }
-                        .padding(.horizontal, 36)
-                        .font(.footnoteFont)
-                        .foregroundStyle(.secondary)
+                        .padding(.vertical, 24)
                     }
-                    .padding(.vertical, 24)
-                }
-                .foregroundStyle(.black)
-            
-            resumeButton
-            
-            menuButton
-            
+                    .foregroundStyle(.black)
+                
+                resumeButton
+                
+                menuButton
+                
+            }
+            .padding()
         }
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
-                .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
-                .background(
-                    RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
-                        .fill(.black)
-                )
-        )
         .padding()
     }
     
+    var popUpBackground: some View {
+        RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+            .stroke(Assets.Colors.accentPrimary.swiftUIColor,
+                    lineWidth: Constants.Global.lineWidth)
+            .background(
+                RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+                    .foregroundStyle(Color.black)
+            )
+    }
+
     var musicView: some View {
         Assets.Images.musicSoundScreen.swiftUIImage
             .resizable()
             .aspectRatio(contentMode: .fit)
             .overlay {
                 VStack(alignment: .leading) {
-                    HStack(spacing: 12) {
-                        Text("Music ")
+                    HStack(spacing: 24) {
+                        HackerTextView(text: "Music", speed: 0.05)
                         Slider(value: $vm.musicIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
-                    HStack(spacing: 12) {
-                        Text("Sounds")
+                    HStack(spacing: 16) {
+                        HackerTextView(text: "Sounds", speed: 0.05)
                         Slider(value: $vm.soundEffectsIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
@@ -107,8 +109,9 @@ struct SettingsModalView: View {
             .aspectRatio(contentMode: .fit)
             .overlay {
                 HStack {
-                    Toggle("Haptics", isOn: $vm.hapticsEnabled)
+                    HackerTextView(text: "Haptics", speed: 0.05)
                         .font(.bodyFont)
+                    Toggle("", isOn: $vm.hapticsEnabled)
                         .toggleStyle(SwitchToggleStyle(tint: Assets.Colors.bgFillPrimary.swiftUIColor))
                     Spacer()
                 }
@@ -130,7 +133,7 @@ struct SettingsModalView: View {
                         vm.selectedGesture = .holdDrag
                     } label: {
                         HStack {
-                            Text("Hold and Drag")
+                            HackerTextView(text: "Hold and Drag", speed: 0.05)
                             Spacer()
                             Image(systemName: "checkmark")
                                 .opacity(vm.selectedGesture == .holdDrag ? 1 : 0)
@@ -144,7 +147,7 @@ struct SettingsModalView: View {
                         vm.selectedGesture = .tap
                     } label: {
                         HStack {
-                            Text("Tap")
+                            HackerTextView(text: "Tap", speed: 0.05)
                             Spacer()
                             Image(systemName: "checkmark")
                                 .opacity(vm.selectedGesture == .tap ? 1 : 0)

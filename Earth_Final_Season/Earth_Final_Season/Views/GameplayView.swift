@@ -25,10 +25,8 @@ struct GameplayView: View {
                 Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
                 SettingsModalView(vm: $settingsVM, text: "Game play Settings", doStuff: {
                     SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "menu", duration: 1.0)
-                    print("Da gameplay")
                     dismiss()
                 })
-                .frame(width: 400, height: 800)
             }
             .presentationBackground(.clear)
         }
@@ -126,7 +124,7 @@ struct GameplayView: View {
     private var helperButtonsView: some View {
         HStack {
             Spacer()
-            helperButton(destination: EmptyView(), imageName: "questionmark")
+//            helperButton(destination: EmptyView(), imageName: "questionmark")
             
             Button {
                 settingsVM.isPresentedinGameplay.toggle()

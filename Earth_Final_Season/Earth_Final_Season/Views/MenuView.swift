@@ -24,7 +24,6 @@ struct MenuView: View {
             ZStack {
                 ZStack {
                     BackgroundView()
-                    // ControlPanelView(settingsVM: $settingsVM)
                 }
                 .overlay(Color.black.opacity(0.6)).blur(radius: 1.5)
                 
@@ -51,31 +50,21 @@ struct MenuView: View {
     private var buttonsView: some View {
         VStack(spacing: Constants.MenuView.verticalSpacing){
             if menuVM.firstTimePlaying {
-                Button (action: {
+                menuButton("Play") {
                     isShowingVideo = true
                     SoundtrackAudioManager.shared.stopSoundtrack()
-                },
-                        label: {
-                    Text("Play")
-                        .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
-                               height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
-                        .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                        .foregroundColor(Color.white)
-                        .cornerRadius(Constants.MenuView.buttonCornerRadius)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                                .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: 2)
-                        )
-                })
+                }
+                .padding(.bottom, -12)
                 .fullScreenCover(isPresented: $isShowingVideo) {
                     VideoView(menuVM: $menuVM,
                               navigateToGameplay: $navigateToGameplay)
                 }
             }
-
+            
             else {
                 MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
                                label: "Play")
+                .padding(.bottom, -12)
             }
 
             NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
@@ -84,63 +73,26 @@ struct MenuView: View {
                 EmptyView()
             }
 
-            Button(action: {
+            menuButton("Leaderboard") {
                 isGameCenterPresented.toggle()
-            }) {
-                Text("Leaderboard")
-                    .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
-                           height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
-                    .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(Constants.MenuView.buttonCornerRadius)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                            .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
-                    )
             }
             .sheet(isPresented: $isGameCenterPresented) {
                 LeaderboardView()
             }
+            
+            menuButton("Settings") {
+                settingsVM.isPresentedinMenu.toggle()
+            }
             .fullScreenCover(isPresented: $settingsVM.isPresentedinMenu) {
                 ZStack {
                     Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                    SettingsModalView(vm: $settingsVM, text: "Menu Settings", doStuff: {
-                        // do nothing
-                        print("Do menu")
-                    })
-                    .frame(width: 400, height: 800)
+                    SettingsModalView(vm: $settingsVM, text: "Settings", doStuff: {})
                 }
                 .presentationBackground(.clear)
             }
             
-            Button {
-                settingsVM.isPresentedinMenu.toggle()
-            } label: {
-                Text("Settings")
-                    .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
-                           height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
-                    .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(Constants.MenuView.buttonCornerRadius)
-                    .overlay(
-                       RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
-                   )
-            }
-            
-            Button {
+            menuButton("About Us") {
                 aboutUsVM.isPresentedInMenu.toggle()
-            } label: {
-                Text("About Us")
-                    .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
-                           height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
-                    .background(Assets.Colors.bgFillPrimary.swiftUIColor)
-                    .foregroundColor(Color.white)
-                    .cornerRadius(Constants.MenuView.buttonCornerRadius)
-                    .overlay(
-                       RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
-                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
-                   )
             }
             .fullScreenCover(isPresented: $aboutUsVM.isPresentedInMenu) {
                 ZStack {
@@ -151,5 +103,21 @@ struct MenuView: View {
             }
         }
         .padding(.top, -45)
+    }
+
+    @ViewBuilder
+    private func menuButton(_ label: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(label)
+                .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
+                       height: getHeight() * Constants.MenuView.buttonHeightMultiplier)
+                .background(Assets.Colors.bgFillPrimary.swiftUIColor)
+                .foregroundColor(.white)
+                .cornerRadius(Constants.MenuView.buttonCornerRadius)
+                .overlay(
+                    RoundedRectangle(cornerRadius: Constants.MenuView.buttonCornerRadius)
+                        .stroke(Assets.Colors.accentPrimary.swiftUIColor, lineWidth: Constants.Global.lineWidth)
+                )
+        }
     }
 }
