@@ -87,6 +87,13 @@ class GameEngine {
     
     func applyGameOver() {
         self.state = .gameOver
+        let character = currentEvent?.character
+        if (Utils.isSpecialCharacter(character)) {
+            let gameOver = Utils.switchMessageDependindOnCharacter(character)
+            gameOverTitle = gameOver.title
+            gameOverReason = gameOver.message
+            gameOverImage = Utils.getImageByName(character ?? "apocalyptical cat")
+        }
         self.delegate?.gameStateChanged(to: .gameOver)
         SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameover", duration: 0.5)
     }

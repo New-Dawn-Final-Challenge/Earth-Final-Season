@@ -26,7 +26,7 @@ struct CharacterView: View {
                 .resizable()
                 .frame(width: getWidth() * Constants.CharacterView.imageFrameWidthMultiplier,
                        height: getHeight() * Constants.CharacterView.imageFrameHeightMultiplier)
-                
+            
                 .overlay(
                     
                     VStack (spacing: 14) {
@@ -46,7 +46,7 @@ struct CharacterView: View {
                                         topTrailingRadius: getWidth() * Constants.CharacterView.characterViewCornerRadiusMultiplier
                                     )
                                 )
-
+                            
                         )
                         .padding(.top, 8)
                         
@@ -57,68 +57,20 @@ struct CharacterView: View {
                     }
                         .onChange(of: characterName) {
                             triggerChangeChannel.toggle()
-                            getImageByName()
+                            characterImage = Utils.getImageByName(characterName)
                             SoundtrackAudioManager.shared.playSoundEffect(named: "changeCharacter", fileExtension: "wav", volume: 0.15)
                         }
                         .padding(.vertical, Constants.CharacterView.verticalPadding)
                         .padding(.horizontal)
                         .offset(y: -10)
                 )
-                
+            
         }
         .onAppear {
             triggerChangeChannel.toggle()
-            getImageByName()
+            characterImage = Utils.getImageByName(characterName)
         }
-        
-    }
-    
-    func getImageByName() {
-        switch characterName.lowercased() {
-        case "ultra new age environmentalist":
-            characterImage =  Assets.Images.ultraNewAgeEnvironmentalist.swiftUIImage
-        case "fearless economist":
-            characterImage =  Assets.Images.fearlessEconomist.swiftUIImage
-            
-        case "apocalyptical cat":
-            characterImage =  Assets.Images.apocalypticalCat.swiftUIImage
-            
-        case "chronically online teenager":
-            characterImage =  Assets.Images.chronicallyOnlineTeenager.swiftUIImage
-            
-        case "conspiracy theorist":
-            characterImage =  Assets.Images.conspiracyTheoristPodcaster.swiftUIImage
-            
-        case "chaotic billionaire":
-            characterImage =  Assets.Images.chaocticBillionaire.swiftUIImage
-            
-        case "evil researcher":
-            characterImage =  Assets.Images.evilResearcher.swiftUIImage
-            
-        case "experimentalist geneticist":
-            characterImage =  Assets.Images.experimentalistGeneticist.swiftUIImage
-            
-        case "indie physician":
-            characterImage =  Assets.Images.indiePhysician.swiftUIImage
-            
-        case "president in denial":
-            characterImage =  Assets.Images.presidentInDenial.swiftUIImage
-            
-        case "questionable religious leader":
-            characterImage =  Assets.Images.questionableReligiousLeader.swiftUIImage
-            
-        case "robot vacuum cleaner":
-            characterImage =  Assets.Images.robotVacumCleaner.swiftUIImage
-            
-        case "sensationalist tv host":
-            characterImage =  Assets.Images.sensionalistTVHost.swiftUIImage
-            
-        case "slow logistics engineer":
-            characterImage =  Assets.Images.slowLogisticEngineer.swiftUIImage
-            
-        default:
-            characterImage =  Image("image1")
-        }
+
     }
 }
 

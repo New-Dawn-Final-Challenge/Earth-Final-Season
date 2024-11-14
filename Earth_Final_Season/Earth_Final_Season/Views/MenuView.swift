@@ -10,11 +10,14 @@ import Design_System
 import GameKit
 
 struct MenuView: View {
+    @State var menuVM = MenuViewModel()
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
     @State var aboutUsVM = AboutUsViewModel()
-    
+
+    @State private var navigateToGameplay = false
     @State private var isGameCenterPresented = false
+    @State private var isShowingVideo: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -43,12 +46,33 @@ struct MenuView: View {
             }
         }
     }
-    
+
     private var buttonsView: some View {
-        VStack(spacing: Constants.MenuView.verticalSpacing) {
-            MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
-                           label: "Play")
+        VStack(spacing: Constants.MenuView.verticalSpacing){
+            if menuVM.firstTimePlaying {
+                menuButton("Play") {
+                    isShowingVideo = true
+                    SoundtrackAudioManager.shared.stopSoundtrack()
+                }
+                .padding(.bottom, -12)
+                .fullScreenCover(isPresented: $isShowingVideo) {
+                    VideoView(menuVM: $menuVM,
+                              navigateToGameplay: $navigateToGameplay)
+                }
+            }
             
+            else {
+                MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
+                               label: "Play")
+                .padding(.bottom, -12)
+            }
+
+            NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
+                                                     leaderboardVM: $leaderboardVM),
+                           isActive: $navigateToGameplay) {
+                EmptyView()
+            }
+
             menuButton("Leaderboard") {
                 isGameCenterPresented.toggle()
             }

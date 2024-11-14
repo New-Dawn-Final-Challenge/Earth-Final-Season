@@ -150,11 +150,18 @@ struct Constants{
         static let gameOverEnvironmentTitle = "Environmental Degradation reached its peak"
         static let gameOverIllBeingTitle = "Ill-being reached its peak"
         static let gameOverInstabilityTitle = "Sociopolitical instability reached its peak"
+        static let gameOverCatTitle = "Nyah nyah nyah nyah ..."
+        static let gameOverRobotVacuumCleanerTitle = "Damn thats a long title"
 
         static let gameOverAudienceMessage = "There’s no simple way of putting this, but… You’re fired. Just to get it straight, you were supposed to entertain us by wrecking humanity, not by helping them. We already tried helping them, but it’s never as entertaining, trust me. If you ever need us in the future… Well, just don’t"
         static let gameOverEnvironmentMessage = "Chemtrails in the sky give sunrays a strange purple glow. The waters stink of green, the weather is either burning hot, or deadly cold, and fruits and crops never grow. Toc toc: any human alive? The answer is no"
         static let gameOverIllBeingMessage = "Wounds are red, depression is blue. Paranoia, anxiety, dissociation, viruses and bacteria flew free on Earth in a cruel summer breeze that put humanoids to one last, eternal — yet not so peaceful — sleep"
         static let gameOverInstabilityMessage = "There’s an ancient saying regarding humanoid World War IV being fought with sticks and stones. But here’s a new punch line for this final war: it will never be fought, because there’s not a single human left to fight it"
+        
+        static let gameOverCatMessage = "Meow, meow meow meow, meow - meow meow! Meow meow, meow - meow meow meow. Meow meow meow meow, meow meow - meow meow? Meow meow meow meow, meow meow meow - meow meow meow meow. Meow meow meow meow, meow meow - meow meow meow meow, meow meow."
+        
+        static let gameOverRobotVacuumCleanerMessage = "VRRRRRUUUUUUUMMMMMMMMM"
+        
     }
 
     struct Haptics {
@@ -207,6 +214,7 @@ struct Constants{
     }
 
     struct MenuView {
+        static let userDefaultsFirstTimePlayingKey: String = "firstTimePlaying"
         static let titleWidthMultiplier: CGFloat = 0.5
         static let titleHeightMultiplier: CGFloat = 0.06
         static let buttonWidthMultiplier: CGFloat = 0.5
