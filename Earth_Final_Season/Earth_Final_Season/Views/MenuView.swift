@@ -47,11 +47,15 @@ struct MenuView: View {
             }
         }
     }
-    
+
     private var buttonsView: some View {
         VStack(spacing: Constants.MenuView.verticalSpacing){
             if menuVM.firstTimePlaying {
-                Button (action: {isShowingVideo = true}, label: {
+                Button (action: {
+                    isShowingVideo = true
+                    SoundtrackAudioManager.shared.stopSoundtrack()
+                },
+                        label: {
                     Text("Play")
                         .frame(width: getWidth() * Constants.MenuView.buttonWidthMultiplier,
                                height: getHeight() * Constants.MenuView.buttonHeightMultiplier)

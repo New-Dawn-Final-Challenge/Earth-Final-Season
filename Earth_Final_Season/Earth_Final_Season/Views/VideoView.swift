@@ -16,7 +16,7 @@ struct VideoView: View {
     @Binding var navigateToGameplay: Bool
 
 
-    private let player = AVPlayer(url: Bundle.main.url(forResource: "testfilm", withExtension: "mp4")!)
+    private let player = AVPlayer(url: Bundle.main.url(forResource: "introfilm", withExtension: "mp4")!)
     @State private var playerObserver: AnyCancellable?
 
     var body: some View {
