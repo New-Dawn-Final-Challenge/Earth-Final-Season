@@ -142,8 +142,8 @@ struct Constants{
         static let initialEnvironmentalDegradation = 6
         static let initialYear = 0
 
-        static let minAudienceThreshold: Double = 3
-        static let maxIndicatorThreshold = 12
+        static let minAudienceThreshold: Double = 5
+        static let maxIndicatorThreshold = 7
         static let eventsPerYear = 2
         
         static let gameOverAudienceTitle = "Audience reached its minimum"
@@ -173,9 +173,9 @@ struct Constants{
         static let starViewX: CGFloat = -2
         static let starViewY: CGFloat = 2
         static let gameOverMonitorImageWidth: CGFloat = 0.7
-        static let gameOverMonitorImageHeight: CGFloat = 0.15
+        static let gameOverMonitorImageHeight: CGFloat = 0.18
         static let gameOverImageRadius: CGFloat = 40
-        static let gameOverImagePaddingHorizontal: CGFloat = 50
+        static let gameOverImagePaddingHorizontal: CGFloat = 40
         static let gameOverImagePaddingVertical: CGFloat = 12
         static let titleShadowRadius: CGFloat = 0.3
         static let descriptionPadding: CGFloat = 35
