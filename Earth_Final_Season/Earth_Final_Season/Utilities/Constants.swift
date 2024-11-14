@@ -214,6 +214,7 @@ struct Constants{
     }
 
     struct MenuView {
+        static let userDefaultsFirstTimePlayingKey: String = "firstTimePlaying"
         static let titleWidthMultiplier: CGFloat = 0.5
         static let titleHeightMultiplier: CGFloat = 0.06
         static let buttonWidthMultiplier: CGFloat = 0.5
