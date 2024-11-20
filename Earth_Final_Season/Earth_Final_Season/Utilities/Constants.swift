@@ -270,10 +270,10 @@ struct Constants{
     }
     
     struct Settings {
-        static let defaultMusicIntensity: Float = 33.5
-        static let defaultEffectsIntensity: Float = 50.0
+        static let defaultMusicIntensity: Float = 100.0
+        static let defaultEffectsIntensity: Float = 100.0
         static let defaultHapticsIntensity: Float = 100.0
-        static let soundEffectsDefaultIntensity: Float = 63.5
+        static let soundEffectsDefaultIntensity: Float = 100.0
         static let maxIntensity: Float = 100.0
         static let userDefaultsEffectsKey = "effectsIntensity"
         static let userDefaultsMusicKey = "musicIntensity"

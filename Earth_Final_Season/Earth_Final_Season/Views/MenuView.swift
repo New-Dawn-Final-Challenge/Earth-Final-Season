@@ -14,7 +14,7 @@ struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
     @State var aboutUsVM = AboutUsViewModel()
-
+    
     @State private var navigateToGameplay = false
     @State private var isGameCenterPresented = false
     @State private var isShowingVideo: Bool = false
@@ -43,10 +43,11 @@ struct MenuView: View {
         .onAppear {
             if !GKLocalPlayer.local.isAuthenticated {
                 leaderboardVM.authenticateUser()
+                SoundtrackAudioManager.shared.playSoundtrack(named: "menu")
             }
         }
     }
-
+    
     private var buttonsView: some View {
         VStack(spacing: Constants.MenuView.verticalSpacing){
             if menuVM.firstTimePlaying {
@@ -66,13 +67,13 @@ struct MenuView: View {
                                label: "Play")
                 .padding(.bottom, -12)
             }
-
+            
             NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
                                                      leaderboardVM: $leaderboardVM),
                            isActive: $navigateToGameplay) {
                 EmptyView()
             }
-
+            
             menuButton("Leaderboard") {
                 isGameCenterPresented.toggle()
             }
@@ -104,7 +105,7 @@ struct MenuView: View {
         }
         .padding(.top, -45)
     }
-
+    
     @ViewBuilder
     private func menuButton(_ label: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
