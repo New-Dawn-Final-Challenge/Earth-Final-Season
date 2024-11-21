@@ -61,8 +61,13 @@ class SettingsViewModel {
             let rawValue = UserDefaults.standard.integer(forKey: "selectedGesture")
             
             self.selectedGesture = Gesture(rawValue: rawValue) ?? .holdDrag
-            }
+        } else {
+            UserDefaults.standard.set(soundEffectsIntensity, forKey: "effectsIntensity")
+            UserDefaults.standard.set(musicIntensity, forKey: Constants.Settings.userDefaultsMusicKey)
+            UserDefaults.standard.set(hapticsEnabled, forKey: Constants.Settings.userDefaultsHapticsEnabledKey)
+            UserDefaults.standard.set(selectedGesture.rawValue, forKey: Constants.Settings.userDefaultsGestureKey)
         }
+    }
         
     
     func playMusic(music name: String) {
