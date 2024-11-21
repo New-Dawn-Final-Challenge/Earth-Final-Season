@@ -25,9 +25,6 @@ struct Earth_Final_SeasonApp: App {
             MenuView()
                 .environment(gameEngine)
                 .environment(gameplayVM)
-            .task {
-                SoundtrackAudioManager.shared.playSoundtrack(named: "menu")
-            }
         }
     }
 }
