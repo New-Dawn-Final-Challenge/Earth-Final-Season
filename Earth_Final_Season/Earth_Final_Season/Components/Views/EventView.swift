@@ -26,9 +26,9 @@ struct EventView: View {
             .overlay(
                 Group {
                     if textToShow == eventDescription {
-                        Text(textToShow)
+                        Text(formatText(textToShow))
                     } else {
-                        HackerTextView(text: textToShow, speed: 0.05)
+                        HackerTextView(text: formatText(textToShow), speed: 0.05)
                     }
                 }
                 .font(.bodyFont)
@@ -41,7 +41,7 @@ struct EventView: View {
     }
 
     func updateText() {
-        guard gameplayVM.getState() == .consequence else {
+        guard gameplayVM.getState() != .choosing else {
             withAnimation {
                 textToShow = eventDescription
             }
@@ -57,7 +57,19 @@ struct EventView: View {
             textToShow = consequence1
         }
     }
+    
+    func formatText(_ text: String) -> String {
+        var formattedText = text
+        let ponctuation = [".", "?", "!", ":"]
+        if (text.count < 1) { return "" }
+        
+        if (!ponctuation.contains(text.last!.lowercased())) {
+            formattedText.append(".")
+        }
+        return formattedText
+    }
 }
+
 
 #Preview {
     EventView(eventDescription: "Event description here", consequence1: "Consequence 1", consequence2: "Consequence 2")

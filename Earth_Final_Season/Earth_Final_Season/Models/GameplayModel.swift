@@ -74,4 +74,5 @@ struct Indicators: IndicatorService {
         print("Updated Sociopolitical Instability: \(socioPoliticalInstability)")
         print("Updated Environmental Degradation: \(environmentalDegradation)")
     }
+
 }

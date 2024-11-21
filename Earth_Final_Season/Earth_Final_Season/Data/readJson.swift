@@ -28,7 +28,7 @@ struct sampleRecord: Codable {
 // Parse the JSON data into your Swift structs
 func parse(jsonData: Data) -> [Event]? {
     do {
-        let decodedData = try JSONDecoder().decode(sampleRecord.self, from: jsonData)
+        var decodedData = try JSONDecoder().decode(sampleRecord.self, from: jsonData)
         return decodedData.mockEvents
     } catch {
         print("Error parsing JSON: \(error)")
@@ -48,3 +48,4 @@ func loadAndReturnEvents() -> [Event] {
     }
     return []
 }
+
