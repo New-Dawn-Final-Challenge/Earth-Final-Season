@@ -28,17 +28,17 @@ class SettingsViewModel {
     var hapticsEnabled = true {
         didSet {
             UserDefaults.standard.set(hapticsEnabled, forKey: Constants.Settings.userDefaultsHapticsEnabledKey)
+            HapticsManager.shared.setIntensity(hapticsEnabled ? 1.0 : 0.0)
         }
     }
     
     var selectedGesture: Gesture = .holdDrag {
         didSet {
             UserDefaults.standard.set(selectedGesture.rawValue, forKey: Constants.Settings.userDefaultsGestureKey)
-            print("saved \(selectedGesture.rawValue)")
         }
     }
     
-    var hapticsIntensity: Float = 1 {
+    var hapticsIntensity: Float = Constants.Settings.defaultHapticsIntensity {
         didSet {
             HapticsManager.shared.setIntensity(hapticsIntensity / Constants.Settings.maxIntensity)
             UserDefaults.standard.set(hapticsIntensity, forKey: Constants.Settings.userDefaultsHapticsKey)
@@ -54,13 +54,11 @@ class SettingsViewModel {
         if (!firstTimePlaying) {
             self.musicIntensity = UserDefaults.standard.float(forKey: "musicIntensity")
             
-            print("initialized music intensity to \(musicIntensity)\n")
             self.soundEffectsIntensity = UserDefaults.standard.float(forKey: "effectsIntensity")
-            self.hapticsIntensity = UserDefaults.standard.float(forKey: "hapticsIntensity") != 0 ? UserDefaults.standard.float(forKey: "hapticsIntensity") : Constants.Settings.defaultHapticsIntensity
+            self.hapticsIntensity = UserDefaults.standard.float(forKey: "hapticsIntensity")
             self.hapticsEnabled = UserDefaults.standard.bool(forKey: "hapticsEnabled")
             
             let rawValue = UserDefaults.standard.integer(forKey: "selectedGesture")
-            print("raw value: \(rawValue)")
             
             self.selectedGesture = Gesture(rawValue: rawValue) ?? .holdDrag
             }
