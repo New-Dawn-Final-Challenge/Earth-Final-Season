@@ -25,6 +25,7 @@ class GameplayViewModel: GameEngineDelegate {
     var sociopoliticalInstabilityShadowRadius = 0
     var currentEvent: Event?
     
+    var isPaused = false
     var timer: Timer?
     var countdown = Constants.GameplayViewModel.countdownStartValue
     var specialEnding = false
@@ -47,7 +48,9 @@ class GameplayViewModel: GameEngineDelegate {
         case .consequence:
             timer = Timer.scheduledTimer(withTimeInterval: Constants.GameplayViewModel.timerInterval, repeats: true) { _ in
                 if self.countdown > 0 {
-                    self.countdown -= 1
+                    if (!self.isPaused) {
+                        self.countdown -= 1
+                    }
                 } else {
                     self.timer?.invalidate()
                     self.timer = nil
