@@ -53,6 +53,7 @@ struct GameplayView: View {
                 Color.black.opacity(0.6).ignoresSafeArea(.all)
                 GameOverView(isPresented: $showGameOver, leaderboardVM: $leaderboardVM, doStuff: {
                     dismiss()
+                    SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "menu", duration: 0.5)
                 })
             }
             .presentationBackground(.clear)
