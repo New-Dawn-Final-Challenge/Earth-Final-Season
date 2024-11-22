@@ -91,7 +91,7 @@ struct ChaosIndicatorsView: View {
         case "illBeing":
             return Assets.Images.illbeingSimple.swiftUIImage
         case "socioPoliticalInstability":
-            return Assets.Images.sociopoliticalInstabilitySimple.swiftUIImage
+            return Assets.Images.socioPoliticalInstabilitySimple.swiftUIImage
         default:
             return Image(systemName: "questionmark")
         }
