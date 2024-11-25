@@ -58,6 +58,7 @@ struct ControlPanelView: View {
                     .shadow(color: .white, radius: gameplayVM.getState() == .consequence ? 4 : 0)
                     .aspectRatio(contentMode: .fit)
                     .animation(.linear)
+                    .opacity(gameplayVM.getState() == .consequence ? 1 : 0.4)
             }
         
             
@@ -84,6 +85,7 @@ struct ControlPanelView: View {
                     .shadow(color: .white, radius: gameplayVM.getState() == .consequence ? 4 : 0)
                     .aspectRatio(contentMode: .fit)
                     .animation(.linear)
+                    .opacity(gameplayVM.getState() == .consequence ? 1 : 0.4)
             }
             
                 
