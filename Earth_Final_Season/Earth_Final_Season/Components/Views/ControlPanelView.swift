@@ -47,9 +47,7 @@ struct ControlPanelView: View {
     private var panelAccessoryA: some View {
         VStack(spacing: 4) {
             Button {
-                if let _ = gameplayVM.timer {
-                    gameplayVM.isPaused.toggle()
-                }
+                gameplayVM.togglePause()
             } label: {
                 Image(systemName: gameplayVM.isPaused ? "play.fill" : "pause.fill")
                     .resizable()
@@ -74,10 +72,7 @@ struct ControlPanelView: View {
     private var panelAccessoryB: some View {
         VStack(spacing: 4) {
             Button {
-                if let _ = gameplayVM.timer {
-                    gameplayVM.countdown -= 6
-                    gameplayVM.isPaused = false
-                }
+                gameplayVM.skipTimer()
             } label: {
                 Image(systemName: "forward.fill")
                     .resizable()
