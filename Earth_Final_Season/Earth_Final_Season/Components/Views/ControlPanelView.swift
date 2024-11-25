@@ -60,6 +60,7 @@ struct ControlPanelView: View {
                     .animation(.linear)
                     .opacity(gameplayVM.getState() == .consequence ? 1 : 0.4)
             }
+            .disabled(gameplayVM.getState() == .consequence ? false : true)
         
             
             Assets.Images.panelAccessoryA.swiftUIImage
@@ -87,6 +88,7 @@ struct ControlPanelView: View {
                     .animation(.linear)
                     .opacity(gameplayVM.getState() == .consequence ? 1 : 0.4)
             }
+            .disabled(gameplayVM.getState() == .consequence ? false : true)
             
                 
             
