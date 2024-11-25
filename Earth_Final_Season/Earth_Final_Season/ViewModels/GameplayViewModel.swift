@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Design_System
+import Combine
 
 protocol GameEngineDelegate: AnyObject {
     func gameStateChanged(to state: States)
@@ -25,9 +26,13 @@ class GameplayViewModel: GameEngineDelegate {
     var sociopoliticalInstabilityShadowRadius = 0
     var currentEvent: Event?
     
+    var isPaused = false
     var timer: Timer?
     var countdown = Constants.GameplayViewModel.countdownStartValue
     var specialEnding = false
+    var progress: Double = 0
+    private var displayLink: CADisplayLink?
+    private var lastUpdatedTime: CFTimeInterval = 0
     
     var scaleChange: [CGFloat] = Array(repeating: Constants.GameplayViewModel.indicatorInitialScale, count: 3)
     var shouldShowIndicator: [Bool] = Array(repeating: false, count: 3)
@@ -43,26 +48,68 @@ class GameplayViewModel: GameEngineDelegate {
         switch (state) {
         case .choosing:
             currentEvent = getEvent()
+            resetTimer()
             
         case .consequence:
-            timer = Timer.scheduledTimer(withTimeInterval: Constants.GameplayViewModel.timerInterval, repeats: true) { _ in
-                if self.countdown > 0 {
-                    self.countdown -= 1
-                } else {
-                    self.timer?.invalidate()
-                    self.timer = nil
-                    self.countdown = Constants.GameplayViewModel.countdownStartValue
-                    
-                    self.engine?.goToNextEvent()
-                }
-            }
+            startTimer()
             
         default:
             return
         }
-        
-        
     }
+    
+    func resetTimer() {
+        displayLink?.invalidate()
+        displayLink = nil
+        progress = 0
+    }
+    
+    func startTimer() {
+        resetTimer()
+        displayLink = CADisplayLink(target: self, selector: #selector(updateTimer))
+        displayLink?.add(to: .main, forMode: .common)
+        lastUpdatedTime = CACurrentMediaTime()
+    }
+    
+    func skipTimer() {
+        resumeTimer()
+        progress = 1.0
+    }
+    
+    func pauseTimer() {
+        isPaused = true
+        lastUpdatedTime = CACurrentMediaTime()
+    }
+    
+    func resumeTimer() {
+        isPaused = false
+        lastUpdatedTime = CACurrentMediaTime()
+    }
+        
+    func togglePause() {
+        if isPaused {
+            resumeTimer()
+        } else {
+            pauseTimer()
+        }
+    }
+    
+    @objc private func updateTimer(displayLink: CADisplayLink) {
+        if isPaused {
+            return
+        }
+            
+        let currentTime = CACurrentMediaTime()
+        let deltaTime = currentTime - lastUpdatedTime
+        lastUpdatedTime = currentTime
+            
+        progress += deltaTime / Double(countdown)
+            
+            if progress >= 1.0 {
+                resetTimer()
+                engine?.goToNextEvent()
+            }
+        }
     
     func getState() -> States? {
         return engine?.state

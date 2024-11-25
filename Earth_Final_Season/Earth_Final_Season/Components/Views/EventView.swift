@@ -17,27 +17,35 @@ struct EventView: View {
     let consequence2: String
     
     var body: some View {
-        Assets.Images.eventsScreen.swiftUIImage
-            .resizable()
-            .frame(width: getWidth() * Constants.EventView.frameWidthMultiplier,
-                   height: getHeight() * Constants.EventView.frameHeightMultiplier)
-            .padding()
-            .foregroundStyle(Color(UIColor.systemGray4))
-            .overlay(
-                Group {
-                    if textToShow == eventDescription {
-                        Text(formatText(textToShow))
-                    } else {
-                        HackerTextView(text: formatText(textToShow), speed: 0.05)
+        ZStack {
+            Assets.Images.eventsScreen.swiftUIImage
+                .resizable()
+                .frame(width: getWidth() * Constants.EventView.frameWidthMultiplier,
+                       height: getHeight() * Constants.EventView.frameHeightMultiplier)
+                .padding()
+                .foregroundStyle(Color(UIColor.systemGray4))
+                .overlay(
+                    Group {
+                        if textToShow == eventDescription {
+                            Text(textToShow)
+                        } else {
+                            HackerTextView(text: textToShow, speed: 0.05)
+                        }
                     }
-                }
-                .font(.bodyFont)
-                .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, Constants.EventView.horizontalPadding)
-            )
-            .onAppear(perform: updateText)
-            .onChange(of: gameplayVM.getState() == .consequence, updateText)
+                    .font(.bodyFont)
+                    .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, Constants.EventView.horizontalPadding)
+                )
+                .onAppear(perform: updateText)
+                .onChange(of: gameplayVM.getState() == .consequence, updateText)
+            
+            if gameplayVM.getState() == .consequence {
+                ProgressBarView()
+                    .offset(y: 60)
+            }
+        }
+        
     }
 
     func updateText() {

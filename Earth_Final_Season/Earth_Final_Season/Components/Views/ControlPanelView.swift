@@ -45,17 +45,53 @@ struct ControlPanelView: View {
     }
     
     private var panelAccessoryA: some View {
-        Assets.Images.panelAccessoryA.swiftUIImage
-            .resizable()
-            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
-                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
+        VStack(spacing: 4) {
+            Button {
+                gameplayVM.togglePause()
+            } label: {
+                Image(systemName: gameplayVM.isPaused ? "play.fill" : "pause.fill")
+                    .resizable()
+                    .frame(width: 20, height: 30)
+                    .foregroundStyle(gameplayVM.getState() == .consequence ? Assets.Colors.accentSecondary.swiftUIColor : .secondary)
+                    .shadow(color: .white, radius: gameplayVM.getState() == .consequence ? 4 : 0)
+                    .aspectRatio(contentMode: .fit)
+                    .animation(.linear)
+                    .opacity(gameplayVM.getState() == .consequence ? 1 : 0.4)
+            }
+            .disabled(gameplayVM.getState() == .consequence ? false : true)
+        
+            
+            Assets.Images.panelAccessoryA.swiftUIImage
+                .resizable()
+                .frame(width: getWidth() * 0.75 * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                       height: getHeight() * 0.5 * Constants.GameplayView.panelAccessoryHeightMultiplier)
+            
+        }
     }
     
     private var panelAccessoryB: some View {
-        Assets.Images.panelAccessoryB.swiftUIImage
-            .resizable()
-            .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
-                   height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
+        VStack(spacing: 4) {
+            Button {
+                gameplayVM.skipTimer()
+            } label: {
+                Image(systemName: "forward.fill")
+                    .resizable()
+                    .frame(width: 30, height: 35)
+                    .foregroundStyle(gameplayVM.getState() == .consequence ? Assets.Colors.accentSecondary.swiftUIColor : .secondary)
+                    .shadow(color: .white, radius: gameplayVM.getState() == .consequence ? 4 : 0)
+                    .aspectRatio(contentMode: .fit)
+                    .animation(.linear)
+                    .opacity(gameplayVM.getState() == .consequence ? 1 : 0.4)
+            }
+            .disabled(gameplayVM.getState() == .consequence ? false : true)
+            
+                
+            
+            Assets.Images.panelAccessoryB.swiftUIImage
+                .resizable()
+                .frame(width: getWidth() * 0.75 * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                       height: getHeight() * 0.5 * Constants.GameplayView.panelAccessoryHeightMultiplier)
+        }   
     }
     
     private var actionControlsView: some View {
@@ -75,6 +111,8 @@ struct ControlPanelView: View {
                 onChooseOption1: { gameplayVM.chooseOption(option: 1) },
                 onChooseOption2: { gameplayVM.chooseOption(option: 2) }
             )
+            .grayscale(gameplayVM.getState() == .consequence ? 0.8 : 0)
+            .colorMultiply(gameplayVM.getState() == .consequence ? .gray : .white)
             panelAccessoryB
         }
         .padding(.top, Constants.GameplayView.panelPaddingTop)
@@ -151,4 +189,11 @@ struct ControlPanelView: View {
                    height: getHeight() * Constants.BlackPanel.panelHeight)
             .padding(.horizontal, padding ?? 0)
     }
+}
+
+
+#Preview {
+    @Previewable @State var vm = SettingsViewModel()
+    ControlPanelView(settingsVM: $vm)
+        .environment(GameplayViewModel())
 }
