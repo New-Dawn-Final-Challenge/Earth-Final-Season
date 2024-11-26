@@ -9,6 +9,14 @@ import SwiftUI
 import Design_System
 
 struct CharacterGalleryView: View {
+    @Binding var vm: CharacterGalleryViewModel
+    var doStuff: () -> Void
+
+    init(vm: Binding<CharacterGalleryViewModel>, text: String, doStuff: @escaping () -> Void) {
+        self._vm = vm
+        self.doStuff = doStuff
+    }
+    
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 0), count: 2)
     
     var body: some View {
@@ -49,12 +57,17 @@ struct CharacterGalleryView: View {
     
     private var closeButton: some View {
         HStack {
-            HelperButtonView(imageName: "xmark")
+            Button(action: {
+                vm.isPresentedInMenu.toggle()
+                doStuff()
+            }) {
+                HelperButtonView(imageName: "xmark")
+            }
             Spacer()
         }
         .padding(.bottom, -24)
     }
-    
+
     private var titleText: some View {
         Text3dEffect(text: "Character\nGallery")
             .font(.largeTitleFont)
@@ -112,8 +125,4 @@ struct CharacterGalleryView: View {
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
     }
-}
-
-#Preview {
-    CharacterGalleryView()
 }

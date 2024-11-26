@@ -14,8 +14,6 @@ struct AboutUsView: View {
     var doStuff: () -> Void
 
     init(vm: Binding<AboutUsViewModel>, text: String, doStuff: @escaping () -> Void) {
-        print("Inicializando a VM")
-        print(text)
         self._vm = vm
         self.doStuff = doStuff
     }
