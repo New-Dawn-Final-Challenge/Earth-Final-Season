@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Design_System
 
-enum CharacterGallery {
+enum CharacterGallery: CaseIterable {
     case ultraNewAgeEnvironmentalist, slowLogisticsEngineer, experimentalistGeneticist,
          sensationalistTVHost, indiePhysician, chronicallyOnlineTeenager,
          questionableReligiousLeader, presidentInDenial, fearlessEconomist,
@@ -18,20 +18,20 @@ enum CharacterGallery {
     
     var name: String {
         switch self {
-            case .ultraNewAgeEnvironmentalist: return "Ultra New Age Environmentalist"
-            case .slowLogisticsEngineer: return "Slow Logistics Engineer"
-            case .experimentalistGeneticist: return "Experimentalist Geneticist"
-            case .sensationalistTVHost: return "Sensationalist TV Host"
-            case .indiePhysician: return "Indie Physician"
-            case .chronicallyOnlineTeenager: return "Chronically Online Teenager"
-            case .questionableReligiousLeader: return "Questionable Religious Leader"
-            case .presidentInDenial: return "President in Denial"
-            case .fearlessEconomist: return "Fearless Economist"
-            case .evilResearcher: return "Evil Researcher"
-            case .chaoticBillionaire: return "Chaotic Billionaire"
-            case .convincingConspiracyTheorist: return "Convincing Conspiracy Theorist"
-            case .apocalypticalCat: return "Apocalyptical Cat"
-            case .robotVacuumCleaner: return "Robot Vacuum Cleaner"
+            case .ultraNewAgeEnvironmentalist: return "ULTRA NEW AGE ENVIRONMENTALIST"
+            case .slowLogisticsEngineer: return "SLOW LOGISTICS ENGINEER"
+            case .experimentalistGeneticist: return "EXPERIMENTALIST GENETICIST"
+            case .sensationalistTVHost: return "SENSATIONALIST TV HOST"
+            case .indiePhysician: return "INDIE PHYSICIAN"
+            case .chronicallyOnlineTeenager: return "CHRONICALLY ONLINE TEENAGER"
+            case .questionableReligiousLeader: return "QUESTIONABLE RELIGIOUS LEADER"
+            case .presidentInDenial: return "PRESIDENT IN DENIAL"
+            case .fearlessEconomist: return "FEARLESS ECONOMIST"
+            case .evilResearcher: return "EVIL RESEARCHER"
+            case .chaoticBillionaire: return "CHAOTIC BILLIONAIRE"
+            case .convincingConspiracyTheorist: return "CONVINCING CONSPIRACY THEORIST"
+            case .apocalypticalCat: return "APOCALYPTICAL CAT"
+            case .robotVacuumCleaner: return "ROBOT VACUUM CLEANER"
             case .lockedCharacter: return "???"
         }
     }
