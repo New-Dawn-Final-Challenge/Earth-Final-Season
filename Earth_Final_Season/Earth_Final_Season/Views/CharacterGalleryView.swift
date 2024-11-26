@@ -13,9 +13,12 @@ struct CharacterGalleryView: View {
         ZStack {
             popUpBackground
             
-            VStack {
+            VStack(spacing: 16) {
+                closeButton
                 title
                 charactersUnlocked
+                
+                Spacer()
             }
             .padding()
         }
@@ -33,9 +36,18 @@ struct CharacterGalleryView: View {
             )
     }
     
+    private var closeButton: some View {
+        HStack {
+            HelperButtonView(imageName: "xmark")
+            Spacer()
+        }
+        .padding(.bottom, -24)
+    }
+    
     private var title: some View {
-        Text3dEffect(text: "Character Gallery")
+        Text3dEffect(text: "Character\nGallery")
             .font(.largeTitleFont)
+            .multilineTextAlignment(.center)
     }
     
     private var charactersUnlocked: some View {
