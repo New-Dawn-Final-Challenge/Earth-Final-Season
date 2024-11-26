@@ -17,24 +17,26 @@ struct CharacterGalleryView: View {
         self.doStuff = doStuff
     }
     
-    private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 0), count: 2)
+    private let columns: [GridItem] = Array(repeating: .init(.flexible(),
+                                                             spacing: Constants.CharacterGalleryView.gridSpacing),
+                                            count: Constants.CharacterGalleryView.gridColumns)
     
     var body: some View {
         ZStack {
             popUpBackground
             
             ScrollView {
-                VStack(spacing: 16) {
+                VStack(spacing: Constants.CharacterGalleryView.vstackSpacing) {
                     closeButton
                     titleText
                     charactersUnlockedText
                     
-                    LazyVGrid(columns: columns, spacing: 16) {
+                    LazyVGrid(columns: columns, spacing: Constants.CharacterGalleryView.vstackSpacing) {
                         ForEach(CharacterGallery.allCases, id: \.self) { character in
                             characterComponent(character: character)
                         }
                     }
-                    .padding(.top, 16)
+                    .padding(.top, Constants.CharacterGalleryView.vstackPadding)
                     
                     Spacer()
                 }
@@ -42,7 +44,6 @@ struct CharacterGalleryView: View {
             }
         }
         .padding()
-        .background(Color.black.opacity(0.6))
     }
     
     private var popUpBackground: some View {
@@ -65,7 +66,7 @@ struct CharacterGalleryView: View {
             }
             Spacer()
         }
-        .padding(.bottom, -24)
+        .padding(.bottom, Constants.CharacterGalleryView.closeButtonPadding)
     }
 
     private var titleText: some View {
@@ -81,10 +82,10 @@ struct CharacterGalleryView: View {
     }
     
     private func characterComponent(character: CharacterGallery) -> some View {
-        RoundedRectangle(cornerRadius: 16)
+        RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
             .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
-            .frame(width: getWidth() * 0.4,
-                   height: getHeight() * 0.25)
+            .frame(width: getWidth() * Constants.CharacterGalleryView.characterComponentWidth,
+                   height: getHeight() * Constants.CharacterGalleryView.characterComponentHeight)
             .overlay(
                 VStack {
                     characterInfoOverlay(character: character)
@@ -94,27 +95,30 @@ struct CharacterGalleryView: View {
     }
     
     private func characterInfoOverlay(character: CharacterGallery) -> some View {
-        VStack(spacing: 8) {
+        VStack(spacing: Constants.CharacterGalleryView.characterInfoSpacing) {
             characterMonitor(character: character)
             characterName(character: character)
             characterDescription(character: character)
         }
         .font(.footnoteFont)
-        .padding(12)
+        .padding(Constants.CharacterGalleryView.characterInfoPadding)
     }
     
     private func characterMonitor(character: CharacterGallery) -> some View {
         Assets.Images.characterScreen.swiftUIImage
             .resizable()
-            .frame(width: getWidth() * 0.35,
-                   height: getHeight() * 0.12)
+            .frame(width: getWidth() * Constants.CharacterGalleryView.characterMonitorWidth,
+                   height: getHeight() * Constants.CharacterGalleryView.characterMonitorHeight)
             .overlay(character.image)
     }
     
     private func characterName(character: CharacterGallery) -> some View {
         Text(character.name)
             .foregroundStyle(Assets.Colors.accentPrimary.swiftUIColor)
-            .shadow(color: .black, radius: 0, x: -1.5, y: 0.5)
+            .shadow(color: .black,
+                    radius: Constants.CharacterGalleryView.shadowRadius,
+                    x: Constants.CharacterGalleryView.shadowX,
+                    y: Constants.CharacterGalleryView.shadowY)
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)
     }

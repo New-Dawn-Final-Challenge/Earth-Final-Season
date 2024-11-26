@@ -190,6 +190,23 @@ struct Constants{
         static let descriptionHeight: CGFloat = 0.4
     }
     
+    struct CharacterGalleryView {
+        static let gridColumns: Int = 2
+        static let gridSpacing: CGFloat = 0
+        static let vstackSpacing: CGFloat = 16
+        static let vstackPadding: CGFloat = 16
+        static let closeButtonPadding: CGFloat = -24
+        static let characterComponentWidth: CGFloat = 0.4
+        static let characterComponentHeight: CGFloat = 0.25
+        static let characterInfoSpacing: CGFloat = 8
+        static let characterInfoPadding: CGFloat = 12
+        static let characterMonitorWidth: CGFloat = 0.35
+        static let characterMonitorHeight: CGFloat = 0.12
+        static let shadowRadius: CGFloat = 0
+        static let shadowX: CGFloat = -1.5
+        static let shadowY: CGFloat = 0.5
+    }
+    
     struct AboutUsView {
         static let vstackSpacing: CGFloat = 24
         static let membersGridSpacing: CGFloat = 40
