@@ -25,17 +25,27 @@ class GameEngine {
                                 illBeing: Constants.GameEngine.initialIllBeing,
                                 socioPoliticalInstability: Constants.GameEngine.initialSocioPoliticalInstability,
                                 environmentalDegradation: Constants.GameEngine.initialEnvironmentalDegradation,
-                                currentYear: Constants.GameEngine.initialYear)  // Initial Indicators
+                                currentYear: Constants.GameEngine.initialYear)
     
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
+    private var unlockedCharacters: [String] = ["ultra new age environmentalist",
+                                                "sensationalist tv host",
+                                                "questionable religious leader",
+                                                "evil researcher"]
     
     var state: States = .initializing
 
     init(delegate: GameplayViewModel) {
-        events = loadAndReturnEvents()
+        events = filterUnlockedEvents(from: loadAndReturnEvents())
         resetGame()
         self.delegate = delegate
+    }
+    
+    func filterUnlockedEvents(from events: [Event]) -> [Event] {
+        return events.filter { event in
+            return unlockedCharacters.contains(event.character.lowercased())
+        }
     }
     
     func gameEnded() -> Bool {
