@@ -4,6 +4,7 @@ import Design_System
 struct HelpScreen: View {
     @Binding var vm: SettingsViewModel
     var indicatorsSize: CGFloat = 30
+    let percentage: CGFloat = 5
     var title = "Instructions"
     
     var body: some View {
@@ -71,14 +72,15 @@ struct HelpScreen: View {
                             .aspectRatio(contentMode: .fit)
                             .colorInvert()
                             .padding(.leading, 16)
-                            .padding(.top, 4)
+                            .padding(.top, 6)
                             .padding(.trailing, 8)
                         
                         VStack {
-                            Text("Environmental\ndegradation")
-                                .font(.footnoteFont)
-                                .foregroundStyle(.white)
+                            Text("Environmental")
+                            Text("degradation  ")
                         }
+                        .font(.footnoteFont)
+                        .foregroundStyle(.white)
                         Spacer()
                     }
                     .padding(.horizontal, 10)
@@ -173,24 +175,24 @@ struct HelpScreen: View {
                     Image(systemName: "hands.and.sparkles.fill")
                         .resizable()
                         .foregroundStyle(.white)
-                        .frame(width: 35, height: 40)
+                        .frame(width: 25, height: 30)
                         .padding(.horizontal, 12)
                         .padding(.top, 8)
                     
                     ZStack(alignment: .bottom) {
+                        // Background Bar (empty part)
                         Rectangle()
-                            .fill(.gray)
-                            .frame(width: getWidth() * Constants.AudienceIndicator.barWidthMultiplier * 1.25,
-                                   height: getHeight() * 1.25 * Constants.AudienceIndicator.barHeightMultiplier)
-                            .cornerRadius(Constants.Global.cornerRadius)
+                            .fill(Color(UIColor.systemGray))
+                            .frame(width: getWidth() * 1.35 *  Constants.AudienceIndicator.barWidthMultiplier,
+                                   height: getHeight() *  Constants.AudienceIndicator.barHeightMultiplier)
+                        
                         
                         Rectangle()
                             .fill(Assets.Colors.textSecondary.swiftUIColor)
-                            .frame(width: getWidth() * 1.25 * Constants.AudienceIndicator.barWidthMultiplier,
-                                   height: 20 * 1.25)
-                            .cornerRadius(Constants.Global.cornerRadius)
+                            .frame(width: getWidth() * 1.35 *  Constants.AudienceIndicator.barWidthMultiplier,
+                                   height: max(0, CGFloat(percentage - Constants.AudienceIndicator.percentageOffset) / Constants.AudienceIndicator.percentageScaleFactor * (getHeight() * Constants.AudienceIndicator.barHeightMultiplier)))
                     }
-                    .padding(.horizontal, 12)
+                    .cornerRadius(Constants.Global.cornerRadius)
                     .padding(.bottom, 8)
                 }
                 .background(
@@ -210,7 +212,7 @@ struct HelpScreen: View {
                 }
                     .font(.footnoteFont)
                     .foregroundStyle(.gray)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                     .padding(.horizontal, 54)
             }
         }
