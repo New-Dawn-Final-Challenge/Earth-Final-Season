@@ -21,7 +21,7 @@ struct Utils {
             return false
         }
     }
-    static func switchMessageDependindOnCharacter(_ name: String?) -> (title: String, message: String){
+    static func switchMessageDependingOnCharacter(_ name: String?) -> (title: String, message: String){
         let defaultMessage = (title: "nope", message: "something's gone wrong")
         guard let characterName = name else { return defaultMessage }
         
@@ -30,7 +30,7 @@ struct Utils {
             return (title: Constants.GameEngine.gameOverCatTitle , message: Constants.GameEngine.gameOverCatMessage)
         
         case "robot vacuum cleaner":
-            return (title: Constants.GameEngine.gameOverRobotVacuumCleanerTitle , message: Constants.GameEngine.gameOverRobotVacuumCleanerTitle)
+            return (title: Constants.GameEngine.gameOverRobotVacuumCleanerTitle , message: Constants.GameEngine.gameOverRobotVacuumCleanerMessage)
             
         default:
             return defaultMessage
@@ -47,6 +47,9 @@ struct Utils {
             
         case "apocalyptical cat":
             return Assets.Images.apocalypticalCat.swiftUIImage
+            
+        case "special final apocalyptical cat":
+            return Assets.Images.specialFinalApocalypiticalCat.swiftUIImage
             
         case "chronically online teenager":
             return Assets.Images.chronicallyOnlineTeenager.swiftUIImage
@@ -74,6 +77,9 @@ struct Utils {
             
         case "robot vacuum cleaner":
             return Assets.Images.robotVacumCleaner.swiftUIImage
+            
+        case "special final robot vacuum cleaner":
+            return Assets.Images.specialFinalRobotVaccum.swiftUIImage
             
         case "sensationalist tv host":
             return Assets.Images.sensionalistTVHost.swiftUIImage
