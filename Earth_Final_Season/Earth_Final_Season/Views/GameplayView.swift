@@ -13,7 +13,7 @@ struct GameplayView: View {
         ZStack {
             BackgroundView()
             
-            VStack(spacing: 0) {
+            VStack(spacing: -4) {
                 helperButtonsView
                     .padding(.top, 16)
                 gameContentView

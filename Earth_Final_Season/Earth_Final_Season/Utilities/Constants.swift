@@ -71,7 +71,7 @@ struct Constants{
     struct BlackPanel {
         static let horizontalSpacing: CGFloat = 6
         static let panelHeight: CGFloat = 0.125
-        static let backgroundPanelHeight: CGFloat = 0.29
+        static let backgroundPanelHeight: CGFloat = 0.31
         static let yearMonitorHeight: CGFloat = 0.1
         static let sidePanelWidth: CGFloat = 0.1
         static let yearPanelWidth: CGFloat = 0.3
@@ -202,15 +202,17 @@ struct Constants{
 
     struct GameplayView {
         static let helperButtonsPaddingTrailing: CGFloat = 60
-        static let helperButtonsPaddingTop: CGFloat = 32
+        static let helperButtonsPaddingTop: CGFloat = 30
         static let indicatorSpacingMultiplier: CGFloat = -0.02
-        static let panelAccessoryWidthMultiplier: CGFloat = 0.3
-        static let panelAccessoryHeightMultiplier: CGFloat = 0.08
-        static let staticPanelWidth: CGFloat = 1.05
-        static let staticPanelHeight: CGFloat = 0.08
+        static let panelAccessoryWidthMultiplier: CGFloat = 0.25
+        static let panelAccessoryHeightMultiplier: CGFloat = 0.06
+        static let staticPanelWidth: CGFloat = 0.8
+        static let staticPanelHeight: CGFloat = 0.07
         static let paddingTopChoiceView: CGFloat = -15
         static let panelPaddingTop: CGFloat = 30
+        static let staticPanelPaddingTop: CGFloat = 42
         static let panelHorizontalPadding: CGFloat = 30
+        static let staticPanelHorizontalPadding: CGFloat = 0
     }
 
     struct MenuView {
