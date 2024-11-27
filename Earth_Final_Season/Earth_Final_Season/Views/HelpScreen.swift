@@ -50,7 +50,7 @@ struct HelpScreen: View {
             
             VStack {
                 HStack {
-                    Text("Chaos Indicators")
+                    HackerTextView(text: "Chaos Indicators", speed: 0.05)
                         .font(.bodyFont)
                         .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                     Spacer()
@@ -69,8 +69,8 @@ struct HelpScreen: View {
                             .padding(.trailing, 8)
                         
                         VStack {
-                            Text("Environmental")
-                            Text("degradation  ")
+                            HackerTextView(text: "Environmental", speed: 0.05)
+                            HackerTextView(text: "degradation  ", speed: 0.05)
                         }
                         .font(.footnoteFont)
                         .foregroundStyle(.white)
@@ -93,7 +93,7 @@ struct HelpScreen: View {
                             .padding(.trailing, 8)
                         
                         VStack {
-                            Text("Ill-being")
+                            HackerTextView(text: "Ill-being", speed: 0.05)
                                 .font(.footnoteFont)
                                 .foregroundStyle(.white)
                         }
@@ -115,7 +115,7 @@ struct HelpScreen: View {
                             .padding(.trailing, 8)
                         
                         VStack {
-                            Text("Sociopolitical\ninstability")
+                            HackerTextView(text: "Sociopolitical\ninstability", speed: 0.05)
                                 .font(.footnoteFont)
                                 .foregroundStyle(.white)
                         }
@@ -135,10 +135,7 @@ struct HelpScreen: View {
                 .frame(maxWidth: 250)
                 
                 HStack {
-                    Text("Keep them ") +
-                    Text("high")
-                        .underline() +
-                    Text(", but never to their limit")
+                    HackerTextView(text: "Keep them high, but never to their limit", speed: 0.05)
                 }
                 .font(.footnoteFont)
                 .foregroundStyle(.gray)
@@ -156,7 +153,7 @@ struct HelpScreen: View {
             
             VStack {
                 HStack {
-                    Text("Audience Indicator")
+                    HackerTextView(text: "Audience Indicator", speed: 0.05)
                         .font(.bodyFont)
                         .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                     Spacer()
@@ -195,12 +192,7 @@ struct HelpScreen: View {
                 .frame(maxWidth: .infinity)
                 
                 HStack {
-                    Text("Audience is high if ") +
-                    Text("chaos is high")
-                        .underline() +
-                    Text(". If it hits the bottom, ") +
-                    Text("you're fired")
-                        .underline()
+                    HackerTextView(text: "Audience is high if chaos is high. If it hits the bottom, you're fired", speed: 0.05)
                 }
                     .font(.footnoteFont)
                     .foregroundStyle(.gray)
