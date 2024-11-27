@@ -11,25 +11,20 @@ struct HelpScreen: View {
         ZStack {
             popUpBackground
             
-            VStack(spacing: 0) {
+            VStack(spacing: 6) {
                 Text3dEffect(text: title)
                     .font(.largeTitleFont)
                 
                 Text("Keep the show running for as many years as you can!")
-                    .foregroundStyle(.white)
-                    .font(.title3Font)
-                    .padding(.bottom, 16)
+                    .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
+                    .font(.bodyFont)
                     .multilineTextAlignment(.center)
                 
                 indicators
-                    .padding(.vertical, 8)
                 
                 audienceSection
-                    .padding(.vertical, 8)
                 
                 resumeButton
-                
-                Spacer()
             }
             .padding()
         }
@@ -50,19 +45,17 @@ struct HelpScreen: View {
         ZStack {
             Assets.Images.characterScreen.swiftUIImage
                 .resizable()
-                .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: .infinity)
+                .frame(height: getHeight() * 0.33)
             
-            VStack(spacing: 0) {
+            VStack {
                 HStack {
-                    Spacer()
-                    Text("Chaos indicators")
-                        .font(.title3Font)
-                        .foregroundStyle(.black)
-                    Spacer()
+                    Text("Chaos Indicators")
+                        .font(.bodyFont)
+                        .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                     Spacer()
                 }
-                .padding(.horizontal)
+                .padding(.leading, 36)
                 
                 VStack {
                     HStack {
@@ -133,6 +126,7 @@ struct HelpScreen: View {
                     
                     
                 }
+                .padding(4)
                 .background(
                     Rectangle()
                         .fill(Assets.Colors.bgFillPrimary.swiftUIColor)
@@ -160,16 +154,14 @@ struct HelpScreen: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(maxWidth: .infinity)
             
-            VStack(spacing: 4) {
+            VStack {
                 HStack {
-                    Spacer()
-                    Text("Audience indicator")
-                        .font(.title3Font)
-                        .foregroundStyle(.black)
-                    Spacer()
+                    Text("Audience Indicator")
+                        .font(.bodyFont)
+                        .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                     Spacer()
                 }
-                .padding(.horizontal)
+                .padding(.leading, 36)
                 
                 VStack {
                     Image(systemName: "hands.and.sparkles.fill")
