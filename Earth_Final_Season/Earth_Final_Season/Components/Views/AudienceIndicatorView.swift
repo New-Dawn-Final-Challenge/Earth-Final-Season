@@ -33,7 +33,7 @@ struct AudienceIndicatorView: View {
                 Rectangle()
                     .fill(Assets.Colors.textSecondary.swiftUIColor)
                     .frame(width: getWidth() * Constants.AudienceIndicator.barWidthMultiplier,
-                           height: max(0, CGFloat(percentage - Constants.AudienceIndicator.percentageOffset) / Constants.AudienceIndicator.percentageScaleFactor * (getHeight() * Constants.AudienceIndicator.barHeightMultiplier)))
+                           height: min(CGFloat(percentage - Constants.AudienceIndicator.percentageOffset) / Constants.AudienceIndicator.percentageScaleFactor * (getHeight() * Constants.AudienceIndicator.barHeightMultiplier),45))
             }
             .cornerRadius(Constants.Global.cornerRadius)
         }
