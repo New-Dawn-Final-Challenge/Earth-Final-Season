@@ -26,24 +26,26 @@ class GameEngine {
                                 socioPoliticalInstability: Constants.GameEngine.initialSocioPoliticalInstability,
                                 environmentalDegradation: Constants.GameEngine.initialEnvironmentalDegradation,
                                 currentYear: Constants.GameEngine.initialYear)
+    var unlockedCharacters: [String] = ["ultra new age environmentalist",
+                                        "sensationalist tv host",
+                                        "questionable religious leader",
+                                        "evil researcher"]
     
+    let allEvents: [Event]
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
-    private var unlockedCharacters: [String] = ["ultra new age environmentalist",
-                                                "sensationalist tv host",
-                                                "questionable religious leader",
-                                                "evil researcher"]
     
     var state: States = .initializing
 
     init(delegate: GameplayViewModel) {
+        self.allEvents = loadAndReturnEvents()
         events = filterUnlockedEvents(from: loadAndReturnEvents())
         resetGame()
         self.delegate = delegate
     }
     
-    func filterUnlockedEvents(from events: [Event]) -> [Event] {
-        return events.filter { event in
+    func filterUnlockedEvents(from allEvents: [Event]) -> [Event] {
+        return allEvents.filter { event in
             return unlockedCharacters.contains(event.character.lowercased())
         }
     }
@@ -163,14 +165,17 @@ class GameEngine {
                                     socioPoliticalInstability: Constants.GameEngine.initialSocioPoliticalInstability,
                                     environmentalDegradation: Constants.GameEngine.initialEnvironmentalDegradation,
                                     currentYear: Constants.GameEngine.initialYear)
-            let isReseting = state == .gameOver
             
+            let isReseting = state == .gameOver
             state = .choosing
-            let shuffledEvents = events.shuffled()
+            
+            let shuffledEvents = filterUnlockedEvents(from: allEvents).shuffled()
             self.eventsSequence = shuffledEvents.map { $0.id }
             currentEvent = shuffledEvents.first
+            
             eventsPassedCount = 0
             gameOverReason = ""
+            
             SoundtrackAudioManager.shared.stopAllSoundEffects()
             if (isReseting) {
                 SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameplay", duration: 0.5)

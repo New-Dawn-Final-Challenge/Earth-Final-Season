@@ -60,7 +60,7 @@ class SoundtrackAudioManager: NSObject, AVAudioPlayerDelegate {
             // After fade-out, start the new soundtrack with a fade-in
             self.playNewSoundtrack(named: newSoundtrackName)
             self.fadeInNewSoundtrack(duration: duration)
-            print("switched to new soundtrack")
+//            print("switched to new soundtrack")
         }
     }
     
@@ -137,7 +137,7 @@ class SoundtrackAudioManager: NSObject, AVAudioPlayerDelegate {
             soundEffectPlayer.volume = volume * soundEffectsVolume
             
             soundEffectPlayers.append(soundEffectPlayer)
-            print("played sound effect")
+//            print("played sound effect")
         } catch {
             print("Error playing sound effect: \(error.localizedDescription)")
         }
