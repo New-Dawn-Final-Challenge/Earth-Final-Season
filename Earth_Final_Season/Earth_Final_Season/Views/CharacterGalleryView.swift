@@ -34,7 +34,7 @@ struct CharacterGalleryView: View {
                     charactersUnlockedText(gameplayViewModel: gameplayVM)
                     
                     LazyVGrid(columns: columns, spacing: Constants.CharacterGalleryView.vstackSpacing) {
-                        ForEach(CharacterGallery.allCases, id: \.self) { character in
+                        ForEach(CharacterGallery.allCases.filter { $0 != .lockedCharacter }, id: \.self) { character in
                             characterComponent(character: character, gameplayViewModel: gameplayVM)
                         }
                     }
