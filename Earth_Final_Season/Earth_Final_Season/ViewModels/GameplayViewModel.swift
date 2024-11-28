@@ -262,9 +262,10 @@ class GameplayViewModel: GameEngineDelegate {
         let optionIndex = engine?.lastChosenOption == "choice2" ? 1 : 0
         let chosenValue = indicatorValues[indicator]?[optionIndex] ?? 0
         
+
         value[nIndicator] = chosenValue
         valueIsIncreasing[nIndicator] = value[nIndicator] > 0
-        shouldShowIndicator[nIndicator] = value[nIndicator] != 0
+        shouldShowIndicator[nIndicator] = (value[nIndicator] != 0 && value[nIndicator] < abs(15))
         scaleChange[nIndicator] = Constants.GameplayViewModel.indicatorVisibleScale
     }
     

@@ -71,7 +71,7 @@ struct Constants{
     struct BlackPanel {
         static let horizontalSpacing: CGFloat = 6
         static let panelHeight: CGFloat = 0.125
-        static let backgroundPanelHeight: CGFloat = 0.29
+        static let backgroundPanelHeight: CGFloat = 0.31
         static let yearMonitorHeight: CGFloat = 0.1
         static let sidePanelWidth: CGFloat = 0.1
         static let yearPanelWidth: CGFloat = 0.3
@@ -150,17 +150,17 @@ struct Constants{
         static let gameOverEnvironmentTitle = "Environmental Degradation reached its peak"
         static let gameOverIllBeingTitle = "Ill-being reached its peak"
         static let gameOverInstabilityTitle = "Sociopolitical instability reached its peak"
-        static let gameOverCatTitle = "Nyah nyah nyah nyah ..."
-        static let gameOverRobotVacuumCleanerTitle = "Damn thats a long title"
+        static let gameOverCatTitle = "Cat-astrophic Yarn Incident"
+        static let gameOverRobotVacuumCleanerTitle = "Robot Vaccum Cleaner clean too much"
 
         static let gameOverAudienceMessage = "There’s no simple way of putting this, but… You’re fired. Just to get it straight, you were supposed to entertain us by wrecking humanity, not by helping them. We already tried helping them, but it’s never as entertaining, trust me. If you ever need us in the future… Well, just don’t"
         static let gameOverEnvironmentMessage = "Chemtrails in the sky give sunrays a strange purple glow. The waters stink of green, the weather is either burning hot, or deadly cold, and fruits and crops never grow. Toc toc: any human alive? The answer is no"
         static let gameOverIllBeingMessage = "Wounds are red, depression is blue. Paranoia, anxiety, dissociation, viruses and bacteria flew free on Earth in a cruel summer breeze that put humanoids to one last, eternal — yet not so peaceful — sleep"
         static let gameOverInstabilityMessage = "There’s an ancient saying regarding humanoid World War IV being fought with sticks and stones. But here’s a new punch line for this final war: it will never be fought, because there’s not a single human left to fight it"
         
-        static let gameOverCatMessage = "Meow, meow meow meow, meow - meow meow! Meow meow, meow - meow meow meow. Meow meow meow meow, meow meow - meow meow? Meow meow meow meow, meow meow meow - meow meow meow meow. Meow meow meow meow, meow meow - meow meow meow meow, meow meow."
+        static let gameOverCatMessage = "Seriously? A ball of yarn? Come on, you look cute, you were our best bet to cause the most chaos to the humanoids, but you ruined it all! You played with the ball of destruction, and now, humanity is destroyed, and there is no one to applaud your work. "
         
-        static let gameOverRobotVacuumCleanerMessage = "VRRRRRUUUUUUUMMMMMMMMM"
+        static let gameOverRobotVacuumCleanerMessage = "Food? Chairs? Feet? EVERYTHING?! You cleaned so much there’s no dirt, not even a crumb for a cockroach to snack on—just a spotless, lemon-scented wasteland. How are diseases supposed to spread now? Congrats, idiot robot, you vacuumed away existence... and the audience. Great job!"
         
     }
 
@@ -219,15 +219,17 @@ struct Constants{
 
     struct GameplayView {
         static let helperButtonsPaddingTrailing: CGFloat = 60
-        static let helperButtonsPaddingTop: CGFloat = 32
+        static let helperButtonsPaddingTop: CGFloat = 30
         static let indicatorSpacingMultiplier: CGFloat = -0.02
-        static let panelAccessoryWidthMultiplier: CGFloat = 0.3
-        static let panelAccessoryHeightMultiplier: CGFloat = 0.08
-        static let staticPanelWidth: CGFloat = 1.05
-        static let staticPanelHeight: CGFloat = 0.08
+        static let panelAccessoryWidthMultiplier: CGFloat = 0.25
+        static let panelAccessoryHeightMultiplier: CGFloat = 0.06
+        static let staticPanelWidth: CGFloat = 0.8
+        static let staticPanelHeight: CGFloat = 0.07
         static let paddingTopChoiceView: CGFloat = -15
         static let panelPaddingTop: CGFloat = 30
+        static let staticPanelPaddingTop: CGFloat = 42
         static let panelHorizontalPadding: CGFloat = 30
+        static let staticPanelHorizontalPadding: CGFloat = 0
     }
 
     struct MenuView {

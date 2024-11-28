@@ -52,7 +52,7 @@ enum CharacterGallery: CaseIterable {
             case .convincingConspiracyTheorist: return "Claims aliens control everything"
             case .apocalypticalCat: return "Bringer of doom, taker of naps"
             case .robotVacuumCleaner: return "Sweeps up dirt... and humanity"
-            case .lockedCharacter: return "!@#ERROR#$%\n///###UNKNOWN###\\"
+            case .lockedCharacter: return "!@#CHARACTER#$%\n///###LOCKED###\\"
         }
     }
     

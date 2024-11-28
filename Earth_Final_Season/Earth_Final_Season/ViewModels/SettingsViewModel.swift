@@ -11,6 +11,7 @@ import Foundation
 class SettingsViewModel {
     var isPresentedinGameplay = false
     var isPresentedinMenu = false
+    var isPresentedHelp = false
     var soundEffectsIntensity: Float = Constants.Settings.defaultEffectsIntensity {
         didSet {
             SoundtrackAudioManager.shared.changeSoundEffectVolume(intensity: soundEffectsIntensity / Constants.Settings.maxIntensity)

@@ -21,7 +21,7 @@ struct ControlPanelView: View {
                 
                 VStack(alignment: .center) {
                     topPanelView
-                        .padding(.bottom, -20)
+                        .padding(.bottom, -45)
                     
                     ZStack {
                         bottomPanelView
@@ -34,18 +34,52 @@ struct ControlPanelView: View {
     }
     
     private var staticPanelView: some View {
-        HStack {
-            Assets.Images.accessibilityPanel.swiftUIImage
-                .resizable()
-                .frame(width: getWidth() * Constants.GameplayView.staticPanelWidth,
-                       height: getHeight() * Constants.GameplayView.staticPanelHeight)
+        VStack {
+            HStack {
+                Button {
+                    gameplayVM.togglePause()
+                } label: {
+                    Image(systemName: gameplayVM.isPaused ? "play.fill" : "pause.fill")
+                        .resizable()
+                        .frame(width: 20, height: 30)
+                        .foregroundStyle(gameplayVM.getState() == .consequence ? Assets.Colors.accentSecondary.swiftUIColor : .secondary)
+                        .shadow(color: .white, radius: gameplayVM.getState() == .consequence ? 4 : 0)
+                        .aspectRatio(contentMode: .fit)
+                        .animation(.linear)
+                        .opacity(gameplayVM.getState() == .consequence ? 1 : 0.4)
+                }
+                .disabled(gameplayVM.getState() == .consequence ? false : true)
+                
+                Spacer()
+                
+                Button {
+                    gameplayVM.skipTimer()
+                } label: {
+                    Image(systemName: "forward.fill")
+                        .resizable()
+                        .frame(width: 30, height: 35)
+                        .foregroundStyle(gameplayVM.getState() == .consequence ? Assets.Colors.accentSecondary.swiftUIColor : .secondary)
+                        .shadow(color: .white, radius: gameplayVM.getState() == .consequence ? 4 : 0)
+                        .aspectRatio(contentMode: .fit)
+                        .animation(.linear)
+                        .opacity(gameplayVM.getState() == .consequence ? 1 : 0.4)
+                }
+                .disabled(gameplayVM.getState() == .consequence ? false : true)
+            }
+            .padding(.horizontal, 90)
+            
+            HStack {
+                Assets.Images.accessibilityPanel.swiftUIImage
+                    .resizable()
+                    .frame(width: getWidth() * Constants.GameplayView.staticPanelWidth,
+                           height: getHeight() * Constants.GameplayView.staticPanelHeight)
+            }
         }
-        .padding(.horizontal, Constants.GameplayView.panelHorizontalPadding)
-        .padding(.top, Constants.GameplayView.panelPaddingTop)
+        .padding(.top, Constants.GameplayView.staticPanelPaddingTop)
     }
     
     private var panelAccessoryA: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 12) {
             Button {
                 gameplayVM.togglePause()
             } label: {
@@ -63,14 +97,15 @@ struct ControlPanelView: View {
             
             Assets.Images.panelAccessoryA.swiftUIImage
                 .resizable()
-                .frame(width: getWidth() * 0.75 * Constants.GameplayView.panelAccessoryWidthMultiplier,
-                       height: getHeight() * 0.5 * Constants.GameplayView.panelAccessoryHeightMultiplier)
+                .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                       height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
             
         }
+        .padding(.top)
     }
     
     private var panelAccessoryB: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 12) {
             Button {
                 gameplayVM.skipTimer()
             } label: {
@@ -89,9 +124,10 @@ struct ControlPanelView: View {
             
             Assets.Images.panelAccessoryB.swiftUIImage
                 .resizable()
-                .frame(width: getWidth() * 0.75 * Constants.GameplayView.panelAccessoryWidthMultiplier,
-                       height: getHeight() * 0.5 * Constants.GameplayView.panelAccessoryHeightMultiplier)
-        }   
+                .frame(width: getWidth() * Constants.GameplayView.panelAccessoryWidthMultiplier,
+                       height: getHeight() * Constants.GameplayView.panelAccessoryHeightMultiplier)
+        }
+        .padding(.top)
     }
     
     private var actionControlsView: some View {

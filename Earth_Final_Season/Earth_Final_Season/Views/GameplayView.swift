@@ -13,7 +13,7 @@ struct GameplayView: View {
         ZStack {
             BackgroundView()
             
-            VStack(spacing: 0) {
+            VStack(spacing: -4) {
                 helperButtonsView
                     .padding(.top, 16)
                 gameContentView
@@ -27,6 +27,13 @@ struct GameplayView: View {
                     SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "menu", duration: 1.0)
                     dismiss()
                 })
+            }
+            .presentationBackground(.clear)
+        }
+        .fullScreenCover(isPresented: $settingsVM.isPresentedHelp) {
+            ZStack {
+                Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                HelpScreen(vm: $settingsVM)
             }
             .presentationBackground(.clear)
         }
@@ -125,7 +132,7 @@ struct GameplayView: View {
     private var helperButtonsView: some View {
         HStack {
             Spacer()
-//            helperButton(destination: EmptyView(), imageName: "questionmark")
+            helperButton(imageName: "questionmark")
             
             Button {
                 settingsVM.isPresentedinGameplay.toggle()
@@ -137,8 +144,10 @@ struct GameplayView: View {
         .padding(.top, Constants.GameplayView.helperButtonsPaddingTop)
     }
     
-    private func helperButton<Destination: View>(destination: Destination, imageName: String) -> some View {
-        NavigationLink(destination: destination) {
+    private func helperButton(imageName: String) -> some View {
+        Button {
+            settingsVM.isPresentedHelp.toggle()
+        } label: {
             HelperButtonView(imageName: imageName)
         }
     }
