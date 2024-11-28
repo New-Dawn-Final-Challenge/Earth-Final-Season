@@ -150,7 +150,10 @@ class GameEngine {
                     }
                 } else {
                     print("No more events in the sequence.")
-                    currentEvent = nil
+                    // Reshuffle the events and restart the sequence
+                    let shuffledEvents = filterUnlockedEvents(from: allEvents).shuffled()
+                    self.eventsSequence = shuffledEvents.map { $0.id }
+                    currentEvent = shuffledEvents.first
                 }
             } else {
                 print("Event sequence is empty.")
