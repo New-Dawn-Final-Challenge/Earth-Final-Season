@@ -60,6 +60,21 @@ class GameplayViewModel: GameEngineDelegate {
         "robot vacuum cleaner"
     ]
     
+    init() {
+        loadUnlockedCharacters()
+    }
+    
+    func loadUnlockedCharacters() {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return
+        }
+
+        if let savedCharacters = UserDefaults.standard.array(forKey: "unlockedCharacters") as? [String] {
+            engine.unlockedCharacters = savedCharacters
+        }
+    }
+    
     func unlockNextCharacter() {
         guard let engine = engine else { return }
         
@@ -73,6 +88,8 @@ class GameplayViewModel: GameEngineDelegate {
         engine.events = engine.filterUnlockedEvents(from: engine.allEvents)
         print("Unlocked character: \(nextCharacter)")
         printUnlockedCharacters()
+        
+        saveUnlockedCharacters()
     }
     
     func printUnlockedCharacters() {
@@ -110,6 +127,15 @@ class GameplayViewModel: GameEngineDelegate {
         return allCharacters.count
     }
     
+    func saveUnlockedCharacters() {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return
+        }
+
+        UserDefaults.standard.set(engine.unlockedCharacters, forKey: "unlockedCharacters")
+    }
+
     func gameStateChanged(to state: States) {
         
         switch (state) {

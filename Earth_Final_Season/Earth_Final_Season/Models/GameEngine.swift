@@ -39,14 +39,30 @@ class GameEngine {
 
     init(delegate: GameplayViewModel) {
         self.allEvents = loadAndReturnEvents()
+        self.delegate = delegate
+        loadUnlockedCharacters()
         events = filterUnlockedEvents(from: loadAndReturnEvents())
         resetGame()
-        self.delegate = delegate
     }
     
     func filterUnlockedEvents(from allEvents: [Event]) -> [Event] {
         return allEvents.filter { event in
             return unlockedCharacters.contains(event.character.lowercased())
+        }
+    }
+
+    func saveUnlockedCharacters() {
+        UserDefaults.standard.set(unlockedCharacters, forKey: "unlockedCharacters")
+    }
+
+    func loadUnlockedCharacters() {
+        if let savedCharacters = UserDefaults.standard.array(forKey: "unlockedCharacters") as? [String] {
+            unlockedCharacters = savedCharacters
+        } else {
+            unlockedCharacters = ["ultra new age environmentalist",
+                                   "sensationalist tv host",
+                                   "questionable religious leader",
+                                   "evil researcher"]
         }
     }
     
