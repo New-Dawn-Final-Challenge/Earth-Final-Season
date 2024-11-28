@@ -91,6 +91,25 @@ class GameplayViewModel: GameEngineDelegate {
         }
     }
     
+    func getUnlockedCharacters() -> [String] {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return []
+        }
+        return engine.unlockedCharacters
+    }
+    
+    var unlockedCharacterCount: Int {
+        guard let engine = engine else {
+            return 0
+        }
+        return engine.unlockedCharacters.count
+    }
+    
+    var totalCharacterCount: Int {
+        return allCharacters.count
+    }
+    
     func gameStateChanged(to state: States) {
         
         switch (state) {

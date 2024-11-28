@@ -9,6 +9,8 @@ import SwiftUI
 import Design_System
 
 struct CharacterGalleryView: View {
+    @Environment(GameplayViewModel.self) private var gameplayVM
+
     @Binding var vm: CharacterGalleryViewModel
     var doStuff: () -> Void
 
@@ -29,11 +31,11 @@ struct CharacterGalleryView: View {
                 VStack(spacing: Constants.CharacterGalleryView.vstackSpacing) {
                     closeButton
                     titleText
-                    charactersUnlockedText
+                    charactersUnlockedText(gameplayViewModel: gameplayVM)
                     
                     LazyVGrid(columns: columns, spacing: Constants.CharacterGalleryView.vstackSpacing) {
                         ForEach(CharacterGallery.allCases, id: \.self) { character in
-                            characterComponent(character: character)
+                            characterComponent(character: character, gameplayViewModel: gameplayVM)
                         }
                     }
                     .padding(.top, Constants.CharacterGalleryView.vstackPadding)
@@ -75,20 +77,26 @@ struct CharacterGalleryView: View {
             .multilineTextAlignment(.center)
     }
     
-    private var charactersUnlockedText: some View {
-        Text("Characters unlocked: 8/14")
+    private func charactersUnlockedText(gameplayViewModel: GameplayViewModel) -> some View {
+        Text("Characters unlocked: \(gameplayViewModel.unlockedCharacterCount)/\(gameplayViewModel.totalCharacterCount)")
             .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             .font(.bodyFont)
     }
     
-    private func characterComponent(character: CharacterGallery) -> some View {
-        RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
+    private func characterComponent(character: CharacterGallery, gameplayViewModel: GameplayViewModel) -> some View {
+        let unlockedCharacters = gameplayViewModel.getUnlockedCharacters()
+        
+        return RoundedRectangle(cornerRadius: Constants.Global.cornerRadius)
             .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
             .frame(width: getWidth() * Constants.CharacterGalleryView.characterComponentWidth,
                    height: getHeight() * Constants.CharacterGalleryView.characterComponentHeight)
             .overlay(
                 VStack {
-                    characterInfoOverlay(character: character)
+                    if unlockedCharacters.contains(character.name.lowercased()) {
+                        characterInfoOverlay(character: character)
+                    } else {
+                        characterInfoOverlay(character: .lockedCharacter)
+                    }
                     Spacer()
                 }
             )

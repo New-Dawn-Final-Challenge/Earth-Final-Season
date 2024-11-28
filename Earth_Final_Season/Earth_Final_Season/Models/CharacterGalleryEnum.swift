@@ -76,3 +76,9 @@ enum CharacterGallery: CaseIterable {
         }
     }
 }
+
+extension CharacterGallery {
+    func isUnlocked(using unlockedNames: [String]) -> Bool {
+        unlockedNames.contains(self.name.lowercased())
+    }
+}
