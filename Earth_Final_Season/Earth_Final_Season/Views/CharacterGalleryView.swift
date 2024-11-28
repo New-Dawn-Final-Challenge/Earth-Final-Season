@@ -10,7 +10,7 @@ import Design_System
 
 struct CharacterGalleryView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
-
+    @State private var triggerGlitch = false
     @Binding var vm: CharacterGalleryViewModel
     var doStuff: () -> Void
 
@@ -43,6 +43,10 @@ struct CharacterGalleryView: View {
                     Spacer()
                 }
                 .padding()
+                .onAppear {
+                    triggerGlitch = true
+                    SoundtrackAudioManager.shared.playSoundEffect(named: "changeCharacter", fileExtension: "wav", volume: 0.15)
+                }
             }
         }
         .padding()
@@ -117,7 +121,9 @@ struct CharacterGalleryView: View {
             .resizable()
             .frame(width: getWidth() * Constants.CharacterGalleryView.characterMonitorWidth,
                    height: getHeight() * Constants.CharacterGalleryView.characterMonitorHeight)
-            .overlay(character.image)
+            .overlay(
+                GlitchContentView(trigger: $triggerGlitch, uiImage: character.image)
+            )
     }
     
     private func characterName(character: CharacterGallery) -> some View {
