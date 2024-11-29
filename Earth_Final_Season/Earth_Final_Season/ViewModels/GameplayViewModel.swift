@@ -205,7 +205,7 @@ class GameplayViewModel: GameEngineDelegate {
             
             if progress >= 1.0 {
                 resetTimer()
-                engine?.goToNextEvent()
+                engine?.goToNextEvent(isPortuguese: isPortuguese)
             }
         }
     
