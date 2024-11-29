@@ -25,17 +25,45 @@ class GameEngine {
                                 illBeing: Constants.GameEngine.initialIllBeing,
                                 socioPoliticalInstability: Constants.GameEngine.initialSocioPoliticalInstability,
                                 environmentalDegradation: Constants.GameEngine.initialEnvironmentalDegradation,
-                                currentYear: Constants.GameEngine.initialYear)  // Initial Indicators
+                                currentYear: Constants.GameEngine.initialYear)
+    var unlockedCharacters: [String] = ["ultra new age environmentalist",
+                                        "sensationalist tv host",
+                                        "questionable religious leader",
+                                        "evil researcher"]
     
+    let allEvents: [Event]
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
     
     var state: States = .initializing
 
     init(delegate: GameplayViewModel) {
-        events = loadAndReturnEvents()
-        resetGame()
+        self.allEvents = loadAndReturnEvents()
         self.delegate = delegate
+        loadUnlockedCharacters()
+        events = filterUnlockedEvents(from: loadAndReturnEvents())
+        resetGame()
+    }
+    
+    func filterUnlockedEvents(from allEvents: [Event]) -> [Event] {
+        return allEvents.filter { event in
+            return unlockedCharacters.contains(event.character.lowercased())
+        }
+    }
+
+    func saveUnlockedCharacters() {
+        UserDefaults.standard.set(unlockedCharacters, forKey: "unlockedCharacters")
+    }
+
+    func loadUnlockedCharacters() {
+        if let savedCharacters = UserDefaults.standard.array(forKey: "unlockedCharacters") as? [String] {
+            unlockedCharacters = savedCharacters
+        } else {
+            unlockedCharacters = ["ultra new age environmentalist",
+                                   "sensationalist tv host",
+                                   "questionable religious leader",
+                                   "evil researcher"]
+        }
     }
     
     func gameEnded() -> Bool {
@@ -90,7 +118,7 @@ class GameEngine {
         // comentado finais especiais
         let character = currentEvent?.character
         if (Utils.isSpecialCharacter(character)) {
-            let gameOver = Utils.switchMessageDependingOnCharacter(character)
+            let gameOver = Utils.switchMessageDependindOnCharacter(character)
             gameOverTitle = gameOver.title
             gameOverReason = gameOver.message
             let finalCharacter = "special final " + (character ?? "")
@@ -123,7 +151,10 @@ class GameEngine {
                     }
                 } else {
                     print("No more events in the sequence.")
-                    currentEvent = nil
+                    // Reshuffle the events and restart the sequence
+                    let shuffledEvents = filterUnlockedEvents(from: allEvents).shuffled()
+                    self.eventsSequence = shuffledEvents.map { $0.id }
+                    currentEvent = shuffledEvents.first
                 }
             } else {
                 print("Event sequence is empty.")
@@ -154,14 +185,17 @@ class GameEngine {
                                     socioPoliticalInstability: Constants.GameEngine.initialSocioPoliticalInstability,
                                     environmentalDegradation: Constants.GameEngine.initialEnvironmentalDegradation,
                                     currentYear: Constants.GameEngine.initialYear)
-            let isReseting = state == .gameOver
             
+            let isReseting = state == .gameOver
             state = .choosing
-            let shuffledEvents = events.shuffled()
+            
+            let shuffledEvents = filterUnlockedEvents(from: allEvents).shuffled()
             self.eventsSequence = shuffledEvents.map { $0.id }
             currentEvent = shuffledEvents.first
+            
             eventsPassedCount = 0
             gameOverReason = ""
+            
             SoundtrackAudioManager.shared.stopAllSoundEffects()
             if (isReseting) {
                 SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameplay", duration: 0.5)

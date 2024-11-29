@@ -14,6 +14,7 @@ struct MenuView: View {
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
     @State var aboutUsVM = AboutUsViewModel()
+    @State var characterGalleryVM = CharacterGalleryViewModel()
     
     @State private var navigateToGameplay = false
     @State private var isGameCenterPresented = false
@@ -79,6 +80,17 @@ struct MenuView: View {
             }
             .sheet(isPresented: $isGameCenterPresented) {
                 LeaderboardView()
+            }
+            
+            menuButton("Character Gallery") {
+                characterGalleryVM.isPresentedInMenu.toggle()
+            }
+            .fullScreenCover(isPresented: $characterGalleryVM.isPresentedInMenu) {
+                ZStack {
+                    Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                    CharacterGalleryView(vm: $characterGalleryVM, text: "Character Gallery", doStuff: {})
+                }
+                .presentationBackground(.clear)
             }
             
             menuButton("Settings") {

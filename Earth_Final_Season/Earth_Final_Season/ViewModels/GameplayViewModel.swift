@@ -43,6 +43,99 @@ class GameplayViewModel: GameEngineDelegate {
     var specialGameOverImage: Image?
     var specialGameOverText: String?
     
+    private var allCharacters: [String] = [
+        "ultra new age environmentalist",
+        "sensationalist tv host",
+        "questionable religious leader",
+        "evil researcher",
+        "slow logistics engineer",
+        "indie physician",
+        "president in denial",
+        "chaotic billionaire",
+        "experimentalist geneticist",
+        "chronically online teenager",
+        "fearless economist",
+        "convincing conspiracy theorist",
+        "apocalyptical cat",
+        "robot vacuum cleaner"
+    ]
+    
+    init() {
+        loadUnlockedCharacters()
+    }
+    
+    func loadUnlockedCharacters() {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return
+        }
+
+        if let savedCharacters = UserDefaults.standard.array(forKey: "unlockedCharacters") as? [String] {
+            engine.unlockedCharacters = savedCharacters
+        }
+    }
+    
+    func unlockNextCharacter() {
+        guard let engine = engine else { return }
+        
+        let lockedCharacters = allCharacters.filter { !engine.unlockedCharacters.contains($0.lowercased()) }
+        guard let nextCharacter = lockedCharacters.first else {
+            print("All characters are already unlocked.")
+            return
+        }
+
+        engine.unlockedCharacters.append(nextCharacter.lowercased())
+        engine.events = engine.filterUnlockedEvents(from: engine.allEvents)
+        print("Unlocked character: \(nextCharacter)")
+        printUnlockedCharacters()
+        
+        saveUnlockedCharacters()
+    }
+    
+    func printUnlockedCharacters() {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return
+        }
+        
+        if engine.unlockedCharacters.isEmpty {
+            print("No characters unlocked yet.")
+        } else {
+            print("Unlocked characters:")
+            for character in engine.unlockedCharacters {
+                print("- \(character)")
+            }
+        }
+    }
+    
+    func getUnlockedCharacters() -> [String] {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return []
+        }
+        return engine.unlockedCharacters
+    }
+    
+    var unlockedCharacterCount: Int {
+        guard let engine = engine else {
+            return 0
+        }
+        return engine.unlockedCharacters.count
+    }
+    
+    var totalCharacterCount: Int {
+        return allCharacters.count
+    }
+    
+    func saveUnlockedCharacters() {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return
+        }
+
+        UserDefaults.standard.set(engine.unlockedCharacters, forKey: "unlockedCharacters")
+    }
+
     func gameStateChanged(to state: States) {
         
         switch (state) {
@@ -145,6 +238,7 @@ class GameplayViewModel: GameEngineDelegate {
     }
     
     func resetGame() {
+        unlockNextCharacter()
         engine?.resetGame()
     }
     
@@ -227,4 +321,3 @@ class GameplayViewModel: GameEngineDelegate {
         }
     }
 }
-

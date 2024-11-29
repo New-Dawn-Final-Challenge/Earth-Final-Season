@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62363DAD2CF8E29700DBA750 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 62363DAC2CF8E29700DBA750 /* Toast */; };
 		8B61B0862CA1AB3800ED8A81 /* .swiftlint.yml in Sources */ = {isa = PBXBuildFile; fileRef = 8B61B0852CA1AB2F00ED8A81 /* .swiftlint.yml */; };
 		8B61B0892CA1B3AB00ED8A81 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8B61B0852CA1AB2F00ED8A81 /* .swiftlint.yml */; };
 		8B61B08D2CA1B5E500ED8A81 /* .swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = 8B61B08C2CA1B5E000ED8A81 /* .swiftgen.yml */; };
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62363DAD2CF8E29700DBA750 /* Toast in Frameworks */,
 				BD46C3322CCFB43B00441790 /* Design-System in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -92,6 +94,7 @@
 			name = Earth_Final_Season;
 			packageProductDependencies = (
 				BD46C3312CCFB43B00441790 /* Design-System */,
+				62363DAC2CF8E29700DBA750 /* Toast */,
 			);
 			productName = Earth_Final_Season;
 			productReference = 620E4D522C9C468E006850BB /* Earth_Final_Season.app */;
@@ -123,6 +126,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				BD46C3302CCFB43B00441790 /* XCRemoteSwiftPackageReference "Design-System" */,
+				62363DAB2CF8E29700DBA750 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 620E4D532C9C468E006850BB /* Products */;
@@ -323,7 +327,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.EarthFinalSeason;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -362,7 +366,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.EarthFinalSeason;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -400,6 +404,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		62363DAB2CF8E29700DBA750 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
 		BD46C3302CCFB43B00441790 /* XCRemoteSwiftPackageReference "Design-System" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/New-Dawn-Final-Challenge/Design-System.git";
@@ -411,6 +423,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		62363DAC2CF8E29700DBA750 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62363DAB2CF8E29700DBA750 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
 		BD46C3312CCFB43B00441790 /* Design-System */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BD46C3302CCFB43B00441790 /* XCRemoteSwiftPackageReference "Design-System" */;

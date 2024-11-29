@@ -1,5 +1,6 @@
 import SwiftUI
 import Design_System
+import Toast
 
 struct GameplayView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
@@ -65,7 +66,12 @@ struct GameplayView: View {
             }
             .presentationBackground(.clear)
         }
-
+        .onChange(of: gameplayVM.unlockedCharacterCount) {
+            if let newCharacterName = gameplayVM.getUnlockedCharacters().last,
+               let newCharacter = CharacterGallery.allCases.first(where: { $0.name.lowercased() == newCharacterName.lowercased() }) {
+                showToast(characterImage: newCharacter.image, characterName: newCharacter.name)
+            }
+        }
     }
     
     // MARK: - View Components
@@ -149,6 +155,37 @@ struct GameplayView: View {
             settingsVM.isPresentedHelp.toggle()
         } label: {
             HelperButtonView(imageName: imageName)
+        }
+    }
+    
+    func showToast(characterImage: Image, characterName: String) {
+        let formattedName = characterName.lowercased().capitalized
+        
+        if let window = UIApplication.shared.windows.first {
+            let toastView = ToastView(characterImage: characterImage, characterName: formattedName)
+            let hostingController = UIHostingController(rootView: toastView)
+            hostingController.view.backgroundColor = .clear
+            
+            let initialYPosition: CGFloat = -100 + 20
+            hostingController.view.frame = CGRect(x: 0, y: initialYPosition, width: window.bounds.width, height: 100)
+            hostingController.view.alpha = 0.0
+
+            window.addSubview(hostingController.view)
+            
+            // Animate the toast appearance and disappearance
+            UIView.animate(withDuration: 0.5, animations: {
+                hostingController.view.alpha = 1.0
+                hostingController.view.frame.origin.y += 100
+            }, completion: { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                    UIView.animate(withDuration: 0.5, animations: {
+                        hostingController.view.alpha = 0.0
+                        hostingController.view.frame.origin.y -= 100
+                    }, completion: { _ in
+                        hostingController.view.removeFromSuperview()
+                    })
+                }
+            })
         }
     }
 }
