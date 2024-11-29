@@ -68,8 +68,8 @@ struct GameplayView: View {
         }
         .onChange(of: gameplayVM.unlockedCharacterCount) {
             if let newCharacterName = gameplayVM.getUnlockedCharacters().last,
-               let newCharacter = CharacterGallery.allCases.first(where: { $0.name.lowercased() == newCharacterName.lowercased() }) {
-                showToast(characterImage: newCharacter.image, characterName: newCharacter.name)
+               let newCharacter = CharacterGallery.allCases.first(where: { $0.name(isPortuguese: gameplayVM.isPortuguese).lowercased() == newCharacterName.lowercased() }) {
+                showToast(characterImage: newCharacter.image, characterName: newCharacter.name(isPortuguese: gameplayVM.isPortuguese))
             }
         }
     }

@@ -197,7 +197,7 @@ struct Constants{
         static let vstackPadding: CGFloat = 16
         static let closeButtonPadding: CGFloat = -24
         static let characterComponentWidth: CGFloat = 0.4
-        static let characterComponentHeight: CGFloat = 0.25
+        static let characterComponentHeight: CGFloat = 0.27
         static let characterInfoSpacing: CGFloat = 8
         static let characterInfoPadding: CGFloat = 12
         static let characterMonitorWidth: CGFloat = 0.35
