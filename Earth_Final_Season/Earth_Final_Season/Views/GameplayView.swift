@@ -92,7 +92,7 @@ struct GameplayView: View {
     }
     
     private var noMoreEventsView: some View {
-        Text("No more events")
+        Text(gameplayVM.isPortuguese ? "Sem mais eventos" : "No more events")
             .font(.title)
             .padding(20)
     }
