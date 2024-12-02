@@ -72,6 +72,12 @@ struct GameplayView: View {
                 showToast(characterImage: newCharacter.image, characterName: newCharacter.name)
             }
         }
+        .onChange(of: gameplayVM.unlockedEndingsCount) {
+            if let newEnding = gameplayVM.getUnlockedEndings().last,
+               let newEnding = EndingsGallery.allCases.first(where: { $0.ending.lowercased() == newEnding.lowercased() }) {
+                showToast(characterImage: newEnding.image, characterName: newEnding.ending)
+            }
+        }
     }
     
     // MARK: - View Components

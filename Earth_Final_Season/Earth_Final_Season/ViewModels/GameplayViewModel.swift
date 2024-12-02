@@ -5,6 +5,7 @@ import Combine
 
 protocol GameEngineDelegate: AnyObject {
     func gameStateChanged(to state: States)
+    func unlockEnding(ending: GameOverReasons)
 }
 
 @Observable
@@ -60,8 +61,18 @@ class GameplayViewModel: GameEngineDelegate {
         "robot vacuum cleaner"
     ]
     
+    private var allEndings: [String] = [
+        "Apocalyptical Cat",
+        "Environmental Degradation",
+        "Sociopolitical Instability",
+        "Audience",
+        "illBeing",
+        "Robot Vacuum Cleaner"
+    ]
+    
     init() {
         loadUnlockedCharacters()
+        
     }
     
     func loadUnlockedCharacters() {
@@ -73,6 +84,48 @@ class GameplayViewModel: GameEngineDelegate {
         if let savedCharacters = UserDefaults.standard.array(forKey: "unlockedCharacters") as? [String] {
             engine.unlockedCharacters = savedCharacters
         }
+    }
+    func loadUnlockedEndings() {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return
+        }
+
+        if let savedEndings = UserDefaults.standard.array(forKey: "unlockedEndings") as? [String] {
+            engine.unlockedEndings = savedEndings
+        }
+    }
+    
+    func unlockEnding(ending: GameOverReasons) {
+        guard let engine = engine else { return }
+        
+        var endingToBeUnlocked = ""
+        switch ending {
+        case .audience:
+            endingToBeUnlocked = "Audience"
+        case .environmentalDegradation:
+            endingToBeUnlocked = "Environmental Degradation"
+        case .sociopoliticalInstability:
+            endingToBeUnlocked = "Sociopolitical Instability"
+        case .illBeing:
+            endingToBeUnlocked = "illBeing"
+        case .cat:
+            endingToBeUnlocked = "Apocalyptical Cat"
+        case .robot:
+            endingToBeUnlocked = "Robot Vacuum Cleaner"
+        }
+        if !getUnlockedEndings().contains(endingToBeUnlocked.lowercased()) {
+            engine.unlockedEndings.append(endingToBeUnlocked.lowercased())
+            saveUnlockedEndings()
+        }
+    }
+    
+    func getUnlockedEndings() -> [String] {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return []
+        }
+        return engine.unlockedEndings
     }
     
     func unlockNextCharacter() {
@@ -122,9 +175,20 @@ class GameplayViewModel: GameEngineDelegate {
         }
         return engine.unlockedCharacters.count
     }
+     
+    var unlockedEndingsCount: Int {
+        guard let engine = engine else {
+            return 0
+        }
+        return engine.unlockedEndings.count
+    }
     
     var totalCharacterCount: Int {
         return allCharacters.count
+    }
+    
+    var totalEndingsCount: Int {
+        return allEndings.count
     }
     
     func saveUnlockedCharacters() {
@@ -134,6 +198,15 @@ class GameplayViewModel: GameEngineDelegate {
         }
 
         UserDefaults.standard.set(engine.unlockedCharacters, forKey: "unlockedCharacters")
+    }
+    
+    func saveUnlockedEndings() {
+        guard let engine = engine else {
+            print("Engine not initialized.")
+            return
+        }
+
+        UserDefaults.standard.set(engine.unlockedEndings, forKey: "unlockedEndings")
     }
 
     func gameStateChanged(to state: States) {

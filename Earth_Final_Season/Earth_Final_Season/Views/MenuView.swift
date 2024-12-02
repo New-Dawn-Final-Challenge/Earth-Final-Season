@@ -15,6 +15,7 @@ struct MenuView: View {
     @State var leaderboardVM = LeaderboardViewModel()
     @State var aboutUsVM = AboutUsViewModel()
     @State var characterGalleryVM = CharacterGalleryViewModel()
+    @State var endingsGalleryVM = EndingsGalleryViewModel()
     
     @State private var navigateToGameplay = false
     @State private var isGameCenterPresented = false
@@ -89,6 +90,17 @@ struct MenuView: View {
                 ZStack {
                     Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
                     CharacterGalleryView(vm: $characterGalleryVM, text: "Character Gallery", doStuff: {})
+                }
+                .presentationBackground(.clear)
+            }
+            
+            menuButton("Ending Gallery") {
+                endingsGalleryVM.isPresentedInMenu.toggle()
+            }
+            .fullScreenCover(isPresented: $endingsGalleryVM.isPresentedInMenu) {
+                ZStack {
+                    Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                   EndingsGalleryView(vm: $endingsGalleryVM, text: "Ending Gallery", doStuff: {})
                 }
                 .presentationBackground(.clear)
             }

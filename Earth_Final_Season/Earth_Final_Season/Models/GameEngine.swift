@@ -30,6 +30,7 @@ class GameEngine {
                                         "sensationalist tv host",
                                         "questionable religious leader",
                                         "evil researcher"]
+    var unlockedEndings: [String] = []
     
     let allEvents: [Event]
     private var eventsSequence: [String] = []
@@ -41,6 +42,7 @@ class GameEngine {
         self.allEvents = loadAndReturnEvents()
         self.delegate = delegate
         loadUnlockedCharacters()
+        loadUnlockedEndings()
         events = filterUnlockedEvents(from: loadAndReturnEvents())
         resetGame()
     }
@@ -66,6 +68,14 @@ class GameEngine {
         }
     }
     
+    func loadUnlockedEndings() {
+        if let savedEndings = UserDefaults.standard.array(forKey: "unlockedEndings") as? [String] {
+            unlockedEndings = savedEndings
+        } else {
+            unlockedEndings = []
+        }
+    }
+    
     func gameEnded() -> Bool {
         return indicators.audience <= Constants.GameEngine.minAudienceThreshold ||
                indicators.environmentalDegradation >= Constants.GameEngine.maxIndicatorThreshold ||
@@ -81,7 +91,7 @@ class GameEngine {
                     gameOverReason = Constants.GameEngine.gameOverAudienceMessage
                     gameOverImage = Assets.Images.audienceEnd.swiftUIImage
                 }
-                applyGameOver()
+                applyGameOver(indicator: .audience)
             }
             
             if indicators.environmentalDegradation >= Constants.GameEngine.maxIndicatorThreshold {
@@ -90,7 +100,7 @@ class GameEngine {
                     gameOverReason = Constants.GameEngine.gameOverEnvironmentMessage
                     gameOverImage = Assets.Images.environmentalEnd.swiftUIImage
                 }
-                applyGameOver()
+                applyGameOver(indicator: .environmentalDegradation)
             }
             
             if indicators.illBeing >= Constants.GameEngine.maxIndicatorThreshold {
@@ -99,7 +109,7 @@ class GameEngine {
                     gameOverReason = Constants.GameEngine.gameOverIllBeingMessage
                     gameOverImage = Assets.Images.illBeingEnd.swiftUIImage
                 }
-                applyGameOver()
+                applyGameOver(indicator: .illBeing)
             }
             
             if indicators.socioPoliticalInstability >= Constants.GameEngine.maxIndicatorThreshold {
@@ -108,14 +118,14 @@ class GameEngine {
                     gameOverReason = Constants.GameEngine.gameOverInstabilityMessage
                     gameOverImage = Assets.Images.socioPoliticalEnd.swiftUIImage
                 }
-                applyGameOver()
+                applyGameOver(indicator: .sociopoliticalInstability)
             }
         }
     }
     
-    func applyGameOver() {
+    func applyGameOver(indicator: GameOverReasons) {
         self.state = .gameOver
-        // comentado finais especiais
+        var reason = indicator
         let character = currentEvent?.character
         if (Utils.isSpecialCharacter(character)) {
             let gameOver = Utils.switchMessageDependindOnCharacter(character)
@@ -123,8 +133,12 @@ class GameEngine {
             gameOverReason = gameOver.message
             let finalCharacter = "special final " + (character ?? "")
             gameOverImage = Utils.getImageByName(finalCharacter)
+            reason = reason.getReason(character?.lowercased())
         }
         self.delegate?.gameStateChanged(to: .gameOver)
+        // adicionar finais a galeria
+        self.delegate?.unlockEnding(ending: reason)
+        print("tried to unlock \(gameOverTitle)")
         SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameover", duration: 0.5)
     }
 
@@ -187,19 +201,32 @@ class GameEngine {
                                     currentYear: Constants.GameEngine.initialYear)
             
             let isReseting = state == .gameOver
-            state = .choosing
+            
             
             let shuffledEvents = filterUnlockedEvents(from: allEvents).shuffled()
             self.eventsSequence = shuffledEvents.map { $0.id }
             currentEvent = shuffledEvents.first
-            
+            state = .choosing
             eventsPassedCount = 0
             gameOverReason = ""
-            
+            self.delegate?.gameStateChanged(to: .choosing)
             SoundtrackAudioManager.shared.stopAllSoundEffects()
             if (isReseting) {
                 SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameplay", duration: 0.5)
             }
+        }
+    }
+}
+
+enum GameOverReasons: CaseIterable {
+    case environmentalDegradation, audience, sociopoliticalInstability,
+    illBeing, cat, robot
+    
+    func getReason(_ reason: String?) -> GameOverReasons {
+        if reason == "apocalyptical cat" {
+            return .cat
+        } else {
+            return .robot
         }
     }
 }
