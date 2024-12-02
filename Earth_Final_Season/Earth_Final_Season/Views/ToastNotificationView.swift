@@ -9,6 +9,7 @@ import SwiftUI
 import Toast
 
 struct ToastView: View {
+    @Environment(GameplayViewModel.self) private var gameplayVM
     let characterImage: Image
     let characterName: String
 
@@ -21,7 +22,7 @@ struct ToastView: View {
                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
 
             VStack(alignment: .leading) {
-                Text("New Character Unlocked!")
+                Text(gameplayVM.isPortuguese ? "Novo Personagem Desbloqueado!" : "New Character Unlocked!")
                     .font(.headline)
                     .foregroundColor(.white)
                 Text(characterName)
