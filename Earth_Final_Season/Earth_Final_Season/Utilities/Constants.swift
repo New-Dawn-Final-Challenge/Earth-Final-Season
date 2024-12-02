@@ -267,7 +267,7 @@ struct Constants{
         static let userDefaultsFirstTimePlayingKey: String = "firstTimePlaying"
         static let titleWidthMultiplier: CGFloat = 0.5
         static let titleHeightMultiplier: CGFloat = 0.06
-        static let buttonWidthMultiplier: CGFloat = 0.5
+        static let buttonWidthMultiplier: CGFloat = 0.6
         static let buttonHeightMultiplier: CGFloat = 0.06
         static let buttonCornerRadius: CGFloat = 10
         static let verticalSpacing: CGFloat = 12
