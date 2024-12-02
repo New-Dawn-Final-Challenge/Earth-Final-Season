@@ -31,17 +31,22 @@ class GameEngine {
                                         "questionable religious leader",
                                         "evil researcher"]
     
-    let allEvents: [Event]
+    private var isPortuguese: Bool
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
-    
     var state: States = .initializing
-
+    
+    var allEvents: [Event] = []  // Initialize it as an empty array first
+    
     init(delegate: GameplayViewModel) {
-        self.allEvents = loadAndReturnEvents()
         self.delegate = delegate
+        self.isPortuguese = delegate.isPortuguese
+        
+        // Now initialize allEvents after isPortuguese is set
+        self.allEvents = loadAndReturnEvents(isPortuguese: self.isPortuguese)
+        
         loadUnlockedCharacters()
-        events = filterUnlockedEvents(from: loadAndReturnEvents())
+        events = filterUnlockedEvents(from: allEvents)
         resetGame()
     }
     
