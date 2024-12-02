@@ -9,6 +9,7 @@ import SwiftUI
 import Design_System
 
 struct SettingsModalView: View {
+    @Environment(GameplayViewModel.self) private var gameplayVM
     @Binding var vm: SettingsViewModel
     var doStuff: ()-> Void
     
@@ -24,7 +25,7 @@ struct SettingsModalView: View {
             popUpBackground
             
             VStack(spacing: 6) {
-                Text3dEffect(text: "Settings")
+                Text3dEffect(text: gameplayVM.isPortuguese ? "Configurações" : "Settings")
                     .font(.largeTitleFont)
                 
                 musicView
@@ -40,7 +41,7 @@ struct SettingsModalView: View {
                     .overlay {
                         VStack {
                             HStack {
-                                HackerTextView(text: "Gesture", speed: 0.05)
+                                HackerTextView(text: gameplayVM.isPortuguese ? "Gesto" : "Gesture", speed: 0.05)
                                     .foregroundStyle(Assets.Colors.fillPrimary.swiftUIColor)
                                     .font(.bodyFont)
                                     .padding(.leading, 36)
@@ -50,7 +51,7 @@ struct SettingsModalView: View {
                             gestureSelectionView
                             
                             Group {
-                                HackerTextView(text: "The standard gesture is Hold and Drag, while Tap is recommended for accessibilty", speed: 0.05)
+                                HackerTextView(text: gameplayVM.isPortuguese ? "O gesto padrão é Segurar e Arrastar, enquanto Tocar é recomendado para acessibilidade" : "The standard gesture is Hold and Drag, while Tap is recommended for accessibilty", speed: 0.05)
                             }
                             .padding(.horizontal, 36)
                             .font(.footnoteFont)
@@ -86,13 +87,13 @@ struct SettingsModalView: View {
             .aspectRatio(contentMode: .fit)
             .overlay {
                 VStack(alignment: .leading) {
-                    HStack(spacing: 24) {
-                        HackerTextView(text: "Music", speed: 0.05)
+                    HStack(spacing: gameplayVM.isPortuguese ? 34 : 24) {
+                        HackerTextView(text: gameplayVM.isPortuguese ? "Música" : "Music", speed: 0.05)
                         Slider(value: $vm.musicIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
                     HStack(spacing: 16) {
-                        HackerTextView(text: "Sounds", speed: 0.05)
+                        HackerTextView(text: gameplayVM.isPortuguese ? "Efeitos Sonoros" : "Sounds", speed: 0.05)
                         Slider(value: $vm.soundEffectsIntensity, in: 0...100)
                             .tint(Assets.Colors.bgFillPrimary.swiftUIColor)
                     }
@@ -109,7 +110,7 @@ struct SettingsModalView: View {
             .aspectRatio(contentMode: .fit)
             .overlay {
                 HStack {
-                    HackerTextView(text: "Haptics", speed: 0.05)
+                    HackerTextView(text: gameplayVM.isPortuguese ? "Hápticos" : "Haptics", speed: 0.05)
                         .font(.bodyFont)
                     Toggle("", isOn: $vm.hapticsEnabled)
                         .toggleStyle(SwitchToggleStyle(tint: Assets.Colors.bgFillPrimary.swiftUIColor))
@@ -133,7 +134,7 @@ struct SettingsModalView: View {
                         vm.selectedGesture = .holdDrag
                     } label: {
                         HStack {
-                            HackerTextView(text: "Hold and Drag", speed: 0.05)
+                            HackerTextView(text: gameplayVM.isPortuguese ? "Segurar e Arrastar" : "Hold and Drag", speed: 0.05)
                             Spacer()
                             Image(systemName: "checkmark")
                                 .opacity(vm.selectedGesture == .holdDrag ? 1 : 0)
@@ -147,7 +148,7 @@ struct SettingsModalView: View {
                         vm.selectedGesture = .tap
                     } label: {
                         HStack {
-                            HackerTextView(text: "Tap", speed: 0.05)
+                            HackerTextView(text: gameplayVM.isPortuguese ? "Tocar" : "Tap", speed: 0.05)
                             Spacer()
                             Image(systemName: "checkmark")
                                 .opacity(vm.selectedGesture == .tap ? 1 : 0)
@@ -165,7 +166,7 @@ struct SettingsModalView: View {
             self.vm.isPresentedinGameplay = false
             self.vm.isPresentedinMenu = false
         } label: {
-            Text("Resume")
+            Text(gameplayVM.isPortuguese ? "Continuar" : "Resume")
                 .padding(16)
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
