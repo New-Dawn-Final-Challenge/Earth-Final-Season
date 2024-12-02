@@ -10,12 +10,11 @@ import Toast
 
 struct ToastView: View {
     @Environment(GameplayViewModel.self) private var gameplayVM
-    let characterImage: Image
-    let characterName: String
+    let character: CharacterGallery
 
     var body: some View {
         HStack(spacing: 16) {
-            characterImage
+            character.image
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
@@ -25,7 +24,7 @@ struct ToastView: View {
                 Text(gameplayVM.isPortuguese ? "Novo Personagem Desbloqueado!" : "New Character Unlocked!")
                     .font(.headline)
                     .foregroundColor(.white)
-                Text(characterName)
+                Text(character.name(isPortuguese: gameplayVM.isPortuguese))
                     .font(.subheadline)
                     .foregroundColor(.white)
             }
