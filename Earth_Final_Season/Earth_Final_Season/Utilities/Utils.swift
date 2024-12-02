@@ -10,7 +10,7 @@ import Design_System
 import SwiftUI
 
 struct Utils {
-    
+
     static func isSpecialCharacter(_ name: String?) -> Bool {
         guard let characterName = name else { return false }
         switch characterName.lowercased() {
@@ -19,22 +19,29 @@ struct Utils {
         }
     }
     
-    static func switchMessageDependindOnCharacter(_ name: String?) -> (title: String, message: String){
+    static func switchMessageDependindOnCharacter(_ name: String?, isPortuguese: Bool) -> (title: String, message: String) {
         let defaultMessage = (title: "nope", message: "something's gone wrong")
         guard let characterName = name else { return defaultMessage }
         
+        let title: String
+        let message: String
+        
         switch characterName.lowercased() {
             case "apocalyptical cat":
-                return (title: Constants.GameEngine.gameOverCatTitle , message: Constants.GameEngine.gameOverCatMessage)
-            
+                title = Constants.GameEngine.gameOverCatTitle(isPortuguese: isPortuguese)
+                message = Constants.GameEngine.gameOverCatMessage(isPortuguese: isPortuguese)
+                
             case "robot vacuum cleaner":
-                return (title: Constants.GameEngine.gameOverRobotVacuumCleanerTitle , message: Constants.GameEngine.gameOverRobotVacuumCleanerTitle)
+                title = Constants.GameEngine.gameOverRobotVacuumCleanerTitle(isPortuguese: isPortuguese)
+                message = Constants.GameEngine.gameOverRobotVacuumCleanerMessage(isPortuguese: isPortuguese)
                 
             default:
                 return defaultMessage
         }
+        
+        return (title, message)
     }
-    
+
     static func getImageByName(_ characterName: String) -> Image {
         switch characterName.lowercased() {
             case "ultra new age environmentalist": return Assets.Images.ultraNewAgeEnvironmentalist.swiftUIImage

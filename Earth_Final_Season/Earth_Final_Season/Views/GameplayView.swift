@@ -68,14 +68,14 @@ struct GameplayView: View {
         }
         .onChange(of: gameplayVM.unlockedCharacterCount) {
             if let newCharacterName = gameplayVM.getUnlockedCharacters().last,
-               let newCharacter = CharacterGallery.allCases.first(where: { $0.name.lowercased() == newCharacterName.lowercased() }) {
-                showToast(characterImage: newCharacter.image, characterName: newCharacter.name)
+               let newCharacter = CharacterGallery.allCases.first(where: { $0.name(isPortuguese: false).lowercased() == newCharacterName.lowercased() }) {
+                showToast(character: newCharacter, gameplayVM: gameplayVM)
             }
         }
         .onChange(of: gameplayVM.unlockedEndingsCount) {
             if let newEnding = gameplayVM.getUnlockedEndings().last,
                let newEnding = EndingsGallery.allCases.first(where: { $0.ending.lowercased() == newEnding.lowercased() }) {
-                showToast(characterImage: newEnding.image, characterName: newEnding.ending)
+                showNewEndingTost(ending: newEnding, gameplayVM: gameplayVM)
             }
         }
     }
@@ -98,7 +98,7 @@ struct GameplayView: View {
     }
     
     private var noMoreEventsView: some View {
-        Text("No more events")
+        Text(gameplayVM.isPortuguese ? "Sem mais eventos" : "No more events")
             .font(.title)
             .padding(20)
     }
@@ -164,11 +164,40 @@ struct GameplayView: View {
         }
     }
     
-    func showToast(characterImage: Image, characterName: String) {
-        let formattedName = characterName.lowercased().capitalized
-        
-        if let window = UIApplication.shared.windows.first {
-            let toastView = ToastView(characterImage: characterImage, characterName: formattedName)
+    func showNewEndingTost(ending: EndingsGallery, gameplayVM: GameplayViewModel) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            let toastView = toastEndingView(ending: ending, gameplayVM: gameplayVM)
+            let hostingController = UIHostingController(rootView: toastView)
+            hostingController.view.backgroundColor = .clear
+            
+            let initialYPosition: CGFloat = -100 + 20
+            hostingController.view.frame = CGRect(x: 0, y: initialYPosition, width: window.bounds.width, height: 100)
+            hostingController.view.alpha = 0.0
+
+            window.addSubview(hostingController.view)
+            
+            // Animate the toast appearance and disappearance
+            UIView.animate(withDuration: 0.5, animations: {
+                hostingController.view.alpha = 1.0
+                hostingController.view.frame.origin.y += 100
+            }, completion: { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                    UIView.animate(withDuration: 0.5, animations: {
+                        hostingController.view.alpha = 0.0
+                        hostingController.view.frame.origin.y -= 100
+                    }, completion: { _ in
+                        hostingController.view.removeFromSuperview()
+                    })
+                }
+            })
+        }
+    }
+    
+    func showToast(character: CharacterGallery, gameplayVM: GameplayViewModel) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            let toastView = toastCharacterView(character: character, gameplayVM: gameplayVM)
             let hostingController = UIHostingController(rootView: toastView)
             hostingController.view.backgroundColor = .clear
             
@@ -193,5 +222,53 @@ struct GameplayView: View {
                 }
             })
         }
+    }
+
+    func toastCharacterView(character: CharacterGallery, gameplayVM: GameplayViewModel) -> some View {
+        HStack(spacing: 16) {
+            character.image
+                .resizable()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+
+            VStack(alignment: .leading) {
+                Text(gameplayVM.isPortuguese ? "Novo Personagem Desbloqueado!" : "New Character Unlocked!")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                Text(character.name(isPortuguese: gameplayVM.isPortuguese).capitalized)
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+            }
+            .multilineTextAlignment(.leading)
+        }
+        .padding()
+        .background(Color.black.opacity(0.8))
+        .cornerRadius(12)
+        .shadow(radius: 4)
+    }
+    
+    func toastEndingView(ending: EndingsGallery, gameplayVM: GameplayViewModel) -> some View {
+        HStack(spacing: 16) {
+            ending.image
+                .resizable()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+
+            VStack(alignment: .leading) {
+                Text(gameplayVM.isPortuguese ? "Novo Final Desbloqueado!" : "New Ending Unlocked!")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                Text(ending.displayTranslated(isPortuguese: gameplayVM.isPortuguese).capitalized)
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+            }
+            .multilineTextAlignment(.leading)
+        }
+        .padding()
+        .background(Color.black.opacity(0.8))
+        .cornerRadius(12)
+        .shadow(radius: 4)
     }
 }

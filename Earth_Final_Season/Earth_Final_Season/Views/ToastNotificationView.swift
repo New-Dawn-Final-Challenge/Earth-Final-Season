@@ -9,22 +9,22 @@ import SwiftUI
 import Toast
 
 struct ToastView: View {
-    let characterImage: Image
-    let characterName: String
+    @Environment(GameplayViewModel.self) private var gameplayVM
+    let character: CharacterGallery
 
     var body: some View {
         HStack(spacing: 16) {
-            characterImage
+            character.image
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
 
             VStack(alignment: .leading) {
-                Text("New Character Unlocked!")
+                Text(gameplayVM.isPortuguese ? "Novo Personagem Desbloqueado!" : "New Character Unlocked!")
                     .font(.headline)
                     .foregroundColor(.white)
-                Text(characterName)
+                Text(character.name(isPortuguese: gameplayVM.isPortuguese))
                     .font(.subheadline)
                     .foregroundColor(.white)
             }

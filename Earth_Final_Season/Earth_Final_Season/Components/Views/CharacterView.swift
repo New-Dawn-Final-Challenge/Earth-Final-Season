@@ -9,17 +9,24 @@ import SwiftUI
 import Design_System
 
 struct CharacterView: View {
+    @Environment(GameplayViewModel.self) private var gameplayVM
     @State var characterImage: Image = Image("image1")
-    private var characterName: String
+    @State private var triggerChangeChannel: Bool = false
+    private var character: CharacterGallery
+    private var rawCharacterName: String
     let screenWidth: CGFloat = UIScreen.main.bounds.width
     let screenHeight: CGFloat = UIScreen.main.bounds.height
-    @State private var triggerChangeChannel: Bool = false
-    
-    
-    init(character: String) {
-        self.characterName = character
+
+    private var characterName: String {
+        let localized = character.name(isPortuguese: gameplayVM.isPortuguese)
+        return localized.capitalized
     }
-    
+
+    init(character: String) {
+        self.character = CharacterGallery.allCases.first { $0.name(isPortuguese: false).lowercased() == character.lowercased() } ?? .lockedCharacter
+        self.rawCharacterName = self.character.name(isPortuguese: false)
+    }
+
     var body: some View {
         VStack {
             Assets.Images.characterScreen.swiftUIImage
@@ -28,7 +35,6 @@ struct CharacterView: View {
                        height: getHeight() * Constants.CharacterView.imageFrameHeightMultiplier)
             
                 .overlay(
-                    
                     VStack (spacing: 14) {
                         GlitchContentView(trigger: $triggerChangeChannel,
                                           uiImage: characterImage)
@@ -46,7 +52,6 @@ struct CharacterView: View {
                                         topTrailingRadius: getWidth() * Constants.CharacterView.characterViewCornerRadiusMultiplier
                                     )
                                 )
-                            
                         )
                         .padding(.top, 8)
                         
@@ -55,26 +60,19 @@ struct CharacterView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .frame(maxWidth: .infinity, minHeight: 20)
                     }
-                        .onChange(of: characterName) {
-                            triggerChangeChannel.toggle()
-                            characterImage = Utils.getImageByName(characterName)
-                            SoundtrackAudioManager.shared.playSoundEffect(named: "changeCharacter", fileExtension: "wav", volume: 0.15)
-                        }
-                        .padding(.vertical, Constants.CharacterView.verticalPadding)
-                        .padding(.horizontal)
-                        .offset(y: -10)
+                    .onChange(of: characterName) {
+                        triggerChangeChannel.toggle()
+                        characterImage = Utils.getImageByName(rawCharacterName)
+                        SoundtrackAudioManager.shared.playSoundEffect(named: "changeCharacter", fileExtension: "wav", volume: 0.15)
+                    }
+                    .padding(.vertical, Constants.CharacterView.verticalPadding)
+                    .padding(.horizontal, 2)
+                    .offset(y: -10)
                 )
-            
         }
         .onAppear {
             triggerChangeChannel.toggle()
-            characterImage = Utils.getImageByName(characterName)
+            characterImage = Utils.getImageByName(rawCharacterName)
         }
-
     }
 }
-
-#Preview {
-    CharacterView(character: "Slow Logistics Engineer")
-}
-

@@ -205,7 +205,7 @@ struct ControlPanelView: View {
                    height: getHeight() * Constants.BlackPanel.yearMonitorHeight)
             .padding(.leading, Constants.BlackPanel.yearMonitorPadding)
             .overlay(
-                Text("Year\n\(gameplayVM.getIndicators()?.currentYear ?? 0)")
+                Text(gameplayVM.isPortuguese ? "Ano\n\(gameplayVM.getIndicators()?.currentYear ?? 0)" : "Year\n\(gameplayVM.getIndicators()?.currentYear ?? 0)")
                     .font(.title3Font)
                     .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                     .multilineTextAlignment(.center)

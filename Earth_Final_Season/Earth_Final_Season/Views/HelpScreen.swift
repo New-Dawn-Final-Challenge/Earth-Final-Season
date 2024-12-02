@@ -2,12 +2,14 @@ import SwiftUI
 import Design_System
 
 struct HelpScreen: View {
+    @Environment(GameplayViewModel.self) private var gameplayVM
     @Binding var vm: SettingsViewModel
     var indicatorsSize: CGFloat = 30
     let percentage: CGFloat = 5
-    var title = "Instructions"
     
     var body: some View {
+        let title = gameplayVM.isPortuguese ? "Instruções" : "Instructions"
+        
         ZStack {
             popUpBackground
             
@@ -15,7 +17,7 @@ struct HelpScreen: View {
                 Text3dEffect(text: title)
                     .font(.largeTitleFont)
                 
-                Text("Keep the show running for as many years as you can!")
+                Text(gameplayVM.isPortuguese ? "Mantenha o show no ar pelo maior número de anos possível!" : "Keep the show running for as many years as you can!")
                     .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
                     .font(.bodyFont)
                     .multilineTextAlignment(.center)
@@ -50,7 +52,7 @@ struct HelpScreen: View {
             
             VStack {
                 HStack {
-                    HackerTextView(text: "Chaos Indicators", speed: 0.05)
+                    HackerTextView(text: gameplayVM.isPortuguese ? "Indicadores de Caos" : "Chaos Indicators", speed: 0.05)
                         .font(.bodyFont)
                         .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                     Spacer()
@@ -69,8 +71,8 @@ struct HelpScreen: View {
                             .padding(.trailing, 8)
                         
                         VStack {
-                            HackerTextView(text: "Environmental", speed: 0.05)
-                            HackerTextView(text: "degradation  ", speed: 0.05)
+                            HackerTextView(text: gameplayVM.isPortuguese ? "Degradação" : "Environmental", speed: 0.05)
+                            HackerTextView(text: gameplayVM.isPortuguese ? "ambiental " : "degradation  ", speed: 0.05)
                         }
                         .font(.footnoteFont)
                         .foregroundStyle(.white)
@@ -93,7 +95,7 @@ struct HelpScreen: View {
                             .padding(.trailing, 8)
                         
                         VStack {
-                            HackerTextView(text: "Ill-being", speed: 0.05)
+                            HackerTextView(text: gameplayVM.isPortuguese ? "Mal-estar" : "Ill-being", speed: 0.05)
                                 .font(.footnoteFont)
                                 .foregroundStyle(.white)
                         }
@@ -115,7 +117,7 @@ struct HelpScreen: View {
                             .padding(.trailing, 8)
                         
                         VStack {
-                            HackerTextView(text: "Sociopolitical\ninstability", speed: 0.05)
+                            HackerTextView(text: gameplayVM.isPortuguese ? "Instabilidade\nsociopolítica" : "Sociopolitical\ninstability", speed: 0.05)
                                 .font(.footnoteFont)
                                 .foregroundStyle(.white)
                         }
@@ -135,7 +137,7 @@ struct HelpScreen: View {
                 .frame(maxWidth: 250)
                 
                 HStack {
-                    HackerTextView(text: "Keep them high, but never to their limit", speed: 0.05)
+                    HackerTextView(text: gameplayVM.isPortuguese ? "Mantenha eles altos, mas nunca nos seus limites" : "Keep them high, but never to their limit", speed: 0.05)
                 }
                 .font(.footnoteFont)
                 .foregroundStyle(.gray)
@@ -153,7 +155,7 @@ struct HelpScreen: View {
             
             VStack {
                 HStack {
-                    HackerTextView(text: "Audience Indicator", speed: 0.05)
+                    HackerTextView(text: gameplayVM.isPortuguese ? "Indicador de Audiência" : "Audience Indicator", speed: 0.05)
                         .font(.bodyFont)
                         .foregroundStyle(Assets.Colors.bgFillPrimary.swiftUIColor)
                     Spacer()
@@ -192,7 +194,7 @@ struct HelpScreen: View {
                 .frame(maxWidth: .infinity)
                 
                 HStack {
-                    HackerTextView(text: "Audience is high if chaos is high. If it hits the bottom, you're fired", speed: 0.05)
+                    HackerTextView(text: gameplayVM.isPortuguese ? "A audiência fica alta se o caos estiver alto. Se ela chegar no mínimo, você está demitido" : "Audience is high if chaos is high. If it hits the bottom, you're fired", speed: 0.05)
                 }
                     .font(.footnoteFont)
                     .foregroundStyle(.gray)
@@ -206,7 +208,7 @@ struct HelpScreen: View {
         Button {
             self.vm.isPresentedHelp.toggle()
         } label: {
-            Text("Resume")
+            Text(gameplayVM.isPortuguese ? "Continuar" : "Resume")
                 .padding(16)
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)

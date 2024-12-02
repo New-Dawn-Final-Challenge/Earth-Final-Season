@@ -76,15 +76,22 @@ struct EndingsGalleryView: View {
     }
 
     private var titleText: some View {
-        Text3dEffect(text: "Endings\nGallery")
+        Text3dEffect(text: gameplayVM.isPortuguese ?  "Galeria de\nFinais" : "Endings\nGallery")
             .font(.largeTitleFont)
             .multilineTextAlignment(.center)
     }
     
     private func endingsUnlockedText(gameplayViewModel: GameplayViewModel) -> some View {
-        Text("Endings unlocked: \(gameplayViewModel.getUnlockedEndings().count)/\(gameplayViewModel.totalEndingsCount)")
-            .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
-            .font(.bodyFont)
+        if gameplayVM.isPortuguese {
+            Text("Finais desbloqueados: \(gameplayViewModel.getUnlockedEndings().count)/\(gameplayViewModel.totalEndingsCount)")
+                .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
+                .font(.bodyFont)
+        } else {
+            Text("Endings unlocked: \(gameplayViewModel.getUnlockedEndings().count)/\(gameplayViewModel.totalEndingsCount)")
+                .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
+                .font(.bodyFont)
+        }
+        
     }
     
     private func endingComponent(ending reason: EndingsGallery, gameplayViewModel: GameplayViewModel) -> some View {
@@ -137,7 +144,7 @@ struct EndingsGalleryView: View {
             if ending == EndingsGallery.lockedEnding {
                 HackerTextView(text: ending.ending, duration: 99)
             } else {
-                Text(ending.ending)
+                Text(ending.displayTranslated(isPortuguese: gameplayVM.isPortuguese))
             }
         }
             .foregroundStyle(Assets.Colors.accentPrimary.swiftUIColor)
@@ -154,7 +161,7 @@ struct EndingsGalleryView: View {
             if ending == EndingsGallery.lockedEnding {
                 HackerTextView(text: ending.ending, duration: 99)
             } else {
-                Text(ending.getDescritption())
+                Text(ending.getDescritption(isPortuguese: gameplayVM.isPortuguese))
             }
         }
         .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)

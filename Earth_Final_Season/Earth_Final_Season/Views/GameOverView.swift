@@ -49,15 +49,15 @@ struct GameOverView: View {
         VStack {
             if (gameplayVM.getIndicators()?.currentYear ?? 0) <= leaderboardVM.highestScore {
                 // Player did not beat the previous highest score
-                Text("You ran the show for \(gameplayVM.getIndicators()?.currentYear ?? 0) years")
+                Text(gameplayVM.isPortuguese ? "Você dirigiu o show por \(gameplayVM.getIndicators()?.currentYear ?? 0) anos" : "You ran the show for \(gameplayVM.getIndicators()?.currentYear ?? 0) years")
             } else {
                 // Player reached a new record
                 HStack(alignment: .bottom) {
                     starView
-                    Text("New Record!")
+                    Text(gameplayVM.isPortuguese ? "Novo Recorde!" : "New Record!")
                     starView
                 }
-                Text("\(gameplayVM.getIndicators()?.currentYear ?? 0) years")
+                Text(gameplayVM.isPortuguese ? "\(gameplayVM.getIndicators()?.currentYear ?? 0) anos" : "\(gameplayVM.getIndicators()?.currentYear ?? 0) years")
             }
         }
         .font(.title3Font)
@@ -126,7 +126,7 @@ struct GameOverView: View {
     
     private var gameOverButtons: some View {
         VStack(spacing: Constants.GameOverView.vstackComponentsSpacing) {
-            buttonView(label: "Play again") {
+            buttonView(label: gameplayVM.isPortuguese ? "Jogar novamente" : "Play again") {
                 gameplayVM.resetGame()
                 isPresented.toggle()
             }

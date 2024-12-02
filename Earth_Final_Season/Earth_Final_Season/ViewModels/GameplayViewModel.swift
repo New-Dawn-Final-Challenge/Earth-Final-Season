@@ -12,6 +12,8 @@ protocol GameEngineDelegate: AnyObject {
 class GameplayViewModel: GameEngineDelegate {
     weak var engine: GameEngine?
     
+    var isGameReset: Bool = false
+    var isPortuguese: Bool
     var environmentalDegradationDecreaseShadowRadius = 0
     var environmentalDegradationIncreaseShadowRadius = 0
     var environmentalDegradationShadowRadius = 0
@@ -71,6 +73,10 @@ class GameplayViewModel: GameEngineDelegate {
     ]
     
     init() {
+        let preferredLanguage = Locale.preferredLanguages.first ?? "en"
+        isPortuguese = preferredLanguage.hasPrefix("pt")
+        print("Preferred language: \(preferredLanguage), isPortuguese: \(isPortuguese)")
+        
         loadUnlockedCharacters()
         
     }
@@ -273,7 +279,7 @@ class GameplayViewModel: GameEngineDelegate {
             
             if progress >= 1.0 {
                 resetTimer()
-                engine?.goToNextEvent()
+                engine?.goToNextEvent(isPortuguese: isPortuguese)
             }
         }
     
@@ -313,6 +319,7 @@ class GameplayViewModel: GameEngineDelegate {
     func resetGame() {
         unlockNextCharacter()
         engine?.resetGame()
+        isGameReset = true
     }
     
     func getIndicatorValue(indicator: String, nIndicator: Int) {
