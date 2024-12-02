@@ -39,45 +39,35 @@ struct EventView: View {
                 )
                 .onAppear(perform: updateText)
                 .onChange(of: gameplayVM.getState() == .consequence, updateText)
+                .onChange(of: gameplayVM.isGameReset) { updateText() }
             
             if gameplayVM.getState() == .consequence {
                 ProgressBarView()
                     .offset(y: 60)
             }
         }
-        
     }
 
     func updateText() {
-        guard gameplayVM.getState() != .choosing else {
+        if gameplayVM.getState() == .choosing {
             withAnimation {
                 textToShow = eventDescription
             }
-            return
-        }
-        guard case gameplayVM.getLastChosenOption() = "choice1" else {
-            withAnimation {
-                textToShow = consequence2
+        } else if gameplayVM.getState() == .consequence {
+            if gameplayVM.getLastChosenOption() == "choice1" {
+                withAnimation {
+                    textToShow = consequence1
+                }
+            } else {
+                withAnimation {
+                    textToShow = consequence2
+                }
             }
-            return
         }
-        withAnimation {
-            textToShow = consequence1
-        }
-    }
-    
-    func formatText(_ text: String) -> String {
-        var formattedText = text
-        let ponctuation = [".", "?", "!", ":"]
-        if (text.count < 1) { return "" }
         
-        if (!ponctuation.contains(text.last!.lowercased())) {
-            formattedText.append(".")
-        }
-        return formattedText
+        gameplayVM.isGameReset = false
     }
 }
-
 
 #Preview {
     EventView(eventDescription: "Event description here", consequence1: "Consequence 1", consequence2: "Consequence 2")
