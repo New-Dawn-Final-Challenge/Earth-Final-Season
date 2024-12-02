@@ -117,10 +117,9 @@ struct MenuView: View {
                 }
             }
             
-            menuButton(gameplayVM.isPortuguese ? buttonText : "Galleries") {
+            menuButton(hideNonGalleryButtons ? (gameplayVM.isPortuguese ? "Menu" : "Menu") : (gameplayVM.isPortuguese ? "Galerias" : "Galleries")) {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     hideNonGalleryButtons.toggle()
-                    buttonText = "Menu"
                 }
             }
             
