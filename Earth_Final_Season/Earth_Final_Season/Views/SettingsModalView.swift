@@ -61,7 +61,9 @@ struct SettingsModalView: View {
                     }
                     .foregroundStyle(.black)
                 
-                resumeButton
+                if vm.isPresentedinGameplay {
+                    resumeButton
+                }
                 
                 menuButton
                 
