@@ -23,13 +23,13 @@ enum TeamMember {
         }
     }
     
-    var role: String {
+    func role(isPortuguese: Bool) -> String {
         switch self {
-            case .elisa: return "Developer"
-            case .breno: return "Developer"
+            case .elisa: return isPortuguese ? "Desenvolvedora" : "Developer"
+            case .breno: return isPortuguese ? "Desenvolvedor" : "Developer"
             case .bruna: return "Designer"
-            case .lariF: return "Developer"
-            case .lariO: return "Developer"
+            case .lariF: return isPortuguese ? "Desenvolvedora" : "Developer"
+            case .lariO: return isPortuguese ? "Desenvolvedora" : "Developer"
             case .luan: return "Designer"
         }
     }

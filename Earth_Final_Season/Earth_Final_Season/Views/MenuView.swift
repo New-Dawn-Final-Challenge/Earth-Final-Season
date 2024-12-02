@@ -10,6 +10,8 @@ import Design_System
 import GameKit
 
 struct MenuView: View {
+    @Environment(GameplayViewModel.self) private var gameplayVM
+    
     @State var menuVM = MenuViewModel()
     @State var settingsVM = SettingsViewModel()
     @State var leaderboardVM = LeaderboardViewModel()
@@ -52,7 +54,7 @@ struct MenuView: View {
     private var buttonsView: some View {
         VStack(spacing: Constants.MenuView.verticalSpacing){
             if menuVM.firstTimePlaying {
-                menuButton("Play") {
+                menuButton(gameplayVM.isPortuguese ? "Jogar" : "Play") {
                     isShowingVideo = true
                     SoundtrackAudioManager.shared.stopSoundtrack()
                 }
@@ -65,7 +67,7 @@ struct MenuView: View {
             
             else {
                 MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
-                               label: "Play")
+                               label: gameplayVM.isPortuguese ? "Jogar" : "Play")
                 .padding(.bottom, -12)
             }
             
@@ -75,42 +77,42 @@ struct MenuView: View {
                 EmptyView()
             }
             
-            menuButton("Leaderboard") {
+            menuButton(gameplayVM.isPortuguese ? "Ranking" : "Leaderboard") {
                 isGameCenterPresented.toggle()
             }
             .sheet(isPresented: $isGameCenterPresented) {
                 LeaderboardView()
             }
             
-            menuButton("Character Gallery") {
+            menuButton(gameplayVM.isPortuguese ? "Galeria de Personagens" : "Character Gallery") {
                 characterGalleryVM.isPresentedInMenu.toggle()
             }
             .fullScreenCover(isPresented: $characterGalleryVM.isPresentedInMenu) {
                 ZStack {
                     Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                    CharacterGalleryView(vm: $characterGalleryVM, text: "Character Gallery", doStuff: {})
+                    CharacterGalleryView(vm: $characterGalleryVM, text: gameplayVM.isPortuguese ? "Galeria de Personagens" : "Character Gallery", doStuff: {})
                 }
                 .presentationBackground(.clear)
             }
             
-            menuButton("Settings") {
+            menuButton(gameplayVM.isPortuguese ? "Configurações" : "Settings") {
                 settingsVM.isPresentedinMenu.toggle()
             }
             .fullScreenCover(isPresented: $settingsVM.isPresentedinMenu) {
                 ZStack {
                     Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                    SettingsModalView(vm: $settingsVM, text: "Settings", doStuff: {})
+                    SettingsModalView(vm: $settingsVM, text: gameplayVM.isPortuguese ? "Configurações" : "Settings", doStuff: {})
                 }
                 .presentationBackground(.clear)
             }
             
-            menuButton("About Us") {
+            menuButton(gameplayVM.isPortuguese ? "Sobre Nós" : "About Us") {
                 aboutUsVM.isPresentedInMenu.toggle()
             }
             .fullScreenCover(isPresented: $aboutUsVM.isPresentedInMenu) {
                 ZStack {
                     Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                    AboutUsView(vm: $aboutUsVM, text: "About Us", doStuff: {})
+                    AboutUsView(vm: $aboutUsVM, text: gameplayVM.isPortuguese ? "Sobre Nós" : "About Us", doStuff: {})
                 }
                 .presentationBackground(.clear)
             }

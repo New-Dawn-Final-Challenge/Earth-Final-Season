@@ -9,6 +9,7 @@ import SwiftUI
 import Design_System
 
 struct AboutUsView: View {
+    @Environment(GameplayViewModel.self) private var gameplayVM
     @Binding var vm: AboutUsViewModel
     @State private var triggerGlitch = false
     var doStuff: () -> Void
@@ -53,11 +54,11 @@ struct AboutUsView: View {
     }
     
     private var titleText: some View {
-        Text3dEffect(text: "About Us")
+        Text3dEffect(text: gameplayVM.isPortuguese ? "Sobre Nós" : "About Us")
     }
     
     private var descriptionText: some View {
-        Text("This game was developed at the Apple Developer Academy")
+        Text(gameplayVM.isPortuguese ? "Este jogo foi desenvolvido na Apple Developer Academy" : "This game was developed at the Apple Developer Academy")
             .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             .font(.bodyFont)
             .multilineTextAlignment(.center)
@@ -80,7 +81,7 @@ struct AboutUsView: View {
         VStack {
             memberImage(image: member.image)
             HackerTextView(text: member.name, speed: 0.05)
-            HackerTextView(text: member.role, speed: 0.05)
+            HackerTextView(text: member.role(isPortuguese: gameplayVM.isPortuguese), speed: 0.05)
         }
         .font(.footnoteFont)
     }

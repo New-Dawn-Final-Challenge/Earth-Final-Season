@@ -76,13 +76,13 @@ struct CharacterGalleryView: View {
     }
 
     private var titleText: some View {
-        Text3dEffect(text: "Character\nGallery")
+        Text3dEffect(text: gameplayVM.isPortuguese ? "Galeria de Personagens" : "Character\nGallery")
             .font(.largeTitleFont)
             .multilineTextAlignment(.center)
     }
     
     private func charactersUnlockedText(gameplayViewModel: GameplayViewModel) -> some View {
-        Text("Characters unlocked: \(gameplayViewModel.unlockedCharacterCount)/\(gameplayViewModel.totalCharacterCount)")
+        Text(gameplayVM.isPortuguese ? "Personagens desbloqueados: \(gameplayViewModel.unlockedCharacterCount)/\(gameplayViewModel.totalCharacterCount)" : "Characters unlocked: \(gameplayViewModel.unlockedCharacterCount)/\(gameplayViewModel.totalCharacterCount)")
             .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             .font(.bodyFont)
     }
@@ -96,7 +96,7 @@ struct CharacterGalleryView: View {
                    height: getHeight() * Constants.CharacterGalleryView.characterComponentHeight)
             .overlay(
                 VStack {
-                    if unlockedCharacters.contains(character.name.lowercased()) {
+                    if unlockedCharacters.contains(character.name(isPortuguese: false).lowercased()) {
                         characterInfoOverlay(character: character)
                     } else {
                         characterInfoOverlay(character: .lockedCharacter)
@@ -127,8 +127,7 @@ struct CharacterGalleryView: View {
     }
     
     private func characterName(character: CharacterGallery) -> some View {
-        Text(character.name)
-            .foregroundStyle(Assets.Colors.accentPrimary.swiftUIColor)
+        Text(character.name(isPortuguese: gameplayVM.isPortuguese))            .foregroundStyle(Assets.Colors.accentPrimary.swiftUIColor)
             .shadow(color: .black,
                     radius: Constants.CharacterGalleryView.shadowRadius,
                     x: Constants.CharacterGalleryView.shadowX,
@@ -138,7 +137,7 @@ struct CharacterGalleryView: View {
     }
     
     private func characterDescription(character: CharacterGallery) -> some View {
-        Text(character.description)
+        Text(character.description(isPortuguese: gameplayVM.isPortuguese))
             .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
             .multilineTextAlignment(.center)
             .fixedSize(horizontal: false, vertical: true)

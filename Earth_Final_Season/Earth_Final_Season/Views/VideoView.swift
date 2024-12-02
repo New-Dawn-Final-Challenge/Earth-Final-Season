@@ -10,41 +10,45 @@ import SwiftUI
 import Combine
 
 struct VideoView: View {
+    @Environment(GameplayViewModel.self) private var gameplayVM
     @Environment(\.dismiss) private var dismiss
 
     @Binding var menuVM: MenuViewModel
     @Binding var navigateToGameplay: Bool
 
-
-    private let player = AVPlayer(url: Bundle.main.url(forResource: "introfilm", withExtension: "mp4")!)
+    @State private var player: AVPlayer?
     @State private var playerObserver: AnyCancellable?
 
     var body: some View {
         ZStack {
             Color.black
-            .ignoresSafeArea()
-            VideoPlayer(player: player)
-                .frame(width: getHeight(), height: getWidth())
-                .rotationEffect(.degrees(90))
-                .onAppear {
-                    player.play()
-                    addVideoEndObserver()
-                }
-                .onDisappear {
-                    player.pause()
-                    removeVideoEndObserver()
-                }
+                .ignoresSafeArea()
+            if let player = player {
+                VideoPlayer(player: player)
+                    .frame(width: getHeight(), height: getWidth())
+                    .rotationEffect(.degrees(90))
+                    .onAppear {
+                        player.play()
+                        addVideoEndObserver()
+                    }
+                    .onDisappear {
+                        player.pause()
+                        removeVideoEndObserver()
+                    }
+            }
         }
-
+        .onAppear {
+            player = AVPlayer(url: Bundle.main.url(forResource: gameplayVM.isPortuguese ? "introfilmBR" : "introfilm", withExtension: "mp4")!)
+        }
     }
-    
+
     private func addVideoEndObserver() {
-        playerObserver = NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        playerObserver = NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem)
             .sink { _ in
                 videoDidEnd()
             }
     }
-    
+
     private func removeVideoEndObserver() {
         playerObserver?.cancel()
     }

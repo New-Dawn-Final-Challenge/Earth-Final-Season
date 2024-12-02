@@ -146,22 +146,53 @@ struct Constants{
         static let maxIndicatorThreshold = 12
         static let eventsPerYear = 2
         
-        static let gameOverAudienceTitle = "Audience reached its minimum"
-        static let gameOverEnvironmentTitle = "Environmental Degradation reached its peak"
-        static let gameOverIllBeingTitle = "Ill-being reached its peak"
-        static let gameOverInstabilityTitle = "Sociopolitical instability reached its peak"
-        static let gameOverCatTitle = "Cat-astrophic Yarn Incident"
-        static let gameOverRobotVacuumCleanerTitle = "Robot Vaccum Cleaner clean too much"
+        static func gameOverAudienceTitle(isPortuguese: Bool) -> String {
+            return isPortuguese ? "A audiência atingiu seu mínimo" : "Audience reached its minimum"
+        }
 
-        static let gameOverAudienceMessage = "There’s no simple way of putting this, but… You’re fired. Just to get it straight, you were supposed to entertain us by wrecking humanity, not by helping them. We already tried helping them, but it’s never as entertaining, trust me. If you ever need us in the future… Well, just don’t"
-        static let gameOverEnvironmentMessage = "Chemtrails in the sky give sunrays a strange purple glow. The waters stink of green, the weather is either burning hot, or deadly cold, and fruits and crops never grow. Toc toc: any human alive? The answer is no"
-        static let gameOverIllBeingMessage = "Wounds are red, depression is blue. Paranoia, anxiety, dissociation, viruses and bacteria flew free on Earth in a cruel summer breeze that put humanoids to one last, eternal — yet not so peaceful — sleep"
-        static let gameOverInstabilityMessage = "There’s an ancient saying regarding humanoid World War IV being fought with sticks and stones. But here’s a new punch line for this final war: it will never be fought, because there’s not a single human left to fight it"
-        
-        static let gameOverCatMessage = "Seriously? A ball of yarn? Come on, you look cute, you were our best bet to cause the most chaos to the humanoids, but you ruined it all! You played with the ball of destruction, and now, humanity is destroyed, and there is no one to applaud your work. "
-        
-        static let gameOverRobotVacuumCleanerMessage = "Food? Chairs? Feet? EVERYTHING?! You cleaned so much there’s no dirt, not even a crumb for a cockroach to snack on—just a spotless, lemon-scented wasteland. How are diseases supposed to spread now? Congrats, idiot robot, you vacuumed away existence... and the audience. Great job!"
-        
+        static func gameOverEnvironmentTitle(isPortuguese: Bool) -> String {
+            return isPortuguese ? "A degradação ambiental atingiu seu máximo" : "Environmental Degradation reached its peak"
+        }
+
+        static func gameOverIllBeingTitle(isPortuguese: Bool) -> String {
+            return isPortuguese ? "O mal-estar atingiu seu máximo" : "Ill-being reached its peak"
+        }
+
+        static func gameOverInstabilityTitle(isPortuguese: Bool) -> String {
+            return isPortuguese ? "A instabilidade sociopolítica atingiu seu máximo" : "Sociopolitical instability reached its peak"
+        }
+
+        static func gameOverCatTitle(isPortuguese: Bool) -> String {
+            return isPortuguese ? "Incidente cat-astrófico da bola de pelo" : "Cat-astrophic Yarn Incident"
+        }
+
+        static func gameOverRobotVacuumCleanerTitle(isPortuguese: Bool) -> String {
+            return isPortuguese ? "O robô aspirador limpou demais" : "Robot Vaccum Cleaner clean too much"
+        }
+
+        static func gameOverAudienceMessage(isPortuguese: Bool) -> String {
+            return isPortuguese ? "Não há uma maneira simples de dizer isso, mas... Você está demitido. Só para deixar claro, sua tarefa era nos entreter destruindo a humanidade, não ajudando. Já tentamos ajudar, mas nunca é tão divertido, acredite. Se precisar de nós no futuro... Bem, não precise" : "There’s no simple way of putting this, but… You’re fired. Just to get it straight, you were supposed to entertain us by wrecking humanity, not by helping them. We already tried helping them, but it’s never as entertaining, trust me. If you ever need us in the future… Well, just don’t"
+        }
+
+        static func gameOverEnvironmentMessage(isPortuguese: Bool) -> String {
+            return isPortuguese ? "A fumaça no céu dá aos raios solares um brilho estranho e roxo. As águas fedem a verde, o clima é ou escaldante ou mortalmente frio, e frutas e colheitas nunca crescem. Toc toc: tem algum humano vivo? A resposta é não" : "Chemtrails in the sky give sunrays a strange purple glow. The waters stink of green, the weather is either burning hot, or deadly cold, and fruits and crops never grow. Toc toc: any human alive? The answer is no"
+        }
+
+        static func gameOverIllBeingMessage(isPortuguese: Bool) -> String {
+            return isPortuguese ? "Feridas são vermelhas, a depressão é azul. Paranoia, ansiedade, dissociação, vírus e bactérias voam livres na Terra numa cruel brisa de verão que colocou os humanoides em um último sono eterno — mas não tão pacífico" : "Wounds are red, depression is blue. Paranoia, anxiety, dissociation, viruses and bacteria flew free on Earth in a cruel summer breeze that put humanoids to one last, eternal — yet not so peaceful — sleep"
+        }
+
+        static func gameOverInstabilityMessage(isPortuguese: Bool) -> String {
+            return isPortuguese ? "Há um ditado antigo sobre a 4ª Guerra Mundial dos humanoides sendo travada com paus e pedras. Mas aqui está a nova piada para essa guerra final: ela nunca será travada, porque não há um único humano para lutar" : "There’s an ancient saying regarding humanoid World War IV being fought with sticks and stones. But here’s a new punch line for this final war: it will never be fought, because there’s not a single human left to fight it"
+        }
+
+        static func gameOverCatMessage(isPortuguese: Bool) -> String {
+            return isPortuguese ? "Sério? Uma bola de pelo? Qual é, você é fofo, era nossa melhor aposta para causar o maior caos nos humanoides, mas você arruinou tudo! Você brincou com a bola da destruição, e agora, a humanidade está destruída, e não há ninguém para aplaudir seu trabalho" : "Seriously? A ball of yarn? Come on, you look cute, you were our best bet to cause the most chaos to the humanoids, but you ruined it all! You played with the ball of destruction, and now, humanity is destroyed, and there is no one to applaud your work."
+        }
+
+        static func gameOverRobotVacuumCleanerMessage(isPortuguese: Bool) -> String {
+            return isPortuguese ? "Comida? Cadeiras? Pés? TUDO?! Você limpou tanto que não há sujeira, nem uma migalha para uma barata comer — só um deserto imaculado e com cheiro de limão. Como as doenças devem se espalhar agora? Parabéns, robô idiota, você aspirou a existência... e a audiência. Ótimo trabalho!" : "Food? Chairs? Feet? EVERYTHING?! You cleaned so much there’s no dirt, not even a crumb for a cockroach to snack on—just a spotless, lemon-scented wasteland. How are diseases supposed to spread now? Congrats, idiot robot, you vacuumed away existence... and the audience. Great job!"
+        }
     }
 
     struct Haptics {
@@ -197,7 +228,7 @@ struct Constants{
         static let vstackPadding: CGFloat = 16
         static let closeButtonPadding: CGFloat = -24
         static let characterComponentWidth: CGFloat = 0.4
-        static let characterComponentHeight: CGFloat = 0.25
+        static let characterComponentHeight: CGFloat = 0.27
         static let characterInfoSpacing: CGFloat = 8
         static let characterInfoPadding: CGFloat = 12
         static let characterMonitorWidth: CGFloat = 0.35
@@ -236,7 +267,7 @@ struct Constants{
         static let userDefaultsFirstTimePlayingKey: String = "firstTimePlaying"
         static let titleWidthMultiplier: CGFloat = 0.5
         static let titleHeightMultiplier: CGFloat = 0.06
-        static let buttonWidthMultiplier: CGFloat = 0.5
+        static let buttonWidthMultiplier: CGFloat = 0.6
         static let buttonHeightMultiplier: CGFloat = 0.06
         static let buttonCornerRadius: CGFloat = 10
         static let verticalSpacing: CGFloat = 12

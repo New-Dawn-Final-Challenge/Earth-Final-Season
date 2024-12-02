@@ -31,17 +31,22 @@ class GameEngine {
                                         "questionable religious leader",
                                         "evil researcher"]
     
-    let allEvents: [Event]
+    private var isPortuguese: Bool
     private var eventsSequence: [String] = []
     private var eventsPassedCount = 0
-    
     var state: States = .initializing
-
+    
+    var allEvents: [Event] = []  // Initialize it as an empty array first
+    
     init(delegate: GameplayViewModel) {
-        self.allEvents = loadAndReturnEvents()
         self.delegate = delegate
+        self.isPortuguese = delegate.isPortuguese
+        
+        // Now initialize allEvents after isPortuguese is set
+        self.allEvents = loadAndReturnEvents(isPortuguese: self.isPortuguese)
+        
         loadUnlockedCharacters()
-        events = filterUnlockedEvents(from: loadAndReturnEvents())
+        events = filterUnlockedEvents(from: allEvents)
         resetGame()
     }
     
@@ -73,52 +78,51 @@ class GameEngine {
                indicators.socioPoliticalInstability >= Constants.GameEngine.maxIndicatorThreshold
     }
     
-    func checkForGameOver() {
+    func checkForGameOver(isPortuguese: Bool) {
         if state == .consequence {
             if indicators.audience <= Constants.GameEngine.minAudienceThreshold {
                 if gameOverReason.isEmpty {
-                    gameOverTitle = Constants.GameEngine.gameOverAudienceTitle
-                    gameOverReason = Constants.GameEngine.gameOverAudienceMessage
+                    gameOverTitle = Constants.GameEngine.gameOverAudienceTitle(isPortuguese: isPortuguese)
+                    gameOverReason = Constants.GameEngine.gameOverAudienceMessage(isPortuguese: isPortuguese)
                     gameOverImage = Assets.Images.audienceEnd.swiftUIImage
                 }
-                applyGameOver()
+                applyGameOver(isPortuguese: isPortuguese)
             }
             
             if indicators.environmentalDegradation >= Constants.GameEngine.maxIndicatorThreshold {
                 if gameOverReason.isEmpty {
-                    gameOverTitle = Constants.GameEngine.gameOverEnvironmentTitle
-                    gameOverReason = Constants.GameEngine.gameOverEnvironmentMessage
+                    gameOverTitle = Constants.GameEngine.gameOverEnvironmentTitle(isPortuguese: isPortuguese)
+                    gameOverReason = Constants.GameEngine.gameOverEnvironmentMessage(isPortuguese: isPortuguese)
                     gameOverImage = Assets.Images.environmentalEnd.swiftUIImage
                 }
-                applyGameOver()
+                applyGameOver(isPortuguese: isPortuguese)
             }
             
             if indicators.illBeing >= Constants.GameEngine.maxIndicatorThreshold {
                 if gameOverReason.isEmpty {
-                    gameOverTitle = Constants.GameEngine.gameOverIllBeingTitle
-                    gameOverReason = Constants.GameEngine.gameOverIllBeingMessage
+                    gameOverTitle = Constants.GameEngine.gameOverIllBeingTitle(isPortuguese: isPortuguese)
+                    gameOverReason = Constants.GameEngine.gameOverIllBeingMessage(isPortuguese: isPortuguese)
                     gameOverImage = Assets.Images.illBeingEnd.swiftUIImage
                 }
-                applyGameOver()
+                applyGameOver(isPortuguese: isPortuguese)
             }
             
             if indicators.socioPoliticalInstability >= Constants.GameEngine.maxIndicatorThreshold {
                 if gameOverReason.isEmpty {
-                    gameOverTitle = Constants.GameEngine.gameOverInstabilityTitle
-                    gameOverReason = Constants.GameEngine.gameOverInstabilityMessage
+                    gameOverTitle = Constants.GameEngine.gameOverInstabilityTitle(isPortuguese: isPortuguese)
+                    gameOverReason = Constants.GameEngine.gameOverInstabilityMessage(isPortuguese: isPortuguese)
                     gameOverImage = Assets.Images.socioPoliticalEnd.swiftUIImage
                 }
-                applyGameOver()
+                applyGameOver(isPortuguese: isPortuguese)
             }
         }
     }
     
-    func applyGameOver() {
+    func applyGameOver(isPortuguese: Bool) {
         self.state = .gameOver
-        // comentado finais especiais
         let character = currentEvent?.character
-        if (Utils.isSpecialCharacter(character)) {
-            let gameOver = Utils.switchMessageDependindOnCharacter(character)
+        if Utils.isSpecialCharacter(character) {
+            let gameOver = Utils.switchMessageDependindOnCharacter(character, isPortuguese: isPortuguese)
             gameOverTitle = gameOver.title
             gameOverReason = gameOver.message
             let finalCharacter = "special final " + (character ?? "")
@@ -128,8 +132,8 @@ class GameEngine {
         SoundtrackAudioManager.shared.crossfadeToNewSoundtrack(named: "gameover", duration: 0.5)
     }
 
-    func goToNextEvent() {
-        checkForGameOver()
+    func goToNextEvent(isPortuguese: Bool) {
+        checkForGameOver(isPortuguese: isPortuguese)
         if state == .consequence {
             state = .choosing
             

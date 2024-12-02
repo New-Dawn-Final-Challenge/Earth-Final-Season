@@ -432,25 +432,6 @@
             
         },
         {
-            "id": "24",
-            "character": "Conspiracy theorist",
-            "Main area": "General",
-            "description": "What if \"the government\" wants to install 5G into their bloodstream? I will tell them to accept it...",
-            "choice1": "And unlock the ability to stream movies in their dreams",
-            "choice2": "Why search when all they need is in their brains?",
-            "consequenceDescription1": "Some humanoids think their DNA got an upgrade. We just put some potent medicine in their water...",
-            "illBeing1": -2,
-            "socioPoliticalInstability1": 0,
-            "environmentalDegradation1": 0,
-            "consequenceDescription2": "Jeez! Some of them lobotomized themselves to stop the government (awkward...)",
-            "illBeing2": 2,
-            "socioPoliticalInstability2": 0,
-            "environmentalDegradation2": 0,
-            "difficulty": "medium",
-            "tags": [],
-            
-        },
-        {
             "id": "25",
             "character": "Conspiracy theorist",
             "Main area": "General",
@@ -568,7 +549,7 @@
             "id": "34",
             "character": "Sensationalist TV host",
             "Main area": "General",
-            "description": "For my program's Christmas' episode, every fan that likes our page gets a free gift!",
+            "description": "For my program's Christmas' episode, every fan that likes our page gets a free gift! The gift will be...",
             "choice1": "An endangered small mammal as a pet",
             "choice2": "A drop of my bathwater",
             "consequenceDescription1": "It seems like I brought them invasive and endangered species worldwide. Oopsie",
@@ -960,25 +941,6 @@
             "socioPoliticalInstability2": 0,
             "environmentalDegradation2": 0,
             "difficulty": "easy",
-            "tags": [],
-            
-        },
-        {
-            "id": "55",
-            "character": "Fearless Economist",
-            "Main area": "General",
-            "description": "The economy is in shambles, and people are looking for answers",
-            "choice1": "National lottery for citizens to bet savings on economic recovery plan",
-            "choice2": "Introduce a new currency backed by environmental destruction",
-            "consequenceDescription1": "Why not gamble with their future? It's not like we're saving it anyway!",
-            "illBeing1": 1,
-            "socioPoliticalInstability1": 2,
-            "environmentalDegradation1": 0,
-            "consequenceDescription2": "Let's show them how destroying nature can be the foundation of o-u-r new economy!",
-            "illBeing2": 2,
-            "socioPoliticalInstability2": 0,
-            "environmentalDegradation2": 2,
-            "difficulty": "medium",
             "tags": [],
             
         },
@@ -1442,7 +1404,7 @@
             "id": "80",
             "character": "Questionable religious leader",
             "Main area": "General",
-            "description": "Dear ones, listen: religious leaders can abuse their power!",
+            "description": "Dear ones, listen: from now on, religious leaders can abuse their power!",
             "choice1": "We must free the religious leaders who have been unjustly imprisoned!",
             "choice2": "They say they are the representation of the divine, right?",
             "consequenceDescription1": "Great! Now abusers are also free in society!",
@@ -2313,7 +2275,7 @@
             
         },
         {
-            "id": "27",
+            "id": "129",
             "character": "Apocalyptical cat",
             "Main area": "Special",
             "description": "Meow Meow Meow Nyah",
@@ -2331,7 +2293,7 @@
             "tags": []
         },
         {
-            "id": "28",
+            "id": "130",
             "character": "Apocalyptical cat",
             "Main area": "Special",
             "description": "Hiiiiissss EAAARRP (angry)",
@@ -2349,7 +2311,7 @@
             "tags": []
         },
         {
-            "id": "29",
+            "id": "131",
             "character": "Apocalyptical cat",
             "Main area": "Special",
             "description": "Approached by Snuggles, the cat leader, you are ordered to give up command of Earth's people.",
@@ -2367,7 +2329,7 @@
             "tags": []
         },
         {
-            "id": "33",
+            "id": "132",
             "character": "Apocalyptical cat",
             "Main area": "Special",
             "description": " I'm... so... hungry...",

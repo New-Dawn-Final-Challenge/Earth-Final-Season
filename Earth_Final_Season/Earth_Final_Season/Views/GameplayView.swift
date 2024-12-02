@@ -68,8 +68,8 @@ struct GameplayView: View {
         }
         .onChange(of: gameplayVM.unlockedCharacterCount) {
             if let newCharacterName = gameplayVM.getUnlockedCharacters().last,
-               let newCharacter = CharacterGallery.allCases.first(where: { $0.name.lowercased() == newCharacterName.lowercased() }) {
-                showToast(characterImage: newCharacter.image, characterName: newCharacter.name)
+               let newCharacter = CharacterGallery.allCases.first(where: { $0.name(isPortuguese: false).lowercased() == newCharacterName.lowercased() }) {
+                showToast(character: newCharacter, gameplayVM: gameplayVM)
             }
         }
     }
@@ -92,7 +92,7 @@ struct GameplayView: View {
     }
     
     private var noMoreEventsView: some View {
-        Text("No more events")
+        Text(gameplayVM.isPortuguese ? "Sem mais eventos" : "No more events")
             .font(.title)
             .padding(20)
     }
@@ -158,11 +158,10 @@ struct GameplayView: View {
         }
     }
     
-    func showToast(characterImage: Image, characterName: String) {
-        let formattedName = characterName.lowercased().capitalized
-        
-        if let window = UIApplication.shared.windows.first {
-            let toastView = ToastView(characterImage: characterImage, characterName: formattedName)
+    func showToast(character: CharacterGallery, gameplayVM: GameplayViewModel) {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            let toastView = toastView(character: character, gameplayVM: gameplayVM)
             let hostingController = UIHostingController(rootView: toastView)
             hostingController.view.backgroundColor = .clear
             
@@ -187,5 +186,29 @@ struct GameplayView: View {
                 }
             })
         }
+    }
+
+    func toastView(character: CharacterGallery, gameplayVM: GameplayViewModel) -> some View {
+        HStack(spacing: 16) {
+            character.image
+                .resizable()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+
+            VStack(alignment: .leading) {
+                Text(gameplayVM.isPortuguese ? "Novo Personagem Desbloqueado!" : "New Character Unlocked!")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                Text(character.name(isPortuguese: gameplayVM.isPortuguese).capitalized)
+                    .font(.subheadline)
+                    .foregroundColor(.white)
+            }
+            .multilineTextAlignment(.leading)
+        }
+        .padding()
+        .background(Color.black.opacity(0.8))
+        .cornerRadius(12)
+        .shadow(radius: 4)
     }
 }

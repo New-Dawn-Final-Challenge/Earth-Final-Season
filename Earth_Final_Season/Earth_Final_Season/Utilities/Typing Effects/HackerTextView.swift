@@ -49,7 +49,7 @@ struct HackerTextView: View {
     
     private func animateText() {
         let currentID = animationID
-        for index in text.indices {
+        for index in 0..<text.count {
             let delay = CGFloat.random(in: 0...duration)
             var timerDuration = 0.0
             let timer = Timer.scheduledTimer(withTimeInterval: speed, repeats: true) { timer in
@@ -58,8 +58,9 @@ struct HackerTextView: View {
                 }
                 timerDuration += speed
                 if timerDuration >= delay {
-                    if text.indices.contains(index) {
-                        let actualCharacter = text[index]
+                    let stringIndex = text.index(text.startIndex, offsetBy: index)
+                    if text.indices.contains(stringIndex) {
+                        let actualCharacter = text[stringIndex]
                         replaceCharacter(at: index, character: actualCharacter)
                     }
                 } else {
@@ -73,19 +74,18 @@ struct HackerTextView: View {
     
     private func setRandomCharacters() {
         animatedText = text
-        for index in animatedText.indices {
+        for index in 0..<animatedText.count {
             guard let randomCharacter = randomCharacters.randomElement() else { return }
             replaceCharacter(at: index, character: randomCharacter)
         }
     }
     
-    func replaceCharacter(at index: String.Index, character: Character) {
-        guard animatedText.indices.contains(index) else { return }
-        let indexCharacter = String(animatedText[index])
-        
-        if !indexCharacter.isEmpty {
-            animatedText.replaceSubrange(index...index, with: String(character))
-        }
+    func replaceCharacter(at index: Int, character: Character) {
+        guard index < animatedText.count else { return }
+        let animatedCharacters = Array(animatedText)
+        var updatedCharacters = animatedCharacters
+        updatedCharacters[index] = character
+        animatedText = String(updatedCharacters)
     }
 }
 

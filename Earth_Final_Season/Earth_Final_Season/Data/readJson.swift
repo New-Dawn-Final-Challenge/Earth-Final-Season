@@ -36,8 +36,9 @@ func parse(jsonData: Data) -> [Event]? {
     return nil
 }
 
-func loadAndReturnEvents() -> [Event] {
-    if let jsonData = readLocalJSONFile(forName: "EventsData") {
+func loadAndReturnEvents(isPortuguese: Bool) -> [Event] {
+    let jsonFileName = isPortuguese ? "EventsDataBR" : "EventsData"
+    if let jsonData = readLocalJSONFile(forName: jsonFileName) {
         if let eventsData = parse(jsonData: jsonData) {
             return eventsData
         } else {
