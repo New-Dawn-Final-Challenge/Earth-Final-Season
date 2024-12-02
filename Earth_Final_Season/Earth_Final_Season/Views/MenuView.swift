@@ -23,6 +23,7 @@ struct MenuView: View {
     @State private var isGameCenterPresented = false
     @State private var isShowingVideo: Bool = false
     @State private var hideNonGalleryButtons = false
+    @State private var buttonText = "Galerias"
     
     var body: some View {
         NavigationStack {
@@ -116,16 +117,17 @@ struct MenuView: View {
                 }
             }
             
-            menuButton(gameplayVM.isPortuguese ? "Galerias" : "Galleries") {
+            menuButton(gameplayVM.isPortuguese ? buttonText : "Galleries") {
                 withAnimation(.easeInOut(duration: 0.3)) {
                     hideNonGalleryButtons.toggle()
+                    buttonText = "Menu"
                 }
             }
             
             if hideNonGalleryButtons {
                 // esses botoes escondidos aqui embaixo servem so para
                 // deixar o espacamento igual
-                menuButton("Galerias") {
+                menuButton("Menu") {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         hideNonGalleryButtons.toggle()
                     }
@@ -133,7 +135,7 @@ struct MenuView: View {
                 .hidden()
                 .disabled(true)
                 
-                menuButton("Galerias") {
+                menuButton("Menu") {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         hideNonGalleryButtons.toggle()
                     }
