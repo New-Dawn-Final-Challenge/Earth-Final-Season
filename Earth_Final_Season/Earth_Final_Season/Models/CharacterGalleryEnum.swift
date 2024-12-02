@@ -97,3 +97,131 @@ extension CharacterGallery {
         unlockedNames.contains(self.name(isPortuguese: isPortuguese).lowercased())
     }
 }
+
+
+enum EndingsGallery: CaseIterable {
+    case environmentalDegradation, sociopoliticalInstability, illBeing,
+    apocalypticalCat, robotVacuumCleaner, audience, lockedEnding
+    
+    func getDescritption(isPortuguese: Bool) -> String {
+        if isPortuguese {
+            switch self {
+            case .apocalypticalCat:
+                return Constants.EndingsGalleryView.catDescriptionPortuguese
+                
+            case .environmentalDegradation:
+                return Constants.EndingsGalleryView.environmentDescriptionPortuguese
+                
+            case .sociopoliticalInstability:
+                return Constants.EndingsGalleryView.sociopoliticalDescriptionPortuguese
+                
+            case .audience:
+                return Constants.EndingsGalleryView.audienceDescriptionPortuguese
+                
+            case .illBeing:
+                return Constants.EndingsGalleryView.illBeingDescriptionPortuguese
+                
+            case .robotVacuumCleaner:
+                return Constants.EndingsGalleryView.robotDescriptionPortuguese
+                
+            case .lockedEnding: return "!@#Ending#$%\n///###LOCKED###\\"
+            }
+        }
+        
+        switch self {
+        case .apocalypticalCat:
+            return Constants.EndingsGalleryView.catDescription
+            
+        case .environmentalDegradation:
+            return Constants.EndingsGalleryView.environmentDescription
+            
+        case .sociopoliticalInstability:
+            return Constants.EndingsGalleryView.sociopoliticalDescription
+            
+        case .audience:
+            return Constants.EndingsGalleryView.audienceDescription
+            
+        case .illBeing:
+            return Constants.EndingsGalleryView.illBeingDescription
+            
+        case .robotVacuumCleaner:
+            return Constants.EndingsGalleryView.robotDescription
+        
+        case .lockedEnding: return "!@#Ending#$%\n///###LOCKED###\\"
+        }
+    }
+    
+    func displayTranslated(isPortuguese: Bool) -> String {
+        if !isPortuguese {
+            return ending
+        }
+        switch self {
+        case.apocalypticalCat:
+            return "Gato apocalíptico"
+        case .audience:
+            return "Audiência"
+            
+        case .environmentalDegradation:
+            return "Degradação Ambiental"
+            
+        case .illBeing:
+            return "Mal-estar"
+            
+        case .robotVacuumCleaner:
+            return "Robô aspirador de pó"
+            
+        case .sociopoliticalInstability:
+            return "Instabilidade sociopolítica"
+        default:
+            return ""
+        }
+    }
+    
+    var ending: String {
+        switch self {
+        case .apocalypticalCat:
+            return "Apocalyptical Cat"
+            
+        case .environmentalDegradation:
+            return "Environmental Degradation"
+            
+        case .sociopoliticalInstability:
+            return "Sociopolitical Instability"
+            
+        case .audience:
+            return "Audience"
+            
+        case .illBeing:
+            return "IllBeing"
+            
+        case .robotVacuumCleaner:
+            return "Robot Vacuum Cleaner"
+        
+        case .lockedEnding: return "ending not found"
+        }
+    }
+    
+    var image: Image {
+        switch self {
+        case .apocalypticalCat:
+            return Assets.Images.specialFinalApocalypiticalCat.swiftUIImage
+            
+        case .environmentalDegradation:
+            return Assets.Images.environmentalEnd.swiftUIImage
+        
+        case .illBeing:
+            return Assets.Images.illBeingEnd.swiftUIImage
+        
+        case .sociopoliticalInstability:
+            return Assets.Images.socioPoliticalEnd.swiftUIImage
+            
+        case .audience:
+            return Assets.Images.audienceEnd.swiftUIImage
+            
+        case .robotVacuumCleaner:
+            return Assets.Images.specialFinalRobotVaccum.swiftUIImage
+            
+        case .lockedEnding: return Assets.Images.lockedGallery.swiftUIImage
+        }
+    }
+}

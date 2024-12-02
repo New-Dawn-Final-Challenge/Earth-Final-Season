@@ -17,10 +17,13 @@ struct MenuView: View {
     @State var leaderboardVM = LeaderboardViewModel()
     @State var aboutUsVM = AboutUsViewModel()
     @State var characterGalleryVM = CharacterGalleryViewModel()
+    @State var endingsGalleryVM = EndingsGalleryViewModel()
     
     @State private var navigateToGameplay = false
     @State private var isGameCenterPresented = false
     @State private var isShowingVideo: Bool = false
+    @State private var hideNonGalleryButtons = false
+    @State private var buttonText = "Galerias"
     
     var body: some View {
         NavigationStack {
@@ -52,72 +55,124 @@ struct MenuView: View {
     }
     
     private var buttonsView: some View {
-        VStack(spacing: Constants.MenuView.verticalSpacing){
-            if menuVM.firstTimePlaying {
-                menuButton(gameplayVM.isPortuguese ? "Jogar" : "Play") {
-                    isShowingVideo = true
-                    SoundtrackAudioManager.shared.stopSoundtrack()
+        VStack(spacing: Constants.MenuView.verticalSpacing) {
+            Group {
+                if !hideNonGalleryButtons {
+                    if menuVM.firstTimePlaying {
+                        menuButton(gameplayVM.isPortuguese ? "Jogar" : "Play") {
+                            isShowingVideo = true
+                            SoundtrackAudioManager.shared.stopSoundtrack()
+                        }
+                        .padding(.bottom, -12)
+                        .fullScreenCover(isPresented: $isShowingVideo) {
+                            VideoView(menuVM: $menuVM,
+                                      navigateToGameplay: $navigateToGameplay)
+                        }
+                    } else {
+                        MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
+                                       label: gameplayVM.isPortuguese ? "Jogar" : "Play")
+                        .padding(.bottom, -12)
+                    }
+                    
+                    NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
+                                                             leaderboardVM: $leaderboardVM),
+                                   isActive: $navigateToGameplay) {
+                        EmptyView()
+                    }
+                    
+                    menuButton(gameplayVM.isPortuguese ? "Ranking" : "Leaderboard") {
+                        isGameCenterPresented.toggle()
+                    }
+                    .sheet(isPresented: $isGameCenterPresented) {
+                        LeaderboardView()
+                    }
                 }
-                .padding(.bottom, -12)
-                .fullScreenCover(isPresented: $isShowingVideo) {
-                    VideoView(menuVM: $menuVM,
-                              navigateToGameplay: $navigateToGameplay)
+            }
+            .transition(.opacity.combined(with: .move(edge: .leading)))
+            
+            Group {
+                if hideNonGalleryButtons {
+                    menuButton(gameplayVM.isPortuguese ? "Galeria de Personagens" : "Character Gallery") {
+                        characterGalleryVM.isPresentedInMenu.toggle()
+                    }
+                    .fullScreenCover(isPresented: $characterGalleryVM.isPresentedInMenu) {
+                        ZStack {
+                            Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                            CharacterGalleryView(vm: $characterGalleryVM, text: gameplayVM.isPortuguese ? "Galeria de Personagens" : "Character Gallery", doStuff: {})
+                        }
+                        .presentationBackground(.clear)
+                    }
+                    
+                    menuButton(gameplayVM.isPortuguese ? "Galeria de Finais" : "Ending Gallery") {
+                        endingsGalleryVM.isPresentedInMenu.toggle()
+                    }
+                    .fullScreenCover(isPresented: $endingsGalleryVM.isPresentedInMenu) {
+                        ZStack {
+                            Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                            EndingsGalleryView(vm: $endingsGalleryVM, text: "Ending Gallery", doStuff: {})
+                        }
+                        .presentationBackground(.clear)
+                    }
+                    
                 }
             }
             
-            else {
-                MenuButtonView(destination: GameplayView(settingsVM: $settingsVM, leaderboardVM: $leaderboardVM),
-                               label: gameplayVM.isPortuguese ? "Jogar" : "Play")
-                .padding(.bottom, -12)
-            }
-            
-            NavigationLink(destination: GameplayView(settingsVM: $settingsVM,
-                                                     leaderboardVM: $leaderboardVM),
-                           isActive: $navigateToGameplay) {
-                EmptyView()
-            }
-            
-            menuButton(gameplayVM.isPortuguese ? "Ranking" : "Leaderboard") {
-                isGameCenterPresented.toggle()
-            }
-            .sheet(isPresented: $isGameCenterPresented) {
-                LeaderboardView()
-            }
-            
-            menuButton(gameplayVM.isPortuguese ? "Galeria de Personagens" : "Character Gallery") {
-                characterGalleryVM.isPresentedInMenu.toggle()
-            }
-            .fullScreenCover(isPresented: $characterGalleryVM.isPresentedInMenu) {
-                ZStack {
-                    Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                    CharacterGalleryView(vm: $characterGalleryVM, text: gameplayVM.isPortuguese ? "Galeria de Personagens" : "Character Gallery", doStuff: {})
+            menuButton(gameplayVM.isPortuguese ? buttonText : "Galleries") {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    hideNonGalleryButtons.toggle()
+                    buttonText = "Menu"
                 }
-                .presentationBackground(.clear)
             }
             
-            menuButton(gameplayVM.isPortuguese ? "Configurações" : "Settings") {
-                settingsVM.isPresentedinMenu.toggle()
-            }
-            .fullScreenCover(isPresented: $settingsVM.isPresentedinMenu) {
-                ZStack {
-                    Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                    SettingsModalView(vm: $settingsVM, text: gameplayVM.isPortuguese ? "Configurações" : "Settings", doStuff: {})
+            if hideNonGalleryButtons {
+                // esses botoes escondidos aqui embaixo servem so para
+                // deixar o espacamento igual
+                menuButton("Menu") {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        hideNonGalleryButtons.toggle()
+                    }
                 }
-                .presentationBackground(.clear)
+                .hidden()
+                .disabled(true)
+                
+                menuButton("Menu") {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        hideNonGalleryButtons.toggle()
+                    }
+                }
+                .hidden()
+                .disabled(true)
             }
             
-            menuButton(gameplayVM.isPortuguese ? "Sobre Nós" : "About Us") {
-                aboutUsVM.isPresentedInMenu.toggle()
-            }
-            .fullScreenCover(isPresented: $aboutUsVM.isPresentedInMenu) {
-                ZStack {
-                    Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
-                    AboutUsView(vm: $aboutUsVM, text: gameplayVM.isPortuguese ? "Sobre Nós" : "About Us", doStuff: {})
+            Group {
+                if !hideNonGalleryButtons {
+                    menuButton(gameplayVM.isPortuguese ? "Configurações" : "Settings") {
+                        settingsVM.isPresentedinMenu.toggle()
+                    }
+                    .fullScreenCover(isPresented: $settingsVM.isPresentedinMenu) {
+                        ZStack {
+                            Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                            SettingsModalView(vm: $settingsVM, text: gameplayVM.isPortuguese ? "Configurações" : "Settings", doStuff: {})
+                        }
+                        .presentationBackground(.clear)
+                    }
+                    
+                    menuButton(gameplayVM.isPortuguese ? "Sobre Nós" : "About Us") {
+                        aboutUsVM.isPresentedInMenu.toggle()
+                    }
+                    .fullScreenCover(isPresented: $aboutUsVM.isPresentedInMenu) {
+                        ZStack {
+                            Color.black.opacity(0.6).ignoresSafeArea(edges: .all)
+                            AboutUsView(vm: $aboutUsVM, text: gameplayVM.isPortuguese ? "Sobre Nós" : "About Us", doStuff: {})
+                        }
+                        .presentationBackground(.clear)
+                    }
                 }
-                .presentationBackground(.clear)
             }
+            .transition(.opacity.combined(with: .move(edge: .trailing)))
         }
         .padding(.top, -45)
+        .animation(.easeInOut(duration: 0.3), value: hideNonGalleryButtons)
     }
     
     @ViewBuilder
@@ -136,3 +191,4 @@ struct MenuView: View {
         }
     }
 }
+

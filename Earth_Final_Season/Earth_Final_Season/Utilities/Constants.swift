@@ -238,6 +238,23 @@ struct Constants{
         static let shadowY: CGFloat = 0.5
     }
     
+    struct EndingsGalleryView {
+        static let catDescription = "Honestly, should've seen this one comming"
+        static let robotDescription = "No more humans,\nNo more trash"
+        static let environmentDescription = "No Longer can Earth inhabit life"
+        static let audienceDescription = "No one left watching"
+        static let sociopoliticalDescription = "Team up with your friends for WW3"
+        static let illBeingDescription = "Everything's awful now, thanks"
+        
+        static let catDescriptionPortuguese = "Honestamente, até já esperava por essa"
+        static let robotDescriptionPortuguese = "Sem humanos,\nSem lixo"
+        static let environmentDescriptionPortuguese = "A Terra se torna inóspita a vida"
+        static let audienceDescriptionPortuguese = "Ninguém quer assistir mais"
+        static let sociopoliticalDescriptionPortuguese = "Junte-se aos seus amigos para a 3a guerra"
+        static let illBeingDescriptionPortuguese = "Tudo tá horrível agora, valeu hein..."
+        static let monitorDisplayWidth: CGFloat = 0.4
+    }
+    
     struct AboutUsView {
         static let vstackSpacing: CGFloat = 24
         static let membersGridSpacing: CGFloat = 40

@@ -11,3 +11,8 @@ import Foundation
 class CharacterGalleryViewModel {
     var isPresentedInMenu = false
 }
+
+@Observable
+class EndingsGalleryViewModel {
+    var isPresentedInMenu = false
+}
