@@ -190,7 +190,7 @@ struct GameplayView: View {
             hostingController.view.alpha = 1.0
             hostingController.view.frame.origin.y += 100
         }, completion: { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                 UIView.animate(withDuration: 0.5, animations: {
                     hostingController.view.alpha = 0.0
                     hostingController.view.frame.origin.y -= 100
@@ -220,7 +220,7 @@ struct GameplayView: View {
                 hostingController.view.alpha = 1.0
                 hostingController.view.frame.origin.y += 100
             }, completion: { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
                     UIView.animate(withDuration: 0.5, animations: {
                         hostingController.view.alpha = 0.0
                         hostingController.view.frame.origin.y -= 100

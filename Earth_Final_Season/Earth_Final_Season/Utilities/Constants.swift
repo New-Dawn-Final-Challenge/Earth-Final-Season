@@ -241,7 +241,7 @@ struct Constants{
     struct EndingsGalleryView {
         static let catDescription = "Honestly, should've seen this one comming"
         static let robotDescription = "No more humans,\nNo more trash"
-        static let environmentDescription = "No Longer can Earth inhabit life"
+        static let environmentDescription = "No longer can Earth inhabit life"
         static let audienceDescription = "No one left watching"
         static let sociopoliticalDescription = "Team up with your friends for WW3"
         static let illBeingDescription = "Everything's awful now, thanks"
