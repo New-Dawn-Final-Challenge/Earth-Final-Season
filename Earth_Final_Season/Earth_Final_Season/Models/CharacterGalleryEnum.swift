@@ -124,7 +124,7 @@ enum EndingsGallery: CaseIterable {
             case .robotVacuumCleaner:
                 return Constants.EndingsGalleryView.robotDescriptionPortuguese
                 
-            case .lockedEnding: return "!@#Ending#$%\n///###LOCKED###\\"
+            case .lockedEnding: return "!@#FINAL#$%\n###BLOQUEADO###\\"
             }
         }
         
@@ -147,7 +147,7 @@ enum EndingsGallery: CaseIterable {
         case .robotVacuumCleaner:
             return Constants.EndingsGalleryView.robotDescription
         
-        case .lockedEnding: return "!@#Ending#$%\n///###LOCKED###\\"
+        case .lockedEnding: return "!@#ENDING#$%\n###LOCKED###\\"
         }
     }
     
@@ -172,8 +172,9 @@ enum EndingsGallery: CaseIterable {
             
         case .sociopoliticalInstability:
             return "Instabilidade sociopolítica"
-        default:
-            return ""
+            
+        case .lockedEnding:
+            return "???"
         }
     }
     
@@ -197,7 +198,7 @@ enum EndingsGallery: CaseIterable {
         case .robotVacuumCleaner:
             return "Robot Vacuum Cleaner"
         
-        case .lockedEnding: return "ending not found"
+        case .lockedEnding: return "???"
         }
     }
     

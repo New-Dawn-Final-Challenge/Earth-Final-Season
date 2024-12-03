@@ -140,30 +140,18 @@ struct EndingsGalleryView: View {
     }
     
     private func endingName(ending: EndingsGallery) -> some View {
-        Group {
-            if ending == EndingsGallery.lockedEnding {
-                HackerTextView(text: ending.ending, duration: 99)
-            } else {
-                Text(ending.displayTranslated(isPortuguese: gameplayVM.isPortuguese))
-            }
-        }
-            .foregroundStyle(Assets.Colors.accentPrimary.swiftUIColor)
-            .shadow(color: .black,
-                    radius: Constants.CharacterGalleryView.shadowRadius,
-                    x: Constants.CharacterGalleryView.shadowX,
-                    y: Constants.CharacterGalleryView.shadowY)
-            .multilineTextAlignment(.center)
-            .fixedSize(horizontal: false, vertical: true)
+        Text(ending.displayTranslated(isPortuguese: gameplayVM.isPortuguese))
+        .foregroundStyle(Assets.Colors.accentPrimary.swiftUIColor)
+        .shadow(color: .black,
+                radius: Constants.CharacterGalleryView.shadowRadius,
+                x: Constants.CharacterGalleryView.shadowX,
+                y: Constants.CharacterGalleryView.shadowY)
+        .multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true)
     }
     
     private func endingDescription(ending: EndingsGallery) -> some View {
-        Group {
-            if ending == EndingsGallery.lockedEnding {
-                HackerTextView(text: ending.ending, duration: 99)
-            } else {
-                Text(ending.getDescritption(isPortuguese: gameplayVM.isPortuguese))
-            }
-        }
+        Text(ending.getDescritption(isPortuguese: gameplayVM.isPortuguese))
         .foregroundStyle(Assets.Colors.textSecondary.swiftUIColor)
         .multilineTextAlignment(.center)
         .fixedSize(horizontal: false, vertical: true)
