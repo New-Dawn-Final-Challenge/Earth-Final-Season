@@ -75,7 +75,7 @@ struct GameplayView: View {
         .onChange(of: gameplayVM.unlockedEndingsCount) {
             if let newEnding = gameplayVM.getUnlockedEndings().last,
                let newEnding = EndingsGallery.allCases.first(where: { $0.ending.lowercased() == newEnding.lowercased() }) {
-                showNewEndingTost(ending: newEnding, gameplayVM: gameplayVM)
+                showNewEndingToast(ending: newEnding, gameplayVM: gameplayVM)
             }
         }
     }
@@ -164,34 +164,42 @@ struct GameplayView: View {
         }
     }
     
-    func showNewEndingTost(ending: EndingsGallery, gameplayVM: GameplayViewModel) {
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let window = windowScene.windows.first {
-            let toastView = toastEndingView(ending: ending, gameplayVM: gameplayVM)
-            let hostingController = UIHostingController(rootView: toastView)
-            hostingController.view.backgroundColor = .clear
-            
-            let initialYPosition: CGFloat = -100 + 20
-            hostingController.view.frame = CGRect(x: 0, y: initialYPosition, width: window.bounds.width, height: 100)
-            hostingController.view.alpha = 0.0
+    func showNewEndingToast(ending: EndingsGallery, gameplayVM: GameplayViewModel) {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
 
-            window.addSubview(hostingController.view)
-            
-            // Animate the toast appearance and disappearance
-            UIView.animate(withDuration: 0.5, animations: {
-                hostingController.view.alpha = 1.0
-                hostingController.view.frame.origin.y += 100
-            }, completion: { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                    UIView.animate(withDuration: 0.5, animations: {
-                        hostingController.view.alpha = 0.0
-                        hostingController.view.frame.origin.y -= 100
-                    }, completion: { _ in
-                        hostingController.view.removeFromSuperview()
-                    })
-                }
-            })
-        }
+        // Create a new window specifically for the toast
+        let toastWindow = UIWindow(windowScene: scene)
+        toastWindow.windowLevel = .alert + 1 // Ensure it's above all other windows
+        toastWindow.backgroundColor = .clear
+
+        let toastView = toastEndingView(ending: ending, gameplayVM: gameplayVM)
+        let hostingController = UIHostingController(rootView: toastView)
+        hostingController.view.backgroundColor = .clear
+        
+        // Configure the initial position and size of the toast
+        let initialYPosition: CGFloat = -100
+        hostingController.view.frame = CGRect(x: 0, y: initialYPosition, width: toastWindow.bounds.width, height: 100)
+        hostingController.view.alpha = 0.0
+
+        toastWindow.rootViewController = UIViewController()
+        toastWindow.rootViewController?.view.addSubview(hostingController.view)
+        toastWindow.makeKeyAndVisible()
+
+        // Animate the toast appearance and disappearance
+        UIView.animate(withDuration: 0.5, animations: {
+            hostingController.view.alpha = 1.0
+            hostingController.view.frame.origin.y += 100
+        }, completion: { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) {
+                UIView.animate(withDuration: 0.5, animations: {
+                    hostingController.view.alpha = 0.0
+                    hostingController.view.frame.origin.y -= 100
+                }, completion: { _ in
+                    hostingController.view.removeFromSuperview()
+                    toastWindow.isHidden = true // Hide and remove the toast window
+                })
+            }
+        })
     }
     
     func showToast(character: CharacterGallery, gameplayVM: GameplayViewModel) {
@@ -243,11 +251,16 @@ struct GameplayView: View {
             .multilineTextAlignment(.leading)
         }
         .padding()
-        .background(Color.black.opacity(0.8))
+        .background(
+            ZStack {
+                VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                    .cornerRadius(12)
+            }
+        )
         .cornerRadius(12)
         .shadow(radius: 4)
     }
-    
+
     func toastEndingView(ending: EndingsGallery, gameplayVM: GameplayViewModel) -> some View {
         HStack(spacing: 16) {
             ending.image
@@ -267,8 +280,19 @@ struct GameplayView: View {
             .multilineTextAlignment(.leading)
         }
         .padding()
-        .background(Color.black.opacity(0.8))
+        .background(
+            ZStack {
+                VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                    .cornerRadius(12)
+            }
+        )
         .cornerRadius(12)
         .shadow(radius: 4)
     }
+}
+
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }
