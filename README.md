@@ -1,7 +1,7 @@
 # Earth-Final-Season
 Final Project for the Apple Developer Academy
 
-![Earth Final Season](path-to-image.png)
+![Earth Final Season](EarthFinalSeason.png)
 
 ## Overview
 
@@ -40,7 +40,7 @@ Final Project for the Apple Developer Academy
 
 ## Available on the App Store
 
-[![Download on the App Store](path-to-app-store-badge.png)](app-store-link)
+[Download on the App Store](https://apps.apple.com/br/app/earth-final-season/id6736763946?l=en-GB)
 
 ## Developer Features
 
